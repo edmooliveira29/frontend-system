@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './styles.scss';
 
 const NavBar = () => (

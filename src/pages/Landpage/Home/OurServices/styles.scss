@@ -1,0 +1,7 @@
+#div-card-services:hover {
+  transform: translate(0px, -10px);
+}
+
+#div-card-services {
+  transition: transform 300ms ease-out;
+}

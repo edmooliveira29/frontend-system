@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentButtonCommon Should renders button with custom width 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-3zyfgb-MuiButtonBase-root-MuiButton-root"
+  style="width: 200px;"
+  tabindex="0"
+  type="submit"
+>
+  Click me!
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</button>
+`;
+
+exports[`ComponentButtonCommon Should renders button with text 1`] = `
+<button
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-3zyfgb-MuiButtonBase-root-MuiButton-root"
+  style="width: 100%;"
+  tabindex="0"
+  type="submit"
+>
+  Click me!
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</button>
+`;

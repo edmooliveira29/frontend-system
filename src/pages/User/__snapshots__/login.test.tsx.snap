@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component Should renders email and password fields 1`] = `
+<input
+  aria-invalid="false"
+  autocomplete="on"
+  class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+  id="text-field-E-mail"
+  type="text"
+  value=""
+/>
+`;
+
+exports[`Login component Should renders email and password fields 2`] = `
+<input
+  aria-invalid="false"
+  autocomplete="on"
+  class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+  id="text-field-Senha"
+  type="password"
+  value=""
+/>
+`;
+
+exports[`Login component Should renders link to password recovery page 1`] = `
+<a
+  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-u67f7p-MuiTypography-root-MuiLink-root"
+  href="/lembrar"
+>
+  Clique aqui para lembrar a senha
+</a>
+`;
+
+exports[`Login component Should renders remember checkbox 1`] = `
+<input
+  class="PrivateSwitchBase-input css-1m9pwf3"
+  data-indeterminate="false"
+  type="checkbox"
+/>
+`;
+
+exports[`Login component Should renders submit button 1`] = `
+[
+  <h3
+    id="h3-entrar"
+  >
+    Entrar
+  </h3>,
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-3zyfgb-MuiButtonBase-root-MuiButton-root"
+    style="width: 100%;"
+    tabindex="0"
+    type="submit"
+  >
+    Entrar
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>,
+]
+`;

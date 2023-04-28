@@ -3,7 +3,7 @@ import NavBar from '../../components/navBar/NavBar';
 import CheckIcon from '@mui/icons-material/Check';
 import Footer from '../../components/footer/Footer';
 import {Link} from 'react-router-dom';
-const PricePage = () => (
+export const PricePage = () => (
 	<>
 		<NavBar />
 		<div className='container'>
@@ -124,5 +124,3 @@ const PricePage = () => (
 	</>
 
 );
-
-export default PricePage;

@@ -29,13 +29,28 @@
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-          }
+        }
     },
     "plugins": [
         "react"
     ],
     "rules": {
         "new-cap": "off",
-        "@typescript-eslint/semi":"off"
+        "@typescript-eslint/semi": "off",
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "quotes": [
+            "error"
+        ],
+        "space-before-function-paren": [
+            "error",
+            "always"
+        ]
     }
 }

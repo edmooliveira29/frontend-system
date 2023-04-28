@@ -4,4 +4,7 @@
     "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
     "typescript.format.insertSpaceAfterConstructor": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
+
+
 }

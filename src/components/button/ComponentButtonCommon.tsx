@@ -15,13 +15,12 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 	},
 }));
 
-export function ComponentButtonCommon(props: {text: string; width?: string}) {
+export function ComponentButtonCommon(props: {text: string; width?: string; sizeButton?: string}) {
 	return (
 		<Stack spacing={2} direction='row'>
 			<ColorButton
 				variant='contained'
-				size='large'
-				style={{width: props.width ?? '100%'}}
+				style={{width: props.width ?? '100%', height: props.sizeButton ?? '60px', margin: '5px 10px'}}
 				type='submit'
 			>
 				{props.text}

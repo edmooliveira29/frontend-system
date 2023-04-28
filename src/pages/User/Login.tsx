@@ -6,7 +6,7 @@ import {LinkComponent} from '../../components/inputs/link/LinkComponent';
 import './stylesUser.sass';
 import NavBar from '../../components/navBar/NavBar';
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
 	function onClick() {
 		console.log('aqui');
 	}
@@ -52,5 +52,3 @@ const Login: React.FC = () => {
 		</div>
 	);
 };
-
-export default Login;

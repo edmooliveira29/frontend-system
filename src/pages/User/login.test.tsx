@@ -2,11 +2,10 @@ import React from 'react';
 import {
 	render,
 	screen,
-	fireEvent,
 	cleanup,
 	createEvent,
 } from '@testing-library/react';
-import Login from './Login';
+import {Login} from './Login';
 
 // Mock do arquivo de estilo
 jest.mock('./stylesUser.sass', () => ({}));

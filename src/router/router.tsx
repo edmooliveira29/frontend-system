@@ -1,14 +1,10 @@
 import React from 'react';
 import {createBrowserRouter} from 'react-router-dom';
-import Home from '../pages/Landpage/Home';
-import Login from '../pages/User/Login';
-import Singin from '../pages/User/Singin';
-import PricePage from '../pages/Landpage/Price';
-import FeaturesPage from '../pages/Landpage/Features';
-import AboutPage from '../pages/Landpage/About';
+import {Login, Singin} from '../pages/User';
+import {Home, PricePage, FeaturesPage, AboutPage} from '../pages/Landpage';
 
 export const router = createBrowserRouter([
-	{path: '/', element: <Home />, children: []},
+	{path: '/', element: <Home />},
 	{path: '/entrar', element: <Login />},
 	{path: '/registrar', element: <Singin />},
 	{path: '/preco', element: <PricePage />},

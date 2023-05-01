@@ -7,6 +7,13 @@ import './stylesUser.sass';
 import NavBar from '../../components/navBar/NavBar';
 
 export const Login: React.FC = () => {
+	const [state, setState] = React.useState({
+		email: '',
+		password: '',
+		passwordConfirmation: '',
+		username: '',
+	});
+
 	function onClick() {
 		console.log('aqui');
 	}
@@ -20,14 +27,22 @@ export const Login: React.FC = () => {
 					style={{border: '1px solid'}}
 					className='col-md-12'
 				>
-					<form id='form-login'>
+					<div id='div-login-form'>
 						<h3 id='h3-entrar'>Entrar</h3>
 						<div className='mb-3' id='input-email'>
-							<TextFieldInput label='E-mail' typeInput='text' />
+							<TextFieldInput label='E-mail' typeInput='text'
+								value={state.email}
+								onChange={(value: string) => {
+									setState({...state, email: value});
+								}}
+							/>
 						</div>
 						<div className='mb-3' id='input-password'>
-							<TextFieldInput label='Senha' typeInput='password' />
-						</div>
+							<TextFieldInput label='Senha' typeInput='password'
+								value={state.password}
+								onChange={(value: string) => {
+									setState({...state, password: value});
+								}} />						</div>
 						<div className='mb-3' id='checkbox-remember'>
 							<CheckboxInput label='Lembrar durante 3 dias' />
 						</div>
@@ -46,7 +61,7 @@ export const Login: React.FC = () => {
 						<div className='d-grid' id='button-login-google' onSubmit={onClick}>
 							<ComponentButtonCommon text='Entrar com o GOOGLE' />
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>

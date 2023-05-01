@@ -7,7 +7,8 @@
     "build": "react-scripts build",
     "test": "jest --watchAll --updateSnapshot",
     "eject": "react-scripts eject",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
@@ -25,6 +26,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
+    "@mui/joy": "^5.0.0-alpha.77",
     "@mui/material": "^5.12.1",
     "@mui/styled-engine-sc": "^5.12.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -56,6 +58,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
+    "gh-pages": "^5.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "^2.8.8",

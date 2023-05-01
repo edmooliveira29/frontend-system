@@ -27,6 +27,9 @@ const NavBar = () => (
 						<Link to='/sobre' className='link-navbar'>
 							Sobre
 						</Link>
+						<Link to='/contato' className='link-navbar'>
+							Contato
+						</Link>
 					</ul>
 					<form className='d-flex'>
 						<input className='form-control me-2' type='search' placeholder='Pesquisar' aria-label='Search' />

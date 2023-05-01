@@ -7,118 +7,55 @@ export const PricePage = () => (
 	<>
 		<NavBar />
 		<div className='container'>
-			<div className='pricing-header p-3 pb-md-4 mx-auto text-center'>
-				<h1 className='display-4 fw-normal'>Preços</h1>
-				<p className='fs-5 text-muted'>Bem-vindo à nossa tabela de preços! Aqui você encontrará informações sobre os nossos produtos e serviços e os respectivos valores. Temos opções para todos os gostos e necessidades, desde os mais simples até os mais complexos. Acreditamos que a transparência nos preços é fundamental para uma relação de confiança com os nossos clientes. Confira abaixo as nossas opções e sinta-se à vontade para entrar em contato caso precise de mais informações ou esclarecimentos. Estamos sempre à disposição para atendê-lo da melhor forma possível.</p>
-			</div>
-			<div className='row row-cols-1 row-cols-md-3 mb-3 text-center'>
-				<div className='col'>
-					<div className='card mb-4 rounded-3 shadow-sm'>
-						<div className='card-header py-3'>
-							<h4 className='my-0 fw-normal'>Grátis</h4>
-						</div>
-						<div className='card-body'>
-							<h1 className='card-title pricing-card-title'>R$0,00<small className='text-muted fw-light'>/mês</small></h1>
-							<ul className='list-unstyled mt-3 mb-4'>
-								<li>1 usuário</li>
-								<li>1 GB de armazenamento</li>
 
-							</ul>
-							<Link to='/registrar'>
-								<button type='button' className='w-100 btn btn-lg btn-outline-primary'>Cadastre agora</button>
-							</Link>
-						</div>
-					</div>
-				</div>
-				<div className='col'>
-					<div className='card mb-4 rounded-3 shadow-sm'>
-						<div className='card-header py-3'>
-							<h4 className='my-0 fw-normal'>Prata</h4>
-						</div>
-						<div className='card-body'>
-							<h1 className='card-title pricing-card-title'>R$xx,xx<small className='text-muted fw-light'>/mês</small></h1>
-							<ul className='list-unstyled mt-3 mb-4'>
-								<li>2 usuário</li>
-								<li>1 GB de armazenamento</li>
-							</ul>
-							<Link to='/registrar'>
-								<button type='button' className='w-100 btn btn-lg btn-primary'>Cadastre-se agora</button>
-							</Link>
-						</div>
-					</div>
-				</div>
-				<div className='col'>
-					<div className='card mb-4 rounded-3 shadow-sm border-primary'>
-						<div className='card-header py-3 text-white bg-primary border-primary'>
-							<h4 className='my-0 fw-normal'>Enterprise</h4>
-						</div>
-						<div className='card-body'>
-							<h1 className='card-title pricing-card-title'>R$xx,xx<small className='text-muted fw-light'>/mês</small></h1>
-							<ul className='list-unstyled mt-3 mb-4'>
-								<li>5 usuário</li>
-								<li>5 GB de armazenamento</li>
-							</ul>
-							<Link to='/registrar'>
-								<button type='button' className='w-100 btn btn-lg btn-primary'>Entre em contato</button>
-							</Link>
-						</div>
-					</div>
-				</div>
+			<div className='section-title'>
+				<h2>Pricing</h2>
+				<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
 			</div>
-			<h2 className='display-6 text-center mb-4'>Compare os planos</h2>
-			<div className='table-responsive'>
-				<table className='table text-center'>
-					<thead>
-						<tr>
-							<th style={{width: '34%'}}></th>
-							<th style={{width: '22%'}}>Grátis</th>
-							<th style={{width: '22%'}}>Prata</th>
-							<th style={{width: '22%'}}>Ouro</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 1</th>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-						</tr>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 2</th>
-							<td></td>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-						</tr>
-					</tbody>
 
-					<tbody>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 3</th>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-						</tr>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 4</th>
-							<td></td>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-						</tr>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 5</th>
-							<td></td>
-							<td><CheckIcon /></td>
-							<td><CheckIcon /></td>
-						</tr>
-						<tr>
-							<th scope='row' className='text-start'>Caracteristica 6</th>
-							<td></td>
-							<td></td>
-							<td><CheckIcon /></td>
-						</tr>
-					</tbody>
-				</table>
+			<div className='row no-gutters'>
+
+				<div className='col-lg-4 box'>
+					<h3>Free</h3>
+					<h4>$0<span>per month</span></h4>
+					<ul>
+						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
+						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
+						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
+						<li className='na'><i className='bx bx-x'></i> <span>Pharetra massa massa ultricies</span></li>
+						<li className='na'><i className='bx bx-x'></i> <span>Massa ultricies mi quis hendrerit</span></li>
+					</ul>
+					<a href='#' className='get-started-btn'>Get Started</a>
+				</div>
+
+				<div className='col-lg-4 box featured'>
+					<h3>Business</h3>
+					<h4>$29<span>per month</span></h4>
+					<ul>
+						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
+						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
+						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
+						<li><i className='bx bx-check'></i> Pharetra massa massa ultricies</li>
+						<li><i className='bx bx-check'></i> Massa ultricies mi quis hendrerit</li>
+					</ul>
+					<a href='#' className='get-started-btn'>Get Started</a>
+				</div>
+
+				<div className='col-lg-4 box'>
+					<h3>Developer</h3>
+					<h4>$49<span>per month</span></h4>
+					<ul>
+						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
+						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
+						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
+						<li><i className='bx bx-check'></i> Pharetra massa massa ultricies</li>
+						<li><i className='bx bx-check'></i> Massa ultricies mi quis hendrerit</li>
+					</ul>
+					<a href='#' className='get-started-btn'>Get Started</a>
+				</div>
+
 			</div>
+
 		</div>
 		<Footer />
 	</>

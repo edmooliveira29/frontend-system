@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 const ColorButton = styled(Button)<ButtonProps>(() => ({
 	backgroundColor: '#003566',
 	boxShadow: '2px -2px 10px gray',
-	margin: '0px 8px',
+	margin: '0px 10px',
 	fontSize: 16,
 	'&:hover': {
 		backgroundColor: '#003566',

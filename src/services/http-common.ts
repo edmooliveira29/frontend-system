@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import axios from 'axios';
 
 export default axios.create({

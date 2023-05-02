@@ -29,7 +29,7 @@ describe('ComponentButtonCommon', () => {
 		const buttonElement = screen.getByText(buttonText);
 		buttonElement.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
 		expect(buttonElement).toHaveStyle('opacity: 0.8');
-		expect(buttonElement).toHaveStyle('background-color: #003566');
+		expect(buttonElement).toHaveStyle('background-color: #001a32');
 		expect(buttonElement).toHaveStyle('box-shadow: 2px -2px 10px gray');
 	});
 });

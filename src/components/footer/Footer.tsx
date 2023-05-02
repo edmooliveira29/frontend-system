@@ -32,7 +32,7 @@ const Footer = () => {
 									<div className='d-flex flex-column flex-sm-row w-100 gap-2'>
 										<label htmlFor='newsletter1' className='visually-hidden'>Email</label>
 										<TextFieldInput
-									required={true} label='E-mail' typeInput='text'
+											required={true} label='E-mail' typeInput='text'
 											value={state.email}
 											onChange={(value: string) => {
 												setState({...state, email: value});

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, {useState} from 'react';
 import {TextFieldInput} from '../../../components/inputs/TextFieldInput';
 import {CheckboxInput} from '../../../components/inputs/CheckboxInput';

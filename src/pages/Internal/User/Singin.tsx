@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, {useState} from 'react';
 import {LinkComponent} from '../../../components/inputs/link/LinkComponent';
 import {ComponentButtonCommon} from '../../../components/button/ComponentButtonCommon';

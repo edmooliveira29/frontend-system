@@ -30,7 +30,8 @@ export const ContactUs = () => {
 										<div className='row'>
 											<div className='col-md-6'>
 												<div className='form-group'>
-													<TextFieldInput label='Nome' typeInput='text'
+													<TextFieldInput
+														required={true} label='Nome' typeInput='text'
 														value={state.name}
 														onChange={(value: string) => {
 															setState({...state, name: value});
@@ -40,7 +41,8 @@ export const ContactUs = () => {
 											</div>
 											<div className='col-md-6'>
 												<div className='form-group'>
-													<TextFieldInput label='E-mail' typeInput='text'
+													<TextFieldInput
+														required={true} label='E-mail' typeInput='text'
 														value={state.email}
 														onChange={(value: string) => {
 															setState({...state, email: value});
@@ -50,7 +52,8 @@ export const ContactUs = () => {
 											</div>
 											<div className='col-md-12'>
 												<div className='form-group'>
-													<TextFieldInput label='Assunto' typeInput='text'
+													<TextFieldInput
+														required={true} label='Assunto' typeInput='text'
 														value={state.subject}
 														onChange={(value: string) => {
 															setState({...state, subject: value});

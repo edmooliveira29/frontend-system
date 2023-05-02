@@ -1,10 +1,13 @@
-import React from 'react';
-import {LinkComponent} from '../../components/inputs/link/LinkComponent';
-import {ComponentButtonCommon} from '../../components/button/ComponentButtonCommon';
-import {CheckboxInput} from '../../components/inputs/CheckboxInput';
-import {TextFieldInput} from '../../components/inputs/TextFieldInput';
-import NavBar from '../../components/navBar/NavBar';
-import {UserService} from '../../services/User/user-http';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import React, {useState} from 'react';
+import {LinkComponent} from '../../../components/inputs/link/LinkComponent';
+import {ComponentButtonCommon} from '../../../components/button/ComponentButtonCommon';
+import {CheckboxInput} from '../../../components/inputs/CheckboxInput';
+import {TextFieldInput} from '../../../components/inputs/TextFieldInput';
+import NavBar from '../../../components/navBar/NavBar';
+import {UserService} from '../../../services/User/user-http';
 
 export const Singin = () => {
 	const [state, setState] = React.useState({
@@ -14,12 +17,20 @@ export const Singin = () => {
 		name: '',
 	});
 
+	const [errorResponse, setErrorResponse] = useState('');
+
 	const handleSave = async () => {
 		const userService = new UserService();
+
 		try {
-			await userService.create(state);
-		} catch (e) {
-			console.error();
+			await userService.create({
+				email: state.email,
+				name: state.name,
+				password: state.password,
+				passwordConfirm: state.passwordConfirmation,
+			});
+		} catch (error: any) {
+			setErrorResponse((error.response.data.message));
 		}
 	};
 
@@ -35,7 +46,10 @@ export const Singin = () => {
 						<div id='div-login-form'>
 							<h3 id='h3-entrar'>Registrar</h3>
 							<div className='mb-3' id='input-email'>
-								<TextFieldInput label='Name' typeInput='text'
+								<TextFieldInput
+									required={true}
+									label='Nome'
+									typeInput='text'
 									value={state.name}
 									onChange={(value: string) => {
 										setState({...state, name: value});
@@ -43,7 +57,10 @@ export const Singin = () => {
 								/>
 							</div>
 							<div className='mb-3' id='input-email'>
-								<TextFieldInput label='E-mail' typeInput='text'
+								<TextFieldInput
+									required={true}
+									label='E-mail'
+									typeInput='text'
 									value={state.email}
 									onChange={(value: string) => {
 										setState({...state, email: value});
@@ -51,31 +68,34 @@ export const Singin = () => {
 								/>
 							</div>
 							<div className='mb-3' id='input-password'>
-								<TextFieldInput label='Senha' typeInput='password'
+								<TextFieldInput
+									required={true}
+									label='Senha' typeInput='password'
 									value={state.password}
 									onChange={(value: string) => {
 										setState({...state, password: value});
-									}} />
+									}}
+								/>
 							</div>
 							<div className='mb-3' id='input-password'>
-								<TextFieldInput label='Confirme sua senha' typeInput='password'
+								<TextFieldInput
+									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}
 									onChange={(value: string) => {
 										setState({...state, passwordConfirmation: value});
-									}} />
+									}}
+								/>
 							</div>
 							<div className='d-grid' id='button-login' onClick={handleSave}>
 								<ComponentButtonCommon text='Registrar' />
 							</div>
-							<LinkComponent
-								hrefLink='/lembrar'
-								text='Clique aqui para lembrar a senha'
-								size={14}
-							/>
+							<div>
+								<span id='error-response'>{errorResponse}</span>
+							</div>
 							<div id='div-line'>
 								<span id='span-separete'>OU</span>
 							</div>
-							<div className='d-grid' id='button-login-google' onSubmit={handleSave}>
+							<div className='d-grid' id='button-login-google' onClick={handleSave}>
 								<ComponentButtonCommon text='Entrar com o GOOGLE' />
 							</div>
 						</div>

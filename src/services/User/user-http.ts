@@ -5,4 +5,8 @@ export class UserService {
 	async create(data: UserI) {
 		return http.post<UserI>('/user', data);
 	}
+
+	async login(data: UserI) {
+		return http.post<UserI>('/login', data);
+	}
 }

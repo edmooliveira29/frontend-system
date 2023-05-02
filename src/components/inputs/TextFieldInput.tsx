@@ -1,27 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export function TextFieldInput(props: {label: string; typeInput: string; onChange: any; value: string}) {
+export function TextFieldInput(props: {label: string; typeInput: string; onChange: any; value: string; required: boolean}) {
 	return (
-		<Box
-			component='form'
-			sx={{
-				'& > :not(style)': {m: 1, width: '100%', minWidth: 'clamp(0px, ($targetWidth - 100%) * 999, 100%)'},
-			}}
-			noValidate
-			autoComplete='off'
-		>
-			<TextField
-				id={`text-field-${props.label}`}
+		<>
+			<label htmlFor='validationCustom01' className='form-label'>{props.label}{props.required ? ' *' : ''}</label>
+			<input
+				style={{padding: '15px'}}
 				type={props.typeInput}
-				label={props.label}
-				variant='outlined'
-				onChange={(e: any) => props.onChange(e.target.value)}
-				value={props.value} />
-		</Box>
+				className='form-control'
+				id='validationCustom01'
+				value={props.value}
+				required={props.required}
+				onChange={(e: any) => props.onChange(e.target.value)} />
+		</>
 	);
 }

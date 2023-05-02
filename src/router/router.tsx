@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { Login, Singin } from '../pages/Internal/User'
 import { Home, PricePage, FeaturesPage, AboutPage } from '../pages/Website'
@@ -12,9 +12,15 @@ import { SideBar } from '../components/sideBar/sideBar'
 import { Report } from '../pages/Internal/Report/Report'
 
 const Internal = (props: { Page: any }) => {
+	const [showMenu, setShowMenu] = useState(true)
+	const showSiderbar = () => setShowMenu(!showMenu)
+
+	const closeSidebar = () => setShowMenu(false)
 	return (<>
-		<SideBar />
-		<props.Page />
+		<SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
+		<div style={{ marginLeft: showMenu?'280px':'0px' }}>
+			<props.Page />
+		</div>
 	</>)
 }
 

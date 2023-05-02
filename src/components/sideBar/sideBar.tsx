@@ -9,12 +9,9 @@ import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCi
 import './styles.scss'
 
 
-export const SideBar = () => {
-    const [showMenu, setShowMenu] = useState(false)
-    const showSiderbar = () => setShowMenu(!showMenu)
-    const navigate = useNavigate()
+export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSidebar:any  }) => {
+	const navigate = useNavigate()
 
-    const closeSidebar = () => setShowMenu(false)
     const handleLogOut = () => {
         navigate('/entrar')
     }
@@ -22,15 +19,15 @@ export const SideBar = () => {
     return (
         <><div className='row div-header'>
             <div className="col-10 p-0">
-                {!showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 p-3 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh' }}>
+                {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 p-3 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh' }}>
                     <div className="row">
                         <div className='col-9'>
                             <a className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <span className="fs-4">LOGO</span>
                             </a>
                         </div>
-                        <div className='col-3' onClick={showSiderbar}>
-                            <FaTimes onClick={closeSidebar} />
+                        <div className='col-3' onClick={props.showSiderbar}>
+                            <FaTimes onClick={props.closeSidebar} />
                         </div>
 
                     </div>
@@ -45,7 +42,7 @@ export const SideBar = () => {
                         <Link to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
                     </ul>
                     <hr />
-                </div > : <HiBars3 className="icon-bar" onClick={showSiderbar} />}
+                </div > : <HiBars3 className="icon-bar" onClick={props.showSiderbar} />}
             </div>
             <div className="col-2 ">
                 <div className="dropdown justify-content-end">

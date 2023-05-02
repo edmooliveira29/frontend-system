@@ -3,6 +3,10 @@ import { SideBar } from '../../../components/sideBar/sideBar'
 
 export const Dashboard = () => {
 	return (
-		<SideBar />
+		<>
+			<div>
+				pagina em construção
+			</div>
+		</>
 	)
 }

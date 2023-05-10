@@ -6,6 +6,6 @@ const baseURLProduction = process.env.BASE_URL_PRODUCTION
 export default axios.create({
 	baseURL: environment === 'production' ? baseURLProduction : baseURLDevelopment,
 	responseType: 'json',
-	withCredentials: true,
+	withCredentials: true
 });
 

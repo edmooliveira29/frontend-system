@@ -1,7 +1,8 @@
 import axios from 'axios'
+
 const environment = process.env.NODE_ENV
-const baseURLDevelopment = process.env.BASE_URL_DEVELOPMENT
-const baseURLProduction = process.env.BASE_URL_PRODUCTION
+const baseURLDevelopment = process.env.REACT_APP_BASE_URL_DEVELOPMENT
+const baseURLProduction = process.env.REACT_APP_BASE_URL_PRODUCTION
 console.log(environment)
 console.log(baseURLDevelopment)
 console.log(baseURLProduction)

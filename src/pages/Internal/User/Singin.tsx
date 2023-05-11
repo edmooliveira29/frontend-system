@@ -42,7 +42,7 @@ export const Singin = () => {
 					>
 						<div id='div-login-form'>
 							<h3 id='h3-entrar'>Registrar</h3>
-							<div className='mb-3' id='input-email'>
+							<div id='input-email'>
 								<TextFieldInput
 									required={true}
 									label='Nome'
@@ -53,7 +53,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div className='mb-3' id='input-email'>
+							<div  id='input-email'>
 								<TextFieldInput
 									required={true}
 									label='E-mail'
@@ -64,7 +64,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div className='mb-3' id='input-password'>
+							<div  id='input-password'>
 								<TextFieldInput
 									required={true}
 									label='Senha' typeInput='password'
@@ -74,7 +74,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div className='mb-3' id='input-password'>
+							<div  id='input-password'>
 								<TextFieldInput
 									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}

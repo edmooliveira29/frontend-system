@@ -23,7 +23,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
 				/>
 				{props.typeInput == 'password' ?
 					<i id='i-icon' onClick={handleShowPassword}>
-						{HIDEPASSWORD ? <AiFillEye size={35} /> : <AiFillEyeInvisible size={35} />}
+						{HIDEPASSWORD ? <AiFillEye size={30}  color='#BBBBBB'/> : <AiFillEyeInvisible size={30} color='#555555'/>}
 					</i> : ''}
 			</div>
 		</>

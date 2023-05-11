@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {LinkComponent} from '../../../components/inputs/link/LinkComponent';
-import {ComponentButtonCommon} from '../../../components/button/ComponentButtonCommon';
-import {CheckboxInput} from '../../../components/inputs/CheckboxInput';
-import {TextFieldInput} from '../../../components/inputs/TextFieldInput';
-import NavBar from '../../../components/navBar/NavBar';
-import {UserService} from '../../../services/User/user-http';
+import React, { useState } from 'react'
+import { LinkComponent } from '../../../components/inputs/link/LinkComponent'
+import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
+import { CheckboxInput } from '../../../components/inputs/CheckboxInput'
+import { TextFieldInput } from '../../../components/inputs/TextFieldInput'
+import NavBar from '../../../components/navBar/NavBar'
+import { UserService } from '../../../services/User/user-http'
 
 export const Singin = () => {
 	const [state, setState] = React.useState({
@@ -12,12 +12,13 @@ export const Singin = () => {
 		password: '',
 		passwordConfirmation: '',
 		name: '',
-	});
-
-	const [errorResponse, setErrorResponse] = useState('');
+	})
+	const [loading, setLoading] = useState(false)
+	const [errorResponse, setErrorResponse] = useState('')
 
 	const handleSave = async () => {
-		const userService = new UserService();
+		setLoading(true)
+		const userService = new UserService()
 
 		try {
 			await userService.create({
@@ -25,11 +26,13 @@ export const Singin = () => {
 				name: state.name,
 				password: state.password,
 				passwordConfirm: state.passwordConfirmation,
-			});
+			})
+
 		} catch (error: any) {
-			setErrorResponse((error.response.data.message));
+			setLoading(false)
+			setErrorResponse((error.response.data.message))
 		}
-	};
+	}
 
 	return (
 		<div>
@@ -38,7 +41,7 @@ export const Singin = () => {
 				<div className='row'>
 					<div
 						id='div-login'
-						style={{border: '1px solid'}}
+						style={{ border: '1px solid' }}
 					>
 						<div id='div-login-form'>
 							<h3 id='h3-entrar'>Registrar</h3>
@@ -49,7 +52,7 @@ export const Singin = () => {
 									typeInput='text'
 									value={state.name}
 									onChange={(value: string) => {
-										setState({...state, name: value});
+										setState({ ...state, name: value })
 									}}
 								/>
 							</div>
@@ -60,7 +63,7 @@ export const Singin = () => {
 									typeInput='text'
 									value={state.email}
 									onChange={(value: string) => {
-										setState({...state, email: value});
+										setState({ ...state, email: value })
 									}}
 								/>
 							</div>
@@ -70,7 +73,7 @@ export const Singin = () => {
 									label='Senha' typeInput='password'
 									value={state.password}
 									onChange={(value: string) => {
-										setState({...state, password: value});
+										setState({ ...state, password: value })
 									}}
 								/>
 							</div>
@@ -79,12 +82,12 @@ export const Singin = () => {
 									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}
 									onChange={(value: string) => {
-										setState({...state, passwordConfirmation: value});
+										setState({ ...state, passwordConfirmation: value })
 									}}
 								/>
 							</div>
 							<div className='d-grid' id='button-login' onClick={handleSave}>
-								<ComponentButtonCommon text='Registrar' />
+								<ComponentButtonCommon text='Registrar' loading={loading} />
 							</div>
 							<div>
 								<span id='error-response'>{errorResponse}</span>
@@ -99,5 +102,5 @@ export const Singin = () => {
 					</div>
 				</div>
 			</div>
-		</div >);
-};
+		</div >)
+}

@@ -51,11 +51,11 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSideb
                         <strong id='name-user-log'>Nome Sobrenome</strong>
                     </a>
                     <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
-                        <li><a className="dropdown-item" href="#">New project...</a></li>
-                        <li><a className="dropdown-item" href="#">Settings</a></li>
-                        <li><a className="dropdown-item" href="#">Profile</a></li>
+                        <li><a id='a-sidebar' className="dropdown-item" href="#">New project...</a></li>
+                        <li><a id='a-sidebar' className="dropdown-item" href="#">Settings</a></li>
+                        <li><a id='a-sidebar' className="dropdown-item" href="#">Profile</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" onClick={handleLogOut}>Sair</a></li>
+                        <li><a id='a-sidebar' className="dropdown-item" onClick={handleLogOut}>Sair</a></li>
                     </ul>
                 </div>
             </div>

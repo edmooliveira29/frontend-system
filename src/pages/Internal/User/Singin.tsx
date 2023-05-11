@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {LinkComponent} from '../../../components/inputs/link/LinkComponent';
 import {ComponentButtonCommon} from '../../../components/button/ComponentButtonCommon';
-import {CheckboxInput} from '../../../components/inputs/CheckboxInput';
 import {TextFieldInput} from '../../../components/inputs/TextFieldInput';
 import NavBar from '../../../components/navBar/NavBar';
 import {UserService} from '../../../services/User/user-http';
@@ -15,6 +13,11 @@ export const Singin = () => {
 	});
 
 	const [errorResponse, setErrorResponse] = useState('');
+	const handleKeyEnter = async (e: React.KeyboardEvent) => {
+		if (e.key == 'Enter') {
+			await handleSave()
+		}
+	}
 
 	const handleSave = async () => {
 		const userService = new UserService();
@@ -74,7 +77,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div className='mb-3' id='input-password'>
+							<div className='mb-3' id='input-password' onKeyDown={handleKeyEnter}>
 								<TextFieldInput
 									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}

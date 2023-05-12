@@ -5,8 +5,10 @@ import { CheckboxInput } from '../../../components/inputs/CheckboxInput'
 import { TextFieldInput } from '../../../components/inputs/TextFieldInput'
 import NavBar from '../../../components/navBar/NavBar'
 import { UserService } from '../../../services/User/user-http'
+import { useNavigate } from 'react-router-dom'
 
 export const Singin = () => {
+	const navigate = useNavigate()
 	const [state, setState] = React.useState({
 		email: '',
 		password: '',
@@ -27,7 +29,7 @@ export const Singin = () => {
 				password: state.password,
 				passwordConfirm: state.passwordConfirmation,
 			})
-
+			navigate('/dashboard')
 		} catch (error: any) {
 			setLoading(false)
 			setErrorResponse((error.response.data.message))

@@ -24,13 +24,16 @@ export const Login: React.FC = () => {
 		const userService = new UserService()
 		setErrorResponse('')
 		try {
-			await userService.login({
+			const user = await userService.login({
 				email: state.email,
 				password: state.password,
-			})
+			});
+			localStorage.setItem('username', user.data.name);
+			localStorage.setItem('idUser', user.data._id);
+
 			navigate('/dashboard')
 		} catch (error: any) {
-			setLoading(false)
+			console.log(error);
 			setErrorResponse(error.response.data.message)
 		}
 	}

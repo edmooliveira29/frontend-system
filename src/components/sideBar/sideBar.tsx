@@ -9,10 +9,12 @@ import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCi
 import './styles.scss'
 
 
-export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSidebar:any  }) => {
-	const navigate = useNavigate()
+export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
+    const navigate = useNavigate()
+    const userName = localStorage.getItem('username')
 
     const handleLogOut = () => {
+        localStorage.clear()
         navigate('/entrar')
     }
 
@@ -48,12 +50,11 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSideb
                 <div className="dropdown justify-content-end">
                     <a href="#" className="d-flex align-items-center text-white dropdown-toggle p-2 justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="" width="42" height="42" className="rounded-circle me-2" />
-                        <strong id='name-user-log'>Nome Sobrenome</strong>
+                        <strong id='name-user-log'>{userName}</strong>
                     </a>
                     <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
-                        <li><a className="dropdown-item" href="#">New project...</a></li>
-                        <li><a className="dropdown-item" href="#">Settings</a></li>
-                        <li><a className="dropdown-item" href="#">Profile</a></li>
+                        <li><a className="dropdown-item" href="#">Configurações da Conta</a></li>
+                        <li><a className="dropdown-item" href="#">Perfil</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={handleLogOut}>Sair</a></li>
                     </ul>

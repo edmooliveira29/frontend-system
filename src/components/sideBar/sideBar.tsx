@@ -9,13 +9,13 @@ import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCi
 import './styles.scss'
 
 
-export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSidebar:any  }) => {
-	const navigate = useNavigate()
+export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
+    const navigate = useNavigate()
 
     const handleLogOut = () => {
         navigate('/entrar')
     }
-
+    
     return (
         <><div className='row div-header'>
             <div className="col-10 p-0">
@@ -26,7 +26,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar:any, closeSideb
                                 <span className="fs-4">LOGO</span>
                             </a>
                         </div>
-                        <div className='col-3' onClick={props.showSiderbar}>
+                        <div className='col-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
                             <FaTimes onClick={props.closeSidebar} />
                         </div>
 

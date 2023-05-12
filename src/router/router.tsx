@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, createBrowserRouter } from 'react-router-dom'
 import { Login, Singin } from '../pages/Internal/User'
 import { Home, PricePage, FeaturesPage, AboutPage } from '../pages/Website'
 import { ContactUs } from '../pages/Website/Contact'
@@ -24,19 +24,23 @@ const Internal = (props: { Page: any }) => {
 	</>)
 }
 
-export const router = createBrowserRouter([
-	{ path: '/', element: <Home /> },
-	{ path: '/entrar', element: <Login /> },
-	{ path: '/registrar', element: <Singin /> },
-	{ path: '/preco', element: <PricePage /> },
-	{ path: '/caracteristica', element: < FeaturesPage /> },
-	{ path: '/sobre', element: < AboutPage /> },
-	{ path: '/contato', element: < ContactUs /> },
-	{ path: '/dashboard', element: < Internal Page={Dashboard} /> },
-	{ path: '/relatorios', element: < Internal Page={Report} /> },
-	{ path: '/configuracoes', element: < Internal Page={Setup} /> },
-	{ path: '/clientes', element: < Internal Page={Customer} /> },
-	{ path: '/produtos', element: < Internal Page={Products} /> },
-	{ path: '/vendas', element: < Internal Page={Sale} /> },
 
-])
+export const router = (
+	<BrowserRouter>
+	  <Routes>
+		<Route path="/" element={<Home />} />
+		<Route path="/entrar" element={<Login />} />
+		<Route path="/registrar" element={<Singin />} />
+		<Route path="/preco" element={<PricePage />} />
+		<Route path="/caracteristica" element={<FeaturesPage />} />
+		<Route path="/sobre" element={<AboutPage />} />
+		<Route path="/contato" element={<ContactUs />} />
+		<Route path="/dashboard" element={<Internal Page={Dashboard} />} />
+		<Route path="/relatorios" element={<Internal Page={Report} />} />
+		<Route path="/configuracoes" element={<Internal Page={Setup} />} />
+		<Route path="/clientes" element={<Internal Page={Customer} />} />
+		<Route path="/produtos" element={<Internal Page={Products} />} />
+		<Route path="/vendas" element={<Internal Page={Sale} />} />
+	  </Routes>
+	</BrowserRouter>
+  );

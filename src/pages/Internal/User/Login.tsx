@@ -33,7 +33,8 @@ export const Login: React.FC = () => {
 
 			navigate('/dashboard')
 		} catch (error: any) {
-			console.log(error);
+			setLoading(false)
+
 			setErrorResponse(error.response.data.message)
 		}
 	}

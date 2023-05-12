@@ -15,7 +15,6 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 }))
 
 export function ComponentButtonCommon(props: { text: string; width?: string; sizeButton?: string; loading?: boolean }) {
-	console.log(props.loading)
 	return (
 		<Stack spacing={2} direction='row'>
 			<ColorButton

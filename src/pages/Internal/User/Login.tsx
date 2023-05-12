@@ -85,13 +85,13 @@ export const Login: React.FC = () => {
 						</div>
 						<Link to='/registrar'>
 
-							<div className='d-grid' id='button-login-google'>
+							<div className='d-grid mb-3 ' id='button-login-google'>
 								<ComponentButtonCommon text='Entrar com o GOOGLE' />
 							</div>
 						</Link>
 						<Link to='/registrar'>
 
-							<div className='d-grid' id='button-login-google'>
+							<div className='d-grid mb-3' id='button-login-google'>
 								<ComponentButtonCommon text='Registrar' />
 							</div>
 						</Link >

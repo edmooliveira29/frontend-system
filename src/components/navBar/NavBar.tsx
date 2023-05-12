@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {Link} from 'react-router-dom';
-import './styles.scss';
+import React, { Component } from 'react'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { Link } from 'react-router-dom'
+import './styles.scss'
+import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
 
 const NavBar = () => (
 	<div>
@@ -31,17 +32,17 @@ const NavBar = () => (
 							Contato
 						</Link>
 					</ul>
-					<form className='d-flex'>
-						<input className='form-control me-2' type='search' placeholder='Pesquisar' aria-label='Search' />
-						<button className='btn btn-outline-light' type='submit'>Pesquisar</button>
+					<form className='d-flex align-items-center'>
+						<input className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
+						<ComponentButtonCommon text='Pesquisar' sizeButton='50px' />
+						<Link to='/entrar' title='Entrar'>
+							<AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
+						</Link>
 					</form>
-					<Link to='/entrar' title='Entrar'>
-						<AccountCircleIcon sx={{color: '#FFFFFF', margin: '0px 20px'}} fontSize='large' />
-					</Link>
 				</div>
 			</div>
 		</nav >
 	</div >
-);
+)
 
-export default NavBar;
+export default NavBar

@@ -36,6 +36,7 @@ export const Singin = () => {
 		}
 	}
 
+
 	return (
 		<div>
 			<div>
@@ -58,7 +59,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div  id='input-email'>
+							<div id='input-email'>
 								<TextFieldInput
 									required={true}
 									label='E-mail'
@@ -69,7 +70,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div  id='input-password'>
+							<div id='input-password'>
 								<TextFieldInput
 									required={true}
 									label='Senha' typeInput='password'
@@ -79,7 +80,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div  id='input-password'>
+							<div id='input-password'>
 								<TextFieldInput
 									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}
@@ -98,7 +99,9 @@ export const Singin = () => {
 								<span id='span-separete'>OU</span>
 							</div>
 							<div className='d-grid' id='button-login-google' onClick={handleSave}>
-								<ComponentButtonCommon text='Entrar com o GOOGLE' />
+								<div className='d-grid' id='button-login-google'>
+
+								</div>
 							</div>
 						</div>
 					</div>

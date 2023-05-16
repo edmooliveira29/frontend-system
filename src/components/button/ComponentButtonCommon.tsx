@@ -19,7 +19,7 @@ export function ComponentButtonCommon(props: { text: string; width?: string; siz
 		<Stack spacing={2} direction='row'>
 			<ColorButton
 				variant='contained'
-				style={{ width: props.width ?? '100%', height: props.sizeButton ?? '60px', margin: '0px 10px' }}
+				style={{ width: props.width ?? '100%', height: props.sizeButton ?? '40px', margin: '0px 10px' }}
 				type='submit'
 				disabled={props.loading}
 			>

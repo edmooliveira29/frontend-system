@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 import { UserService } from '../../../services/User/user-http'
 import { useNavigate } from 'react-router-dom'
 
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import jwtDecode from 'jwt-decode'
+
 export const Login: React.FC = () => {
 	const [state, setState] = React.useState({
 		email: '',
@@ -19,23 +22,47 @@ export const Login: React.FC = () => {
 	const [loading, setLoading] = useState(false)
 	const [errorResponse, setErrorResponse] = useState('')
 	const navigate = useNavigate()
+	const userService = new UserService()
+
 	const handleLogin = async () => {
 		setLoading(true)
-		const userService = new UserService()
 		setErrorResponse('')
 		try {
 			const user = await userService.login({
 				email: state.email,
 				password: state.password,
-			});
-			localStorage.setItem('username', user.data.name);
-			localStorage.setItem('idUser', user.data._id);
+			})
+			localStorage.setItem('username', user.data.name)
+			localStorage.setItem('idUser', user.data._id)
 
 			navigate('/dashboard')
 		} catch (error: any) {
 			setLoading(false)
 
 			setErrorResponse(error.response.data.message)
+		}
+	}
+	const handleLoginGoogle = async (credentialResponse: any) => {
+		if (credentialResponse.credential != null) {
+			const USER_CREDENTIAL: any = jwtDecode(credentialResponse.credential)
+			try {
+				const user = await userService.login({
+					email: USER_CREDENTIAL.email,
+					password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+				})
+			} catch (error: any) {
+				if (error.message != "Usuário autenticado com sucesso") {
+					await userService.create({
+						email: USER_CREDENTIAL.email,
+						name: USER_CREDENTIAL.name,
+						password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+						passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+					})
+				}
+			}
+			localStorage.setItem('username', USER_CREDENTIAL.name)
+			localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
+			navigate('/dashboard')
 		}
 	}
 
@@ -69,8 +96,8 @@ export const Login: React.FC = () => {
 						<div className='mb-3' id='checkbox-remember'>
 							<CheckboxInput label='Lembrar durante 3 dias' />
 						</div>
-						<div className='d-grid' id='button-login' onClick={handleLogin}>
-							<ComponentButtonCommon text='Entrar' loading={loading} />
+						<div className='d-flex justify-content-evenly' id='button-login' onClick={handleLogin}>
+							<ComponentButtonCommon text='Entrar' width='210px'  loading={loading} />
 						</div>
 						<div id='error-response'>
 							<span >{errorResponse ?? ''}</span>
@@ -85,16 +112,23 @@ export const Login: React.FC = () => {
 						</div>
 						<Link to='/registrar'>
 
-							<div className='d-grid mb-3 ' id='button-login-google'>
-								<ComponentButtonCommon text='Entrar com o GOOGLE' />
+							<div className='d-flex justify-content-evenly' id='button-login'>
+								<ComponentButtonCommon text='Cadastrar' width='210px' />
 							</div>
 						</Link>
-						<Link to='/registrar'>
 
-							<div className='d-grid mb-3' id='button-login-google'>
-								<ComponentButtonCommon text='Registrar' />
-							</div>
-						</Link >
+						<div className='d-flex justify-content-evenly m-3' id='button-login-google' >
+							<GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`} >
+								<GoogleLogin
+									text='signin_with'
+									logo_alignment='center'
+									useOneTap
+									containerProps={{ style: { display:'block', alignContent: 'center' } }}
+									onSuccess={handleLoginGoogle}
+								/>
+							</GoogleOAuthProvider>
+
+						</div>
 					</div>
 				</div>
 			</div>

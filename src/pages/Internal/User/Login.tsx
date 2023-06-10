@@ -122,6 +122,7 @@ export const Login: React.FC = () => {
 								<GoogleLogin
 									text='signin_with'
 									logo_alignment='center'
+									useOneTap
 									containerProps={{ style: { display:'block', alignContent: 'center' } }}
 									onSuccess={handleLoginGoogle}
 								/>

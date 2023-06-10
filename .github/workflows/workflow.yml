@@ -17,8 +17,9 @@ jobs:
       
       - name: Run tests and build
         uses: actions/checkout@v3
-      - run: echo "RUN TEST============"
-             npm run build
+      - run: |-
+          echo "RUN TEST============"
+          npm run build   
     
     
       - name: Deploy to Netlify

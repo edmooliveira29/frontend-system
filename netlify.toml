@@ -6,7 +6,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[context.production.environment]
-  API_KEY = "your_api_key"
-  SECRET_KEY = "your_secret_key"

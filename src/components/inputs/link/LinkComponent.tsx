@@ -1,31 +1,26 @@
-import * as React from 'react';
-import Link from '@mui/material/Link';
+import * as React from 'react'
+import Link from '@mui/material/Link'
 
 const preventDefault = (event: React.SyntheticEvent) => {
-	event.preventDefault();
-};
+	event.preventDefault()
+}
 
-export function LinkComponent(props: {hrefLink: string; text?: string; size?: number}) {
+export function LinkComponent(props: { hrefLink: string; text?: string; size?: string, alingment?: string }) {
 	return (
 		<Link
+			display='flex'
+			flexWrap='wrap'
 			href={props.hrefLink}
 			underline='hover'
 			fontSize={props.size}
-			sx={{
-				display: 'flex',
-				flexWrap: 'wrap',
-				typography: 'body1',
-				'& > :not(style) + :not(style)': {
-					ml: 5,
-				},
-				flexDirection: 'row',
-				justifyContent: 'center',
-				alignItems: 'center',
-				margin: '8px 5px',
-			}}
+			color='#666666'
+			flexDirection='row'
+			justifyContent='center'
+			alignItems='center'
+
 			onClick={preventDefault}
 		>
 			{props?.text}
 		</Link>
-	);
+	)
 }

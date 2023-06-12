@@ -13,7 +13,6 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwtDecode from 'jwt-decode'
 
 export const Login: React.FC = () => {
-	console.log(process.env.REACT_APP_CLIENT_ID_GOOGLE)
 	const [state, setState] = React.useState({
 		email: '',
 		password: '',

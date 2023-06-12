@@ -13,7 +13,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
 			<label className='form-label mb-0'>{props.label}{props.required ? <a style={{color: 'red'}}> *</a> : ''}</label>
 			<div className="input-wrapper">
 				<input
-					style={{ padding:'0px 30px',margin: '0px' }}
+					style={{ padding:'0px 30px',margin: '0px', height: '40px'}}
 					type={props.typeInput === "text" || !HIDEPASSWORD ? "text" : "password"}
 					className='form-control'
 					id={(props.label).toLowerCase()}
@@ -23,7 +23,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
 				/>
 				{props.typeInput == 'password' ?
 					<i id='i-icon' onClick={handleShowPassword}>
-						{HIDEPASSWORD ? <AiFillEye size={30}  color='#BBBBBB'/> : <AiFillEyeInvisible size={30} color='#555555'/>}
+						{HIDEPASSWORD ? <AiFillEye size={20}  color='#BBBBBB'/> : <AiFillEyeInvisible size={20} color='#555555'/>}
 					</i> : ''}
 			</div>
 		</>

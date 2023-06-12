@@ -98,7 +98,7 @@ export const Login: React.FC = () => {
 							<CheckboxInput label='Lembrar durante 3 dias' />
 						</div>
 						<div className='d-flex justify-content-evenly' id='button-login' onClick={handleLogin}>
-							<ComponentButtonCommon text='Entrar' width='210px'  loading={loading} />
+							<ComponentButtonCommon text='Entrar' loading={loading} />
 						</div>
 						<div id='error-response'>
 							<span >{errorResponse ?? ''}</span>
@@ -114,7 +114,7 @@ export const Login: React.FC = () => {
 						<Link to='/registrar'>
 
 							<div className='d-flex justify-content-evenly' id='button-login'>
-								<ComponentButtonCommon text='Cadastrar' width='210px' />
+								<ComponentButtonCommon text='Cadastrar'/>
 							</div>
 						</Link>
 

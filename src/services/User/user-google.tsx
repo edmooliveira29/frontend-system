@@ -19,6 +19,7 @@ export const LoginGoogle = () => {
                 })
 
             } catch (error: any) {
+                console.log(error)
                 if (error.message != "Usuário autenticado com sucesso") {
                     await userService.create({
                         email: USER_CREDENTIAL.email,

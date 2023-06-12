@@ -9,6 +9,7 @@ import { UserService } from '../../../services/User/user-http'
 import './stylesUser.sass'
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { handleLoginGoogle } from '../../../services/User/user-google'
 
 export const Login: React.FC = () => {
 	const [state, setState] = React.useState({
@@ -51,10 +52,10 @@ export const Login: React.FC = () => {
 					className='col-md-12'
 				>
 					<div id='div-login-form'>
-						<h3 id='h3-entrar'>Entrar</h3>
-						<div className='mb-3' id='input-email'>
+						<h3 id='h3-enter-register'>Entrar</h3>
+						<div className='m-3' id='input-email'>
 							<TextFieldInput
-								required={true} label='E-mail' 
+								required={true} label='E-mail'
 								typeInput='text'
 								value={state.email}
 								onChange={(value: string) => {
@@ -62,15 +63,15 @@ export const Login: React.FC = () => {
 								}}
 							/>
 						</div>
-						<div className='mb-3' id='input-password'>
+						<div className='m-3' id='input-password'>
 							<TextFieldInput
-								required={true} label='Senha' 
+								required={true} label='Senha'
 								typeInput='password'
 								value={state.password}
 								onChange={(value: string) => {
 									setState({ ...state, password: value })
 								}} />						</div>
-						<div className='mb-3' id='checkbox-remember'>
+						<div className='m-3' id='checkbox-remember'>
 							<CheckboxInput label='Lembrar durante 3 dias' />
 						</div>
 						<div className='d-flex justify-content-evenly' id='button-login' onClick={handleLogin}>
@@ -84,16 +85,14 @@ export const Login: React.FC = () => {
 							text='Clique aqui para lembrar a senha'
 							size={14}
 						/>
-						<div id='div-line'>
-							<span id='span-separete'>OU</span>
+						<div id="div-line">
+							<span>OU</span>
 						</div>
-						<Link to='/registrar'>
-							<div className='d-flex justify-content-evenly' id='button-login'>
-								<ComponentButtonCommon text='Cadastrar' width='310px' />
-							</div>
+						<Link to='/registrar' className='d-flex justify-content-evenly' id='button-login'>
+							<ComponentButtonCommon text='Registrar' width='310px' />
 						</Link>
 
-						<div className='justify-content-evenly m-3' id='button-login-google' >
+						<div className='justify-content-evenly p-2' id='button-login-google' >
 							<GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`} >
 								<GoogleLogin
 									text='signin_with'
@@ -104,7 +103,6 @@ export const Login: React.FC = () => {
 									width='310px'
 								/>
 							</GoogleOAuthProvider>
-
 						</div>
 					</div>
 				</div>

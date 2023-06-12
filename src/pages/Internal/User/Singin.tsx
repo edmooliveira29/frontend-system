@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { LinkComponent } from '../../../components/inputs/link/LinkComponent'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
-import { CheckboxInput } from '../../../components/inputs/CheckboxInput'
 import { TextFieldInput } from '../../../components/inputs/TextFieldInput'
 import NavBar from '../../../components/navBar/NavBar'
 import { UserService } from '../../../services/User/user-http'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { handleLoginGoogle } from '../../../services/User/user-google'
+import './stylesUser.sass'
 
 export const Singin = () => {
 	const navigate = useNavigate()
@@ -45,10 +46,11 @@ export const Singin = () => {
 					<div
 						id='div-login'
 						style={{ border: '1px solid' }}
+						className='col-md-12'
 					>
-						<div id='div-login-form'>
-							<h3 id='h3-entrar'>Registrar</h3>
-							<div id='input-email'>
+						<div id='div-login-form' >
+							<h3 id='h3-enter-register'>Registrar</h3>
+							<div id='input-email' className='m-2'>
 								<TextFieldInput
 									required={true}
 									label='Nome'
@@ -59,7 +61,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div id='input-email'>
+							<div id='input-email' className='m-2'>
 								<TextFieldInput
 									required={true}
 									label='E-mail'
@@ -70,7 +72,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div id='input-password'>
+							<div id='input-password' className='m-2'>
 								<TextFieldInput
 									required={true}
 									label='Senha' typeInput='password'
@@ -80,7 +82,7 @@ export const Singin = () => {
 									}}
 								/>
 							</div>
-							<div id='input-password'>
+							<div id='input-password' className='m-2'>
 								<TextFieldInput
 									required={true} label='Confirme sua senha' typeInput='password'
 									value={state.passwordConfirmation}
@@ -92,16 +94,24 @@ export const Singin = () => {
 							<div className='d-grid' id='button-login' onClick={handleSave}>
 								<ComponentButtonCommon text='Registrar' loading={loading} />
 							</div>
-							<div>
-								<span id='error-response'>{errorResponse}</span>
+							<div id='error-response'>
+								<span >{errorResponse ?? ''}</span>
 							</div>
-							<div id='div-line'>
-								<span id='span-separete'>OU</span>
+							<div id="div-line">
+								<span>OU</span>
 							</div>
-							<div className='d-grid' id='button-login-google' onClick={handleSave}>
-								<div className='d-grid' id='button-login-google'>
 
-								</div>
+							<div className='justify-content' id='button-login-google' >
+								<GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`} >
+									<GoogleLogin
+										text='signin_with'
+										logo_alignment='left'
+										useOneTap
+										containerProps={{ style: { width: '310px' } }}
+										onSuccess={handleLoginGoogle}
+										width='310px'
+									/>
+								</GoogleOAuthProvider>
 							</div>
 						</div>
 					</div>

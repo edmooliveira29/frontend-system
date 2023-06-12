@@ -45,7 +45,6 @@ export const Login: React.FC = () => {
 			<NavBar />
 			<div
 				id='div-login'
-				style={{ border: '1px solid' }}
 				className='col-md-12'
 			>
 				<div id='div-login-form'>

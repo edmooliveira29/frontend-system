@@ -43,7 +43,6 @@ export const Singin = () => {
 				<NavBar />
 				<div
 					id='div-login'
-					style={{ border: '1px solid' }}
 					className='col-md-12'
 				>
 					<div id='div-login-form' >

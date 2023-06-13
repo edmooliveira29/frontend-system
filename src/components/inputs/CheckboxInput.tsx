@@ -5,11 +5,12 @@ import Checkbox from '@mui/material/Checkbox';
 
 export function CheckboxInput(props: {label: string}): React.ReactElement {
 	return (
-		<FormGroup>
+		<FormGroup >
 			<FormControlLabel
-				sx={{margin: '0px 0px'}}
 				control={<Checkbox color='success' />}
 				label={props.label}
+				style={{ fontSize: '12px' }}
+
 			/>
 		</FormGroup>
 	);

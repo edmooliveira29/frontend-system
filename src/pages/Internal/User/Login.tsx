@@ -34,12 +34,19 @@ export const Login: React.FC = () => {
 
 			navigate('/dashboard')
 		} catch (error: any) {
+			console.log(error)
 			setLoading(false)
-
-			setErrorResponse(error.response.data.message)
+			if(error.message != 'Network Error'){
+				setErrorResponse(error.response.data.message)
+			}else{
+				setErrorResponse('Verifique sua conexão de internet')
+			}
 		}
 	}
 
+	const handleGoogle = (error: string) => {
+		setErrorResponse(error);
+	  };
 	return (
 		<>
 			<div>
@@ -89,8 +96,7 @@ export const Login: React.FC = () => {
 						</Link>
 
 						<div className='justify-content-evenly p-2' id='button-login-google' >
-							<LoginGoogle />
-
+							<LoginGoogle errorResponse={handleGoogle}/>
 						</div>
 					</div>
 				</div>

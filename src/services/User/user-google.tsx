@@ -4,7 +4,7 @@ import { UserService } from './user-http'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 
-export const LoginGoogle = () => {
+export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
     const userService = new UserService()
     const navigate = useNavigate()
 
@@ -19,8 +19,10 @@ export const LoginGoogle = () => {
                 })
 
             } catch (error: any) {
-                console.log(error)
-                if (error.message != "Usuário autenticado com sucesso") {
+                if (error.message == 'Network Error') {
+                    errorResponse('Verifique sua conexão de internet')
+                    return
+                } else if (error.message != "Usuário autenticado com sucesso") {
                     await userService.create({
                         email: USER_CREDENTIAL.email,
                         name: USER_CREDENTIAL.name,
@@ -35,6 +37,7 @@ export const LoginGoogle = () => {
             navigate('/dashboard')
         }
     }
+
     return (
         <GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`
         } >

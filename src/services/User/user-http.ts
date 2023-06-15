@@ -1,8 +1,8 @@
-import http from '../http-common';
+import http from '../http-common'
 
 export class UserService {
 	async create(data: any) {
-		return (await http.post<any>('/user', data)).data;
+		return (await http.post<any>('/user', data)).data
 	}
 
 	async login(data: any) {

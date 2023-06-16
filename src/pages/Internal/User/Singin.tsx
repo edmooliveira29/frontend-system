@@ -32,10 +32,17 @@ export const Singin = () => {
 			navigate('/dashboard')
 		} catch (error: any) {
 			setLoading(false)
-			setErrorResponse((error.response.data.message))
+			if (error.message != 'Network Error') {
+				setErrorResponse(error.response.data.message)
+			} else {
+				setErrorResponse('Verifique sua conexão de internet')
+			}
 		}
 	}
 
+	const handleGoogle = (error: string) => {
+		setErrorResponse(error)
+	}
 
 	return (
 		<div>
@@ -99,7 +106,7 @@ export const Singin = () => {
 						</div>
 
 						<div className='justify-content' id='button-login-google' >
-							<LoginGoogle />
+							<LoginGoogle errorResponse={handleGoogle} />
 						</div>
 					</div>
 				</div>

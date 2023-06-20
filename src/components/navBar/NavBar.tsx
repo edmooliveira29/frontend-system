@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
+import icon from '../../assets/img/icon.png'
 
 const NavBar = () => (
 	<div>
 		<nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
 			<div className='container-fluid'>
-				<Link to='/' className='link-navbar'>
-					LOGO
+				<Link to='/' >
+				<img src={icon} width="60" height="60" className="rounded-circle" />
 				</Link>
 				<button className='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
 					<span className='navbar-toggler-icon'></span>

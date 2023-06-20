@@ -6,6 +6,7 @@ import { FaTimes } from 'react-icons/fa'
 import { MdPointOfSale } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
+import icon from '../../assets/img/icon.png'
 import './styles.scss'
 
 
@@ -21,14 +22,12 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
     return (
         <><div className='row div-header'>
             <div className="col-10 p-0">
-                {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 p-3 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh' }}>
+                {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh' }}>
                     <div className="row">
-                        <div className='col-9'>
-                            <a className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                                <span className="fs-4">LOGO</span>
-                            </a>
+                        <div className='col-9 px-1'>
+                            <img src={icon} width="60" height="60" className="rounded-circle" />
                         </div>
-                        <div className='col-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
+                        <div className='col-3 p-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
                             <FaTimes onClick={props.closeSidebar} />
                         </div>
 
@@ -44,7 +43,12 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                         <Link to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
                     </ul>
                     <hr />
-                </div > : <HiBars3 className="icon-bar" onClick={props.showSiderbar} />}
+                </div > :
+                    <div onClick={props.showSiderbar}>
+                        <img src={icon} width="60" height="60" className="rounded-circle" />
+                        <HiBars3 className="icon-bar" />
+                    </div>
+                }
             </div>
             <div className="col-2 ">
                 <div className="dropdown justify-content-end">

@@ -14,11 +14,13 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
         let USER_CREDENTIAL: any
         if (credentialResponse.credential != null) {
             USER_CREDENTIAL = jwtDecode(credentialResponse.credential)
+            let user
             try {
-                await userService.login({
+                user = await userService.login({
                     email: USER_CREDENTIAL.email,
                     password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
                 })
+
             } catch (error: any) {
                 if (error.message == 'Network Error') {
                     errorResponse('Verifique sua conexão de internet')
@@ -34,7 +36,9 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                     })
                 }
             }
+            console.log(user)
 
+            localStorage.setItem('sessionId', user.data.sessionId)
             localStorage.setItem('username', USER_CREDENTIAL.name)
             localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
             setLoading(false)

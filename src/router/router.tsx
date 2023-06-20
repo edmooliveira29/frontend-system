@@ -21,8 +21,8 @@ const Internal = (props: { Page: any }) => {
 	})
 
 	const userIsAlreadyLoggedIn = () => {
-		console.log(localStorage.getItem('sessionId'))
-		if (!localStorage.getItem('sessionId')) {
+		console.log(localStorage.getItem('sessionToken'))
+		if (!localStorage.getItem('sessionToken')) {
 			navigate('/entrar')
 		}
 	}

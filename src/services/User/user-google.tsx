@@ -38,7 +38,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
             }
             console.log(user)
 
-            localStorage.setItem('sessionId', user.data.sessionId)
+            localStorage.setItem('sessionToken', user.data.sessionToken)
             localStorage.setItem('username', USER_CREDENTIAL.name)
             localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
             setLoading(false)

@@ -21,7 +21,6 @@ const Internal = (props: { Page: any }) => {
 	})
 
 	const userIsAlreadyLoggedIn = () => {
-		console.log(localStorage.getItem('sessionToken'))
 		if (!localStorage.getItem('sessionToken')) {
 			navigate('/entrar')
 		}
@@ -49,8 +48,10 @@ export const router = (
 			<Route path="/contato" element={<ContactUs />} />
 			<Route path="/dashboard" element={<Internal Page={Dashboard} />} />
 			<Route path="/relatorios" element={<Internal Page={Report} />} />
-			<Route path="/configuracoes" element={<Internal Page={Setup} />} />
-			<Route path="/clientes" element={<Internal Page={Customer} />} />
+			<Route path="/clientes">
+				<Route path="fisico" element={<Internal Page={Customer} />} />
+				<Route path="juridico" element={<Internal Page={Customer} />} />
+			</Route>
 			<Route path="/produtos" element={<Internal Page={Products} />} />
 			<Route path="/vendas" element={<Internal Page={Sale} />} />
 		</Routes>

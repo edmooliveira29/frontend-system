@@ -4,8 +4,37 @@ a {
     text-decoration: none;
 }
 
-#user-dropdown{
+#user-dropdown {
     inset: 0px 40px auto auto;
+}
+
+#icon-arrow {
+    margin: 0 0 0 100px;
+    cursor: pointer
+}
+
+.nav-item {
+    cursor: pointer
+}
+
+.link-sub-item-menu {
+    padding: 10px 60px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.dropdown-item:active,
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+#div-icon-bar {
+    cursor: pointer
 }
 
 .div-header {
@@ -45,5 +74,4 @@ a {
     #name-user-log {
         display: none
     }
-
 }

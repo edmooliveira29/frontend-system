@@ -21,7 +21,6 @@ export const AlertConfirmationLogout = async (handleLogOut: any) => {
                 timerProgressBar: true,
                 width:400,
                 willClose: () => {
-                    //clearInterval(timerInterval)
                     handleLogOut()
                 }
             })

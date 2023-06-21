@@ -25,8 +25,8 @@ const Internal = (props: { Page: any }) => {
 			navigate('/entrar')
 		}
 	}
+	const closeSidebar = () => setShowMenu(true)
 
-	const closeSidebar = () => setShowMenu(false)
 	return (<>
 		<SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
 		<div style={{ marginLeft: showMenu ? '280px' : '0px' }}>
@@ -48,11 +48,10 @@ export const router = (
 			<Route path="/contato" element={<ContactUs />} />
 			<Route path="/dashboard" element={<Internal Page={Dashboard} />} />
 			<Route path="/relatorios" element={<Internal Page={Report} />} />
-			<Route path="/clientes">
-				<Route path="fisico" element={<Internal Page={Customer} />} />
-				<Route path="juridico" element={<Internal Page={Customer} />} />
-			</Route>
+			<Route path="/clientes/fisico" element={<Internal Page={Customer} />} />
+			<Route path="/clientes/juridico" element={<Internal Page={Customer} />} />
 			<Route path="/produtos" element={<Internal Page={Products} />} />
+			<Route path="/configuracoes" element={<Internal Page={Products} />} />
 			<Route path="/vendas" element={<Internal Page={Sale} />} />
 		</Routes>
 	</BrowserRouter>

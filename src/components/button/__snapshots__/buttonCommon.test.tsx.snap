@@ -2,8 +2,8 @@
 
 exports[`ComponentButtonCommon Should renders button with custom width 1`] = `
 <button
-  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-3zyfgb-MuiButtonBase-root-MuiButton-root"
-  style="width: 200px;"
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-rjcf26-MuiButtonBase-root-MuiButton-root"
+  style="width: 200px; height: 40px; margin: 0px 10px;"
   tabindex="0"
   type="submit"
 >
@@ -16,8 +16,8 @@ exports[`ComponentButtonCommon Should renders button with custom width 1`] = `
 
 exports[`ComponentButtonCommon Should renders button with text 1`] = `
 <button
-  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-3zyfgb-MuiButtonBase-root-MuiButton-root"
-  style="width: 100%;"
+  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-rjcf26-MuiButtonBase-root-MuiButton-root"
+  style="width: 100%; height: 40px; margin: 0px 10px;"
   tabindex="0"
   type="submit"
 >

@@ -8,6 +8,7 @@ export const AlertConfirmationSaveEdit = (title: string, subtitle: string, editO
         cancelButtonColor: '#F56666',
         confirmButtonText: 'SIM',
         cancelButtonText: 'NÃO',
+        allowOutsideClick:false,
         width: 400
 
     }).then((result) => {
@@ -15,6 +16,7 @@ export const AlertConfirmationSaveEdit = (title: string, subtitle: string, editO
             Swal.fire({
                 title: 'Salvo com sucesso!',
                 icon: 'success',
+                allowOutsideClick:false,
                 width: 400
             })
         }

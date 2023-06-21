@@ -9,6 +9,7 @@ export const AlertConfirmationDelete = (subtitle: string, editOrSave: string) =>
         confirmButtonColor: '#8AC381',
         cancelButtonColor: '#F56666',
         confirmButtonText: 'SIM',
+        allowOutsideClick:false,
         width: 400
 
     }).then((result) => {

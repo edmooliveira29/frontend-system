@@ -14,6 +14,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
         let USER_CREDENTIAL: any
         if (credentialResponse.credential != null) {
             USER_CREDENTIAL = jwtDecode(credentialResponse.credential)
+
             let user
             try {
                 user = await userService.login({
@@ -36,7 +37,6 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                     })
                 }
             }
-            console.log(user)
 
             localStorage.setItem('sessionToken', user.data.sessionToken)
             localStorage.setItem('username', USER_CREDENTIAL.name)

@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import icon from '../../assets/img/icon.png'
 import './styles.scss'
+import { AlertConfirmationLogout } from '../modal'
 
 
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
@@ -76,7 +77,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                         <li><a className="dropdown-item" href="#">Configurações da Conta</a></li>
                         <li><a className="dropdown-item" href="#">Perfil</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" onClick={handleLogOut}>Sair</a></li>
+                        <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
                     </ul>
                 </div>
             </div>

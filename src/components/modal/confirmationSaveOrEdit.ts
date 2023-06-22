@@ -9,7 +9,7 @@ export const AlertConfirmationSaveEdit = (title: string, subtitle: string, editO
         confirmButtonText: 'SIM',
         cancelButtonText: 'NÃO',
         allowOutsideClick:false,
-        width: 400
+        width: 500
 
     }).then((result) => {
         if (result.isConfirmed) {
@@ -17,7 +17,7 @@ export const AlertConfirmationSaveEdit = (title: string, subtitle: string, editO
                 title: 'Salvo com sucesso!',
                 icon: 'success',
                 allowOutsideClick:false,
-                width: 400
+                width: 500
             })
         }
     })

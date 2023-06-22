@@ -10,7 +10,7 @@ export const AlertConfirmationDelete = (subtitle: string, editOrSave: string) =>
         cancelButtonColor: '#F56666',
         confirmButtonText: 'SIM',
         allowOutsideClick:false,
-        width: 400
+        width: 500
 
     }).then((result) => {
         if (result.isConfirmed) {
@@ -18,7 +18,7 @@ export const AlertConfirmationDelete = (subtitle: string, editOrSave: string) =>
                 title: editOrSave == 'save' ? 'Salvo' : 'Editado',
                 text: editOrSave == 'save' ? 'Informação salva com sucesso' : 'Informação editada com sucesso',
                 icon: 'success',
-                width: 400
+                width: 500
             }
             )
         }

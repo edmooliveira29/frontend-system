@@ -29,7 +29,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
 
                     return
                 } else if (error.message != "Usuário autenticado com sucesso") {
-                    await userService.create({
+                    user = await userService.create({
                         email: USER_CREDENTIAL.email,
                         name: USER_CREDENTIAL.name,
                         password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
@@ -37,7 +37,6 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                     })
                 }
             }
-
             localStorage.setItem('sessionToken', user.data.sessionToken)
             localStorage.setItem('username', USER_CREDENTIAL.name)
             localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
@@ -52,6 +51,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
         } >
             {!loading ? <GoogleLogin
                 text='signup_with'
+                locale='PT-BR'
                 logo_alignment='left'
                 useOneTap={false}
                 containerProps={{ style: { width: '310px' } }}

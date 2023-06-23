@@ -21,14 +21,12 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                     email: USER_CREDENTIAL.email,
                     password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
                 })
-
             } catch (error: any) {
                 if (error.message == 'Network Error') {
                     errorResponse('Verifique sua conexão de internet')
                     setLoading(false)
-
                     return
-                } else if (error.message != "Usuário autenticado com sucesso") {
+                } else {
                     user = await userService.create({
                         email: USER_CREDENTIAL.email,
                         name: USER_CREDENTIAL.name,

@@ -10,7 +10,6 @@ export function CheckboxInput(props: {label: string}): React.ReactElement {
 				control={<Checkbox color='success' />}
 				label={props.label}
 				style={{ fontSize: '12px' }}
-
 			/>
 		</FormGroup>
 	);

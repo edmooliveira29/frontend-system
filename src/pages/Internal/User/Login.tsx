@@ -29,6 +29,7 @@ export const Login: React.FC = () => {
 				email: state.email,
 				password: state.password,
 			})
+			localStorage.setItem('sessionToken', user.data.sessionToken)
 			localStorage.setItem('username', user.data.name)
 			localStorage.setItem('idUser', user.data._id)
 

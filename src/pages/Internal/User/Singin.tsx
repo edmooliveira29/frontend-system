@@ -23,12 +23,14 @@ export const Singin = () => {
 		const userService = new UserService()
 
 		try {
-			await userService.create({
+			const user = await userService.create({
 				email: state.email,
 				name: state.name,
 				password: state.password,
-				passwordConfirm: state.passwordConfirmation,
+				passwordConfirm: state.passwordConfirmation
 			})
+			localStorage.setItem('sessionToken', user.data.sessionToken)
+            localStorage.setItem('username', user.data.name)
 			navigate('/dashboard')
 		} catch (error: any) {
 			setLoading(false)

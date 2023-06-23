@@ -15,6 +15,7 @@ export const Login: React.FC = () => {
 		password: '',
 		passwordConfirmation: '',
 		username: '',
+		remember: false
 	})
 	const [loading, setLoading] = useState(false)
 	const [errorResponse, setErrorResponse] = useState('')
@@ -28,6 +29,7 @@ export const Login: React.FC = () => {
 			const user = await userService.login({
 				email: state.email,
 				password: state.password,
+				remember: state.remember
 			})
 			localStorage.setItem('sessionToken', user.data.sessionToken)
 			localStorage.setItem('username', user.data.name)
@@ -69,14 +71,19 @@ export const Login: React.FC = () => {
 						</div>
 						<div className='m-3' id='input-password'>
 							<TextFieldInput
-								required={true} label='Senha'
+								required={true} 
+								label='Senha'
 								typeInput='password'
 								value={state.password}
 								onChange={(value: string) => {
 									setState({ ...state, password: value })
 								}} />						</div>
 						<div className='m-3' id='checkbox-remember'>
-							<CheckboxInput label='Lembrar durante 3 dias' />
+							<CheckboxInput
+								label='Lembrar durante 7 dias'
+								onChange={() => {
+									setState({ ...state, remember: !state.remember })
+								}} />
 						</div>
 						<div className='d-flex justify-content-evenly' id='button-login' onClick={handleLogin}>
 							<ComponentButtonCommon text='Entrar' width='310px' loading={loading} />

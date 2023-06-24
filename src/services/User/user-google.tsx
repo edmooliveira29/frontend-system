@@ -20,6 +20,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                 user = await userService.login({
                     email: USER_CREDENTIAL.email,
                     password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+                    remember: true
                 })
             } catch (error: any) {
                 if (error.message == 'Network Error') {
@@ -35,7 +36,9 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
                     })
                 }
             }
-            localStorage.setItem('sessionToken', user.data.sessionToken)
+            if (user.data.sessionToken !== null) {
+				localStorage.setItem('sessionToken', user.data.sessionToken)
+			}
             localStorage.setItem('username', USER_CREDENTIAL.name)
             localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
             setLoading(false)

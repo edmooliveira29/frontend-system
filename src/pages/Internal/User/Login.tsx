@@ -31,6 +31,7 @@ export const Login: React.FC = () => {
 				password: state.password,
 				remember: state.remember
 			})
+
 			localStorage.setItem('sessionToken', user.data.sessionToken)
 			localStorage.setItem('username', user.data.name)
 			localStorage.setItem('idUser', user.data._id)
@@ -71,7 +72,7 @@ export const Login: React.FC = () => {
 						</div>
 						<div className='m-3' id='input-password'>
 							<TextFieldInput
-								required={true} 
+								required={true}
 								label='Senha'
 								typeInput='password'
 								value={state.password}

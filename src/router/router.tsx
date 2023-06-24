@@ -10,6 +10,8 @@ import { Products } from '../pages/Internal/Products/Products'
 import { Sale } from '../pages/Internal/Sale/Products'
 import { SideBar } from '../components/sideBar/sideBar'
 import { Report } from '../pages/Internal/Report/Report'
+import jwtDecode, { JwtPayload } from 'jwt-decode'
+import { AlertWarningGeneral } from '../components/modal'
 
 const Internal = (props: { Page: any }) => {
 	const [showMenu, setShowMenu] = useState(true)
@@ -18,10 +20,18 @@ const Internal = (props: { Page: any }) => {
 
 	useEffect(() => {
 		userIsAlreadyLoggedIn()
-	})
+	}, [])
 
 	const userIsAlreadyLoggedIn = () => {
-		if (!localStorage.getItem('sessionToken')) {
+		sessionTokenExpiry(String(localStorage.getItem('sessionToken')))
+	}
+	const sessionTokenExpiry = (sessionToken: string) => {
+		const decoded = jwtDecode(sessionToken) as JwtPayload
+		const expirationTime = decoded.exp || 0
+		const currentTime = Math.floor(Date.now() / 1000)
+		if (currentTime > expirationTime) {
+			AlertWarningGeneral('Sua sessão expirou. Por favor entre novamente')
+			localStorage.clear()
 			navigate('/entrar')
 		}
 	}

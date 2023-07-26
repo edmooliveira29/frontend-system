@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {Facebook, Twitter, Instagram} from '@mui/icons-material';
-import {Link} from 'react-router-dom';
-import './styles.sass';
-import {ComponentButtonCommon} from '../button/ComponentButtonCommon';
-import {TextFieldInput} from '../inputs/TextFieldInput';
+import React, { Component } from 'react'
+import { Facebook, Twitter, Instagram } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
+import './styles.sass'
+import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
+import { TextFieldInput } from '../inputs/TextFieldInput'
 const Footer = () => {
 	const [state, setState] = React.useState({
 		email: '',
-	});
+	})
 	return (
 		<>
 			<div className='bg-secondary'>
@@ -35,7 +35,7 @@ const Footer = () => {
 											required={true} label='E-mail' typeInput='text'
 											value={state.email}
 											onChange={(value: string) => {
-												setState({...state, email: value});
+												setState({ ...state, email: value })
 											}}
 										/>									<ComponentButtonCommon text='Inscrever-se' width='180px' />
 									</div>
@@ -57,7 +57,7 @@ const Footer = () => {
 				</div >
 			</div >
 
-		</>);
-};
+		</>)
+}
 
-export default Footer;
+export default Footer

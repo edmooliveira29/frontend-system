@@ -1,63 +1,111 @@
-import React, {Component} from 'react';
-import NavBar from '../../components/navBar/NavBar';
-import CheckIcon from '@mui/icons-material/Check';
-import Footer from '../../components/footer/Footer';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react'
+import NavBar from '../../components/navBar/NavBar'
+import Footer from '../../components/footer/Footer'
+import './styles.sass'
+import { ComponentButtonCommon } from '../../components/button/ComponentButtonCommon'
+import { Link } from 'react-router-dom'
+
 export const PricePage = () => (
 	<>
 		<NavBar />
-		<div className='container'>
+		<div className="container">
+			<div className="row m-5">
+				<div className="col-12 col-md-6 col-lg-3 mb-4">
+					<div className="card fixed-height">
+						<div className="card-header text-center">
+							<h5 className="card-title">GRÁTIS</h5>
+							<p className="text-muted">Valor: R$XX,XX/mês</p>
+						</div>
+						<div className="card-body">
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">1 usuário</li>
+								<li className="list-group-item">Cadastro de clientes*</li>
+								<li className="list-group-item">Cadastro de produtos*</li>
+								<li className="list-group-item">Gestão de estoques*</li>
+								<li className="list-group-item">Suporte por email</li>
+							</ul>
+						</div>
+						<Link to='/registrar'>
+							<div className="card-footer text-center">
+								<ComponentButtonCommon text='CADASTRAR' />
+							</div>
+						</Link>
+					</div>
+				</div>
+				<div className="col-12 col-md-6 col-lg-3 mb-4">
+					<div className="card fixed-height">
+						<div className="card-header text-center">
+							<h5 className="card-title">PADRÃO</h5>
+							<p className="text-muted">Valor: R$XX,XX/mês</p>
 
-			<div className='section-title'>
-				<h2>Pricing</h2>
-				<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+						</div>
+						<div className="card-body">
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">5 usuário</li>
+								<li className="list-group-item">Cadastro de clientes</li>
+								<li className="list-group-item">Cadastro de produtos</li>
+								<li className="list-group-item">Gestão de estoques</li>
+								<li className="list-group-item">Suporte Segunda a Sexta</li>
+							</ul>
+						</div>
+						<div className="card-footer text-center">
+							<ComponentButtonCommon text='Comprar' />
+						</div>
+					</div>
+				</div>
+				<div className="col-12 col-md-6 col-lg-3 mb-4 ">
+					<div className="card fixed-height more-used">
+						<div className="card-header bg-secondary text-white text-center">
+							<h5 className="card-title">PREMIUM</h5>
+							<p className="text-white">Valor: R$XX,XX/mês</p>
+						</div>
+						<div className="card-body">
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">10 usuário</li>
+								<li className="list-group-item">Cadastro de clientes</li>
+								<li className="list-group-item">Cadastro de produtos</li>
+								<li className="list-group-item">Gestão de estoques</li>
+								<li className="list-group-item">Relatórios</li>
+								<li className="list-group-item">Suporte Segunda a Sexta</li>
+							</ul>
+						</div>
+						<div className="card-footer text-center">
+							<ComponentButtonCommon text='Comprar' />
+						</div>
+					</div>
+				</div>
+				<div className="col-12 col-md-6 col-lg-3 mb-4">
+					<div className="card fixed-height">
+						<div className="card-header text-center">
+							<h5 className="card-title">ENTERPRISE</h5>
+							<p className="text-muted">Valor: R$XX,XX/mês</p>
+
+						</div>
+						<div className="card-body">
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">Usuário ilimitado</li>
+								<li className="list-group-item">Cadastro de clientes</li>
+								<li className="list-group-item">Cadastro de produtos</li>
+								<li className="list-group-item">Gestão de estoques</li>
+								<li className="list-group-item">Impressão de etiqueta</li>
+								<li className="list-group-item">Emissão de Boletos</li>
+								<li className="list-group-item">Relatórios</li>
+								<li className="list-group-item">Suporte 24/7</li>
+							</ul>
+						</div>
+						<div className="card-footer text-center">
+							<ComponentButtonCommon text='Comprar' />
+						</div>
+					</div>
+				</div>
 			</div>
-
-			<div className='row no-gutters'>
-
-				<div className='col-lg-4 box'>
-					<h3>Free</h3>
-					<h4>$0<span>per month</span></h4>
-					<ul>
-						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
-						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
-						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
-						<li className='na'><i className='bx bx-x'></i> <span>Pharetra massa massa ultricies</span></li>
-						<li className='na'><i className='bx bx-x'></i> <span>Massa ultricies mi quis hendrerit</span></li>
-					</ul>
-					<a href='#' className='get-started-btn'>Get Started</a>
-				</div>
-
-				<div className='col-lg-4 box featured'>
-					<h3>Business</h3>
-					<h4>$29<span>per month</span></h4>
-					<ul>
-						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
-						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
-						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
-						<li><i className='bx bx-check'></i> Pharetra massa massa ultricies</li>
-						<li><i className='bx bx-check'></i> Massa ultricies mi quis hendrerit</li>
-					</ul>
-					<a href='#' className='get-started-btn'>Get Started</a>
-				</div>
-
-				<div className='col-lg-4 box'>
-					<h3>Developer</h3>
-					<h4>$49<span>per month</span></h4>
-					<ul>
-						<li><i className='bx bx-check'></i> Quam adipiscing vitae proin</li>
-						<li><i className='bx bx-check'></i> Nec feugiat nisl pretium</li>
-						<li><i className='bx bx-check'></i> Nulla at volutpat diam uteera</li>
-						<li><i className='bx bx-check'></i> Pharetra massa massa ultricies</li>
-						<li><i className='bx bx-check'></i> Massa ultricies mi quis hendrerit</li>
-					</ul>
-					<a href='#' className='get-started-btn'>Get Started</a>
-				</div>
-
+			<div>
+				<h6 style={{ fontSize: '10px' }}>
+					* Cadastro de no máximo 10 clientes, produtos ou estoques.
+				</h6>
 			</div>
-
 		</div>
 		<Footer />
 	</>
 
-);
+)

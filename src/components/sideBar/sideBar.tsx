@@ -5,7 +5,7 @@ import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MdPointOfSale, MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
-import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
+import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill } from 'react-icons/bs'
 import icon from '../../assets/img/icon.png'
 import './styles.scss'
 import { AlertConfirmationLogout } from '../modal'
@@ -14,7 +14,7 @@ import { AlertConfirmationLogout } from '../modal'
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
     const navigate = useNavigate()
     const userName = localStorage.getItem('username')
-    const [pictureProfile, setPictureProfile] = useState(localStorage.getItem('picture_profile'))
+    const [pictureProfile] = useState(localStorage.getItem('picture_profile'))
     const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
 
     const toggleClientesSubmenu = () => {

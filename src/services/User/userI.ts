@@ -1,6 +1,6 @@
 type UserI = {
 	data: {
-		_id?: any
+		_id?: string
 		name?: string
 		email: string
 		password?: string

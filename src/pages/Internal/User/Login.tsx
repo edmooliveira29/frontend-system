@@ -55,9 +55,7 @@ export const Login: React.FC = () => {
 		<>
 			<div>
 				<NavBar />
-				<div
-					id='div-login'
-				>
+				<div id='div-login'>
 					<div id='div-login-form'>
 						<h3 id='h3-enter-register'>Entrar</h3>
 						<div className='m-3' id='input-email'>

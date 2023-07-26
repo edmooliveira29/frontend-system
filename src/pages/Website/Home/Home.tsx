@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import NavBar from '../../../components/navBar/NavBar'
 import Footer from '../../../components/footer/Footer'
@@ -7,12 +7,12 @@ import { ComponentButtonCommon } from '../../../components/button/ComponentButto
 import { OurServices } from './OurServices/Our-Services'
 import { AlertWarningGeneral } from '../../../components/modal'
 export const Home = () => {
-
-
-
+	useEffect(() => {
+		AlertWarningGeneral('Este site está em fase de desenvolvimento. <strong style="font-weight: bold; color: red">Não</strong> nos responsabilizamos pelos dados aqui inseridos.')
+	})
 	return (
 		<>
-			<div onLoad={() => AlertWarningGeneral('Este site está em fase de desenvolvimento. <strong style="font-weight: bold; color: red">Não</strong> nos responsabilizamos pelos dados aqui inseridos.')}>
+			<div>
 				<NavBar />
 				<div className='page-header-ui-content' id='image-primary-carroussel'>
 					<div className='container px-5'>

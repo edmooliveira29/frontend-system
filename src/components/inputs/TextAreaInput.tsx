@@ -1,8 +1,5 @@
 
 import * as React from 'react';
-import Box from '@mui/joy/Box';
-import Textarea from '@mui/joy/Textarea';
-
 export default function TextAreaInput() {
 	return (
 		<div className='mb-3'>

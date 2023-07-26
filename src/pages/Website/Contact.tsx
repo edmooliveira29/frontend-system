@@ -1,13 +1,12 @@
-import React from 'react';
-import NavBar from '../../components/navBar/NavBar';
-import {TextFieldInput} from '../../components/inputs/TextFieldInput';
-import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import DevicesOutlinedIcon from '@mui/icons-material/DevicesOutlined';
-import Footer from '../../components/footer/Footer';
-import {ComponentButtonCommon} from '../../components/button/ComponentButtonCommon';
-import TextAreaInput from '../../components/inputs/TextAreaInput';
+import React from 'react'
+import NavBar from '../../components/navBar/NavBar'
+import { TextFieldInput } from '../../components/inputs/TextFieldInput'
+import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined'
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+import Footer from '../../components/footer/Footer'
+import { ComponentButtonCommon } from '../../components/button/ComponentButtonCommon'
+import TextAreaInput from '../../components/inputs/TextAreaInput'
 export const ContactUs = () => {
 	const [state, setState] = React.useState({
 		name: '',
@@ -15,7 +14,7 @@ export const ContactUs = () => {
 		subject: '',
 		message: '',
 
-	});
+	})
 	return (<div>
 		<NavBar />
 		<div className='container'>
@@ -34,7 +33,7 @@ export const ContactUs = () => {
 														required={true} label='Nome' typeInput='text'
 														value={state.name}
 														onChange={(value: string) => {
-															setState({...state, name: value});
+															return setState({ ...state, name: value })
 														}}
 													/>
 												</div>
@@ -45,7 +44,7 @@ export const ContactUs = () => {
 														required={true} label='E-mail' typeInput='text'
 														value={state.email}
 														onChange={(value: string) => {
-															setState({...state, email: value});
+															setState({ ...state, email: value })
 														}}
 													/>
 												</div>
@@ -56,7 +55,7 @@ export const ContactUs = () => {
 														required={true} label='Assunto' typeInput='text'
 														value={state.subject}
 														onChange={(value: string) => {
-															setState({...state, subject: value});
+															setState({ ...state, subject: value })
 														}}
 													/>
 												</div>
@@ -76,7 +75,7 @@ export const ContactUs = () => {
 								</div>
 							</div>
 							<div className='col-md-5 d-flex align-items-stretch p-5'>
-								<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120048.47545183754!2d-44.046450938287975!3d-19.902697333643328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690cacacf2c33%3A0x5b35795e3ad23997!2sBelo%20Horizonte%2C%20State%20of%20Minas%20Gerais!5e0!3m2!1sen!2sbr!4v1682961567336!5m2!1sen!2sbr' width='800' height='450' style={{border: '0'}} loading='lazy' referrerPolicy='no-referrer-when-downgrade'></iframe>	</div>
+								<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120048.47545183754!2d-44.046450938287975!3d-19.902697333643328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690cacacf2c33%3A0x5b35795e3ad23997!2sBelo%20Horizonte%2C%20State%20of%20Minas%20Gerais!5e0!3m2!1sen!2sbr!4v1682961567336!5m2!1sen!2sbr' width='800' height='450' style={{ border: '0' }} loading='lazy' referrerPolicy='no-referrer-when-downgrade'></iframe>	</div>
 						</div>
 						<div className='row'>
 							<div className='col-md-4'>
@@ -111,5 +110,5 @@ export const ContactUs = () => {
 		</div>
 		<Footer />
 	</div>
-	);
-};
+	)
+}

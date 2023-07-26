@@ -10,6 +10,9 @@ export const PricePage = () => (
 		<NavBar />
 		<div className="container">
 			<div className="row m-5">
+				<h2 className='text-center p-5'>
+					Invista na <span className='text-success'> melhor plataforma </span> para seu negócio!
+				</h2>
 				<div className="col-12 col-md-6 col-lg-3 mb-4">
 					<div className="card fixed-height">
 						<div className="card-header text-center">
@@ -37,7 +40,6 @@ export const PricePage = () => (
 						<div className="card-header text-center">
 							<h5 className="card-title">PADRÃO</h5>
 							<p className="text-muted">Valor: R$XX,XX/mês</p>
-
 						</div>
 						<div className="card-body">
 							<ul className="list-group list-group-flush">
@@ -48,15 +50,24 @@ export const PricePage = () => (
 								<li className="list-group-item">Suporte Segunda a Sexta</li>
 							</ul>
 						</div>
-						<div className="card-footer text-center">
-							<ComponentButtonCommon text='Comprar' />
-						</div>
+						<Link to='/registrar'>
+							<div className="card-footer text-center">
+								<ComponentButtonCommon text='Comprar' />
+							</div>
+						</Link>
 					</div>
 				</div>
-				<div className="col-12 col-md-6 col-lg-3 mb-4 ">
+				<div className="col-12 col-md-6 col-lg-3">
 					<div className="card fixed-height more-used">
 						<div className="card-header bg-secondary text-white text-center">
-							<h5 className="card-title">PREMIUM</h5>
+							<div className='row'>
+								<div className='col-9'>
+									<h5 className="card-title popular-name">PREMIUM</h5>
+								</div>
+								<div className='col-3 p-0'>
+									<h6 className="card-title popular-text">Popular</h6>
+								</div>
+							</div>
 							<p className="text-white">Valor: R$XX,XX/mês</p>
 						</div>
 						<div className="card-body">
@@ -69,9 +80,11 @@ export const PricePage = () => (
 								<li className="list-group-item">Suporte Segunda a Sexta</li>
 							</ul>
 						</div>
-						<div className="card-footer text-center">
-							<ComponentButtonCommon text='Comprar' />
-						</div>
+						<Link to='/registrar'>
+							<div className="card-footer text-center">
+								<ComponentButtonCommon text='Comprar' />
+							</div>
+						</Link>
 					</div>
 				</div>
 				<div className="col-12 col-md-6 col-lg-3 mb-4">
@@ -93,9 +106,11 @@ export const PricePage = () => (
 								<li className="list-group-item">Suporte 24/7</li>
 							</ul>
 						</div>
-						<div className="card-footer text-center">
-							<ComponentButtonCommon text='Comprar' />
-						</div>
+						<Link to='/registrar'>
+							<div className="card-footer text-center">
+								<ComponentButtonCommon text='Comprar' />
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>

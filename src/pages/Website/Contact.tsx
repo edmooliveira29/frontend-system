@@ -1,20 +1,19 @@
 import React from 'react'
 import NavBar from '../../components/navBar/NavBar'
-import { TextFieldInput } from '../../components/inputs/TextFieldInput'
+import { TextFieldInput, TextAreaInput } from '../../components/inputs'
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined'
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import Footer from '../../components/footer/Footer'
 import { ComponentButtonCommon } from '../../components/button/ComponentButtonCommon'
-import TextAreaInput from '../../components/inputs/TextAreaInput'
 export const ContactUs = () => {
 	const [state, setState] = React.useState({
 		name: '',
 		email: '',
 		subject: '',
 		message: '',
-
 	})
+
 	return (<div>
 		<NavBar />
 		<div className='container'>
@@ -82,7 +81,7 @@ export const ContactUs = () => {
 								<div className='dbox w-100 text-center '>
 									<NearMeOutlinedIcon className='mb-2' fontSize='large' />
 									<div className='text'>
-										<p><span>Entedeço:</span> Belo Horizonte</p>
+										<p><span>Endereço:</span> Belo Horizonte</p>
 									</div>
 								</div>
 							</div>

@@ -18,6 +18,10 @@
         "react"
     ],
     "rules": {
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "max-lines": [
+            "error",
+            100
+        ]
     }
 }

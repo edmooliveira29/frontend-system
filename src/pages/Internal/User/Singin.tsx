@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
-import { TextFieldInput } from '../../../components/inputs/TextFieldInput'
+import { TextFieldInput } from '../../../components/inputs'
 import NavBar from '../../../components/navBar/NavBar'
 import { UserService } from '../../../services/User/user-http'
 import { useNavigate } from 'react-router-dom'

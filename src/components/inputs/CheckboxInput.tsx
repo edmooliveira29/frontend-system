@@ -4,15 +4,15 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
 export function CheckboxInput(props: { label: string, onChange: any, required?: boolean }): React.ReactElement {
-	return (
-		<FormGroup >
-			<FormControlLabel
-				control={<Checkbox color='success' />}
-				label={props.label}
-				required={props.required || false}
-				style={{ fontSize: '12px' }}
-				onChange={(e: any) => props.onChange(e.target.value)}
-			/>
-		</FormGroup>
-	)
+  return (
+    <FormGroup >
+      <FormControlLabel
+        control={<Checkbox color='success' />}
+        label={props.label}
+        required={props.required || false}
+        style={{ fontSize: '12px' }}
+        onChange={(e: any) => props.onChange(e.target.value)}
+      />
+    </FormGroup>
+  )
 }

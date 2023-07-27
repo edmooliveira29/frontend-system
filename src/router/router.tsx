@@ -15,67 +15,67 @@ import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 
 const Internal = (props: { Page: any }) => {
-	const [showMenu, setShowMenu] = useState(true)
-	const showSiderbar = () => setShowMenu(!showMenu)
-	const navigate = useNavigate()
+  const [showMenu, setShowMenu] = useState(true)
+  const showSiderbar = () => setShowMenu(!showMenu)
+  const navigate = useNavigate()
 
-	useEffect(() => {
-		userIsAlreadyLoggedIn()
-	}, [])
+  useEffect(() => {
+    userIsAlreadyLoggedIn()
+  }, [])
 
-	const userIsAlreadyLoggedIn = () => {
-		sessionTokenExpiry(String(localStorage.getItem('sessionToken')))
-	}
-	const sessionTokenExpiry = (sessionToken: string) => {
-		const decoded = jwtDecode(sessionToken) as JwtPayload
-		const expirationTime = decoded.exp || 0
-		const currentTime = Math.floor(Date.now() / 1000)
-		if (currentTime > expirationTime) {
-			AlertWarningGeneral('Sua sessão expirou. Por favor entre novamente')
-			localStorage.clear()
-			navigate('/entrar')
-		}
-	}
-	const closeSidebar = () => setShowMenu(true)
+  const userIsAlreadyLoggedIn = () => {
+    sessionTokenExpiry(String(localStorage.getItem('sessionToken')))
+  }
+  const sessionTokenExpiry = (sessionToken: string) => {
+    const decoded = jwtDecode(sessionToken) as JwtPayload
+    const expirationTime = decoded.exp || 0
+    const currentTime = Math.floor(Date.now() / 1000)
+    if (currentTime > expirationTime) {
+      AlertWarningGeneral('Sua sessão expirou. Por favor entre novamente')
+      localStorage.clear()
+      navigate('/entrar')
+    }
+  }
+  const closeSidebar = () => setShowMenu(true)
 
-	return (<>
-		<SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
-		<div style={{ marginLeft: showMenu ? '280px' : '0px' }}>
-			<props.Page />
-		</div>
-	</>)
+  return (<>
+    <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
+    <div style={{ marginLeft: showMenu ? '280px' : '0px' }}>
+      <props.Page />
+    </div>
+  </>)
 }
 
 
 
 const Website = (props: { Page: any }) => {
 
-	return (
-		<>
-			<NavBar />
-			<props.Page />
-			<Footer />
-		</>
-	)
+  return (
+    <>
+      <NavBar />
+      <props.Page />
+      <Footer />
+    </>
+  )
 }
 
 export const router = (
-	<BrowserRouter>
-		<Routes>
-			<Route path="/" element={<Website Page={Home} />} />
-			<Route path="/entrar" element={<Login />} />
-			<Route path="/registrar" element={<Singin />} />
-			<Route path="/preco" element={<PricePage />} />
-			<Route path="/caracteristica" element={<Website Page={FeaturesPage} />} />
-			<Route path="/sobre" element={<AboutPage />} />
-			<Route path="/contato" element={<ContactUs />} />
-			<Route path="/dashboard" element={<Internal Page={Dashboard} />} />
-			<Route path="/relatorios" element={<Internal Page={Report} />} />
-			<Route path="/clientes/fisico" element={<Internal Page={Customer} />} />
-			<Route path="/clientes/juridico" element={<Internal Page={Customer} />} />
-			<Route path="/produtos" element={<Internal Page={Products} />} />
-			<Route path="/configuracoes" element={<Internal Page={Products} />} />
-			<Route path="/vendas" element={<Internal Page={Sale} />} />
-		</Routes>
-	</BrowserRouter>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Website Page={Home} />} />
+      <Route path="/entrar" element={<Login />} />
+      <Route path="/registrar" element={<Singin />} />
+      <Route path="/preco" element={<PricePage />} />
+      <Route path="/caracteristica" element={<Website Page={FeaturesPage} />} />
+      <Route path="/sobre" element={<AboutPage />} />
+      <Route path="/contato" element={<ContactUs />} />
+      <Route path="/dashboard" element={<Internal Page={Dashboard} />} />
+      <Route path="/relatorios" element={<Internal Page={Report} />} />
+      <Route path="/clientes/fisico" element={<Internal Page={Customer} />} />
+      <Route path="/clientes/juridico" element={<Internal Page={Customer} />} />
+      <Route path="/produtos" element={<Internal Page={Products} />} />
+      <Route path="/configuracoes" element={<Internal Page={Products} />} />
+      <Route path="/vendas" element={<Internal Page={Sale} />} />
+    </Routes>
+  </BrowserRouter>
 )

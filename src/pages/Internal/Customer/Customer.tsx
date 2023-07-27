@@ -1,6 +1,6 @@
 import React from 'react'
 
 export const Customer = () => {
-    return (
+  return (
     <div>Página em construção</div>)
 }

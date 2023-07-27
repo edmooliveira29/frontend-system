@@ -3,6 +3,11 @@
         "browser": true,
         "es2021": true
     },
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -11,7 +16,10 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "plugins": [
         "@typescript-eslint",
@@ -22,6 +30,7 @@
         "max-lines": [
             "error",
             100
-        ]
+        ],
+        "indent":["error", 2]
     }
 }

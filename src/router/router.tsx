@@ -11,6 +11,8 @@ import { SideBar } from '../components/sideBar/sideBar'
 import { Report } from '../pages/Internal/Report/Report'
 import jwtDecode, { JwtPayload } from 'jwt-decode'
 import { AlertWarningGeneral } from '../components/modal'
+import NavBar from '../components/navBar/NavBar'
+import Footer from '../components/footer/Footer'
 
 const Internal = (props: { Page: any }) => {
 	const [showMenu, setShowMenu] = useState(true)
@@ -45,14 +47,26 @@ const Internal = (props: { Page: any }) => {
 }
 
 
+
+const Website = (props: { Page: any }) => {
+
+	return (
+		<>
+			<NavBar />
+			<props.Page />
+			<Footer />
+		</>
+	)
+}
+
 export const router = (
 	<BrowserRouter>
 		<Routes>
-			<Route path="/" element={<Home />} />
+			<Route path="/" element={<Website Page={Home} />} />
 			<Route path="/entrar" element={<Login />} />
 			<Route path="/registrar" element={<Singin />} />
 			<Route path="/preco" element={<PricePage />} />
-			<Route path="/caracteristica" element={<FeaturesPage />} />
+			<Route path="/caracteristica" element={<Website Page={FeaturesPage} />} />
 			<Route path="/sobre" element={<AboutPage />} />
 			<Route path="/contato" element={<ContactUs />} />
 			<Route path="/dashboard" element={<Internal Page={Dashboard} />} />

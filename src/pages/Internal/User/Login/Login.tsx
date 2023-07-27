@@ -30,7 +30,6 @@ export const Login: React.FC = () => {
 
 	return (
 		<>
-			<div>
 				<NavBar />
 				<div id='div-login'>
 					<div id='div-login-form'>
@@ -79,7 +78,6 @@ export const Login: React.FC = () => {
 						</div>
 					</div>
 				</div>
-			</div>
 		</>
 	)
 

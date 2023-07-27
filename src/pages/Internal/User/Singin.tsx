@@ -30,7 +30,7 @@ export const Singin = () => {
 				passwordConfirm: state.passwordConfirmation
 			})
 			localStorage.setItem('sessionToken', user.data.sessionToken)
-            localStorage.setItem('username', user.data.name)
+			localStorage.setItem('username', user.data.name)
 			navigate('/dashboard')
 		} catch (error: any) {
 			setLoading(false)
@@ -45,9 +45,9 @@ export const Singin = () => {
 	const handleGoogle = (error: string) => {
 		setErrorResponse(error)
 	}
-
+	
 	return (
-		<div>
+		<>
 			<div>
 				<NavBar />
 				<div
@@ -113,5 +113,5 @@ export const Singin = () => {
 					</div>
 				</div>
 			</div>
-		</div >)
+		</>)
 }

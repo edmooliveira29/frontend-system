@@ -13,6 +13,7 @@ import jwtDecode, { JwtPayload } from 'jwt-decode'
 import { AlertWarningGeneral } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
+import { MyAccount } from '../pages/Internal/MyAccount/MyAccount'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
@@ -74,7 +75,7 @@ export const router = (
       <Route path="/clientes/fisico" element={<Internal Page={Customer} />} />
       <Route path="/clientes/juridico" element={<Internal Page={Customer} />} />
       <Route path="/produtos" element={<Internal Page={Products} />} />
-      <Route path="/configuracoes" element={<Internal Page={Products} />} />
+      <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />
       <Route path="/vendas" element={<Internal Page={Sale} />} />
     </Routes>
   </BrowserRouter>

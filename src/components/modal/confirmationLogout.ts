@@ -18,7 +18,7 @@ export const AlertConfirmationLogout = async (handleLogOut: any) => {
       Swal.fire({
         allowOutsideClick:false,
         title: 'Até mais ...',
-        timer: 2500,
+        timer: 1800,
         showConfirmButton: false,
         timerProgressBar: true,
         width:400,

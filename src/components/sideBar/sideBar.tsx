@@ -5,7 +5,7 @@ import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MdPointOfSale, MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
-import { BsFillPersonLinesFill, BsInboxesFill, BsFillGearFill } from 'react-icons/bs'
+import { BsFillPersonLinesFill, BsInboxesFill } from 'react-icons/bs'
 import icon from '../../assets/img/icon.png'
 import './styles.scss'
 import { AlertConfirmationLogout } from '../modal'
@@ -43,7 +43,6 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <hr />
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
-            <Link className='link-item-menu' to='/configuracoes'> <BsFillGearFill size={30} style={{ margin: '0 10px' }} />Configurações </Link><hr />
             <Link className='link-item-menu' to='/relatorios'> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
             <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
@@ -74,8 +73,11 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
             <strong id='name-user-log'>{userName}</strong>
           </a>
           <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
-            <li><a className="dropdown-item" href="#">Configurações da Conta</a></li>
-            <li><a className="dropdown-item" href="#">Perfil</a></li>
+            <li>
+              <Link to='/minha-conta' className="dropdown-item" >
+                Minha conta
+              </Link>
+            </li>
             <li><hr className="dropdown-divider" /></li>
             <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
           </ul>

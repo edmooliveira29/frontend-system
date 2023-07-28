@@ -15,7 +15,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
         <input
           style={{margin: '0px', height: '40px'}}
           type={props.typeInput === "text" || !HIDEPASSWORD ? "text" : "password"}
-          className='form-control'
+          className='form-control text-field-input'
           id={(props.label).toLowerCase()}
           value={props.value}
           required={props.required}

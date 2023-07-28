@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextFieldInput } from '../../../components'
 import { Masks } from '../../../utils/mask'
+import DataFieldInput from '../../../components/inputs/DataFieldInput'
 
 export const PersonalData = (props: { state: any, setState: any }) => {
   const masks = new Masks()
@@ -23,7 +24,6 @@ export const PersonalData = (props: { state: any, setState: any }) => {
           value={props.state.cpf}
           typeInput="text"
           onChange={(value: string) => {
-            console.log(value.length)
             if (value.length < 19) {
               props.setState({ ...props.state, cpf: masks.maskCpfCnpj(value) })
             }
@@ -31,13 +31,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <TextFieldInput
-          label="Data de Nascimento"
-          required={true}
-          value={props.state.birthday}
-          typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }}
-        />
+        <DataFieldInput label='Data de nascimento'/>
       </div>
     </div>
     <div className="row m-0">

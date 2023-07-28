@@ -1,6 +1,6 @@
 export * from './confirmationDelete'
 export * from './confirmationSaveOrEdit'
 export * from './confirmationLogout'
-export * from './alertWarningGeneral'
+export * from './alertGeneral'
 export * from './alertLoading'
 export * from './alertClose'

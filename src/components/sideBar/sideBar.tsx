@@ -66,10 +66,10 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      <div className="col-2 ">
+      <div className="col-2">
         <div className="dropdown justify-content-end">
-          <a href="#" className="d-flex align-items-center text-white dropdown-toggle p-2 justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src={pictureProfile || "https://github.com/mdo.png"} alt="" width="42" height="42" className="rounded-circle me-2" />
+          <a className="d-flex align-items-center text-white dropdown-toggle p-2 justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src={pictureProfile || "https://github.com/mdo.png"} width="42" height="42" className="rounded-circle me-2" />
             <strong id='name-user-log'>{userName}</strong>
           </a>
           <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">

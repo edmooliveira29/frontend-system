@@ -18,7 +18,7 @@ export const Home = () => {
               <h5 className='page-header-ui-text mb-5' id='text-carroussel'>Transformamos ideias em soluções digitais. Agência de software para impulsionar seu negócio</h5>
               <div className='d-flex flex-column flex-sm-row'>
                 <Link to='/registrar'>
-                  <ComponentButtonCommon text='Cadastre-se agora' width='300px' />
+                  <ComponentButtonCommon text='Cadastre-se agora' sizewidth='300px' />
                 </Link>
                 <Link to='/caracteristica' id='link-more'>Saiba mais</Link>
               </div>

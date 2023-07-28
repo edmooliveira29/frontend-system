@@ -14,7 +14,7 @@ import { AlertWarningGeneral } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import { MyAccount } from '../pages/Internal/MyAccount/MyAccount'
-
+import './styles.sass'
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => setShowMenu(!showMenu)
@@ -38,10 +38,11 @@ const Internal = (props: { Page: any }) => {
     }
   }
   const closeSidebar = () => setShowMenu(true)
-
+  const stylesContainer = showMenu ? { marginRight: '280px'} : { marginRight: '0px'}
+  
   return (<>
     <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
-    <div style={{ marginLeft: showMenu ? '280px' : '0px' }}>
+    <div className={showMenu ? 'contents' : ''} style={{ marginLeft: stylesContainer.marginRight }}>
       <props.Page />
     </div>
   </>)

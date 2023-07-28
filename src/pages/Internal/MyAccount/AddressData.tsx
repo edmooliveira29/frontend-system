@@ -1,7 +1,26 @@
 import React from 'react'
-import { TextFieldInput } from '../../../components'
+import { AlertGeneral, TextFieldInput } from '../../../components'
+import axios from 'axios'
+import { Masks } from '../../../utils/mask'
 
 export const AddressData = (props: { state: any, setState: any }) => {
+  const masks = new Masks()
+  const getZipCode = async (zipCode: string) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${zipCode}/json`)
+      const { data } = response
+      props.setState({
+        ...props.state,
+        zipCode: data.cep || '',
+        address: data.logradouro || '',
+        neighborhood: data.bairro || '',
+        city: data.localidade || '',
+        state: data.uf || '',
+      })
+    } catch (error) {
+      AlertGeneral({ message: 'CEP não encontrado', type: 'error' })
+    }
+  }
 
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
@@ -12,7 +31,12 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={true}
           value={props.state.zipCode}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, zipCode: value }) }}
+          onChange={async (value: string) => {
+            props.setState({ ...props.state, zipCode: masks.maskZipCode(value) })
+            if (value.length === 9) {
+              await getZipCode(value)
+            }
+          }}
         />
       </div>
       <div className="col-md-6 col-sm-12">
@@ -38,7 +62,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Complemento"
-          required={true}
+          required={false}
           value={props.state.complement}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, complement: value }) }}

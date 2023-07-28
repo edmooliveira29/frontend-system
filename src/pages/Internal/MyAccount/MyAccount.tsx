@@ -33,7 +33,7 @@ export const MyAccount = () => {
     <div className="row border border-secondary rounded" id="content-container">
       <PersonalData setState={setState} state={state} />
       <AddressData setState={setState} state={state} />
-      <div className="m-2 d-flex justify-content-center">
+      <div className="m-2 d-flex justify-content-center" onClick={handleSave}>
         <ComponentButtonCommon text='Salvar' sizewidth='280px' />
       </div>
 

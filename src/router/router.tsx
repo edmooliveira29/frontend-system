@@ -10,7 +10,7 @@ import { Sale } from '../pages/Internal/Sale/Products'
 import { SideBar } from '../components/sideBar/sideBar'
 import { Report } from '../pages/Internal/Report/Report'
 import jwtDecode, { JwtPayload } from 'jwt-decode'
-import { AlertWarningGeneral } from '../components/modal'
+import { AlertGeneral } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import { MyAccount } from '../pages/Internal/MyAccount/MyAccount'
@@ -32,14 +32,14 @@ const Internal = (props: { Page: any }) => {
     const expirationTime = decoded.exp || 0
     const currentTime = Math.floor(Date.now() / 1000)
     if (currentTime > expirationTime) {
-      AlertWarningGeneral('Sua sessão expirou. Por favor entre novamente')
+      AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
       localStorage.clear()
       navigate('/entrar')
     }
   }
   const closeSidebar = () => setShowMenu(true)
-  const stylesContainer = showMenu ? { marginRight: '280px'} : { marginRight: '0px'}
-  
+  const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }
+
   return (<>
     <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
     <div className={showMenu ? 'contents' : ''} style={{ marginLeft: stylesContainer.marginRight }}>

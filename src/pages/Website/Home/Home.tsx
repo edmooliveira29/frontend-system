@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
 import { OurServices } from './OurServices/Our-Services'
-import { AlertWarningGeneral } from '../../../components/modal'
+import { AlertGeneral } from '../../../components/modal'
 export const Home = () => {
   useEffect(() => {
-    AlertWarningGeneral('Este site está em fase de desenvolvimento. <strong style="font-weight: bold; color: red">Não</strong> nos responsabilizamos pelos dados aqui inseridos.')
+    AlertGeneral({ message: 'Este site está em fase de desenvolvimento. <strong style="font-weight: bold; color: red">Não</strong> nos responsabilizamos pelos dados aqui inseridos.', type: 'warning' })
   })
   return (
     <>

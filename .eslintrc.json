@@ -5,9 +5,9 @@
     },
     "settings": {
         "react": {
-          "version": "detect"
+            "version": "detect"
         }
-      },
+    },
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -19,7 +19,8 @@
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-        }
+        },
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "@typescript-eslint",
@@ -31,6 +32,9 @@
             "error",
             100
         ],
-        "indent":["error", 2]
+        "indent": [
+            "error",
+            2
+        ]
     }
 }

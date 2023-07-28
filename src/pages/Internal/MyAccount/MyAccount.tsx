@@ -26,7 +26,7 @@ export const MyAccount = () => {
   })
 
   const handleSave = () => {
-    return
+    alert('Em fase de construção!')
   }
 
   return (<>
@@ -40,7 +40,7 @@ export const MyAccount = () => {
     </div>
     <div className="row border border-secondary rounded" id="content-container">
       <PasswordData setState={setState} state={state} />
-      <div className="m-2 d-flex justify-content-center">
+      <div className="m-2 d-flex justify-content-center" onClick={handleSave}>
         <ComponentButtonCommon text='Salvar' sizewidth='280px' />
       </div>
 

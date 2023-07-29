@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Login, Singin } from '../pages/Internal/User'
 import { Home, PricePage, FeaturesPage, AboutPage } from '../pages/Website'
 import { ContactUs } from '../pages/Website/Contact'
@@ -20,10 +20,9 @@ const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => setShowMenu(!showMenu)
   const navigate = useNavigate()
-
   useEffect(() => {
     userIsAlreadyLoggedIn(navigate)
-  }, [])
+  })
 
   const closeSidebar = () => setShowMenu(true)
   const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }
@@ -47,9 +46,13 @@ const Website = (props: { Page: any }) => {
 
   return (
     <>
-      <NavBar />
-      <props.Page />
-      <Footer />
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <NavBar />
+        <div style={{ flexGrow: 1 }}>
+          <props.Page />
+        </div>
+        <Footer />
+      </div>
     </>
   )
 }

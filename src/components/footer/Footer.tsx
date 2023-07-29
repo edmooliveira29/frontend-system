@@ -12,7 +12,7 @@ export const Footer = () => {
   })
   return (
     <>
-      <div className='bg-secondary'>
+      <div className='bg-secondary' >
         < div className='container ' >
           <footer className='m-0 p-3'>
             <div className='row'>

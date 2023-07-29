@@ -22,7 +22,8 @@ export const MyAccount = () => {
     city: '',
     actualyPassword: '',
     newPassword: '',
-    newPasswordAgain: ''
+    newPasswordAgain: '',
+    nickname: ''
   })
 
   const handleSave = () => {
@@ -33,15 +34,14 @@ export const MyAccount = () => {
     <div className="row border border-secondary rounded" id="content-container">
       <PersonalData setState={setState} state={state} />
       <AddressData setState={setState} state={state} />
-      <div className="m-2 d-flex justify-content-center" onClick={handleSave}>
-        <ComponentButtonCommon text='Salvar' sizewidth='280px' />
+      <div className="m-2 d-flex justify-content-center" >
+        <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />
       </div>
-
     </div>
     <div className="row border border-secondary rounded" id="content-container">
       <PasswordData setState={setState} state={state} />
-      <div className="m-2 d-flex justify-content-center" onClick={handleSave}>
-        <ComponentButtonCommon text='Salvar' sizewidth='280px' />
+      <div className="m-2 d-flex justify-content-center">
+        <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />
       </div>
 
     </div>

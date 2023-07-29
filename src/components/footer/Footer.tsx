@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import './styles.sass'
 import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
-import { TextFieldInput } from '../inputs/TextFieldInput'
+import { TextFieldInput } from '../inputs'
 
 
 export const Footer = () => {

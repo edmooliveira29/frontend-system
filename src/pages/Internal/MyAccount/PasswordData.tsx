@@ -10,9 +10,9 @@ export const PasswordData = (props: { state: any, setState: any }) => {
         <TextFieldInput
           label="Senha antiga"
           required={true}
-          value={props.state.name}
-          typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, name: value }) }}
+          value={props.state.password}
+          typeInput="password"
+          onChange={(value: string) => { props.setState({ ...props.state, password: value }) }}
         />
       </div>
       <div className="col-md-4 col-sm-12">
@@ -20,7 +20,7 @@ export const PasswordData = (props: { state: any, setState: any }) => {
           label="Senha Nova"
           required={true}
           value={props.state.newPassword}
-          typeInput="text"
+          typeInput="password"
           onChange={(value: string) => { props.setState({ ...props.state, newPassword: value }) }}
         />
       </div>
@@ -29,7 +29,7 @@ export const PasswordData = (props: { state: any, setState: any }) => {
           label="Repita a senha nova"
           required={true}
           value={props.state.newPasswordAgain}
-          typeInput="text"
+          typeInput="password"
           onChange={(value: string) => { props.setState({ ...props.state, newPasswordAgain: value }) }}
         />
       </div>

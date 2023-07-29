@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import {TextFieldInput} from './TextFieldInput';
+import {TextFieldInput} from './';
 
 describe('TextField component', () => {
   test('Shoul find label in document', () => {

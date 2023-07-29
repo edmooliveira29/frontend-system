@@ -14,9 +14,9 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
   },
 }))
 
-export function ComponentButtonCommon(props: { text: string; sizewidth?: string; sizeButton?: string; loading?: boolean }) {
+export function ComponentButtonCommon(props: { text: string; sizewidth?: string; sizeButton?: string; loading?: boolean, onClick?:any }) {
   return (
-    <Stack spacing={2} direction='row'>
+    <Stack spacing={2} direction='row' onClick={props.onClick}>
       <ColorButton
         variant='contained'
         style={{ width: props.sizewidth ?? '100%', height: props.sizeButton ?? '40px', margin: '0px 10px' }}

@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { TextFieldInput, LinkComponent, CheckboxInput } from '../../../components/inputs'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
-import NavBar from '../../../components/navBar/NavBar'
 import { UserService } from '../../../services/User/user-http'
 import { LoginGoogle } from '../../../services/User/user-google'
 import { handleLoginUser } from './handleLogin'
 import './stylesUser.sass'
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const [state, setState] = React.useState({
     email: '',
     password: '',
@@ -30,7 +29,6 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <NavBar />
       <div id='div-login'>
         <div id='div-login-form'>
           <h3 id='h3-enter-register'>Entrar</h3>

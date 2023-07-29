@@ -1,26 +1,12 @@
-import React from 'react'
-import { AlertGeneral, TextFieldInput } from '../../../components'
-import axios from 'axios'
-import { Masks } from '../../../utils/mask'
+import React, { useState } from 'react'
+import { TextFieldInput } from '../../../components'
+import { Masks, statesBrazilian } from '../../../utils'
+import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
+import { getZipCode } from '../../../services/zipCode'
 
 export const AddressData = (props: { state: any, setState: any }) => {
   const masks = new Masks()
-  const getZipCode = async (zipCode: string) => {
-    try {
-      const response = await axios.get(`https://viacep.com.br/ws/${zipCode}/json`)
-      const { data } = response
-      props.setState({
-        ...props.state,
-        zipCode: data.cep || '',
-        address: data.logradouro || '',
-        neighborhood: data.bairro || '',
-        city: data.localidade || '',
-        state: data.uf || '',
-      })
-    } catch (error) {
-      AlertGeneral({ message: 'CEP não encontrado', type: 'error' })
-    }
-  }
+  const [selectedState, setSelectedState] = useState('')
 
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
@@ -34,7 +20,16 @@ export const AddressData = (props: { state: any, setState: any }) => {
           onChange={async (value: string) => {
             props.setState({ ...props.state, zipCode: masks.maskZipCode(value) })
             if (value.length === 9) {
-              await getZipCode(value)
+              const data: any = await getZipCode(value)
+              setSelectedState(data.uf)
+              props.setState({
+                ...props.state,
+                zipCode: data.cep,
+                address: data.logradouro,
+                neighborhood: data.bairro,
+                city: data.localidade,
+                state: data.uf,
+              })
             }
           }}
         />
@@ -78,13 +73,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <TextFieldInput
-          label="Estado"
-          required={true}
-          value={props.state.state}
-          typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, state: value }) }}
-        />
+        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState} />
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput

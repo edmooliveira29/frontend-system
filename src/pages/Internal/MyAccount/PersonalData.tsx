@@ -2,6 +2,7 @@ import React from 'react'
 import { TextFieldInput } from '../../../components'
 import { Masks } from '../../../utils/mask'
 import DataFieldInput from '../../../components/inputs/DataFieldInput'
+import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
 
 export const PersonalData = (props: { state: any, setState: any }) => {
   const masks = new Masks()
@@ -31,18 +32,25 @@ export const PersonalData = (props: { state: any, setState: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <DataFieldInput label='Data de nascimento'/>
+        <DataFieldInput label='Data de nascimento' />
       </div>
     </div>
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
-        <TextFieldInput
-          label="Gênero"
-          required={true}
-          value={props.state.gender}
-          typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, gender: value }) }}
-        />
+        <div className="row m-0">
+          <div className="col-md-6 col-sm-12" style={{ paddingRight: '10px',marginTop: '6px', top: '-5px', position: 'relative', padding: '0px'}}>
+            <SelectFieldInput required={true} label='Gênero' options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]} />
+          </div>
+          <div className="col-md-6 col-sm-12" style={{ marginTop: '6px', padding: '0px'}}>
+            <TextFieldInput
+              label="Chame-me "
+              required={false}
+              value={props.state.nickname}
+              typeInput="text"
+              onChange={(value: string) => { props.setState({ ...props.state, nickname: value }) }}
+            />
+          </div>
+        </div>
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput

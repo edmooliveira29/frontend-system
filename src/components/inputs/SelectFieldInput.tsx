@@ -6,7 +6,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 export default function SelectFieldInput(props: { label: string, required: boolean, options: any, value?: string, placeholder?: string }) {
   const [value, setValue] = React.useState(props.value || '')
-
   React.useEffect(() => {
     setValue(props.value || '')
   }, [props.value])
@@ -24,11 +23,15 @@ export default function SelectFieldInput(props: { label: string, required: boole
             id="demo-simple-select"
             value={value}
             onChange={handleChange}
-            sx={{ height: '38px', top:'2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px' }}
-            displayEmpty
-            renderValue={value !== "" ? undefined : () => {
-              return props.placeholder
+            sx={{
+              height: '38px', top: '2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px',
+              '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
+                fontSize: '12px',
+                color: '#AAAAAA'
+              }
             }}
+            displayEmpty
+            renderValue={value !== "" ? undefined : () => props.placeholder}
           >
             {props.options.map((option: { value: string; label: string }, index: number) => (
               <MenuItem key={index} value={option.value} >
@@ -37,7 +40,7 @@ export default function SelectFieldInput(props: { label: string, required: boole
             ))}
           </Select>
         </FormControl>
-      </Box>
+      </Box >
     </>
   )
 }

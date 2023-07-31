@@ -4,10 +4,9 @@ import { Masks, statesBrazilian } from '../../../utils'
 import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
 import { getZipCode } from '../../../services/zipCode'
 
-export const AddressData = (props: { state: any, setState: any }) => {
+export const AddressData = (props: { state: any, setUser: any }) => {
   const masks = new Masks()
   const [selectedState, setSelectedState] = useState('')
-
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
     <div className="row m-0">
@@ -19,11 +18,11 @@ export const AddressData = (props: { state: any, setState: any }) => {
           value={props.state.zipCode}
           typeInput="text"
           onChange={async (value: string) => {
-            props.setState({ ...props.state, zipCode: masks.maskZipCode(value) })
+            props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
             if (value.length === 9) {
               const data: any = await getZipCode(value)
               setSelectedState(data.uf)
-              props.setState({
+              props.setUser({
                 ...props.state,
                 zipCode: data.cep,
                 address: data.logradouro,
@@ -42,7 +41,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={true}
           value={props.state.address}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, address: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, address: value }) }}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -52,7 +51,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={true}
           value={props.state.houseNumber}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, houseNumber: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, houseNumber: value }) }}
         />
       </div>
     </div>
@@ -64,7 +63,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={false}
           value={props.state.complement}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, complement: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, complement: value }) }}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -74,11 +73,11 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={true}
           value={props.state.neighborhood}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, neighborhood: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, neighborhood: value }) }}
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState} placeholder='Selecione o estado' />
+        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState || props.state.state} placeholder='Selecione o estado' />
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
@@ -87,7 +86,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
           required={true}
           value={props.state.city}
           typeInput="text"
-          onChange={(value: string) => { props.setState({ ...props.state, city: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, city: value }) }}
         />
       </div>
     </div>

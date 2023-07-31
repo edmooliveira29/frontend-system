@@ -5,20 +5,21 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker, ptBR } from '@mui/x-date-pickers'
 import { makeStyles } from '@mui/styles'
+import "dayjs/locale/pt-br"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   datePickerInput: {
     backgroundColor: 'white',
     top: '-2px',
     position: 'relative',
     color: 'GrayText',
     borderRadius: '5px',
-    height: '50px',
+    height: '40px',
     padding: '0px',
     margin: '0px',
     overflow: 'hidden',
     width: '100%',
-    opacity: '50%',
+    opacity: '75%',
     '& .MuiInputBase-root': {
       '&:focus': {
         border: 'transparent'
@@ -33,11 +34,14 @@ export default function DataFieldInput(props: { label: string, required?: boolea
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
-      <DemoContainer components={['DatePicker']} sx={{ height: '46px', marginBottom: '10px', overflow: 'hidden' }}      >
+      <DemoContainer components={['DatePicker']}
+        sx={{ height: '46px', marginBottom: '8px', overflow: 'hidden', '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' } }}      >
         <DesktopDatePicker
           slotProps={{ textField: { size: 'small' } }}
           className={classes.datePickerInput}
-          defaultValue={dayjs('2022-04-17')} />
+          format='DD/MM/YYYY'
+          localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}
+        />
       </DemoContainer>
     </LocalizationProvider>
   )

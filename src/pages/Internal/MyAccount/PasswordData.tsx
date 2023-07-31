@@ -9,6 +9,7 @@ export const PasswordData = (props: { state: any, setState: any }) => {
       <div className="col-md-4 col-sm-12">
         <TextFieldInput
           label="Senha antiga"
+          placeholder='Digite aqui o antiga senha'
           required={true}
           value={props.state.password}
           typeInput="password"
@@ -18,6 +19,7 @@ export const PasswordData = (props: { state: any, setState: any }) => {
       <div className="col-md-4 col-sm-12">
         <TextFieldInput
           label="Senha Nova"
+          placeholder='Digite aqui a nova senha'
           required={true}
           value={props.state.newPassword}
           typeInput="password"
@@ -27,6 +29,7 @@ export const PasswordData = (props: { state: any, setState: any }) => {
       <div className="col-md-4 col-sm-12">
         <TextFieldInput
           label="Repita a senha nova"
+          placeholder='Digite novamente a nova senha'
           required={true}
           value={props.state.newPasswordAgain}
           typeInput="password"

@@ -12,6 +12,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
           label="Nome"
+          placeholder='Digite aqui o nome completo'
           required={true}
           value={props.state.name}
           typeInput="text"
@@ -21,6 +22,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="CPF"
+          placeholder='Digite aqui o CPF'
           required={true}
           value={props.state.cpf}
           typeInput="text"
@@ -38,12 +40,13 @@ export const PersonalData = (props: { state: any, setState: any }) => {
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
         <div className="row m-0">
-          <div className="col-md-6 col-sm-12" style={{ paddingRight: '10px',marginTop: '6px', top: '-5px', position: 'relative', padding: '0px'}}>
-            <SelectFieldInput required={true} label='Gênero' options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]} />
+          <div className="col-md-6 col-sm-12"  style={{ marginTop: '0px', padding: '0px'}}>
+            <SelectFieldInput required={true} label='Gênero' options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]} placeholder='Selecione o gênero' />
           </div>
-          <div className="col-md-6 col-sm-12" style={{ marginTop: '6px', padding: '0px'}}>
+          <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px'}}>
             <TextFieldInput
-              label="Chame-me "
+              label="Chame-me"
+              placeholder='Digite aqui como gostaria de ser chamado(a)'
               required={false}
               value={props.state.nickname}
               typeInput="text"
@@ -55,6 +58,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Telefone"
+          placeholder='Digite aqui o telefone'
           required={true}
           value={props.state.phoneNumber}
           typeInput="text"
@@ -64,6 +68,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
           label="Email"
+          placeholder='Digite aqui o seu email'
           required={true}
           value={props.state.email}
           typeInput="text"

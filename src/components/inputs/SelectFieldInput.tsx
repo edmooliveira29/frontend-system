@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
-export default function SelectFieldInput(props: { label: string, required: boolean, options: any, value?: string }) {
+export default function SelectFieldInput(props: { label: string, required: boolean, options: any, value?: string, placeholder?: string }) {
   const [value, setValue] = React.useState(props.value || '')
 
   React.useEffect(() => {
@@ -24,10 +24,14 @@ export default function SelectFieldInput(props: { label: string, required: boole
             id="demo-simple-select"
             value={value}
             onChange={handleChange}
-            sx={{ height: '40px', backgroundColor: 'white', opacity: '50%', borderRadius: '5px', }}
+            sx={{ height: '38px', top:'2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px' }}
+            displayEmpty
+            renderValue={value !== "" ? undefined : () => {
+              return props.placeholder
+            }}
           >
             {props.options.map((option: { value: string; label: string }, index: number) => (
-              <MenuItem key={index} value={option.value}>
+              <MenuItem key={index} value={option.value} >
                 {option.label}
               </MenuItem>
             ))}

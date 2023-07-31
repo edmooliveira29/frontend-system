@@ -14,6 +14,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="CEP"
+          placeholder='Digite aqui o seu cep'
           required={true}
           value={props.state.zipCode}
           typeInput="text"
@@ -37,6 +38,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
           label="Endereço"
+          placeholder='Digite aqui o seu endereço'
           required={true}
           value={props.state.address}
           typeInput="text"
@@ -46,6 +48,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Número"
+          placeholder='Digite aqui o n° da residencia ou estabelecimento'
           required={true}
           value={props.state.houseNumber}
           typeInput="text"
@@ -54,9 +57,10 @@ export const AddressData = (props: { state: any, setState: any }) => {
       </div>
     </div>
     <div className="row m-0">
-      <div className="col-md-3 col-sm-12">
+      <div className="col-md-3 col-sm-12" style={{}}>
         <TextFieldInput
           label="Complemento"
+          placeholder='Digite aqui o complemento'
           required={false}
           value={props.state.complement}
           typeInput="text"
@@ -66,6 +70,7 @@ export const AddressData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Bairro"
+          placeholder='Digite aqui o bairro'
           required={true}
           value={props.state.neighborhood}
           typeInput="text"
@@ -73,11 +78,12 @@ export const AddressData = (props: { state: any, setState: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState} />
+        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState} placeholder='Selecione o estado' />
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Cidade"
+          placeholder='Digite aqui a cidade'
           required={true}
           value={props.state.city}
           typeInput="text"

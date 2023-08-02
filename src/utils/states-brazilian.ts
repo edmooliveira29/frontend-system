@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const statesBrazilian = [
   { value: 'ac', label: 'Acre' },
   { value: 'al', label: 'Alagoas' },
@@ -26,4 +28,17 @@ export const statesBrazilian = [
   { value: 'sp', label: 'São Paulo' },
   { value: 'se', label: 'Sergipe' },
   { value: 'to', label: 'Tocantins' },
-];
+]
+
+export const citiesStates = (state: string) => {
+  let formattedCities: any[] = []
+  fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`)
+    .then(response => response.json())
+    .then(cities => {
+      formattedCities = cities.map((city: { nome: string }) => ({
+        value: city.nome.toLowerCase(),
+        label: city.nome
+      }))
+    })
+  console.log(formattedCities)
+}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { TextFieldInput } from '../../../components'
+import { NotifyError, TextFieldInput } from '../../../components'
 import { Masks, statesBrazilian } from '../../../utils'
 import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
 import { getZipCode } from '../../../services/zipCode'
 
 export const AddressData = (props: { state: any, setUser: any }) => {
   const masks = new Masks()
-  const [selectedState, setSelectedState] = useState('')
+  const [selectedState, setSelectedState] = useState(props.state.state || undefined)
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
     <div className="row m-0">
@@ -21,15 +21,21 @@ export const AddressData = (props: { state: any, setUser: any }) => {
             props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
             if (value.length === 9) {
               const data: any = await getZipCode(value)
-              setSelectedState(data.uf)
-              props.setUser({
-                ...props.state,
-                zipCode: data.cep,
-                address: data.logradouro,
-                neighborhood: data.bairro,
-                city: data.localidade,
-                state: data.uf,
-              })
+              if (data.erro) {
+                NotifyError()
+              } else {
+
+                setSelectedState((data.uf).toLowerCase())
+                props.setUser({
+                  ...props.state,
+                  zipCode: data.cep,
+                  address: data.logradouro,
+                  neighborhood: data.bairro,
+                  city: data.localidade,
+                  state: data.uf,
+                })
+              }
+
             }
           }}
         />

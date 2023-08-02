@@ -14,36 +14,39 @@ export const MyAccount = () => {
     const fetchData = async () => {
       try {
         const userResponse = await user.get()
-        // setUser(
-        //   {
-        //     address: userResponse.address || '',
-        //     actualyPassword: userResponse.actualyPassword || '',
-        //     birthday: userResponse.birthday || undefined,
-        //     city: userResponse.city || '',
-        //     complement: userResponse.complement || '',
-        //     cpf: userResponse.cpf || '',
-        //     email: userResponse.email || '',
-        //     gender: userResponse.gender || '',
-        //     houseNumber: userResponse.houseNumber || '',
-        //     name: userResponse.name || '',
-        //     neighborhood: userResponse.neighborhood || '',
-        //     newPassword: userResponse.newPassword || '',
-        //     newPasswordAgain: userResponse.newPasswordAgain || '',
-        //     nickname: userResponse.nickname || '',
-        //     phoneNumber: userResponse.phoneNumber || '',
-        //     state: userResponse.state || '',
-        //     zipCode: userResponse.zipCode || '',
-        //   }
-        // )
+        setUser(
+          {
+            id: userResponse.id,
+            address: userResponse.address || '',
+            actualyPassword: userResponse.actualyPassword || '',
+            birthday: userResponse.birthday || undefined,
+            city: userResponse.city || '',
+            complement: userResponse.complement || '',
+            cpf: userResponse.cpf || '',
+            email: userResponse.email || '',
+            gender: userResponse.gender || '',
+            houseNumber: userResponse.houseNumber || '',
+            name: userResponse.name || '',
+            neighborhood: userResponse.neighborhood || '',
+            newPassword: userResponse.newPassword || '',
+            newPasswordAgain: userResponse.newPasswordAgain || '',
+            nickname: userResponse.nickname || '',
+            phoneNumber: userResponse.phoneNumber || '',
+            state: userResponse.state || '',
+            zipCode: userResponse.zipCode || '',
+          }
+        )
       } catch (error: any) {
         AlertGeneral({ message: error.message, type: 'error' })
       }
     }
 
     fetchData()
-  },[])
+  }, [])
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    console.log(state)
+    const userResponse = await user.put(state)
     alert('Em fase de construção!')
   }
 

@@ -13,9 +13,9 @@ const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => setShowMenu(!showMenu)
   const navigate = useNavigate()
-  useEffect(() => {
-    userIsAlreadyLoggedIn(navigate)
-  },[])
+  // useEffect(() => {
+  //   userIsAlreadyLoggedIn(navigate)
+  // },[])
 
   const closeSidebar = () => setShowMenu(true)
   const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }

@@ -31,24 +31,20 @@ const useStyles = makeStyles(() => ({
 
 export default function DataFieldInput(props: { label: string, required?: boolean, value?: string, onChange?: any }) {
   const classes = useStyles()
-  const value = props.value ? dayjs(props.value) : undefined
+  const [value, setValue] = useState(dayjs(props.value))
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
       <DemoContainer components={['DatePicker']}
         sx={{
           height: '46px', marginBottom: '8px', overflow: 'hidden',
-          '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' },
-          '.css-19qh8xo-MuiInputBase-input-MuiOutlinedInput-input': {
-            fontSize: '12px',
-            paddingTop: '14px'
-          }
+          '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' }
         }}    >
         <DesktopDatePicker
           slotProps={{ textField: { size: 'small' } }}
           className={classes.datePickerInput}
-          value={value || undefined}
-          onChange={(e: any) => props.onChange(e.target.value)}
+          value={props.value ? value : null}
+          onChange={(e: any) => setValue(e)}
           format='DD/MM/YYYY'
           localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}
         />

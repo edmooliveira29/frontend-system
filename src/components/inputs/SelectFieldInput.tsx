@@ -1,15 +1,14 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 export default function SelectFieldInput(props: { label: string, required: boolean, options: any, value?: string, placeholder?: string }) {
-  const [value, setValue] = React.useState(props.value || '')
+  const [value, setValue] = useState(props.value || '')
   React.useEffect(() => {
     setValue(props.value || '')
   }, [props.value])
-
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string)
   }
@@ -23,13 +22,7 @@ export default function SelectFieldInput(props: { label: string, required: boole
             id="demo-simple-select"
             value={value}
             onChange={handleChange}
-            sx={{
-              height: '38px', top: '2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px',
-              '.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
-                fontSize: '12px',
-                color: '#AAAAAA'
-              }
-            }}
+            sx={{ height: '38px', top: '2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px' }}
             displayEmpty
             renderValue={value !== "" ? undefined : () => props.placeholder}
           >

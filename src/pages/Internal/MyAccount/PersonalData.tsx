@@ -1,12 +1,10 @@
 import React from 'react'
-import { TextFieldInput } from '../../../components'
 import { Masks } from '../../../utils/mask'
-import DataFieldInput from '../../../components/inputs/DataFieldInput'
-import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
+import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../../components/inputs'
 
 export const PersonalData = (props: { state: any, setUser: any }) => {
   const masks = new Masks()
-  
+
   return (<>
     <h4 id="title-personal-data">Dados Pessoais</h4>
     <div className="row m-0">
@@ -35,7 +33,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <DataFieldInput label='Data de nascimento' value={props.state.birthday}  />
+        <DataFieldInput label='Data de nascimento' value={props.state.birthday} />
       </div>
     </div>
     <div className="row m-0">

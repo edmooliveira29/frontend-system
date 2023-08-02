@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function DataFieldInput(props: { label: string, required?: boolean, value?: string, onChange?: any }) {
+export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any }) => {
   const classes = useStyles()
   const [value, setValue] = useState(dayjs(props.value))
   return (

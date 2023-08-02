@@ -24,12 +24,12 @@ export class UserService {
       newPasswordAgain: "novaSenha456",
       nickname: "Fulano",
       phoneNumber: "(11) 98765-4321",
-      state: "sp",
+      state: "SP",
       zipCode: "01310-200"
 
     }
   }
-  async put(data: any){
+  async put(){
     //return (await http.put<any>(`/user/${data.id}`, data))
     alert('Conexão com o Banco de dados em construção!')
   }

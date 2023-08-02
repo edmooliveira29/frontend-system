@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import { NotifyError, TextFieldInput } from '../../../components'
-import { Masks, statesBrazilian } from '../../../utils'
-import SelectFieldInput from '../../../components/inputs/SelectFieldInput'
+import React, { useEffect, useState } from 'react'
+import { NotifyError, TextFieldInput, alertLoading } from '../../../components'
+import { Masks, citiesStates, statesBrazilian } from '../../../utils'
+import { SelectFieldInput } from '../../../components/inputs'
 import { getZipCode } from '../../../services/zipCode'
 
-export const AddressData = (props: { state: any, setUser: any }) => {
+export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = (props) => {
   const masks = new Masks()
-  const [selectedState, setSelectedState] = useState(props.state.state || undefined)
+  const [cities, setCities] = useState<any>(props.cities)
+  useEffect(()=>{
+    setCities(props.cities)
+  },[props.cities])
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
     <div className="row m-0">
@@ -20,12 +23,11 @@ export const AddressData = (props: { state: any, setUser: any }) => {
           onChange={async (value: string) => {
             props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
             if (value.length === 9) {
+              alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
               const data: any = await getZipCode(value)
               if (data.erro) {
                 NotifyError()
               } else {
-
-                setSelectedState((data.uf).toLowerCase())
                 props.setUser({
                   ...props.state,
                   zipCode: data.cep,
@@ -36,6 +38,11 @@ export const AddressData = (props: { state: any, setUser: any }) => {
                 })
               }
 
+              const cities = await citiesStates(data.uf)
+              if(cities.length > 0) {
+                setCities(cities)
+              }
+              alertLoading('close')
             }
           }}
         />
@@ -83,17 +90,10 @@ export const AddressData = (props: { state: any, setUser: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={selectedState || props.state.state} placeholder='Selecione o estado' />
+        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={props.state.state} placeholder='Selecione o estado' />
       </div>
       <div className="col-md-3 col-sm-12">
-        <TextFieldInput
-          label="Cidade"
-          placeholder='Digite aqui a cidade'
-          required={true}
-          value={props.state.city}
-          typeInput="text"
-          onChange={(value: string) => { props.setUser({ ...props.state, city: value }) }}
-        />
+        <SelectFieldInput label='Cidade' options={cities} required={true} value={props.state.city} placeholder='Selecione o city' />
       </div>
     </div>
   </>)

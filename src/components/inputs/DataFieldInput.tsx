@@ -3,11 +3,11 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker, ptBR } from '@mui/x-date-pickers'
-import { makeStyles } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
+const useStyles = styled('div')({
 
-const useStyles = makeStyles(() => ({
   datePickerInput: {
     backgroundColor: 'white',
     top: '-2px',
@@ -26,11 +26,11 @@ const useStyles = makeStyles(() => ({
       }
     },
     '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' },
+
   }
-}))
+})
 
 export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any }) => {
-  const classes = useStyles()
   const [value, setValue] = useState(dayjs(props.value))
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
@@ -42,7 +42,7 @@ export const DataFieldInput = (props: { label: string, required?: boolean, value
         }}    >
         <DesktopDatePicker
           slotProps={{ textField: { size: 'small' } }}
-          className={classes.datePickerInput}
+          className={'data-picker-input'}
           value={props.value ? value : null}
           onChange={(e: any) => setValue(e)}
           format='DD/MM/YYYY'

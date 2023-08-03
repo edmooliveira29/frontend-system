@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 
 
-const ITEM_HEIGHT = 80;
-const ITEM_PADDING_TOP = 5;
+const ITEM_HEIGHT = 80
+const ITEM_PADDING_TOP = 5
 const MenuProps = {
   PaperProps: {
     style: {
@@ -15,7 +15,7 @@ const MenuProps = {
       width: 250,
     },
   },
-};
+}
 
 export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
@@ -27,7 +27,7 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
   }, [props.options])
 
   const isValueValid = options.some((option: { value: string }) => option.value === props.value)
- 
+
   if (isValueValid) {
     return (
       <>
@@ -56,5 +56,7 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
         </Box >
       </>
     )
+  } else {
+    return (<></>)
   }
 }

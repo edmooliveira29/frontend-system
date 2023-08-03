@@ -3,7 +3,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker, ptBR } from '@mui/x-date-pickers'
-import { makeStyles } from '@mui/styles'
+import { makeStyles } from '@mui/material/styles'
 import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
 

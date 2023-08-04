@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
 import { Dashboard, Customer, Products, Sale, MyAccount, Report, Login, Singin } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
-import jwtDecode, { JwtPayload } from 'jwt-decode'
-import { AlertGeneral, } from '../components/modal'
+// import jwtDecode, { JwtPayload } from 'jwt-decode'
+// import { AlertGeneral, } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import './styles.sass'
@@ -12,7 +12,7 @@ import './styles.sass'
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => setShowMenu(!showMenu)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   // useEffect(() => {
   //   userIsAlreadyLoggedIn(navigate)
   // },[])
@@ -29,10 +29,10 @@ const Internal = (props: { Page: any }) => {
 }
 
 const Website = (props: { Page: any }) => {
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   useEffect(() => {
     if (props.Page.name == 'Login') {
-      userIsAlreadyLoggedIn(navigate, '/dashboard')
+      //userIsAlreadyLoggedIn(navigate, '/dashboard')
     }
   }, [])
 
@@ -71,23 +71,23 @@ export const router = (
   </BrowserRouter>
 )
 
-const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
-  if (localStorage.getItem('sessionToken') !== null) {
-    sessionTokenExpiry(String(localStorage.getItem('sessionToken')), navigate, route)
-  } else {
-    AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
-    navigate('/entrar')
-  }
-}
-const sessionTokenExpiry = (sessionToken: string, navigate: any, route?: string) => {
-  const decoded = jwtDecode(sessionToken) as JwtPayload
-  const expirationTime = decoded.exp || 0
-  const currentTime = Math.floor(Date.now() / 1000)
-  if (currentTime > expirationTime) {
-    AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
-    localStorage.clear()
-    navigate('/entrar')
-  } else if (route) {
-    navigate(route)
-  }
-}
+// const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
+//   if (localStorage.getItem('sessionToken') !== null) {
+//     sessionTokenExpiry(String(localStorage.getItem('sessionToken')), navigate, route)
+//   } else {
+//     AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
+//     navigate('/entrar')
+//   }
+// }
+// const sessionTokenExpiry = (sessionToken: string, navigate: any, route?: string) => {
+//   const decoded = jwtDecode(sessionToken) as JwtPayload
+//   const expirationTime = decoded.exp || 0
+//   const currentTime = Math.floor(Date.now() / 1000)
+//   if (currentTime > expirationTime) {
+//     AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
+//     localStorage.clear()
+//     navigate('/entrar')
+//   } else if (route) {
+//     navigate(route)
+//   }
+// }

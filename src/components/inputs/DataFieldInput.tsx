@@ -3,32 +3,8 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker, ptBR } from '@mui/x-date-pickers'
-import { styled } from '@mui/material/styles'
 import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
-const useStyles = styled('div')({
-
-  datePickerInput: {
-    backgroundColor: 'white',
-    top: '-2px',
-    position: 'relative',
-    color: 'GrayText',
-    borderRadius: '5px',
-    height: '40px',
-    padding: '0px',
-    margin: '0px',
-    overflow: 'hidden',
-    width: '100%',
-    opacity: '75%',
-    '& .MuiInputBase-root': {
-      '&:focus': {
-        border: 'transparent'
-      }
-    },
-    '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' },
-
-  }
-})
 
 export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any }) => {
   const [value, setValue] = useState(dayjs(props.value))

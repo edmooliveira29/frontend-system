@@ -21,7 +21,7 @@ export const MyAccount = () => {
             id: userResponse.id,
             address: userResponse.address || '',
             actualyPassword: userResponse.actualyPassword || '',
-            birthday: userResponse.birthday || undefined,
+            birthday: userResponse.birthday || null,
             city: userResponse.city || '',
             complement: userResponse.complement || '',
             cpf: userResponse.cpf || '',

@@ -7,7 +7,7 @@ import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
 
 export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any }) => {
-  const [value, setValue] = useState(dayjs(props.value))
+  const [value, setValue] = useState()
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
@@ -19,7 +19,7 @@ export const DataFieldInput = (props: { label: string, required?: boolean, value
         <DesktopDatePicker
           slotProps={{ textField: { size: 'small' } }}
           className={'data-picker-input'}
-          value={props.value ? value : null}
+          value={props.value? dayjs(props.value): value}
           onChange={(e: any) => setValue(e)}
           format='DD/MM/YYYY'
           localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}

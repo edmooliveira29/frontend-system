@@ -4,8 +4,8 @@ import { Masks, citiesStates } from '../../../utils'
 
 export const onChangeZipCode = async (value: string, props: any, setCitySelected: any, setStateSelected: any, setCities: any) => {
   const masks = new Masks()
-  
-  if (value.length < 9) {
+
+  if (value.length < 10) {
     props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
   }
 

@@ -17,17 +17,15 @@ const MenuProps = {
   },
 }
 
-export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string }> = (props) => {
+export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
   const [value, setValue] = useState(props.value)
   useEffect(() => {
     if (props.options) {
       setOptions(props.options)
     }
-  }, [props.options])
-
-  const isValueValid = options.some((option: { value: string }) => option.value === props.value)
-
+  }, [props.options, value])
+  const isValueValid = options.some((option: { value: string }) => option.value === props.value) || props.value === ''
   if (isValueValid) {
     return (
       <>
@@ -36,13 +34,13 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
           <FormControl fullWidth>
             <Select
               id="demo-simple-select"
-              value={value ? value : props.value}
-              onChange={(event: SelectChangeEvent) => setValue(event.target.value)}
+              value={props.value}
+              onChange={props.onChange ? props.onChange : (event: SelectChangeEvent) => {
+                setValue(event.target.value)}}
               sx={{ height: '38px', top: '2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px' }}
               displayEmpty
               renderValue={props.value !== "" ? undefined : () => props.placeholder}
               MenuProps={MenuProps}
-
             >
               <MenuItem value='' disabled key=''>Selecione um {props.label}  </MenuItem>
 

@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { NotifyError, TextFieldInput, alertLoading } from '../../../components'
-import { Masks, citiesStates, statesBrazilian } from '../../../utils'
-import { SelectFieldInput } from '../../../components/inputs'
-import { getZipCode } from '../../../services/zipCode'
+import { TextFieldInput, SelectFieldInput } from '../../../components'
+import { citiesStates, statesBrazilian } from '../../../utils'
+import { onChangeZipCode } from './hooks'
 
 export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = (props) => {
-  const masks = new Masks()
   const [cities, setCities] = useState<any>(props.cities)
-  useEffect(()=>{
-    setCities(props.cities)
-  },[props.cities])
+  const [stateSelected, setStateSelected] = useState<any>()
+  const [citySelected, setCitySelected] = useState(props.state.city)
+  useEffect(() => {
+    const getCities = async () => {
+      if (stateSelected) {
+        setCities(await citiesStates(stateSelected))
+      } else {
+        setCitySelected(props.state.city)
+        setCities(props.cities)
+      }
+    }
+    getCities()
+  }, [props.cities, stateSelected])
   return (<>
     <h4 id="title-personal-data">Endereço</h4>
     <div className="row m-0">
@@ -20,31 +28,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
           required={true}
           value={props.state.zipCode}
           typeInput="text"
-          onChange={async (value: string) => {
-            props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
-            if (value.length === 9) {
-              alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
-              const data: any = await getZipCode(value)
-              if (data.erro) {
-                NotifyError()
-              } else {
-                props.setUser({
-                  ...props.state,
-                  zipCode: data.cep,
-                  address: data.logradouro,
-                  neighborhood: data.bairro,
-                  city: data.localidade,
-                  state: data.uf,
-                })
-              }
-
-              const cities = await citiesStates(data.uf)
-              if(cities.length > 0) {
-                setCities(cities)
-              }
-              alertLoading('close')
-            }
-          }}
+          onChange={async (event: any) => await onChangeZipCode(event, props, setCitySelected, setStateSelected, setCities)}
         />
       </div>
       <div className="col-md-6 col-sm-12">
@@ -90,10 +74,22 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Estado' options={statesBrazilian} required={true} value={props.state.state} placeholder='Selecione o estado' />
+        <SelectFieldInput label='Estado'
+          options={statesBrazilian}
+          required={true}
+          value={stateSelected || props.state.state}
+          placeholder='Selecione o estado' onChange={(event: any) => {
+            setCitySelected('')
+            setStateSelected(event.target.value)
+          }} />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Cidade' options={cities} required={true} value={props.state.city} placeholder='Selecione o city' />
+        <SelectFieldInput label='Cidade' options={cities}
+          required={true} value={citySelected}
+          placeholder='Selecione a cidade'
+          onChange={(event: any) => {
+            setCitySelected(event.target.value)
+          }} />
       </div>
     </div>
   </>)

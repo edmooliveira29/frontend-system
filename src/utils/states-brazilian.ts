@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { alertLoading } from '../components'
 
 export const statesBrazilian = [
   { value: 'AC', label: 'Acre' },
@@ -31,11 +32,15 @@ export const statesBrazilian = [
 ];
 
 export const citiesStates = async(state: string) => {
+  alertLoading('open', 'Carregando lista de cidades ...')
+
   const response = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`);
   const formattedCities = response.data.map((city: { nome: string }) => ({
     value: city.nome,
     label: city.nome
   }));
+  alertLoading('close')
+
 
   return formattedCities;
 }

@@ -37,7 +37,7 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
               value={props.value}
               onChange={props.onChange ? props.onChange : (event: SelectChangeEvent) => {
                 setValue(event.target.value)}}
-              sx={{ height: '38px', top: '2px', backgroundColor: 'white', opacity: '70%', borderRadius: '5px' }}
+              sx={{ height: '36px', top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px' }}
               displayEmpty
               renderValue={props.value !== "" ? undefined : () => props.placeholder}
               MenuProps={MenuProps}

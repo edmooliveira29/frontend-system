@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField'
 import Toolbar from '@mui/material/Toolbar'
 import Paper from '@mui/material/Paper'
 import SearchIcon from '@mui/icons-material/Search'
-import './styles.sass'
 import { InputAdornment } from '@mui/material'
 import { TableHeadComponent, TableBodyComponent } from '.'
+import './styles.sass'
 
 type Order = 'asc' | 'desc'
 
@@ -41,7 +41,7 @@ function EnhancedTable(props: EnhancedTableProps) {
     setPage(0)
   }
 
-  const filteredRows = data.filter((row: any) =>
+  const filteredData = data.filter((row: any) =>
     Object.values(row)
       .slice(0, 2) // Filtra apenas as duas primeiras colunas para pesquisa
       .some((value: any) => value.toString().toLowerCase().includes(searchValue.toLowerCase()))
@@ -68,13 +68,13 @@ function EnhancedTable(props: EnhancedTableProps) {
       <TableContainer>
         <Table sx={{ minWidth: 750 }}>
           <TableHeadComponent columnHeaders={props.head} orderBy={orderBy} setOrderBy={setOrderBy} order={order} setOrder={setOrder} />
-          <TableBodyComponent rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} filteredRows={filteredRows} />
+          <TableBodyComponent rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} />
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 20, 50]}
         component="div"
-        count={filteredRows.length}
+        count={filteredData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handlePageChange}

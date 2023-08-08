@@ -36,22 +36,29 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 }
 
 
-export const TableBodyComponent: FC<{ filteredRows: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any }> = (props) => {
+export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any }> = (props) => {
+  const keys = Object.keys(props.data[0] || {});
+
   return (
     <>
       <TableBody>
-        {stableSort(props.filteredRows, getComparator(props.order, props.orderBy))
-          .slice(props.page * props.rowsPerPage, props.page * props.rowsPerPage + props.rowsPerPage)
+        {stableSort(props.data, getComparator(props.order, props.orderBy))
+          .slice(
+            props.page * props.rowsPerPage,
+            props.page * props.rowsPerPage + props.rowsPerPage
+          )
           .map((row) => (
-            <TableRow sx={{ padding: '0px' }} key={row[0]} >
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }}>{row[Object.keys(row)[0]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[1]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[2]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[3]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[4]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[5]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">{row[Object.keys(row)[6]]}</TableCell>
-              <TableCell sx={{ padding: '2px 0px 0px 10px' }} align="right">
+            <TableRow sx={{ padding: '0px' }} key={row[props.orderBy]}>
+              {keys.map((key) => (
+                <TableCell
+                  sx={{ padding: '2px 0px 0px 15px' }}
+                  align={key === 'name' ? 'left' : 'right'}
+                  key={key}
+                >
+                  {row[key]}
+                </TableCell>
+              ))}
+              <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="right">
                 <IconButton color="primary" size="small" onClick={() => console.log('Edit')}>
                   <EditIcon />
                 </IconButton>

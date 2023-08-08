@@ -1,31 +1,29 @@
 import React from 'react'
 import { TableComponent } from '../../../components/table'
 import './styles.sass'
-import { faker } from '@faker-js/faker'
+import { faker, fakerPT_BR } from '@faker-js/faker'
 export const Customer = () => {
   function createData(): any {
     return {
-      name: faker.person.fullName(),
-      calories: faker.number.int({ min: 10, max: 50 }),
-      fat: faker.number.int({ min: 10, max: 50 }),
-      carbs: faker.number.int({ min: 10, max: 50 }),
-      protein: faker.number.int({ min: 10, max: 50 }),
-      price: faker.commerce.price({ min: 10, max: 50 }),
-      history: new Date().toLocaleString()
+      name: fakerPT_BR.company.name(),
+      cnpj: fakerPT_BR.location.zipCode({format:'##.###.###/####-##'}),
+      phonenumber: fakerPT_BR.phone.number('(##) 99###-####'),
+      email: (fakerPT_BR.internet.email()).toLowerCase(),
+      city: fakerPT_BR.location.city(),
+      state: fakerPT_BR.location.state({abbreviated: true}),
+
     }
   }
 
-  const data: any[] = Array.from({ length: 50 }, () => createData())
+  const data: any[] = Array.from({ length: 159852}, () => createData())
 
   const columnHeaders = [
-    { id: 'name', label: 'Dessert (100g serving)', sortable: true },
-    { id: 'calories', label: 'Calories', sortable: true },
-    { id: 'fat', label: 'Fat (g)', sortable: true },
-    { id: 'carbs', label: 'Carbs (g)', sortable: true },
-    { id: 'protein', label: 'Protein (g)', sortable: true },
-    { id: 'price', label: 'Price ($)', sortable: true },
-    { id: 'history', label: 'History', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
+    { id: 'name', label: 'NOME', sortable: true },
+    { id: 'cnpj', label: 'CNPJ', sortable: true },
+    { id: 'phonenumber', label: 'TELEFONE', sortable: true },
+    { id: 'email', label: 'EMAIL', sortable: true },
+    { id: 'city', label: 'Cidade', sortable: true },
+    { id: 'state', label: 'Estado', sortable: true }
   ]
   return (<>
 

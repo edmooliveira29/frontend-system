@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
-import { PersonalData } from './PersonalData'
-import { AddressData } from './AddressData'
+
 import { AlertGeneral, ComponentButtonCommon } from '../../../components'
 import { PasswordData } from './PasswordData'
 import { UserService } from '../../../services/User'
-import { citiesStates } from '../../../utils'
+import { AddressData, PersonalData } from '../../../components/input-group'
 export const MyAccount = () => {
   const [state, setState] = useState({})
-  const [cities, setCities] = useState([])
+
   const user = new UserService()
 
 
@@ -38,7 +37,7 @@ export const MyAccount = () => {
             zipCode: userResponse.zipCode || '',
           }
         )
-        setCities(await citiesStates(userResponse.state))
+        
 
       } catch (error: any) {
         AlertGeneral({ message: error.message, type: 'error' })
@@ -54,8 +53,8 @@ export const MyAccount = () => {
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-      <PersonalData setUser={setState} state={state} />
-      <AddressData setUser={setState} state={state} cities={cities} />
+      <PersonalData setState={setState} state={state} />
+      <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-center" >
         <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />
       </div>
@@ -67,6 +66,5 @@ export const MyAccount = () => {
       </div>
 
     </div>
-
   </>)
 }

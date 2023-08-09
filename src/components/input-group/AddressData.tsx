@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { TextFieldInput, SelectFieldInput } from '../../../components'
-import { citiesStates, statesBrazilian } from '../../../utils'
+import { TextFieldInput, SelectFieldInput } from '../../components'
+import { citiesStates, statesBrazilian } from '../../utils'
 import { onChangeZipCode } from './hooks'
 
-export const AddressData: React.FC<{ state: any, setUser: any }> = (props) => {
-  const [cities, setCities] = useState<any>([])
+export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = (props) => {
+  const [cities, setCities] = useState<any>(props.cities)
   const [stateSelected, setStateSelected] = useState<any>()
   const [citySelected, setCitySelected] = useState(props.state.city)
-  useEffect(() => {
-    getCities(stateSelected)
-  }, [stateSelected])
-  useEffect(() => {
-    getCities(props.state.state)
-  }, [])
   const getCities = async (uf: string) => {
     if (uf) {
-      setCities(await citiesStates(props.state.state))
+      setCities(await citiesStates(uf))
+      setCitySelected(props.state.city ? props.state.city : '')
     } else {
+      setCities(props.cities)
       setCitySelected('')
     }
   }
+  useEffect(() => {
+    getCities(stateSelected)
+  }, [stateSelected])
+
+  useEffect(() => {
+    getCities(props.state.state)
+  }, [props.state.state])
+
   return (<>
     <h4 id="title-personal-data">ENDEREÇO</h4>
     <div className="row m-0">
@@ -80,18 +84,14 @@ export const AddressData: React.FC<{ state: any, setUser: any }> = (props) => {
           options={statesBrazilian}
           required={true}
           value={stateSelected || props.state.state || ''}
-          placeholder='Selecione o estado' onChange={(event: any) => {
-            setCitySelected('')
-            setStateSelected(event.target.value)
-          }} />
+          placeholder='Selecione o estado' onChange={(event: any) => { setStateSelected(event.target.value) }} />
       </div>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput label='Cidade' options={cities}
-          required={true} value={citySelected || ''}
+          required={true}
+          value={citySelected || ''}
           placeholder='Selecione a cidade'
-          onChange={(event: any) => {
-            setCitySelected(event.target.value)
-          }} />
+          onChange={(event: any) => { setCitySelected(event.target.value) }} />
       </div>
     </div>
   </>)

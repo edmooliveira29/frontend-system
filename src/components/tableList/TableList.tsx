@@ -90,7 +90,7 @@ function EnhancedTable(props: EnhancedTableProps) {
 
 export const TableComponent: React.FC<{ data: any[], head: any[] }> = (props) => {
   return (
-    <Box sx={{ p: 0, boxShadow: '0px -5px 30px black' }}>
+    <Box sx={{ p: 0 }}>
       <EnhancedTable data={props.data} head={props.head} />
     </Box>
   )

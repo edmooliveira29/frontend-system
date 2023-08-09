@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-
+import './styles.sass'
 
 
 const ITEM_HEIGHT = 80
@@ -20,6 +20,7 @@ const MenuProps = {
 export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
   const [value, setValue] = useState(props.value)
+
   useEffect(() => {
     if (props.options) {
       setOptions(props.options)
@@ -30,19 +31,21 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
     return (
       <>
         <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
-        <Box sx={{ minWidth: 120, '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' } }}>
+        <Box sx={{ minWidth: 120, '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' }, }}>
           <FormControl fullWidth>
             <Select
               id="demo-simple-select"
               value={props.value}
               onChange={props.onChange ? props.onChange : (event: SelectChangeEvent) => {
-                setValue(event.target.value)}}
-              sx={{ height: '36px', top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px' }}
+                setValue(event.target.value)
+              }}
+              sx={{top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px' }}
               displayEmpty
               renderValue={props.value !== "" ? undefined : () => props.placeholder}
               MenuProps={MenuProps}
+              className='select-field-input'
             >
-              <MenuItem value='' disabled key=''>Selecione um {props.label}  </MenuItem>
+              <MenuItem selected={true} value='' disabled key=''>Selecione um {props.label}  </MenuItem>
 
               {options.map((option: { value: string; label: string }, index: number) => (
                 < MenuItem key={index} value={option.value} >

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Masks } from '../../../utils/mask'
-import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../../components/inputs'
+import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../components/inputs'
+import { Masks } from '../../utils'
 
-export const PersonalData = (props: { state: any, setUser: any }) => {
+export const PersonalData = (props: { state: any, setState: any }) => {
   const masks = new Masks()
 
   return (<>
-    <h4 id="title-personal-data">DADOS</h4>
+    <h4 id="titles-custumer-add">ADICIONAR PESSOA FÍSICA</h4>
     <div className="row m-0">
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
@@ -15,7 +15,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
           required={true}
           value={props.state.name}
           typeInput="text"
-          onChange={(value: string) => { props.setUser({ ...props.state, name: value }) }}
+          onChange={(value: string) => { props.setState({ ...props.state, name: value }) }}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -27,7 +27,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
           typeInput="text"
           onChange={(value: string) => {
             if (value.length < 19) {
-              props.setUser({ ...props.state, cpf: masks.maskCpfCnpj(value) })
+              props.setState({ ...props.state, cpf: masks.maskCpfCnpj(value) })
             }
           }}
         />
@@ -40,7 +40,13 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
       <div className="col-md-3 col-sm-12">
         <div className="row m-0">
           <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px' }}>
-            <SelectFieldInput value={props.state.gender} required={true} label='Gênero' options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]} placeholder='Selecione o gênero' />
+            <SelectFieldInput value={props.state.gender || ''}
+              required={true}
+              label='Gênero'
+              options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]}
+              placeholder='Selecione o gênero'
+              onChange={(event: any) => { props.setState({ ...props.state, gender: event.target.value }) }}
+            />
           </div>
           <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px' }}>
             <TextFieldInput
@@ -49,7 +55,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
               required={false}
               value={props.state.nickname}
               typeInput="text"
-              onChange={(value: string) => { props.setUser({ ...props.state, nickname: value }) }}
+              onChange={(value: string) => { props.setState({ ...props.state, nickname: value }) }}
             />
           </div>
         </div>
@@ -57,21 +63,31 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Telefone"
-          placeholder='Digite aqui o telefone'
+          placeholder='Ex: (##) 99999-9999'
           required={true}
           value={props.state.phoneNumber}
           typeInput="text"
-          onChange={(value: string) => { props.setUser({ ...props.state, phoneNumber: value }) }}
+          onChange={(value: string) => { props.setState({ ...props.state, phoneNumber: masks.maskPhoneNumber(value) }) }}
         />
       </div>
-      <div className="col-md-6 col-sm-12">
+      <div className="col-md-3 col-sm-12">
         <TextFieldInput
           label="Email"
           placeholder='Digite aqui o seu email'
           required={true}
           value={props.state.email}
           typeInput="text"
-          onChange={(value: string) => { props.setUser({ ...props.state, email: value }) }}
+          onChange={(value: string) => { props.setState({ ...props.state, email: value }) }}
+        />
+      </div>
+      <div className="col-md-3 col-sm-12">
+        <TextFieldInput
+          label="Informações adicionais"
+          placeholder='Digite aqui as informações'
+          required={true}
+          value={props.state.additionalInformation}
+          typeInput="text"
+          onChange={(value: string) => { props.setState({ ...props.state, additionalInformation: value }) }}
         />
       </div>
     </div>

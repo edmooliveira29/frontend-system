@@ -4,7 +4,7 @@ import { TextFieldInput } from '../../../components'
 export const PasswordData = (props: { state: any, setUser: any }) => {
 
   return (<>
-    <h4 id="title-personal-data">Senha</h4>
+    <h4 id="title-personal-data">SENHA DO SISTEMA</h4>
     <div className="row">
       <div className="col-md-4 col-sm-12">
         <TextFieldInput

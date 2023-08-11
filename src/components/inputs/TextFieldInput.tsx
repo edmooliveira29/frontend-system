@@ -13,7 +13,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
       <label title='terfsdf ' data-bs-placement="top"  className='form-label m-1'>{props.label}{props.required ? <em style={{ color: 'red' }}> *</em> : <em style={{ color: 'red' }}>  </em>}</label>
       <div className="input-wrapper" title='infpu'      >
         <input
-          type={props.typeInput === "text" || !HIDEPASSWORD ? "text" : "password"}
+          type={props.typeInput === "number" || props.typeInput === "text" || !HIDEPASSWORD ? props.typeInput : "password"}
           className='form-control text-field-input'
           id={(props.label).toLowerCase()}
           value={props.value || ''}

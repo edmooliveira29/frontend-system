@@ -22,7 +22,7 @@ interface EnhancedTableProps {
 function EnhancedTable(props: EnhancedTableProps) {
   const { data } = props
   const [order, setOrder] = React.useState<Order>('asc')
-  const [orderBy, setOrderBy] = React.useState<keyof any>('calories')
+  const [orderBy, setOrderBy] = React.useState<keyof any>('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [searchValue, setSearchValue] = React.useState('')

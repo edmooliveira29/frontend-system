@@ -33,11 +33,12 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
     return a[1] - b[1]
   })
   return stabilizedThis.map((el) => el[0])
+
 }
 
 
 export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any }> = (props) => {
-  const keys = Object.keys(props.data[0] || {});
+  const keys = Object.keys(props.data[0] || {})
 
   return (
     <>
@@ -48,7 +49,7 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
             props.page * props.rowsPerPage + props.rowsPerPage
           )
           .map((row) => (
-            <TableRow sx={{ padding: '0px' }} key={row[props.orderBy]}>
+            <TableRow sx={{ padding: '0px' }} key={row[keys[0]]}>
               {keys.map((key) => (
                 <TableCell
                   sx={{ padding: '2px 0px 0px 15px' }}

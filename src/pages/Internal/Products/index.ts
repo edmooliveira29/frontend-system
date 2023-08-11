@@ -1,1 +1,2 @@
-export * from './Products'
+export * from './ListProducts'
+export * from './AddProduct'

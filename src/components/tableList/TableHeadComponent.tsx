@@ -9,7 +9,6 @@ export const TableHeadComponent: FC<{ columnHeaders: any, orderBy: any, setOrder
     props.setOrder(isAsc ? 'desc' : 'asc')
     props.setOrderBy(property)
   }
-
   return (
     <>
       <TableHead>

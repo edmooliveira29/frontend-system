@@ -18,7 +18,7 @@ export const ListNaturalPerson = () => {
     }
   }
 
-  const data: any[] = Array.from({ length: 1500 }, () => createData())
+  const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
     { id: 'name', label: 'NOME', sortable: true },

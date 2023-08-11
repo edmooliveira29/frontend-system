@@ -9,10 +9,10 @@ export const ListNaturalPerson = () => {
   function createData(): any {
     return {
       name: fakerPT_BR.company.name(),
-      cnpj: fakerPT_BR.location.zipCode({ format: '##.###.###/####-##' }),
-      phonenumber: fakerPT_BR.phone.number('(##) 99###-####'),
+      cpf: fakerPT_BR.location.zipCode({ format: '###.###.###-##' }),
+      birthday: fakerPT_BR.date.anytime().toLocaleDateString(),
       email: (fakerPT_BR.internet.email()).toLowerCase(),
-      city: fakerPT_BR.location.city(),
+      phoneNumber: fakerPT_BR.phone.number('(##) 99###-####'),
       state: fakerPT_BR.location.state({ abbreviated: true }),
 
     }
@@ -22,12 +22,13 @@ export const ListNaturalPerson = () => {
 
   const columnHeaders = [
     { id: 'name', label: 'NOME', sortable: true },
-    { id: 'cnpj', label: 'CNPJ', sortable: true },
-    { id: 'phonenumber', label: 'TELEFONE', sortable: true },
-    { id: 'email', label: 'EMAIL', sortable: true },
-    { id: 'city', label: 'Cidade', sortable: true },
-    { id: 'state', label: 'Estado', sortable: true }
+    { id: 'cpf', label: 'CPF', sortable: true },
+    { id: 'birthday', label: 'Data de Nascimento', sortable: true },
+    { id: 'email', label: 'Email', sortable: true },
+    { id: 'phoneNumber', label: 'Telefone', sortable: true },
+    { id: 'state', label: 'Estado', sortable: false }
   ]
+
   return (<>
 
     <div className="row border border-secondary rounded" id="div-list-customer">

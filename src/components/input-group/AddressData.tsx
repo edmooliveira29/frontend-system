@@ -31,7 +31,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
           typeInput="text"
           onChange={async (event: any) => {
             setFlagGetCities(false)
-            await onChangeZipCode(event, props, setCitySelected, setStateSelected, setCities, props.state.state)
+            await onChangeZipCode(event, props, setCitySelected, setStateSelected, setCities)
           }}
         />
       </div>

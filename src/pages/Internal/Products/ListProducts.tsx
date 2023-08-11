@@ -8,7 +8,7 @@ export const ListProduct = () => {
   function createData(): any {
     return {
       name: fakerPT_BR.commerce.productName(),
-      description: fakerPT_BR.commerce.productDescription().slice(0,100),
+      description: fakerPT_BR.commerce.productDescription().slice(0,50),
       category: fakerPT_BR.commerce.department(),
       price: fakerPT_BR.commerce.price({ symbol: 'R$ ' }),
       stock: fakerPT_BR.number.int({ min: 0, max: 150 })

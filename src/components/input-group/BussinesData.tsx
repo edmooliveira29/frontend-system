@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../inputs'
+import {  TextFieldInput } from '../inputs'
 import { Masks } from '../../utils'
 
 export const BussinesData = (props: { state: any, setState: any }) => {

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { ComponentButtonCommon, TextFieldInput } from '../../../components'
+import { Masks } from '../../../utils'
 
 
 export const AddProducts = (props: { state: any }) => {
+  const mask = new Masks()
   const [state, setState] = useState({
     name: props.state?.name || '',
     description: props.state?.description || '',
@@ -61,8 +63,8 @@ export const AddProducts = (props: { state: any }) => {
             placeholder='Digite aqui o preço'
             required={true}
             value={state.price}
-            typeInput="number"
-            onChange={(value: string) => { setState({ ...state, price: value }) }}
+            typeInput="text"
+            onChange={(value: string) => { setState({ ...state, price: mask.maskMoney(value) }) }}
           />
         </div>
         <div className="col-md-3 col-sm-12">

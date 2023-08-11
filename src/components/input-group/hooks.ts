@@ -2,12 +2,11 @@ import { getZipCode } from '../../services/zipCode'
 import { Masks, citiesStates } from '../../utils'
 import { NotifyError, alertLoading } from '../modal'
 
-export const onChangeZipCode = async (value: string, props: any, setCitySelected: any, setStateSelected: any, setCities: any) => {
+export const onChangeZipCode = async (value: string, props: any, setCitySelected: any, setStateSelected: any, setCities: any, stateSelected: string) => {
   const masks = new Masks()
   if (value.length < 10) {
     props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
   }
-
   if (value.length === 9) {
     alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
     const data: any = await getZipCode(value)

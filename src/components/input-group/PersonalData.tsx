@@ -2,11 +2,11 @@ import React from 'react'
 import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../components/inputs'
 import { Masks } from '../../utils'
 
-export const PersonalData = (props: { state: any, setState: any }) => {
+export const PersonalData = (props: { state: any, setState: any, title: string}) => {
   const masks = new Masks()
 
   return (<>
-    <h4 id="titles-custumer-add">ADICIONAR PESSOA FÍSICA</h4>
+    <h4 id="titles-custumer-add">{props.title}</h4>
     <div className="row m-0">
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
@@ -39,7 +39,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
         <div className="row m-0">
-          <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px' }}>
+          <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px', paddingRight:'2px'  }}>
             <SelectFieldInput value={props.state.gender || ''}
               required={true}
               label='Gênero'
@@ -48,7 +48,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
               onChange={(event: any) => { props.setState({ ...props.state, gender: event.target.value }) }}
             />
           </div>
-          <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px' }}>
+          <div className="col-md-6 col-sm-12 " style={{ marginTop: '0px', padding: '0px', paddingLeft:'2px' }}>
             <TextFieldInput
               label="Chame-me"
               placeholder='Digite aqui como gostaria de ser chamado(a)'
@@ -84,7 +84,7 @@ export const PersonalData = (props: { state: any, setState: any }) => {
         <TextFieldInput
           label="Informações adicionais"
           placeholder='Digite aqui as informações'
-          required={true}
+          required={false}
           value={props.state.additionalInformation}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, additionalInformation: value }) }}

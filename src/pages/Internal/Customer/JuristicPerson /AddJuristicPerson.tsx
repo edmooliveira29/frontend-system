@@ -13,7 +13,7 @@ export const AddJuristicPerson = () => {
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-      <PersonalData setState={setState} state={state} />
+      <PersonalData setState={setState} state={state} title='ADICIONAR PESSOA JURÍDICA' />
       <hr />
       <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-center" >

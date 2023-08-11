@@ -4,25 +4,20 @@ import { citiesStates, statesBrazilian } from '../../utils'
 import { onChangeZipCode } from './hooks'
 
 export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = (props) => {
-  const [cities, setCities] = useState<any>(props.cities)
+  const [cities, setCities] = useState<any[]>(props.cities)
   const [stateSelected, setStateSelected] = useState<any>()
   const [citySelected, setCitySelected] = useState(props.state.city)
-  const getCities = async (uf: string) => {
-    if (uf) {
-      setCities(await citiesStates(uf))
-      setCitySelected(props.state.city ? props.state.city : '')
-    } else {
-      setCities(props.cities)
-      setCitySelected('')
+  const [flagGetCities, setFlagGetCities] = useState(true)
+  const getCities = async (ufState: string) => {
+    if (ufState && flagGetCities) {
+      const auxCities = props.cities ? await citiesStates(ufState) : cities
+      setCities(auxCities)
+      setCitySelected(auxCities.some((option: { value: string }) => option.value === props.state.city) ? props.state.city : '')
     }
   }
   useEffect(() => {
-    getCities(stateSelected)
-  }, [stateSelected])
-
-  useEffect(() => {
-    getCities(props.state.state)
-  }, [props.state.state])
+    getCities(stateSelected || props.state.state)
+  }, [stateSelected, props.state.state])
 
   return (<>
     <h4 id="title-personal-data">ENDEREÇO</h4>
@@ -34,7 +29,10 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
           required={true}
           value={props.state.zipCode}
           typeInput="text"
-          onChange={async (event: any) => await onChangeZipCode(event, props, setCitySelected, setStateSelected, setCities)}
+          onChange={async (event: any) => {
+            setFlagGetCities(false)
+            await onChangeZipCode(event, props, setCitySelected, setStateSelected, setCities, props.state.state)
+          }}
         />
       </div>
       <div className="col-md-6 col-sm-12">
@@ -84,7 +82,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
           options={statesBrazilian}
           required={true}
           value={stateSelected || props.state.state || ''}
-          placeholder='Selecione o estado' onChange={(event: any) => { setStateSelected(event.target.value) }} />
+          placeholder='Selecione o estado' onChange={(event: any) => { setFlagGetCities(true); setStateSelected(event.target.value) }} />
       </div>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput label='Cidade' options={cities}

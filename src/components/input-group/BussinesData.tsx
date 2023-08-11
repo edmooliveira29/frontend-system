@@ -78,7 +78,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
         <TextFieldInput
           label="Informações adicionais"
           placeholder='Digite aqui as informações'
-          required={true}
+          required={false}
           value={props.state.additionalInformation}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, additionalInformation: value }) }}

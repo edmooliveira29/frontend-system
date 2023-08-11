@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AddressData, PersonalData } from '../../../../components/input-group'
+import { AddressData, BussinesData } from '../../../../components/input-group'
 import { ComponentButtonCommon } from '../../../../components'
 
 
@@ -13,7 +13,7 @@ export const AddNaturalPerson = () => {
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-      <PersonalData setState={setState} state={state} />
+      <BussinesData setState={setState} state={state} />
       <hr />
       <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-center" >

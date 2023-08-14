@@ -16,7 +16,6 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
     }
   }
   useEffect(() => {
-    console.log(props.state)
     getCities(stateSelected || props.state.stateOfTheCountry)
   }, [stateSelected, props.state.stateOfTheCountry])
 

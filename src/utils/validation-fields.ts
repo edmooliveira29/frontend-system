@@ -16,7 +16,7 @@ export const validateFields = (inputs: any, translations: any) => {
     }
   }
   if (emptyFields.length > 0) {
-    AlertGeneral({ message: `O seguinte campo é obrigatório: ${emptyFields[0]}.`, type: 'error' })
+    AlertGeneral({ message: `O campo '${emptyFields[0].toLowerCase()}' é obrigatório.`, type: 'error' })
     return false
   } else { return true }
 

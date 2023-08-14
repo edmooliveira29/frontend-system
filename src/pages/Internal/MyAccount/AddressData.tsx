@@ -11,11 +11,11 @@ export const AddressData: React.FC<{ state: any, setUser: any }> = (props) => {
     getCities(stateSelected)
   }, [stateSelected])
   useEffect(() => {
-    getCities(props.state.state)
+    getCities(props.state.stateOfTheCountry)
   }, [])
   const getCities = async (uf: string) => {
     if (uf) {
-      setCities(await citiesStates(props.state.state))
+      setCities(await citiesStates(props.state.stateOfTheCountry))
     } else {
       setCitySelected('')
     }
@@ -79,7 +79,7 @@ export const AddressData: React.FC<{ state: any, setUser: any }> = (props) => {
         <SelectFieldInput label='Estado'
           options={statesBrazilian}
           required={true}
-          value={stateSelected || props.state.state || ''}
+          value={stateSelected || props.state.stateOfTheCountry || ''}
           placeholder='Selecione o estado' onChange={(event: any) => {
             setCitySelected('')
             setStateSelected(event.target.value)

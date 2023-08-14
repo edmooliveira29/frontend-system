@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { ComponentButtonCommon, TextFieldInput } from '../../../components'
-import { Masks } from '../../../utils'
+import { AlertGeneral, ComponentButtonCommon, TextFieldInput } from '../../../components'
+import { Masks, validateFields } from '../../../utils'
 
 
 export const AddProducts = (props: { state: any }) => {
@@ -14,17 +14,19 @@ export const AddProducts = (props: { state: any }) => {
   })
 
   const handleSave = async () => {
-    //const userResponse = await user.put(state)
+    const { name, category, price, stock } = state
+    const translations = { name: 'Nome', category: 'Categoria', price: 'Preço', stock: 'Estoque' }
+    
+    if (!validateFields({ name, category, price, stock }, translations)) {
+      return false
+    }
     alert('Em fase de construção!')
   }
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-
       <h4 id="titles-custumer-add">ADICIONAR PRODUTO</h4>
       <div className="row">
-
-
         <div className="col-md-6 col-sm-12">
           <TextFieldInput
             label="Nome"
@@ -43,6 +45,7 @@ export const AddProducts = (props: { state: any }) => {
             value={state.description}
             typeInput="text"
             onChange={(value: string) => { setState({ ...state, description: value }) }}
+
           />
         </div>
       </div>

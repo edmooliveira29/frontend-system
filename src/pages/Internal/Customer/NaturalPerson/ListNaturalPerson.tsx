@@ -26,7 +26,7 @@ export const ListNaturalPerson = () => {
     { id: 'birthday', label: 'Data de Nascimento', sortable: true },
     { id: 'email', label: 'Email', sortable: true },
     { id: 'phoneNumber', label: 'Telefone', sortable: true },
-    { id: 'state', label: 'Estado', sortable: false }
+    { id: 'stateOfTheCountry', label: 'Estado', sortable: false }
   ]
 
   return (<>

@@ -26,7 +26,7 @@ export const ListJuristicPerson = () => {
     { id: 'phonenumber', label: 'TELEFONE', sortable: true },
     { id: 'email', label: 'EMAIL', sortable: true },
     { id: 'city', label: 'Cidade', sortable: true },
-    { id: 'state', label: 'Estado', sortable: true }
+    { id: 'stateOfTheCountry', label: 'Estado', sortable: true }
   ]
   return (<>
 
@@ -36,7 +36,7 @@ export const ListJuristicPerson = () => {
 
       </div>
       <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2 p-2">
-        <Link to="/clientes/fisico/adicionar">
+        <Link to="/clientes/juridico/adicionar">
           <ComponentButtonCommon text='Adicionar' sizewidth='200px' />
         </Link>
       </div>

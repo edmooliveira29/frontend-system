@@ -16,8 +16,8 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
     }
   }
   useEffect(() => {
-    getCities(stateSelected || props.state.state)
-  }, [stateSelected, props.state.state])
+    getCities(stateSelected || props.state.stateOfTheCountry)
+  }, [stateSelected, props.state.stateOfTheCountry])
 
   return (<>
     <h4 id="title-personal-data">ENDEREÇO</h4>
@@ -81,15 +81,15 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
         <SelectFieldInput label='Estado'
           options={statesBrazilian}
           required={true}
-          value={stateSelected || props.state.state || ''}
-          placeholder='Selecione o estado' onChange={(event: any) => { setFlagGetCities(true); setStateSelected(event.target.value) }} />
+          value={stateSelected || props.state.stateOfTheCountry || ''}
+          placeholder='Selecione o estado' onChange={(event: any) => { setFlagGetCities(true); setStateSelected(event.target.value); props.setUser({ ...props.state, stateOfTheCountry: event.target.value }) }} />
       </div>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput label='Cidade' options={cities}
           required={true}
           value={citySelected || ''}
           placeholder='Selecione a cidade'
-          onChange={(event: any) => { setCitySelected(event.target.value) }} />
+          onChange={(event: any) => { setCitySelected(event.target.value); props.setUser({ ...props.state, city: event.target.value })  }} />
       </div>
     </div>
   </>)

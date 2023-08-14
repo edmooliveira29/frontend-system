@@ -30,16 +30,16 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
   if (isValueValid) {
     return (
       <>
-        <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
+        <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
         <Box sx={{ minWidth: 120, '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { border: '1px solid black' }, }}>
           <FormControl fullWidth>
             <Select
-              id="demo-simple-select"
+              id={`text-input-${(props.label).toLowerCase()}`}
               value={props.value}
               onChange={props.onChange ? props.onChange : (event: SelectChangeEvent) => {
                 setValue(event.target.value)
               }}
-              sx={{top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px' }}
+              sx={{ top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select':{padding: '7px 11px'} }}
               displayEmpty
               renderValue={props.value !== "" ? undefined : () => props.placeholder}
               MenuProps={MenuProps}

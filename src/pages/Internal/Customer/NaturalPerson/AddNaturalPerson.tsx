@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
 import { AddressData, PersonalData } from '../../../../components/input-group'
 import { ComponentButtonCommon } from '../../../../components'
+import { validateFields } from '../../../../utils'
 
 
 export const AddNaturalPerson = () => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState<any>({})
 
   const handleSave = async () => {
-    //const userResponse = await user.put(state)
+    const { name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const translations = {
+      name: 'Nome',
+      cpf: 'CPF',
+      birthday: 'Data de nascimento',
+      gender: 'Gênero',
+      nickname: 'Chama-me',
+      phoneNumber: 'Telefone',
+      email: 'Email',
+      zipCode: 'CEP',
+      address: 'Endereço',
+      houseNumber: 'Número',
+      neighborhood: 'Bairro',
+      stateOfTheCountry: 'Estado',
+      city: 'Cidade'
+    }
+    if (!validateFields({ name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+      return false
+    }
     alert('Em fase de construção!')
   }
 

@@ -10,8 +10,8 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
   }
   return (
     <>
-      <label title='terfsdf ' data-bs-placement="top"  className='form-label m-1'>{props.label}{props.required ? <em style={{ color: 'red' }}> *</em> : <em style={{ color: 'red' }}>  </em>}</label>
-      <div className="input-wrapper" title='infpu'      >
+      <label data-bs-placement="top"  className='form-label m-1'>{props.label}{props.required ? <em style={{ color: 'red' }}> *</em> : <em style={{ color: 'red' }}>  </em>}</label>
+      <div className="input-wrapper" >
         <input
           type={props.typeInput === "number" || props.typeInput === "text" || !HIDEPASSWORD ? props.typeInput : "password"}
           className='form-control text-field-input'

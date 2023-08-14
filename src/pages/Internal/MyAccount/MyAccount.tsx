@@ -5,8 +5,9 @@ import { AlertGeneral, ComponentButtonCommon } from '../../../components'
 import { PasswordData } from './PasswordData'
 import { UserService } from '../../../services/User'
 import { AddressData, PersonalData } from '../../../components/input-group'
+import { validateFields } from '../../../utils'
 export const MyAccount = () => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState<any>({})
 
   const user = new UserService()
 
@@ -33,11 +34,11 @@ export const MyAccount = () => {
             newPasswordAgain: userResponse.newPasswordAgain || '',
             nickname: userResponse.nickname || '',
             phoneNumber: userResponse.phoneNumber || '',
-            state: userResponse.state || '',
+            stateOfTheCountry: userResponse.stateOfTheCountry || '',
             zipCode: userResponse.zipCode || '',
           }
         )
-        
+
 
       } catch (error: any) {
         AlertGeneral({ message: error.message, type: 'error' })
@@ -47,7 +48,25 @@ export const MyAccount = () => {
   }, [])
 
   const handleSave = async () => {
-    //const userResponse = await user.put(state)
+    const { name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const translations = {
+      name: 'Nome',
+      cpf: 'CPF',
+      birthday: 'Data de nascimento',
+      gender: 'Gênero',
+      nickname: 'Chama-me',
+      phoneNumber: 'Telefone',
+      email: 'Email',
+      zipCode: 'CEP',
+      address: 'Endereço',
+      houseNumber: 'Número',
+      neighborhood: 'Bairro',
+      stateOfTheCountry: 'Estado',
+      city: 'Cidade'
+    }
+    if (!validateFields({ name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+      return false
+    }
     alert('Em fase de construção!')
   }
 

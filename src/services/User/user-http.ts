@@ -24,7 +24,7 @@ export class UserService {
       newPasswordAgain: "novaSenha456",
       nickname: "Fulano",
       phoneNumber: "(11) 98765-4321",
-      state: "SP",
+      stateOfTheCountry: "SP",
       zipCode: "01310-200"
 
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AlertGeneral, ComponentButtonCommon, TextFieldInput } from '../../../components'
+import { ComponentButtonCommon, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 
 

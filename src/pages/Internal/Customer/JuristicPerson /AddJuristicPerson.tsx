@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AddressData, BussinesData, PersonalData } from '../../../../components/input-group'
+import { AddressData, BussinesData } from '../../../../components/input-group'
 import { ComponentButtonCommon } from '../../../../components'
 import { validateFields } from '../../../../utils'
 

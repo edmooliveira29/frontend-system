@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, Sale, MyAccount, Report, Login, Singin, ListNaturalPerson, AddNaturalPerson, ListJuristicPerson, AddJuristicPerson, ListProduct, AddProducts } from '../pages/Internal'
+import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListNaturalPerson, AddNaturalPerson, ListJuristicPerson, AddJuristicPerson, ListProduct, AddProducts, AddSale } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 // import jwtDecode, { JwtPayload } from 'jwt-decode'
 // import { AlertGeneral, } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import './styles.sass'
+import { NotFound } from '../pages/NotFound'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
@@ -53,6 +54,7 @@ const Website = (props: { Page: any }) => {
 export const router = (
   <BrowserRouter>
     <Routes>
+      <Route path="*" element={<Website Page={NotFound} />} />
       <Route path="/" element={<Website Page={Home} />} />
       <Route path="/entrar" element={<Website Page={Login} />} />
       <Route path="/registrar" element={<Singin />} />
@@ -69,7 +71,9 @@ export const router = (
       <Route path="/produtos" element={<Internal Page={ListProduct} />} />
       <Route path="/produtos/adicionar" element={<Internal Page={AddProducts} />} />
       <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />
-      <Route path="/vendas" element={<Internal Page={Sale} />} />
+      <Route path="/vendas" element={<Internal Page={ListSale} />} />
+      <Route path="/vendas/adicionar" element={<Internal Page={AddSale} />} />
+
     </Routes>
   </BrowserRouter>
 )

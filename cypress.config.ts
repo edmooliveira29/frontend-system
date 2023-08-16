@@ -7,7 +7,8 @@ export default defineConfig({
     },
     baseUrl: 'http://localhost:3000',
     supportFile:'tests/e2e/cypress/support/e2e.ts',
-    specPattern:'tests/e2e/cypress/e2e/**.cy.ts'
+    specPattern:'tests/e2e/cypress/e2e/**.cy.ts',
+    video: false
   },
   component: {
     devServer: {

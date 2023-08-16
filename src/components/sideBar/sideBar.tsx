@@ -74,7 +74,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </a>
           <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
             <li>
-              <Link to='/minha-conta' className="dropdown-item" >
+              <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
                 Minha conta
               </Link>
             </li>

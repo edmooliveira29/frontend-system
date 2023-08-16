@@ -8,7 +8,8 @@
     "test": "jest --watchAll --updateSnapshot",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --fix ",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test-e2e": "cypress open"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -52,6 +53,7 @@
     "@testing-library/react": "^13.4.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "cypress": "^12.17.4",
     "eslint": "^8.37.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",

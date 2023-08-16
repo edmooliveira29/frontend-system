@@ -36,5 +36,8 @@
             "error",
             2
         ]
-    }
+    },
+    "ignorePatterns": [
+        "tests"
+    ]
 }

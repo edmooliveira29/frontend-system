@@ -48,8 +48,8 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
             props.page * props.rowsPerPage,
             props.page * props.rowsPerPage + props.rowsPerPage
           )
-          .map((row) => (
-            <TableRow sx={{ padding: '0px' }} key={row[keys[0]]}>
+          .map((row,index) => (
+            <TableRow sx={{ padding: '0px' }} key={`${keys[0]}_${index}`}>
               {keys.map((key) => (
                 <TableCell
                   sx={{ padding: '2px 0px 0px 15px' }}

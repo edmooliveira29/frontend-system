@@ -1,5 +1,6 @@
-describe('Edit my account', (): void => {
-  it('enter website', () => {
+
+describe('Edit my account', () => {
+  it('enter website and edit my account', () => {
     cy.viewport(1366, 768)
     cy.visit('http://localhost:3000/')
     cy.get('.swal2-confirm').click()
@@ -7,9 +8,5 @@ describe('Edit my account', (): void => {
     cy.get('#button-login').click({ force: true })
     cy.get('#img-user').click()
     cy.get('#my-account-dropdown').click()
-
-    //expect(true).to.equal(true)
-  })
-  it('enter my account', () => {
   })
 })

@@ -6,9 +6,11 @@ export default defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'http://localhost:3000',
-    supportFile:'tests/e2e/cypress/support/e2e.ts',
-    specPattern:'tests/e2e/cypress/e2e/**.cy.ts',
-    video: false
+    supportFile: 'tests/e2e/cypress/support/e2e.ts',
+    specPattern: 'tests/e2e/cypress/e2e/**.cy.ts',
+    video: false,
+    screenshotOnRunFailure: false,
+    fixturesFolder: false
   },
   component: {
     devServer: {

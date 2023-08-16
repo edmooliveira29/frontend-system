@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 
 describe('Edit my account', () => {
   it('enter website and edit my account', () => {

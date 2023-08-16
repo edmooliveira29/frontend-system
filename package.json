@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --fix ",
     "prepare": "husky install",
-    "tests-e2e": "cypress run"
+    "tests-e2e": "unset ELECTRON_RUN_AS_NODE && cypress run"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

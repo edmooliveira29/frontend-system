@@ -12,5 +12,4 @@ describe('Edit my account', (): void => {
   })
   it('enter my account', () => {
   })
-
 })

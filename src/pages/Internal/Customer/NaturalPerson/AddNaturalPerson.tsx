@@ -8,7 +8,7 @@ export const AddNaturalPerson = () => {
   const [state, setState] = useState<any>({})
 
   const handleSave = async () => {
-    const { name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const { name, cpf, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
     const translations = {
       name: 'Nome',
       cpf: 'CPF',

@@ -1,11 +1,11 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
-import { Link } from 'react-router-dom'
-import { ComponentButtonCommon, DataFieldInput, MultiSelectFieldInput, SelectFieldInput, TableComponent, TextFieldInput } from '../../../components'
-import { AiFillCloseCircle, AiFillPlusCircle } from 'react-icons/ai'
+import { ComponentButtonCommon, DataFieldInput, MultiSelectFieldInput, SelectFieldInput, TextFieldInput } from '../../../components'
+import { AiFillCloseCircle } from 'react-icons/ai'
 import { BsPlusCircle } from 'react-icons/bs'
-import { Box, Button, Modal, Tooltip } from '@mui/material'
+import { Box, Modal, Tooltip } from '@mui/material'
 import { AddJuristicPerson, AddNaturalPerson } from '../Customer'
 
 export const AddSale = () => {
@@ -82,8 +82,8 @@ export const AddSale = () => {
                   borderRadius: '5px',
                   maxWidth: '90%',
                   width: '100%',
-                  minHeight: '70%',
-                  maxHeight: '90vh'
+                  // minHeight: '70%',
+                  //maxHeight: '90vh'
                 }}>
 
                   <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }} >

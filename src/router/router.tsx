@@ -12,15 +12,11 @@ import { NotFound } from '../pages/NotFound'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
-  const showSiderbar = () => {
-    if (window.innerWidth < 768) {
-      setShowMenu(!showMenu)
-    }
-  }
+  const showSiderbar = () => { if (window.innerWidth < 768) setShowMenu(!showMenu) }
+
   // const navigate = useNavigate()
   useEffect(() => {
     setShowMenu(window.innerWidth > 768)
-
     //    userIsAlreadyLoggedIn(navigate)
   }, [])
 
@@ -79,11 +75,9 @@ export const router = (
       <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />
       <Route path="/vendas" element={<Internal Page={ListSale} />} />
       <Route path="/vendas/adicionar" element={<Internal Page={AddSale} />} />
-
     </Routes>
   </BrowserRouter>
 )
-
 // const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
 //   if (localStorage.getItem('sessionToken') !== null) {
 //     sessionTokenExpiry(String(localStorage.getItem('sessionToken')), navigate, route)

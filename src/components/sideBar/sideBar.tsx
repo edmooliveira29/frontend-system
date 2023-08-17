@@ -42,21 +42,21 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
 
           <hr />
           <ul className="nav flex-column mb-auto">
-            <Link className='link-item-menu' to='/dashboard' > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
-            <Link className='link-item-menu' to='/relatorios'> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
+            <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
+            <Link className='link-item-menu' to='/relatorios' onClick={props.showSiderbar}> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
             <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
               {showClientesSubmenu ? <MdOutlineArrowDropUp size={30} id='icon-arrow' />
                 : < MdOutlineArrowDropDown size={30} id='icon-arrow' />}
               {showClientesSubmenu && (
                 <ul className="nav flex-column mb-auto sub-menu">
-                  <Link className='link-sub-item-menu' to='/clientes/juridico'>Jurídico</Link>
-                  <Link className='link-sub-item-menu' to='/clientes/fisico'>Físico</Link>
+                  <Link className='link-sub-item-menu' onClick={props.showSiderbar} to='/clientes/juridico'>Jurídico</Link>
+                  <Link className='link-sub-item-menu' onClick={props.showSiderbar} to='/clientes/fisico'>Físico</Link>
                 </ul>
               )}
             </li><hr />
-            <Link className='link-item-menu' to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
-            <Link className='link-item-menu' to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
           </ul>
           <hr />
         </div > :

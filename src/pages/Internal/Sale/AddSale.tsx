@@ -3,8 +3,14 @@ import './styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
 import { Link } from 'react-router-dom'
 import { ComponentButtonCommon, DataFieldInput, MultiSelectFieldInput, SelectFieldInput, TableComponent, TextFieldInput } from '../../../components'
+import { AiFillCloseCircle, AiFillPlusCircle } from 'react-icons/ai'
+import { BsPlusCircle } from 'react-icons/bs'
+import { Box, Button, Modal, Tooltip } from '@mui/material'
+import { AddJuristicPerson, AddNaturalPerson } from '../Customer'
 
 export const AddSale = () => {
+  const [openModal, setOpenModal] = React.useState(false)
+  const [typeCustomerModal, setTypeCustomerModal] = React.useState('')
   const [customers, setCustumers] = useState<any>()
   const [state, setState] = useState<any>({
     customer: '',
@@ -26,11 +32,10 @@ export const AddSale = () => {
     }
     setCustumers(peopleList)
   }, [])
-
   useEffect(() => {
-    console.log(state)
-  }, [state])
-  console.log(state)
+    console.log(typeCustomerModal)
+  }, [typeCustomerModal])
+
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -38,21 +43,79 @@ export const AddSale = () => {
       </div>
       <div className="row m-0">
         <div className="col-md-2 col-sm-12">
-          <DataFieldInput label='Data da Venda' value={state.birthday} />
+          <DataFieldInput label='Data da Venda' value={state.birthday} onChange={(value: string) => { setState({ ...state, date: value }) }} />
         </div>
         <div className="col-md-3 col-sm-12">
-          <SelectFieldInput
-            required={true}
-            label='Cliente'
-            value={state.customer}
-            options={customers}
-            placeholder='Selecione um cliente'
-            onChange={(event: any) => {
-              setState({ ...state, customer: event.target.value })
-              console.log(state)
-            }}
-          />
+          <div className="row">
+            <div className="col-10">
+              <SelectFieldInput
+                required={true}
+                label='Cliente'
+                value={state.customer}
+                options={customers}
+                placeholder='Selecione um cliente'
+                onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}
+              />
+            </div>
+            <div className="col-2 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
+              <Tooltip title="Adicionar um cliente" placement='top' arrow sx={{ right: '50px' }}>
+                <i> <BsPlusCircle size={25} color='black' style={{ cursor: 'pointer', marginRight: '20px' }} onClick={() => setOpenModal(true)} /> </i>
+              </Tooltip>
+              <Modal
+                open={openModal}
+                onClose={() => { setTypeCustomerModal(''); setOpenModal(false) }}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+                style={{ zIndex: 1000 }}
+              >
+                <Box sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  bgcolor: 'background.paper',
+                  border: '2px solid #000',
+                  boxShadow: 24,
+                  pt: 1,
+                  px: 2,
+                  pb: 2,
+                  borderRadius: '5px',
+                  maxWidth: '90%',
+                  width: '100%',
+                  minHeight: '70%',
+                  maxHeight: '90vh'
+                }}>
+
+                  <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }} >
+                    <Tooltip title="Fechar sem salvar" placement='left' arrow>
+                      <i><AiFillCloseCircle className="align-self-end" size={20} color='#FF0000' onClick={() => { setTypeCustomerModal(''); setOpenModal(false) }} /></i>
+                    </Tooltip>
+                  </div>
+                  <div className="row d-flex align-items-center justify-content-center">
+                    <div className="px-4">
+
+                      <SelectFieldInput
+                        required={true}
+                        label='Tipo de Cliente'
+                        value={typeCustomerModal}
+                        options={[{ value: 'juristic', label: 'Jurídico' }, { value: 'natural', label: 'Físico' }]}
+                        placeholder='Selecione o tipo'
+                        onChange={(event: any) => { setTypeCustomerModal(event.target.value) }}
+                      />
+                    </div>
+                    <div style={{ padding: '0px', maxHeight: 'calc(90vh - 300px)', overflowY: 'auto' }}>
+                      {typeCustomerModal === 'natural' && <AddNaturalPerson />}
+                      {typeCustomerModal === 'juristic' && <AddJuristicPerson />}
+                    </div>
+                  </div>
+                </Box>
+
+              </Modal>
+            </div>
+          </div>
+
         </div>
+
         <div className="col-md-4 col-sm-12">
           <TextFieldInput
             label="Descrição"
@@ -82,7 +145,7 @@ export const AddSale = () => {
         <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />
       </div>
 
-    </div>
+    </div >
   </>
   )
 }

@@ -12,11 +12,17 @@ import { NotFound } from '../pages/NotFound'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
-  const showSiderbar = () => setShowMenu(!showMenu)
+  const showSiderbar = () => {
+    if (window.innerWidth < 768) {
+      setShowMenu(!showMenu)
+    }
+  }
   // const navigate = useNavigate()
-  // useEffect(() => {
-  //   userIsAlreadyLoggedIn(navigate)
-  // },[])
+  useEffect(() => {
+    setShowMenu(window.innerWidth > 768)
+
+    //    userIsAlreadyLoggedIn(navigate)
+  }, [])
 
   const closeSidebar = () => setShowMenu(true)
   const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }

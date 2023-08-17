@@ -12,7 +12,6 @@ export const AddNaturalPerson = () => {
     const translations = {
       name: 'Nome',
       cpf: 'CPF',
-      birthday: 'Data de nascimento',
       gender: 'Gênero',
       nickname: 'Chama-me',
       phoneNumber: 'Telefone',
@@ -24,7 +23,7 @@ export const AddNaturalPerson = () => {
       stateOfTheCountry: 'Estado',
       city: 'Cidade'
     }
-    if (!validateFields({ name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+    if (!validateFields({ name, cpf, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
       return false
     }
     alert('Em fase de construção!')

@@ -26,7 +26,7 @@ export const MultiSelectFieldInput = (props: { options: any, label: string, requ
     <div>
       <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
 
-      <FormControl sx={{ m:1, width: '100%',top: '0px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 10px' } }}>
+      <FormControl sx={{ m:0, width: '100%',top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 10px' } }}>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
@@ -35,7 +35,8 @@ export const MultiSelectFieldInput = (props: { options: any, label: string, requ
           onChange={props.onChange}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
-          sx={{ top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 11px' }, '.MuiButtonBase-root':{color:'#F101010'} }}
+          
+          sx={{ top: '0px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 11px' }, '.MuiButtonBase-root':{color:'#F101010'} }}
         >
           {props.options.map((option: any) => (
             <MenuItem key={option} value={option}>

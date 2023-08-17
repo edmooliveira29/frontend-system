@@ -5,7 +5,6 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import './styles.sass'
 
-
 const ITEM_HEIGHT = 80
 const ITEM_PADDING_TOP = 5
 const MenuProps = {
@@ -30,7 +29,9 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
   if (isValueValid) {
     return (
       <>
-        <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
+        <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>
+          {props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}
+        </label>
         <Box sx={{ top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 11px' } }}>
           <FormControl fullWidth>
             <Select

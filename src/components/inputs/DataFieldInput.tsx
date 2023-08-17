@@ -7,7 +7,7 @@ import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
 
 export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any }) => {
-  const [value, setValue] = useState()
+  const [value, setValue] = useState(props.value || null);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <label className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>

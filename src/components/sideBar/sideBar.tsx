@@ -44,7 +44,8 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
             <Link className='link-item-menu' to='/relatorios' onClick={props.showSiderbar}> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
-            <li className="nav-item" onClick={toggleClientesSubmenu}>
+            <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
+            {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
               {showClientesSubmenu ? <MdOutlineArrowDropUp size={30} id='icon-arrow' />
                 : < MdOutlineArrowDropDown size={30} id='icon-arrow' />}
@@ -54,7 +55,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                   <Link className='link-sub-item-menu' onClick={props.showSiderbar} to='/clientes/fisico'>Físico</Link>
                 </ul>
               )}
-            </li><hr />
+            </li><hr /> */}
             <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
             <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
           </ul>

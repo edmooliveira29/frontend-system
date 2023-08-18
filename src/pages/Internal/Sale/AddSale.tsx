@@ -93,7 +93,6 @@ export const AddSale = () => {
                   </div>
                   <div className="row d-flex align-items-center justify-content-center">
                     <div className="px-4">
-
                       <SelectFieldInput
                         required={true}
                         label='Tipo de Cliente'

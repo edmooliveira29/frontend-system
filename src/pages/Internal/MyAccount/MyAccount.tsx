@@ -72,7 +72,7 @@ export const MyAccount = () => {
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-      <PersonalData setState={setState} state={state} title='DADOS' />
+      <PersonalData setState={setState} state={state}/>
       <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-center" >
         <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />

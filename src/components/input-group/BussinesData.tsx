@@ -1,8 +1,8 @@
 import React from 'react'
-import {  TextFieldInput } from '../inputs'
+import { TextFieldInput } from '../inputs'
 import { Masks } from '../../utils'
 
-export const BussinesData = (props: { state: any, setState: any }) => {
+export const BussinesData = (props: { state: any, setState: any, disabled?: boolean }) => {
   const masks = new Masks()
 
   return (<>
@@ -16,6 +16,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.name}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, name: value }) }}
+          disabled={props.disabled}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -30,6 +31,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
               props.setState({ ...props.state, cnpj: masks.maskCpfCnpj(value) })
             }
           }}
+          disabled={props.disabled}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -40,6 +42,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.legalResponsible}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, legalResponsible: value }) }}
+          disabled={props.disabled}
         />
       </div>
     </div>
@@ -52,6 +55,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.phoneNumber}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, phoneNumber: masks.maskPhoneNumber(value) }) }}
+          disabled={props.disabled}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -62,6 +66,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.email}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, email: value }) }}
+          disabled={props.disabled}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -72,6 +77,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.stateRegistration}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, stateRegistration: value }) }}
+          disabled={props.disabled}
         />
       </div>
       <div className="col-md-3 col-sm-12">
@@ -82,6 +88,7 @@ export const BussinesData = (props: { state: any, setState: any }) => {
           value={props.state.additionalInformation}
           typeInput="text"
           onChange={(value: string) => { props.setState({ ...props.state, additionalInformation: value }) }}
+          disabled={props.disabled}
         />
       </div>
     </div>

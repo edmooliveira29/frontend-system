@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListNaturalPerson, AddNaturalPerson, ListJuristicPerson, AddJuristicPerson, ListProduct, AddProducts, AddSale } from '../pages/Internal'
+import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListNaturalPerson, AddNaturalPerson, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 // import jwtDecode, { JwtPayload } from 'jwt-decode'
 // import { AlertGeneral, } from '../components/modal'
@@ -66,10 +66,10 @@ export const router = (
       <Route path="/contato" element={<ContactUs />} />
       <Route path="/dashboard" element={<Internal Page={Dashboard} />} />
       <Route path="/relatorios" element={<Internal Page={Report} />} />
-      <Route path="/clientes/fisico" element={<Internal Page={ListNaturalPerson} />} />
-      <Route path="/clientes/fisico/adicionar" element={<Internal Page={AddNaturalPerson} />} />
-      <Route path="/clientes/juridico" element={<Internal Page={ListJuristicPerson} />} />
-      <Route path="/clientes/juridico/adicionar" element={<Internal Page={AddJuristicPerson} />} />
+      <Route path="/clientes" element={<Internal Page={ListCustomer} />} />
+      <Route path="/clientes/adicionar" element={<Internal Page={AddCustomer} />} />
+      {/*<Route path="/clientes/juridico" element={<Internal Page={ListJuristicPerson} />} />
+      <Route path="/clientes/juridico/adicionar" element={<Internal Page={AddJuristicPerson} />} /> */}
       <Route path="/produtos" element={<Internal Page={ListProduct} />} />
       <Route path="/produtos/adicionar" element={<Internal Page={AddProducts} />} />
       <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />

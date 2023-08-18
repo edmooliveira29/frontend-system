@@ -1,11 +1,11 @@
 import React from 'react'
-import { TableComponent } from '../../../../components/tableList'
-import '../styles.sass'
+import { TableComponent } from '../../../components/tableList'
+import './styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
-import { ComponentButtonCommon } from '../../../../components'
+import { ComponentButtonCommon } from '../../../components'
 import { Link } from 'react-router-dom'
 
-export const ListJuristicPerson = () => {
+export const ListCustomer = () => {
   function createData(): any {
     return {
       name: fakerPT_BR.company.name(),
@@ -36,7 +36,7 @@ export const ListJuristicPerson = () => {
 
       </div>
       <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2 p-2">
-        <Link to="/clientes/juridico/adicionar">
+        <Link to="/clientes/adicionar">
           <ComponentButtonCommon text='Adicionar' sizewidth='200px' />
         </Link>
       </div>

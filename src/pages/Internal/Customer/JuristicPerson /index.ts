@@ -1,2 +1,2 @@
 export * from './AddJuristicPerson'
-export * from './ListJuristicPerson'
+export * from '../ListCustomer'

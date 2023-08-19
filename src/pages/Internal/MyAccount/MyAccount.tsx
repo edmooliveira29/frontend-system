@@ -58,7 +58,7 @@ export const MyAccount = () => {
       phoneNumber: 'Telefone',
       email: 'Email',
       zipCode: 'CEP',
-      address: 'Endereço',
+      address: 'Rua/Avenida',
       houseNumber: 'Número',
       neighborhood: 'Bairro',
       stateOfTheCountry: 'Estado',

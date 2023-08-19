@@ -6,7 +6,7 @@ import { ComponentButtonCommon, DataFieldInput, MultiSelectFieldInput, SelectFie
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { BsPlusCircle } from 'react-icons/bs'
 import { Box, Modal, Tooltip } from '@mui/material'
-import { AddJuristicPerson, AddNaturalPerson } from '../Customer'
+import { AddCustomer } from '../Customer'
 
 export const AddSale = () => {
   const [openModal, setOpenModal] = React.useState(false)
@@ -83,7 +83,7 @@ export const AddSale = () => {
                   maxWidth: '90%',
                   width: '100%',
                   // minHeight: '70%',
-                  //maxHeight: '90vh'
+                  //height: '85%'
                 }}>
 
                   <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }} >
@@ -91,21 +91,8 @@ export const AddSale = () => {
                       <i><AiFillCloseCircle className="align-self-end" size={20} color='#FF0000' onClick={() => { setTypeCustomerModal(''); setOpenModal(false) }} /></i>
                     </Tooltip>
                   </div>
-                  <div className="row d-flex align-items-center justify-content-center">
-                    <div className="px-4">
-                      <SelectFieldInput
-                        required={true}
-                        label='Tipo de Cliente'
-                        value={typeCustomerModal}
-                        options={[{ value: 'juristic', label: 'Jurídico' }, { value: 'natural', label: 'Físico' }]}
-                        placeholder='Selecione o tipo'
-                        onChange={(event: any) => { setTypeCustomerModal(event.target.value) }}
-                      />
-                    </div>
-                    <div style={{ padding: '0px', maxHeight: 'calc(90vh - 300px)', overflowY: 'auto' }}>
-                      {typeCustomerModal === 'natural' && <AddNaturalPerson />}
-                      {typeCustomerModal === 'juristic' && <AddJuristicPerson />}
-                    </div>
+                  <div className="row d-flex align-items-center justify-content-center" style={{ maxHeight: 'calc(90vh - 150px)', overflowY: 'auto', overflowX: 'hidden' }}>
+                    {<AddCustomer />}
                   </div>
                 </Box>
 

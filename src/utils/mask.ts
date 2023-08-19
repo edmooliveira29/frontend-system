@@ -36,7 +36,6 @@ export class Masks {
   }
 
   maskMoney(value: string) {
-
     value = value + ''
     value = value.replace(/[\D]+/g, '')
     value = value + ''
@@ -55,6 +54,9 @@ export class Masks {
     }
 
     return value
+  }
+  maskCapitalizeFirstLetter(string: any) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
 }

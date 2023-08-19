@@ -13,7 +13,7 @@ export const ListCustomer = () => {
       phonenumber: fakerPT_BR.phone.number('(##) 99###-####'),
       email: (fakerPT_BR.internet.email()).toLowerCase(),
       city: fakerPT_BR.location.city(),
-      state: fakerPT_BR.location.state({ abbreviated: true }),
+      stateOfTheCountry: fakerPT_BR.location.state({ abbreviated: true }),
 
     }
   }

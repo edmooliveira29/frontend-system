@@ -10,7 +10,7 @@ export const NotFound = () => (
           <h1 className="display-1 fw-bold">404</h1>
           <p className="fs-3"> <span className="text-danger">Opps!</span> Página não encontrada.</p>
           <p className="lead">
-            O link que você digitou não existe. Por valor verifique o endereço digitado.
+            O link que você digitou não existe. Por valor verifique o link digitado.
           </p>
           <Link to='/'>
             <ComponentButtonCommon text='Ir para a página inicial' />

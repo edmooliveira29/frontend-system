@@ -37,8 +37,8 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
-          label="Endereço"
-          placeholder='Digite aqui o seu endereço'
+          label="Rua/Avenida"
+          placeholder='Digite aqui sua rua/avenida'
           required={true}
           value={props.state.address}
           typeInput="text"

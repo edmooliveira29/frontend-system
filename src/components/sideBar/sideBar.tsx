@@ -3,7 +3,7 @@ import { AiFillDashboard } from 'react-icons/ai'
 import { HiDocumentReport } from 'react-icons/hi'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
-import { MdPointOfSale, MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md'
+import { MdPointOfSale} from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import { BsFillPersonLinesFill, BsInboxesFill } from 'react-icons/bs'
 import icon from '../../assets/img/icon.png'
@@ -15,11 +15,11 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   const navigate = useNavigate()
   const userName = localStorage.getItem('username')
   const [pictureProfile] = useState(localStorage.getItem('picture_profile'))
-  const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
+  // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
 
-  const toggleClientesSubmenu = () => {
-    setShowClientesSubmenu(!showClientesSubmenu)
-  }
+  // const toggleClientesSubmenu = () => {
+  //   setShowClientesSubmenu(!showClientesSubmenu)
+  // }
 
   const handleLogOut = () => {
     localStorage.clear()
@@ -35,7 +35,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
               <img src={icon} width="60" height="60" className="rounded-circle" />
             </div>
             <div className='col-3 p-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
-              <FaTimes onClick={props.closeSidebar} />
+              <FaTimes />
             </div>
 
           </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../components/inputs'
-import { Masks, validationCPF } from '../../utils'
-import { AlertGeneral } from '../modal'
+import { Masks } from '../../utils'
 
 export const PersonalData = (props: { state: any, setState: any }) => {
   const masks = new Masks()

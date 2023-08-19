@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListNaturalPerson, AddNaturalPerson, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer } from '../pages/Internal'
+import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 // import jwtDecode, { JwtPayload } from 'jwt-decode'
 // import { AlertGeneral, } from '../components/modal'
@@ -12,17 +12,16 @@ import { NotFound } from '../pages/NotFound'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
-  const showSiderbar = () => { if (window.innerWidth < 768) setShowMenu(!showMenu) }
+  const showSiderbar = () => { setShowMenu(!showMenu) }
 
   // const navigate = useNavigate()
   useEffect(() => {
-    setShowMenu(window.innerWidth > 768)
+    setShowMenu(window.innerWidth < 768 ? false : true)
     //    userIsAlreadyLoggedIn(navigate)
   }, [])
 
   const closeSidebar = () => setShowMenu(true)
   const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }
-
   return (<>
     <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
     <div className={showMenu ? 'contents' : ''} style={{ marginLeft: stylesContainer.marginRight }}>

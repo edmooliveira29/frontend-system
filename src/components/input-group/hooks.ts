@@ -19,7 +19,7 @@ export const onChangeZipCode = async (value: string, props: any, setCitySelected
         address: data.logradouro,
         neighborhood: data.bairro,
         city: data.localidade,
-        state: data.uf,
+        stateOfTheCountry: data.uf,
       })
     }
 

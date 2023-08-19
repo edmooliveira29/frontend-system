@@ -18,8 +18,8 @@ export const validateFields = (inputs: any, translations: any) => {
       AlertGeneral({ message: `O cpf '${inputs[fieldName]}' é inválido!`, type: 'error' })
       return false
     }
-    if (fieldName === 'cnpj' && inputs[fieldName].length !== 18) {
-      AlertGeneral({ message: `O cnpj digitado '${inputs[fieldName]}' é inválido!`, type: 'error' }); return false
+    if (fieldName === 'cnpj' && inputs[fieldName]) {
+      inputs[fieldName].length !== 18 && AlertGeneral({ message: `O cnpj digitado '${inputs[fieldName]}' é inválido!`, type: 'error' }); return false
     }
   }
   if (emptyFields.length > 0) {

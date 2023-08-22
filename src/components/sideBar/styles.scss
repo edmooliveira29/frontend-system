@@ -61,8 +61,8 @@ a {
 #div-sideBar {
     animation: showSidebar .2s;
     margin: 0;
-    display: 'flex';
-    flex-direction: 'column';
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes showSidebar {
@@ -78,6 +78,31 @@ a {
 }
 
 @media only screen and (max-width: 425px) {
+    #products-sale-title {
+        text-align: center;
+    }
+
+    #item {
+        width: 30%;
+    }
+
+    #product {
+        width: 70%;
+    }
+
+    #quantity,
+    #unit-value {
+        width: 50%;
+    }
+
+    #subtotal {
+        width: 70%;
+    }
+
+    #buttons-product {
+        width: 30%;
+    }
+
     #name-user-log {
         display: none
     }

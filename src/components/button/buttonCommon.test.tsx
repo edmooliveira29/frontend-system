@@ -17,7 +17,7 @@ describe('ComponentButtonCommon', () => {
   test('Should renders button with custom width', () => {
     const buttonText = 'Click me!';
     const buttonWidth = '200px';
-    render(<ComponentButtonCommon text={buttonText} sizewidth={buttonWidth} />);
+    render(<ComponentButtonCommon text={buttonText} sizeWidth={buttonWidth} />);
     const buttonElement = screen.getByText(buttonText);
     expect(buttonElement).toMatchSnapshot();
     expect(buttonElement).toHaveStyle(`width: ${buttonWidth}`);

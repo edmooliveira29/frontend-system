@@ -33,7 +33,7 @@ export const AddCustomer = () => {
       <hr />
       {typeCustomerModal && < AddressData setUser={setState} state={state} cities={[]} key={key} />}
       {typeCustomerModal && <div className="m-2 d-flex justify-content-center" >
-        <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={() => handleSaveCustomer(typeCustomerModal, state)} />
+        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={() => handleSaveCustomer(typeCustomerModal, state)} />
       </div>}
     </div>
   </>

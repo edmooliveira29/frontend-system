@@ -32,7 +32,7 @@ export const ListProduct = () => {
       </div>
       <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2 p-2">
         <Link to="/produtos/adicionar">
-          <ComponentButtonCommon text='Adicionar' sizewidth='200px' />
+          <ComponentButtonCommon text='Adicionar' sizeWidth='200px' />
         </Link>
       </div>
       <TableComponent data={data} head={columnHeaders} />

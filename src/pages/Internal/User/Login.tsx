@@ -54,7 +54,7 @@ export const Login = () => {
               onChange={() => { setState({ ...state, remember: !state.remember }) }} />
           </div>
           <div className='d-flex justify-content-evenly' id='button-login' onClick={handleLoginHook}>
-            <ComponentButtonCommon text='Entrar' sizewidth='310px' loading={loading} />
+            <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} />
           </div>
           <div id='error-response'>
             <span >{errorResponse ?? ''}</span>
@@ -68,7 +68,7 @@ export const Login = () => {
             <span>OU</span>
           </div>
           <Link to='/registrar' className='d-flex justify-content-evenly' id='button-login'>
-            <ComponentButtonCommon text='Registrar' sizewidth='310px' />
+            <ComponentButtonCommon text='Registrar' sizeWidth='310px' />
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >

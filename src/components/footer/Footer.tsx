@@ -39,7 +39,7 @@ export const Footer = () => {
                       onChange={(value: string) => {
                         return setState({ ...state, email: value })
                       }}
-                    />									<ComponentButtonCommon text='Inscrever-se' sizewidth='180px' />
+                    />									<ComponentButtonCommon text='Inscrever-se' sizeWidth='180px' />
                   </div>
                 </form>
               </div>

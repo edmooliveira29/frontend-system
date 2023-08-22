@@ -37,7 +37,7 @@ export const NavBar = () => (
             </ul>
             <form className='d-flex align-items-center'>
               <input id="input-search" className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
-              <ComponentButtonCommon text='Pesquisar' sizeButton='50px' />
+              <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' />
               <Link to='/entrar' title='Entrar' id="link-login" >
                 <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
               </Link>

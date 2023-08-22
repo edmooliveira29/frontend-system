@@ -29,7 +29,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   return (
     <><div className='row div-header'>
       <div className="col-9 p-0">
-        {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh' }}>
+        {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh', position:'fixed' }}>
           <div className="row">
             <div className='col-9 px-1'>
               <img src={icon} width="60" height="60" className="rounded-circle" />

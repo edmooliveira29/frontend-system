@@ -82,7 +82,7 @@ export const AddProducts = (props: { state: any }) => {
         </div>
       </div>
       <div className="m-2 d-flex justify-content-center" >
-        <ComponentButtonCommon text='Salvar' sizewidth='280px' onClick={handleSave} />
+        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={handleSave} />
       </div>
     </div>
 

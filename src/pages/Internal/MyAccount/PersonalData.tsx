@@ -10,6 +10,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
     <div className="row m-0">
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
+          id={'name'}
           label="Nome"
           placeholder='Digite aqui o nome completo'
           required={true}
@@ -20,6 +21,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'cpf'}
           label="CPF"
           placeholder='Digite aqui o CPF'
           required={true}
@@ -33,7 +35,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <DataFieldInput label='Data de nascimento' value={props.state.birthday} />
+        <DataFieldInput id={'birthday'}label='Data de nascimento' value={props.state.birthday} />
       </div>
     </div>
     <div className="row m-0">
@@ -44,6 +46,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
           </div>
           <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px' }}>
             <TextFieldInput
+              id={'nickname'}
               label="Chame-me"
               placeholder='Digite aqui como gostaria de ser chamado(a)'
               required={false}
@@ -56,6 +59,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'phoneNumber'}
           label="Telefone"
           placeholder='Digite aqui o telefone'
           required={true}
@@ -66,6 +70,7 @@ export const PersonalData = (props: { state: any, setUser: any }) => {
       </div>
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
+          id={'email'}
           label="Email"
           placeholder='Digite aqui o seu email'
           required={true}

@@ -5,8 +5,9 @@ describe('TextField component', () => {
   test('Shoul find label in document', () => {
     render(TextFieldInput({
       label: 'Name', typeInput: 'text', onChange() {
-        return true;
+        return true
       }, value: '', required: true,
+      id: ''
     }));
     const textField = screen.getAllByText('Name');
     expect(textField[0].textContent).toBe('Name');

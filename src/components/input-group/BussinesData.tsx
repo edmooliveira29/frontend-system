@@ -11,6 +11,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
     <div className="row m-0">
       <div className="col-md-2 col-sm-12">
         <TextFieldInput
+          id={'cnpj'}
           label="CNPJ"
           placeholder='Digite aqui o CNPJ'
           required={true}
@@ -46,6 +47,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-4 col-sm-12">
         <TextFieldInput
+          id={'name'}
           label="Nome Empresarial"
           placeholder='Digite aqui o nome empresarial'
           required={true}
@@ -57,6 +59,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'legalResponsible'}
           label="Responsável Legal"
           placeholder='Digite aqui o nome da pessoa'
           required={true}
@@ -68,6 +71,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'fantasyName'}
           label="Nome Fantasia"
           placeholder='Digite aqui o nome fantasia'
           required={false}
@@ -81,6 +85,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'phoneNumber'}
           label="Telefone"
           placeholder='Ex: (##) 99999-9999'
           required={true}
@@ -92,6 +97,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'email'}
           label="Email"
           placeholder='Digite aqui o seu email'
           required={true}
@@ -103,6 +109,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'stateRegistration'}
           label="Inscrição Estadual"
           placeholder='Digite aqui a inscrição estadual'
           required={false}
@@ -114,6 +121,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'additionalInformation'}
           label="Informações adicionais"
           placeholder='Digite aqui as informações'
           required={false}

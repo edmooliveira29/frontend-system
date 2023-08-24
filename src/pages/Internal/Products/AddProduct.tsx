@@ -29,6 +29,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       <div className="row">
         <div className="col-md-6 col-sm-12">
           <TextFieldInput
+            id={'name'}
             label="Nome"
             placeholder='Digite aqui o nome do produto'
             required={true}
@@ -39,6 +40,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
         </div>
         <div className="col-md-6 col-sm-12">
           <TextFieldInput
+            id={'description'}
             label="Descrição"
             placeholder='Digite aqui uma descrição'
             required={false}
@@ -52,6 +54,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       <div className="row">
         <div className="col-md-6 col-sm-12">
           <TextFieldInput
+            id={'category'}
             label="Categoria"
             placeholder='Digite aqui uma categoria'
             required={true}
@@ -62,6 +65,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
         </div>
         <div className="col-md-3 col-sm-12">
           <TextFieldInput
+            id={'price'}
             label="Preço"
             placeholder='Digite aqui o preço'
             required={true}
@@ -72,6 +76,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
         </div>
         <div className="col-md-3 col-sm-12">
           <TextFieldInput
+            id={'stock'}
             label="Estoque"
             placeholder='Digite aqui o estoque'
             required={true}

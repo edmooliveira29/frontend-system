@@ -15,15 +15,14 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       setCitySelected(auxCities.some((option: { value: string }) => option.value === props.state.city) ? props.state.city : '')
     }
   }
-  useEffect(() => {
-    getCities(stateSelected || props.state.stateOfTheCountry)
-  }, [stateSelected, props.state.stateOfTheCountry])
+  useEffect(() => { getCities(stateSelected || props.state.stateOfTheCountry) }, [stateSelected, props.state.stateOfTheCountry])
 
   return (<>
     <h4 id="title-personal-data">ENDEREÇO</h4>
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'zipCode'}
           label="CEP"
           placeholder='Digite aqui o seu cep'
           required={true}
@@ -37,6 +36,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
+          id={'address'}
           label="Rua/Avenida"
           placeholder='Digite aqui sua rua/avenida'
           required={true}
@@ -47,8 +47,9 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'houseNumber'}
           label="Número"
-          placeholder='Digite aqui o n° da residencia ou estabelecimento'
+          placeholder='Digite aqui o n° da residência ou estabelecimento'
           required={true}
           value={props.state.houseNumber}
           typeInput="text"
@@ -59,6 +60,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
     <div className="row m-0">
       <div className="col-md-3 col-sm-12" style={{}}>
         <TextFieldInput
+          id={'complement'}
           label="Complemento"
           placeholder='Digite aqui o complemento'
           required={false}
@@ -69,6 +71,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-3 col-sm-12">
         <TextFieldInput
+          id={'neighborhood'}
           label="Bairro"
           placeholder='Digite aqui o bairro'
           required={true}
@@ -89,7 +92,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
           required={true}
           value={citySelected || ''}
           placeholder='Selecione a cidade'
-          onChange={(event: any) => { setCitySelected(event.target.value); props.setUser({ ...props.state, city: event.target.value })  }} />
+          onChange={(event: any) => { setCitySelected(event.target.value); props.setUser({ ...props.state, city: event.target.value }) }} />
       </div>
     </div>
   </>)

@@ -32,6 +32,7 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
         </div>
         <div className="col-md-3 col-sm-3">
           <TextFieldInput
+            id={'discount'}
             label={`Desconto em ${props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? 'R$' : '%'}`}
             placeholder={props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? 'Desconto R$' : 'Desconto em %'}
             required={false}
@@ -47,6 +48,7 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
         </div>
         <div className="col-md-3 col-sm-3">
           <TextFieldInput
+            id={'valueDiscount'}
             label="Valor do desconto em R$"
             placeholder={'R$ 0,00 '}
             required={false}

@@ -6,7 +6,6 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import { ComponentButtonCommon, NavBar, Footer } from '../../components'
 export const ContactUs = () => {
   const [state, setState] = React.useState({ name: '', email: '', subject: '', message: '' })
-
   return (<>
     <NavBar />
     <div className='container'>
@@ -22,6 +21,7 @@ export const ContactUs = () => {
                       <div className='col-md-6'>
                         <div className='form-group'>
                           <TextFieldInput
+                            id={'name'}
                             required={true} label='Nome' typeInput='text'
                             value={state.name}
                             onChange={(value: string) => {
@@ -33,6 +33,7 @@ export const ContactUs = () => {
                       <div className='col-md-6'>
                         <div className='form-group'>
                           <TextFieldInput
+                            id={`email`}
                             required={true} label='E-mail' typeInput='text'
                             value={state.email}
                             onChange={(value: string) => {
@@ -44,11 +45,10 @@ export const ContactUs = () => {
                       <div className='col-md-12'>
                         <div className='form-group'>
                           <TextFieldInput
+                            id='subject'
                             required={true} label='Assunto' typeInput='text'
                             value={state.subject}
-                            onChange={(value: string) => {
-                              setState({ ...state, subject: value })
-                            }}
+                            onChange={(value: string) => { setState({ ...state, subject: value }) }}
                           />
                         </div>
                       </div>

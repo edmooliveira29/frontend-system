@@ -34,6 +34,7 @@ export const Footer = () => {
                   <div className='d-flex flex-column flex-sm-row w-100 gap-2'>
                     <label htmlFor='newsletter1' className='visually-hidden'>Email</label>
                     <TextFieldInput
+                      id={'name'}
                       required={true} label='E-mail' typeInput='text'
                       value={state.email}
                       onChange={(value: string) => {

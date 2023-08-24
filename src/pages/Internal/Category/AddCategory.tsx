@@ -25,10 +25,11 @@ export const AddCategory = () => {
       <h4 id="titles-custumer-add">ADICIONAR CATEGORIA</h4>
       <div className="row">
         <div className="col-md-3 col-sm-12">
-          <SelectFieldInput value={state.type ||''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'buy', label: 'Compra' }, { value: 'sell', label: 'Venda' }]} required={true} onChange={(event: any) => setState({ ...state, type: event.target.value })} />
+          <SelectFieldInput value={state.type || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'buy', label: 'Compra' }, { value: 'sell', label: 'Venda' }]} required={true} onChange={(event: any) => setState({ ...state, type: event.target.value })} />
         </div>
         <div className="col-md-4 col-sm-12">
           <TextFieldInput
+            id={'name'}
             label="Nome"
             placeholder='Digite aqui um nome'
             required={true}
@@ -40,6 +41,7 @@ export const AddCategory = () => {
         </div>
         <div className="col-md-5 col-sm-12">
           <TextFieldInput
+            id={'description'}
             label="Descrição"
             placeholder='Digite aqui uma categoria'
             required={false}

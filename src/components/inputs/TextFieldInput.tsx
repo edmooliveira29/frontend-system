@@ -2,7 +2,7 @@ import * as React from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import './styles.sass'
 
-export function TextFieldInput(props: { label: string; typeInput: string; onChange?: any; value: string; required: boolean, placeholder?: string, disabled?: boolean }) {
+export function TextFieldInput(props: { label: string; typeInput: string; onChange?: any; value: string; required: boolean, placeholder?: string, disabled?: boolean, id: string }) {
   const [HIDEPASSWORD, setHidePassword] = React.useState(true)
 
   const handleShowPassword = (): void => {
@@ -11,7 +11,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
   const symbolR$ = ['preço', 'subtotal', 'unitário', 'r$']
   return (
     <>
-      <label id={`label-input-${(props.label).toLowerCase()}`}
+      <label id={`label-input-${props.id}`}
         data-bs-placement="top" className='form-label m-1'>{props.label}{props.required ? <em style={{ color: 'red' }}> *</em> : <em style={{ color: 'red' }}>  </em>}</label>
       <div className="input-group input-wrapper" >
         {symbolR$.some(symbol => props.label.toLowerCase().includes(symbol)) && <span className="input-group-text">R$</span>}
@@ -20,7 +20,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
         <input
           type={props.typeInput === "number" || props.typeInput === "text" || !HIDEPASSWORD ? props.typeInput : "password"}
           className='form-control text-field-input'
-          id={`input-${(props.label).toLowerCase()}`}
+          id={`input-${props.id}`}
           value={props.value || ''}
           required={props.required}
           min='0'

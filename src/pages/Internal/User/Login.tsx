@@ -34,6 +34,7 @@ export const Login = () => {
           <h3 id='h3-enter-register'>Entrar</h3>
           <div className='m-3' id='input-email'>
             <TextFieldInput
+              id={'email'}
               required={true} label='E-mail'
               typeInput='text'
               value={state.email}
@@ -42,6 +43,7 @@ export const Login = () => {
           </div>
           <div className='m-3' id='input-password'>
             <TextFieldInput
+              id={'password'}
               required={true}
               label='Senha'
               typeInput='password'

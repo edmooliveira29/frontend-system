@@ -1,8 +1,9 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
 import '../styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
 import { DataFieldInput, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
-import { Masks } from '../../../../utils'
+import { validateFields } from '../../../../utils'
 import { FooterSale } from './FooterSale'
 import { ProductsInSale } from './ProductsInSale/ProductsInSale'
 import { ModalAddProductOrCustomer } from './ModalAddProductOrCustomer'
@@ -25,6 +26,19 @@ export const AddSale = () => {
   })
 
   const handleSave = async () => {
+    const { dateOfSale, customer, description, products, formOfPayment } = state
+
+    const translations = {
+      dateOfSale: 'Data da Venda',
+      customer: 'Cliente',
+      description: 'Descrição',
+      products: 'Produtos',
+      formOfPayment: 'Forma de Pagamento',
+    }
+
+    if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
+      return false
+    }
     alert('Em fase de construção!')
   }
 
@@ -40,11 +54,11 @@ export const AddSale = () => {
     setCustumers(peopleList)
   }, [])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(state)
+  //   console.log(state)
 
-  }, [state])
+  // }, [state])
 
   const calculateTotalAmount = () => {
     let totalAmount = 0
@@ -66,7 +80,7 @@ export const AddSale = () => {
       </div>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <DataFieldInput label='Data da Venda' value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, dateOfSale: value }) }} />
+          <DataFieldInput id={'dateOfSale'} label='Data da Venda' required={true} value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, dateOfSale: value }) }} />
         </div>
         <div className="col-md-5 col-sm-12">
           <div className="row">
@@ -81,12 +95,13 @@ export const AddSale = () => {
               />
             </div>
             <div className="col-2 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              {<ModalAddProductOrCustomer titleOfModel={'cliente'} />}
+              {<ModalAddProductOrCustomer titleOfModel={'cliente'} id={'add-new-customer'} />}
             </div>
           </div>
         </div>
         <div className="col-md-4 col-sm-12">
           <TextFieldInput
+            id={'description'}
             label="Descrição"
             placeholder='Descrição da venda'
             required={true}

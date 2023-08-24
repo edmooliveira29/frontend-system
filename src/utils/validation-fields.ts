@@ -3,6 +3,10 @@ import { AlertGeneral } from '../components'
 export const validateFields = (inputs: any, translations: any) => {
   const emptyFields = []
   for (const fieldName in inputs) {
+
+    if (fieldName == 'products' || fieldName == 'formOfPayment') {
+      console.log(inputs[fieldName])
+    }
     const elementInput = document.getElementById(`input-${(translations[fieldName]).toLowerCase()}`)
     const elementInputLabel = document.getElementById(`label-input-${(translations[fieldName]).toLowerCase()}`)
     elementInputLabel?.classList.remove('text-danger')

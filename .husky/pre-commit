@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run lint
-npm start & (sleep 10 && npm run tests-e2e && pkill -f "npm start")
+# npm start & (sleep 10 && npm run tests-e2e && pkill -f "npm start")

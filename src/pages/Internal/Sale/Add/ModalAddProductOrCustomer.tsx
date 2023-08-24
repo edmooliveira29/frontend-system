@@ -4,12 +4,12 @@ import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { AddProducts } from '../../Products'
 import { AddCustomer } from '../../Customer'
 
-export const ModalAddProductOrCustomer: React.FC<{ titleOfModel: any }> = (props) => {
+export const ModalAddProductOrCustomer: React.FC<{ titleOfModel: any, id: string }> = (props) => {
   const [openModal, setOpenModal] = React.useState(false)
 
   return (<>
     <Tooltip title={`Adicionar um novo ${props.titleOfModel}`} placement='top' arrow >
-      <i> <AiOutlinePlusCircle size={25} color='black' style={{ cursor: 'pointer' }} onClick={() => setOpenModal(true)} /> </i>
+      <i id={props.id}> < AiOutlinePlusCircle size={25} color='black' style={{ cursor: 'pointer' }} onClick={() => setOpenModal(true)} /> </i>
     </Tooltip>
     <Modal
       open={openModal}

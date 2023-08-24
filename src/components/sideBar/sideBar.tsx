@@ -3,12 +3,13 @@ import { AiFillDashboard } from 'react-icons/ai'
 import { HiDocumentReport } from 'react-icons/hi'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
-import { MdPointOfSale} from 'react-icons/md'
-import { Link, useNavigate } from 'react-router-dom'
+import { MdPointOfSale } from 'react-icons/md'
 import { BsFillPersonLinesFill, BsInboxesFill } from 'react-icons/bs'
+import { BiCategoryAlt } from 'react-icons/bi'
+import { Link, useNavigate } from 'react-router-dom'
 import icon from '../../assets/img/icon.png'
-import './styles.scss'
 import { AlertConfirmationLogout } from '../modal'
+import './styles.scss'
 
 
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
@@ -29,7 +30,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   return (
     <><div className='row div-header'>
       <div className="col-9 p-0">
-        {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh', position:'fixed' }}>
+        {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh', position: 'fixed' }}>
           <div className="row">
             <div className='col-9 px-1'>
               <img src={icon} width="60" height="60" className="rounded-circle" />
@@ -44,6 +45,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
             <Link className='link-item-menu' to='/relatorios' onClick={props.showSiderbar}> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
+            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
             <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes

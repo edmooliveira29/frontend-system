@@ -32,7 +32,7 @@ export const ListCustomer = () => {
 
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
-        <h4 className="col-sm-12" id="title-natural-person">Clientes Jurídicos</h4>
+        <h4 className="col-sm-12" id="title-natural-person">Clientes</h4>
 
       </div>
       <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2 p-2">

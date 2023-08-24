@@ -9,6 +9,7 @@ import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import './styles.sass'
 import { NotFound } from '../pages/NotFound'
+import { AddCategory, ListCategory } from '../pages/Internal/Category'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
@@ -66,6 +67,8 @@ export const router = (
       <Route path="/dashboard" element={<Internal Page={Dashboard} />} />
       <Route path="/relatorios" element={<Internal Page={Report} />} />
       <Route path="/clientes" element={<Internal Page={ListCustomer} />} />
+      <Route path="/categorias" element={<Internal Page={ListCategory} />} />
+      <Route path="/categorias/adicionar" element={<Internal Page={AddCategory} />} />
       <Route path="/clientes/adicionar" element={<Internal Page={AddCustomer} />} />
       {/*<Route path="/clientes/juridico" element={<Internal Page={ListJuristicPerson} />} />
       <Route path="/clientes/juridico/adicionar" element={<Internal Page={AddJuristicPerson} />} /> */}

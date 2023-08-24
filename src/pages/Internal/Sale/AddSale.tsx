@@ -32,7 +32,7 @@ export const AddSale = () => {
       const updatedProductRows = productRows.filter((row) => row.id !== id).map((row, index) => ({ ...row, id: index }))
 
       const updatedProducts = state.products.filter((_: any, index: any) => index !== id)
-      const updatedProductsWithRenamedFields = updatedProducts.map((product: any, index: number) => {
+      const updatedProductsWithRenamedFields = updatedProducts.map((product: any) => {
         const updatedProduct: any = {}
         Object.keys(product).forEach((key) => {
           const matches = key.match(/^(.*?)_(\d+)$/)
@@ -343,7 +343,7 @@ export const AddSale = () => {
             R$ {state.valueDiscount || '0,00'}
           </div>
           <div className="col-md-3 d-flex align-items-center h3 p-1" style={{ color: 'green' }}>
-            <strong>Valor total:&nbsp;</strong> R$ {String((Number(calculateTotalAmount().replace(',', '.'))- Number((state.valueDiscount).replace(',','.'))).toFixed(2)).replace('.',',')}
+            <strong>Valor total:&nbsp;</strong> R$ {String((Number(calculateTotalAmount().replace(',', '.'))- Number((state.valueDiscount || '0,00').replace(',','.'))).toFixed(2)).replace('.',',')}
           </div>
           <div className="col-md-3 d-flex justify-content-center align-items-center">
             <ComponentButtonCommon text='Salvar' onClick={handleSave} />

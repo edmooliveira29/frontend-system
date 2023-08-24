@@ -3,7 +3,7 @@ import { ComponentButtonCommon, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 
 
-export const AddProducts = (props: { state: any }) => {
+export const AddProducts: React.FC<{ state?: any }> = (props) => {
   const mask = new Masks()
   const [state, setState] = useState({
     name: props.state?.name || '',
@@ -16,7 +16,7 @@ export const AddProducts = (props: { state: any }) => {
   const handleSave = async () => {
     const { name, category, price, stock } = state
     const translations = { name: 'Nome', category: 'Categoria', price: 'Preço', stock: 'Estoque' }
-    
+
     if (!validateFields({ name, category, price, stock }, translations)) {
       return false
     }

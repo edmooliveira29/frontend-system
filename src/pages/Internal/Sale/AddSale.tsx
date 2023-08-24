@@ -7,6 +7,7 @@ import { AiFillCloseCircle, AiOutlineMinusCircle, AiOutlinePlusCircle } from 're
 import { Box, Modal, Tooltip } from '@mui/material'
 import { AddCustomer } from '../Customer'
 import { Masks } from '../../../utils'
+import { AddProducts } from '../Products'
 
 export const AddSale = () => {
 
@@ -17,14 +18,19 @@ export const AddSale = () => {
     dateOfSale: null,
     formOfPayment: [],
     products: [],
-    saleTotalAmount: 0
+    saleTotalAmount: 0,
+    date: '',
+    description: '',
+    discount: '',
+    valueDiscount: '',
+    typeOfDiscount: false,
+    informationAboutTheSale: ''
   })
   const [productRows, setProductRows] = useState([{ id: 0 }])
   const masks = new Masks()
   const addProductRow = () => {
     const newRow = { id: productRows.length }
     setProductRows([...productRows, newRow])
-
   }
 
   const removeProductRow = (id: any) => {
@@ -77,11 +83,11 @@ export const AddSale = () => {
     setCustumers(peopleList)
   }, [])
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   console.log('')
+    console.log(state)
 
-  // }, [state])
+  }, [state])
 
   const updateProduct = (productId: number, field: string, value: string) => {
     const updatedProduct = {
@@ -134,7 +140,7 @@ export const AddSale = () => {
       </div>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <DataFieldInput label='Data da Venda' value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, date: value }) }} />
+          <DataFieldInput label='Data da Venda' value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, dateOfSale: value }) }} />
         </div>
         <div className="col-md-5 col-sm-12">
           <div className="row">
@@ -205,7 +211,7 @@ export const AddSale = () => {
         </div>
 
       </div>
-      <div style={{ borderTop: '1px solid #E0E0E0', borderBottom: '1px solid #E0E0E0', margin: '10px 0px' }}>
+      <div style={{ borderTop: '1px solid #E0E0E0', borderBottom: '1px solid #E0E0E0', margin: '0px 0px' }}>
 
         <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS</h6>
         {productRows.map((row, id) => (
@@ -221,14 +227,62 @@ export const AddSale = () => {
               />
             </div>
             <div className="col-md-4" id="product">
-              <SelectFieldInput
-                required={true}
-                label='Produto'
-                value={state.products[id]?.[`name_${id}`] || ''}
-                options={[]}
-                placeholder='Selecione um produto'
-                onChange={(event: any) => updateProduct(id, `name_${id}`, event.target.value)}
-              />
+              <div className="row">
+                <div className="col-10">
+                  <SelectFieldInput
+                    required={true}
+                    label='Produto'
+                    value={state.products[id]?.[`name_${id}`] || ''}
+                    options={[]}
+                    placeholder='Selecione um produto'
+                    onChange={(event: any) => updateProduct(id, `name_${id}`, event.target.value)}
+                  />
+                </div>
+                <div className="col-2">
+                  <div className="col-2 d-flex align-items-center justify-content-center" style={{ top: '35px', position: 'relative' }}>
+                    <Tooltip title="Adicionar um novo produto" placement='top' arrow >
+                      <i> <AiOutlinePlusCircle size={25} color='black' style={{ cursor: 'pointer' }} onClick={() => setOpenModal(true)} /> </i>
+                    </Tooltip>
+                    <Modal
+                      open={openModal}
+                      onClose={() => { setOpenModal(false) }}
+                      aria-labelledby="parent-modal-title"
+                      aria-describedby="parent-modal-description"
+                      style={{ zIndex: 1000 }}
+                    >
+                      <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        pt: 1,
+                        px: 2,
+                        pb: 2,
+                        borderRadius: '5px',
+                        maxWidth: '90%',
+                        width: '100%',
+                        // minHeight: '70%',
+                        //height: '85%'
+                      }}>
+
+                        <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }} >
+                          <Tooltip title="Fechar sem salvar" placement='left' arrow>
+                            <i><AiFillCloseCircle className="align-self-end" size={20} color='#FF0000' onClick={() => { setOpenModal(false) }} /></i>
+                          </Tooltip>
+                        </div>
+                        <div className="row d-flex align-items-center justify-content-center" style={{ maxHeight: 'calc(90vh - 150px)', overflowY: 'auto', overflowX: 'hidden' }}>
+                          {<AddProducts />}
+                        </div>
+                      </Box>
+
+                    </Modal>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div className="col-md-2" id="quantity">
               <TextFieldInput
@@ -276,7 +330,7 @@ export const AddSale = () => {
           </div>
         ))}
       </div>
-      <div className='row'>
+      <div className='row m-0'>
         <h6 className="col-sm-12 m-2" id="products-sale-title">CONDIÇÕES DE PAGAMENTO</h6>
         <div className="col-md-3 col-sm-3">
           <MultiSelectFieldInput
@@ -310,7 +364,7 @@ export const AddSale = () => {
               setState({
                 ...state,
                 discount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : value,
-                valueDiscount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : String((Number(calculateTotalAmount().replace(',', '.')) * (Number(value.replace(',', '.'))/100)).toFixed(2)).replace('.',',')
+                valueDiscount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : String((Number(calculateTotalAmount().replace(',', '.')) * (Number(value.replace(',', '.')) / 100)).toFixed(2)).replace('.', ',')
               })
             }} />
         </div>
@@ -325,15 +379,14 @@ export const AddSale = () => {
           />
         </div>
       </div>
-
-      <div className='row py-2'>
+      <div className='row py-2 m-0'>
         <label id={`label - input`}>Observações sobre a venda</label>
-
-        <TextAreaInput></TextAreaInput>
+        <TextAreaInput onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
 
-      <div className="mt-auto">
-        <div id="div-footer-sale" className="row d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+
+      <div className="mt-auto m-0">
+        <div id="div-footer-sale" className="row d-flex flex-wrap justify-content-between align-items-center p-3 border">
           <div className="col-md-3 d-flex align-items-center h5 p-1" style={{ color: 'blue' }}>
             <strong>Valor em produtos:&nbsp;</strong>
             R$ {calculateTotalAmount()}
@@ -343,7 +396,7 @@ export const AddSale = () => {
             R$ {state.valueDiscount || '0,00'}
           </div>
           <div className="col-md-3 d-flex align-items-center h3 p-1" style={{ color: 'green' }}>
-            <strong>Valor total:&nbsp;</strong> R$ {String((Number(calculateTotalAmount().replace(',', '.'))- Number((state.valueDiscount || '0,00').replace(',','.'))).toFixed(2)).replace('.',',')}
+            <strong>Valor total:&nbsp;</strong> R$ {String((Number(calculateTotalAmount().replace(',', '.')) - Number((state.valueDiscount || '0,00').replace(',', '.'))).toFixed(2)).replace('.', ',')}
           </div>
           <div className="col-md-3 d-flex justify-content-center align-items-center">
             <ComponentButtonCommon text='Salvar' onClick={handleSave} />

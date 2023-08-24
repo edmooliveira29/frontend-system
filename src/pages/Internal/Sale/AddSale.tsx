@@ -14,8 +14,10 @@ export const AddSale = () => {
   const [customers, setCustumers] = useState<any>()
   const [state, setState] = useState<any>({
     customer: '',
-    date: null,
-    formOfPayment: []
+    dateOfSale: null,
+    formOfPayment: [],
+    products: [],
+    saleTotalAmount: 0
   })
   const [productRows, setProductRows] = useState([{ id: 0 }])
   const masks = new Masks()
@@ -27,10 +29,37 @@ export const AddSale = () => {
 
   const removeProductRow = (id: any) => {
     if (productRows.length > 1) {
-      const updatedProducts = productRows.filter(row => row.id !== id).map((row, index) => { return { ...row, id: index } })
-      setProductRows(updatedProducts)
+      const updatedProductRows = productRows.filter((row) => row.id !== id).map((row, index) => ({ ...row, id: index }))
+
+      const updatedProducts = state.products.filter((_: any, index: any) => index !== id)
+      const updatedProductsWithRenamedFields = updatedProducts.map((product: any, index: number) => {
+        const updatedProduct: any = {}
+        Object.keys(product).forEach((key) => {
+          const matches = key.match(/^(.*?)_(\d+)$/)
+          if (matches) {
+            const fieldName = matches[1]
+            const fieldIndex = matches[2]
+            if (fieldIndex > id) {
+              updatedProduct[`${fieldName}_${Number(fieldIndex) - 1}`] = product[key]
+            } else {
+              updatedProduct[key] = product[key]
+            }
+          } else {
+            updatedProduct[key] = product[key]
+          }
+        })
+        return updatedProduct
+      })
+
+      setState({
+        ...state,
+        products: updatedProductsWithRenamedFields,
+      })
+
+      setProductRows(updatedProductRows)
     }
   }
+
 
   const handleSave = async () => {
     alert('Em fase de construção!')
@@ -47,6 +76,57 @@ export const AddSale = () => {
     }
     setCustumers(peopleList)
   }, [])
+
+  // useEffect(() => {
+
+  //   console.log('')
+
+  // }, [state])
+
+  const updateProduct = (productId: number, field: string, value: string) => {
+    const updatedProduct = {
+      ...state.products[productId],
+      [field]: value,
+    }
+
+    const updatedProducts = [...state.products]
+    updatedProducts[productId] = updatedProduct
+
+    // Update the subtotals for all products
+    updatedProducts.forEach((product, id) => {
+      const quantityField = `quantity_${id}`
+      const unitValueField = `unitValue_${id}`
+      const newSubTotal = calculateSubTotal(product[quantityField], product[unitValueField])
+      product[`subTotal_${id}`] = newSubTotal
+    })
+
+    setState({
+      ...state,
+      products: updatedProducts,
+      saleTotalAmount: calculateTotalAmount(),
+    })
+  }
+
+
+  const calculateSubTotal = (quantity: string, unitValue: string) => {
+    const quantityValue = parseFloat(String(quantity || '0').replace(',', '.'))
+    const unitValueFloat = parseFloat(String(unitValue || '0').replace(',', '.'))
+    return (quantityValue * unitValueFloat).toFixed(2).replace('.', ',')
+  }
+
+  const calculateTotalAmount = () => {
+    let totalAmount = 0
+    state.products.forEach((_product: any, id: number) => {
+      const subTotalField = `subTotal_${id}`
+      const subTotalValue = state.products[id]?.[subTotalField]
+      if (subTotalValue) {
+        totalAmount += parseFloat(subTotalValue.replace(',', '.'))
+      }
+    })
+
+    return String(totalAmount.toFixed(2)).replace('.', ',')
+  }
+
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -54,7 +134,7 @@ export const AddSale = () => {
       </div>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <DataFieldInput label='Data da Venda' value={state.birthday} onChange={(value: string) => { setState({ ...state, date: value }) }} />
+          <DataFieldInput label='Data da Venda' value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, date: value }) }} />
         </div>
         <div className="col-md-5 col-sm-12">
           <div className="row">
@@ -138,50 +218,51 @@ export const AddSale = () => {
                 disabled={true}
                 value={String(row.id + 1)}
                 typeInput="number"
-                onChange={(value: string) => { setState({ ...state, [`index${id}`]: value }) }} />
+              />
             </div>
             <div className="col-md-4" id="product">
               <SelectFieldInput
                 required={true}
                 label='Produto'
-                value={''}
+                value={state.products[id]?.[`name_${id}`] || ''}
                 options={[]}
                 placeholder='Selecione um produto'
-                onChange={(event: any) => { setState({ ...state, [`product${id}`]: event.target.value }) }} />
+                onChange={(event: any) => updateProduct(id, `name_${id}`, event.target.value)}
+              />
             </div>
             <div className="col-md-2" id="quantity">
               <TextFieldInput
                 label="Quantidade"
-                placeholder='Quantidade de produtos'
+                placeholder="Quantidade de produtos"
                 required={true}
-                value={state.quantity}
+                value={state.products[id]?.[`quantity_${id}`] || ''}
                 typeInput="number"
-                onChange={(value: string) => {
-                  setState({ ...state, [`quantity${id}`]: value })
-                }} />
+                onChange={(value: string) => { updateProduct(id, `quantity_${id}`, value) }}
+              />
             </div>
             <div className="col-md-2" id="unit-value">
               <TextFieldInput
                 label="Valor Unitário"
                 placeholder='Valor unitário do produto'
                 required={true}
-                value={state.quantity}
-                typeInput="number"
-                onChange={(value: string) => {
-                  setState({ ...state, unitValue: value })
-                }} />
+                value={state.products[id]?.[`unitValue_${id}`] || ''}
+                typeInput="text"
+                onChange={(value: string) => updateProduct(id, `unitValue_${id}`, masks.maskMoney(value))}
+              />
             </div>
             <div className="col-md-2" id="subtotal">
               <TextFieldInput
                 label="Subtotal"
                 placeholder='R$0,00'
                 required={true}
-                value={state.quantity}
+                value={
+                  state.products[id]?.[`quantity_${id}`] && state.products[id]?.[`unitValue_${id}`] ?
+                    String((Number(state.products[id]?.[`quantity_${id}`]) * Number((state.products[id]?.[`unitValue_${id}`].replace(',', '.')))).toFixed(2)).replace('.', ',')
+                    : '0,00'
+                }
                 disabled={true}
-                typeInput="number"
-                onChange={(value: string) => {
-                  setState({ ...state, quantity: value })
-                }} />
+                typeInput="text"
+              />
             </div>
             <div className="col-md-1 d-flex align-items-center justify-content-center" id="buttons-product">
               <Tooltip title="Adicionar um produto" placement='top' arrow sx={{ right: '60px' }}>
@@ -193,14 +274,13 @@ export const AddSale = () => {
             </div>
             <div className="text-center mx-1 my-0"><hr /></div>
           </div>
-
         ))}
       </div>
       <div className='row'>
         <h6 className="col-sm-12 m-2" id="products-sale-title">CONDIÇÕES DE PAGAMENTO</h6>
         <div className="col-md-3 col-sm-3">
           <MultiSelectFieldInput
-            value={state.formOfPayment}
+            value={state.formOfPayment || []}
             onChange={(event: any) => {
               setState({
                 ...state,
@@ -230,7 +310,7 @@ export const AddSale = () => {
               setState({
                 ...state,
                 discount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : value,
-                valueDiscount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : value
+                valueDiscount: state.typeOfDiscount || state.typeOfDiscount == undefined ? masks.maskMoney(value) : String((Number(calculateTotalAmount().replace(',', '.')) * (Number(value.replace(',', '.'))/100)).toFixed(2)).replace('.',',')
               })
             }} />
         </div>
@@ -240,14 +320,14 @@ export const AddSale = () => {
             placeholder={'R$ 0,00 '}
             required={false}
             disabled={true}
-            value={masks.maskMoney(state.discount)}
+            value={state.valueDiscount}
             typeInput="text"
           />
         </div>
       </div>
 
       <div className='row py-2'>
-        <label id={`label-input`}>Observações sobre a venda</label>
+        <label id={`label - input`}>Observações sobre a venda</label>
 
         <TextAreaInput></TextAreaInput>
       </div>
@@ -256,14 +336,14 @@ export const AddSale = () => {
         <div id="div-footer-sale" className="row d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
           <div className="col-md-3 d-flex align-items-center h5 p-1" style={{ color: 'blue' }}>
             <strong>Valor em produtos:&nbsp;</strong>
-            R$0,00
+            R$ {calculateTotalAmount()}
           </div>
           <div className="col-md-3 d-flex align-items-center h5 p-1" style={{ color: 'red' }}>
             <strong>Descontos:&nbsp;</strong>
             R$ {state.valueDiscount || '0,00'}
           </div>
           <div className="col-md-3 d-flex align-items-center h3 p-1" style={{ color: 'green' }}>
-            <strong>Valor total:&nbsp;</strong> R$0,00
+            <strong>Valor total:&nbsp;</strong> R$ {String((Number(calculateTotalAmount().replace(',', '.'))- Number((state.valueDiscount).replace(',','.'))).toFixed(2)).replace('.',',')}
           </div>
           <div className="col-md-3 d-flex justify-content-center align-items-center">
             <ComponentButtonCommon text='Salvar' onClick={handleSave} />

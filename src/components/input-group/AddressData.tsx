@@ -82,13 +82,16 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput label='Estado'
+          id={'stateOfTheCountry'}
           options={statesBrazilian}
           required={true}
           value={stateSelected || props.state.stateOfTheCountry || ''}
           placeholder='Selecione o estado' onChange={(event: any) => { setFlagGetCities(true); setStateSelected(event.target.value); props.setUser({ ...props.state, stateOfTheCountry: event.target.value }) }} />
       </div>
       <div className="col-md-3 col-sm-12">
-        <SelectFieldInput label='Cidade' options={cities}
+        <SelectFieldInput
+          id={'city'}
+          label='Cidade' options={cities}
           required={true}
           value={citySelected || ''}
           placeholder='Selecione a cidade'

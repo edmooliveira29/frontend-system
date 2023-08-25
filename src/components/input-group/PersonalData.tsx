@@ -40,7 +40,9 @@ export const PersonalData = (props: { state: any, setState: any }) => {
       <div className="col-md-3 col-sm-12">
         <div className="row m-0">
           <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px', paddingRight: '2px' }}>
-            <SelectFieldInput value={props.state.gender || ''}
+            <SelectFieldInput
+              id={'gender'}
+              value={props.state.gender || ''}
               required={true}
               label='Gênero'
               options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Feminino' }]}

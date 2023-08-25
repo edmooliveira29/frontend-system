@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { ComponentButtonInherit, ComponentButtonSuccess, TextFieldInput } from '../../../components'
+import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
+import { ModalAdd } from '../../../components/modal/ModalAdd'
 
 
 export const AddProducts: React.FC<{ state?: any }> = (props) => {
@@ -55,15 +56,22 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       </div>
       <div className="row">
         <div className="col-md-6 col-sm-12">
-          <TextFieldInput
-            id={'category'}
-            label="Categoria"
-            placeholder='Digite aqui uma categoria'
-            required={true}
-            value={state.category}
-            typeInput="text"
-            onChange={(value: string) => { setState({ ...state, category: value }) }}
-          />
+          <div className="row">
+            <div className="col-11">
+              <SelectFieldInput
+                id={'category'}
+                placeholder='Selecione uma categoria'
+                value={state.category || ''}
+                label='Categoria' options={[]}
+                required={true}
+                onChange={(event: any) => setState({ ...state, category: event.target.value })}
+              />
+            </div>
+            <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
+              <ModalAdd id='add-new-category' titleOfModel={'categoria'} />
+            </div>
+          </div>
+
         </div>
         <div className="col-md-3 col-sm-12">
           <TextFieldInput

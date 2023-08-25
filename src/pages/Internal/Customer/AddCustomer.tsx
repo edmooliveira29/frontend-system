@@ -20,6 +20,7 @@ export const AddCustomer = () => {
       <h4 id="titles-custumer-add">ADICIONAR CLIENTE</h4>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput
+          id={'typeCustomer'}
           required={true}
           label='Tipo de Cliente'
           value={typeCustomerModal}

@@ -30,7 +30,7 @@
         "@typescript-eslint/no-explicit-any": "off",
         "max-lines": [
             "error",
-            100
+            120
         ],
         "indent": [
             "error",

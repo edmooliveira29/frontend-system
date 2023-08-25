@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router-dom'
 
 export const AddCategory = () => {
   const [state, setState] = useState({
-    type: '',
+    typeCategory: '',
     name: '',
     description: '',
   })
   const navigate = useNavigate()
   const handleSave = async () => {
-    const { type, name } = state
+    const { typeCategory, name } = state
     const translations = { type: 'Tipo', name: 'Nome' }
 
-    if (!validateFields({ type, name }, translations)) {
+    if (!validateFields({ typeCategory, name }, translations)) {
       return false
     }
     alert('Em fase de construção!')
@@ -26,7 +26,7 @@ export const AddCategory = () => {
       <h4 id="titles-custumer-add">ADICIONAR CATEGORIA</h4>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <SelectFieldInput value={state.type || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'buy', label: 'Compra' }, { value: 'sell', label: 'Venda' }]} required={true} onChange={(event: any) => setState({ ...state, type: event.target.value })} />
+          <SelectFieldInput id={'typeCategory'} value={state.typeCategory || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'product', label: 'Produto' }]} required={true} onChange={(event: any) => setState({ ...state, typeCategory: event.target.value })} />
         </div>
         <div className="col-md-4 col-sm-12">
           <TextFieldInput

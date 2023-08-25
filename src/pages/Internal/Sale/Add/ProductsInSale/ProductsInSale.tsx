@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { ModalAdd, SelectFieldInput, TextFieldInput } from '../../../../../components'
+import { SelectFieldInput, TextFieldInput } from '../../../../../components'
 import { Tooltip } from '@mui/material'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { Masks } from '../../../../../utils'
 import { addProductRow, removeProductRow, updateProduct } from './hooks'
+import { ModalAdd } from '../../../../../components/modal/ModalAdd'
 
 export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTotalAmount: any }> = (props) => {
   const [productRows, setProductRows] = useState([{ id: 0 }])
@@ -27,8 +28,9 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
         </div>
         <div className="col-md-4">
           <div className="row">
-            <div className="col-10">
+            <div className="col-11">
               <SelectFieldInput
+                id={`product-${id}`}
                 required={true}
                 label='Produto'
                 value={props.state.products[id]?.[`name_${id}`] || ''}
@@ -37,10 +39,8 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
                 onChange={(event: any) => updateProduct(props.state, props.setState, props.calculateTotalAmount, id, `name_${id}`, event.target.value)}
               />
             </div>
-            <div className="col-2">
-              <div className="col-2 d-flex align-items-center justify-content-center" style={{ top: '35px', position: 'relative' }}>
-                {<ModalAdd titleOfModel={'produto'} id={`add-new-product-${id}`} />}
-              </div>
+            <div className="col-1 d-flex align-items-center justify-content-center" style={{ top: '15px', position: 'relative' }}>
+              <ModalAdd titleOfModel={'produto'} id={`add-new-product-${id}`} />
             </div>
           </div>
 

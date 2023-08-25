@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import '../styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
-import { DataFieldInput, ModalAdd, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
+import { DataFieldInput, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
 import { validateFields } from '../../../../utils'
 import { FooterSale } from './FooterSale'
 import { ProductsInSale } from './ProductsInSale/ProductsInSale'
 import { PaymentConditions } from './PaymentConditions'
+import { ModalAdd } from '../../../../components/modal/ModalAdd'
 
 export const AddSale = () => {
   const [customers, setCustumers] = useState<any>()
@@ -83,8 +84,9 @@ export const AddSale = () => {
         </div>
         <div className="col-md-5 col-sm-12">
           <div className="row">
-            <div className="col-10">
+            <div className="col-11">
               <SelectFieldInput
+                id={'customer'}
                 required={true}
                 label='Cliente'
                 value={state.customer}
@@ -93,8 +95,8 @@ export const AddSale = () => {
                 onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}
               />
             </div>
-            <div className="col-2 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              {<ModalAdd titleOfModel={'cliente'} id={'add-new-customer'} />}
+            <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
+              <ModalAdd titleOfModel={'cliente'} id={'add-new-customer'} />
             </div>
           </div>
         </div>

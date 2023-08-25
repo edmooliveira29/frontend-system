@@ -16,7 +16,7 @@ const MenuProps = {
   }
 }
 
-export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any }> = (props) => {
+export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any, id:string }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
   const [value, setValue] = useState(props.value)
   useEffect(() => {
@@ -28,13 +28,13 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
   if (isValueValid) {
     return (
       <>
-        <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>
+        <label id={`label-input-${props.id}`} className='form-label m-0'>
           {props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}
         </label>
         <Box sx={{ top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 11px' } }}>
           <FormControl fullWidth>
             <Select
-              id={`text-input-${(props.label).toLowerCase()}`}
+              id={`text-input-${props.id}`}
               value={props.value}
               onChange={props.onChange ? props.onChange : (event: SelectChangeEvent) => {
                 setValue(event.target.value)
@@ -48,7 +48,6 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
               <MenuItem selected={true} value='' disabled key=''>Selecione um {props.label}  </MenuItem>
 
               {options.map((option: any, index: number) => (
-
                 < MenuItem key={index} value={option.value} >
                   {option.label}
                 </MenuItem>

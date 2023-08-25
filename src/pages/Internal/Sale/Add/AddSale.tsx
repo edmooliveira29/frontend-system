@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import '../styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
-import { DataFieldInput, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
+import { DataFieldInput, ModalAdd, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
 import { validateFields } from '../../../../utils'
 import { FooterSale } from './FooterSale'
 import { ProductsInSale } from './ProductsInSale/ProductsInSale'
-import { ModalAddProductOrCustomer } from './ModalAddProductOrCustomer'
 import { PaymentConditions } from './PaymentConditions'
 
 export const AddSale = () => {
@@ -95,7 +94,7 @@ export const AddSale = () => {
               />
             </div>
             <div className="col-2 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              {<ModalAddProductOrCustomer titleOfModel={'cliente'} id={'add-new-customer'} />}
+              {<ModalAdd titleOfModel={'cliente'} id={'add-new-customer'} />}
             </div>
           </div>
         </div>

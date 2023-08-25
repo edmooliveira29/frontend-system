@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { ComponentButtonCommon, SelectFieldInput, TextFieldInput } from '../../../components'
+import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { validateFields } from '../../../utils'
+import { useNavigate } from 'react-router-dom'
 
 
 export const AddCategory = () => {
@@ -9,7 +10,7 @@ export const AddCategory = () => {
     name: '',
     description: '',
   })
-
+  const navigate = useNavigate()
   const handleSave = async () => {
     const { type, name } = state
     const translations = { type: 'Tipo', name: 'Nome' }
@@ -23,7 +24,7 @@ export const AddCategory = () => {
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
       <h4 id="titles-custumer-add">ADICIONAR CATEGORIA</h4>
-      <div className="row">
+      <div className="row m-0">
         <div className="col-md-3 col-sm-12">
           <SelectFieldInput value={state.type || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'buy', label: 'Compra' }, { value: 'sell', label: 'Venda' }]} required={true} onChange={(event: any) => setState({ ...state, type: event.target.value })} />
         </div>
@@ -36,7 +37,6 @@ export const AddCategory = () => {
             value={state.name}
             typeInput="text"
             onChange={(value: string) => { setState({ ...state, name: value }) }}
-
           />
         </div>
         <div className="col-md-5 col-sm-12">
@@ -51,8 +51,11 @@ export const AddCategory = () => {
           />
         </div>
       </div>
-      <div className="m-2 d-flex justify-content-center" >
-        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={handleSave} />
+      <div className="row p-3">
+        <div className="d-flex justify-content-between" >
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
+        </div>
       </div>
     </div>
 

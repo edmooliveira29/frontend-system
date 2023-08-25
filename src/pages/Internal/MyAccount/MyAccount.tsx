@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
 
-import { AlertGeneral, ComponentButtonCommon } from '../../../components'
+import { AlertGeneral, ComponentButtonCommon, ComponentButtonInherit, ComponentButtonSuccess } from '../../../components'
 import { PasswordData } from './PasswordData'
 import { UserService } from '../../../services/User'
 import { AddressData, PersonalData } from '../../../components/input-group'
 import { validateFields } from '../../../utils'
+import { useNavigate } from 'react-router-dom'
 export const MyAccount = () => {
   const [state, setState] = useState<any>({})
-
+  const navigate = useNavigate()
   const user = new UserService()
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,14 +74,17 @@ export const MyAccount = () => {
     <div className="row border border-secondary rounded" id="content-container">
       <PersonalData setState={setState} state={state}/>
       <AddressData setUser={setState} state={state} cities={[]} />
-      <div className="m-2 d-flex justify-content-center" >
-        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={handleSave} />
+      <div className="m-2 d-flex justify-content-end" >
+        <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
       </div>
     </div>
     <div className="row border border-secondary rounded" id="content-container">
       <PasswordData setUser={setState} state={state} />
-      <div className="m-2 d-flex justify-content-center">
-        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={handleSave} />
+      <div className="row p-3">
+        <div className="d-flex justify-content-between" >
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
+        </div>
       </div>
 
     </div>

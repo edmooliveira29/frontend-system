@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { SelectFieldInput, TextFieldInput } from '../../../../../components'
+import { ModalAdd, SelectFieldInput, TextFieldInput } from '../../../../../components'
 import { Tooltip } from '@mui/material'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { Masks } from '../../../../../utils'
-import { ModalAddProductOrCustomer } from '../ModalAddProductOrCustomer'
 import { addProductRow, removeProductRow, updateProduct } from './hooks'
 
 export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTotalAmount: any }> = (props) => {
@@ -40,7 +39,7 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
             </div>
             <div className="col-2">
               <div className="col-2 d-flex align-items-center justify-content-center" style={{ top: '35px', position: 'relative' }}>
-                {<ModalAddProductOrCustomer titleOfModel={'produto'} id={`add-new-product-${id}`} />}
+                {<ModalAdd titleOfModel={'produto'} id={`add-new-product-${id}`} />}
               </div>
             </div>
           </div>

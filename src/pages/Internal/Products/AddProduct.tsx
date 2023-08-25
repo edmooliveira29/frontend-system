@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { ComponentButtonCommon, TextFieldInput } from '../../../components'
+import { ComponentButtonInherit, ComponentButtonSuccess, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
+import { useNavigate } from 'react-router-dom'
 
 
 export const AddProducts: React.FC<{ state?: any }> = (props) => {
   const mask = new Masks()
+  const navigate = useNavigate()
   const [state, setState] = useState({
     name: props.state?.name || '',
     description: props.state?.description || '',
@@ -86,10 +88,12 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
           />
         </div>
       </div>
-      <div className="m-2 d-flex justify-content-center" >
-        <ComponentButtonCommon text='Salvar' sizeWidth='280px' onClick={handleSave} />
-      </div>
-    </div>
+      <div className="row p-3">
+        <div className="d-flex justify-content-between" >
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
+        </div>
+      </div>    </div>
 
   </>)
 }

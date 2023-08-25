@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { styled } from '@mui/material/styles'
-import Button, { type ButtonProps } from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
 
-export function ComponentButtonSuccess(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any }) {
+import * as React from 'react'
+import Stack from '@mui/material/Stack'
+import { Button } from '@mui/material'
+
+export function ComponentButtonInherit(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any }) {
   return (
     <Stack spacing={2} onClick={props.onClick} >
       <Button
-        color='success'
+        color='inherit'
         id='button'
         variant='contained'
         style={{ width: props.sizeWidth ?? '300px', height: props.sizeHeight ?? '40px', margin: '0px 10px', boxShadow: '2px -2px 10px gray' }}

@@ -1,10 +1,10 @@
 import { Box, Modal, Tooltip } from '@mui/material'
 import React from 'react'
 import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
-import { AddProducts } from '../../Products'
-import { AddCustomer } from '../../Customer'
+import { AddProducts } from '../../pages/Internal/Products'
+import { AddCustomer } from '../../pages/Internal/Customer'
 
-export const ModalAddProductOrCustomer: React.FC<{ titleOfModel: any, id: string }> = (props) => {
+export const ModalAdd: React.FC<{ titleOfModel: any, id: string }> = (props) => {
   const [openModal, setOpenModal] = React.useState(false)
 
   return (<>

@@ -1,5 +1,18 @@
-export const addProductRow = (productRows: any[], setProductRows: any) => {
+export const addProductRow = (productRows: any[], setProductRows: any, state: any, setState: any) => {
   const newRow = { id: productRows.length }
+  setState((prevState: any) => ({
+    ...prevState,
+    products: [
+      ...prevState.products,
+      {
+        [`product-${newRow.id}`]: '',
+        [`quantity-${newRow.id}`]: '',
+        [`unitValue-${newRow.id}`]: '',
+        [`subTotal-${newRow.id}`]: ''
+      }
+
+    ]
+  }))
   setProductRows([...productRows, newRow])
 }
 
@@ -16,7 +29,7 @@ export const removeProductRow = (state: any, id: any, productRows: any[], setPro
           const fieldName = matches[1]
           const fieldIndex = matches[2]
           if (fieldIndex > id) {
-            updatedProduct[`${fieldName}_${Number(fieldIndex) - 1}`] = product[key]
+            updatedProduct[`${fieldName}-${Number(fieldIndex) - 1}`] = product[key]
           } else {
             updatedProduct[key] = product[key]
           }
@@ -45,10 +58,10 @@ export const updateProduct = (state: any, setState: any, calculateTotalAmount: a
   const updatedProducts = [...state.products]
   updatedProducts[productId] = updatedProduct
   updatedProducts.forEach((product, id) => {
-    const quantityField = `quantity_${id}`
-    const unitValueField = `unitValue_${id}`
+    const quantityField = `quantity-${id}`
+    const unitValueField = `unitValue-${id}`
     const newSubTotal = calculateSubTotal(product[quantityField], product[unitValueField])
-    product[`subTotal_${id}`] = newSubTotal
+    product[`subTotal-${id}`] = newSubTotal
   })
 
   setState({
@@ -68,7 +81,7 @@ export const calculateSubTotal = (quantity: string, unitValue: string) => {
 export const calculateTotalAmount = (state: any) => {
   let totalAmount = 0
   state.products.forEach((_product: any, id: number) => {
-    const subTotalField = `subTotal_${id}`
+    const subTotalField = `subTotal-${id}`
     const subTotalValue = state.products[id]?.[subTotalField]
     if (subTotalValue) {
       totalAmount += parseFloat(subTotalValue.replace(',', '.'))

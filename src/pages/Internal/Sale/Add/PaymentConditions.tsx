@@ -11,6 +11,7 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
         <h6 className="col-sm-12 m-2" id="products-sale-title">CONDIÇÕES DE PAGAMENTO</h6>
         <div className="col-md-3 col-sm-3">
           <MultiSelectFieldInput
+            id={'formOfPayment'}
             value={props.state.formOfPayment || []}
             onChange={(event: any) => {
               props.setState({

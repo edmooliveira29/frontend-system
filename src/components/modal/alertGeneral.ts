@@ -10,6 +10,6 @@ export const AlertGeneral = (props:{ message: string, type: SweetAlertIcon }) =>
     confirmButtonColor: '#8AC381',
     confirmButtonText: 'Ok',
     allowOutsideClick: false,
-    width: 500
+    width: 500,
   })
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
 
-import { AlertGeneral, ComponentButtonCommon, ComponentButtonInherit, ComponentButtonSuccess } from '../../../components'
+import { AlertGeneral, ComponentButtonInherit, ComponentButtonSuccess } from '../../../components'
 import { PasswordData } from './PasswordData'
 import { UserService } from '../../../services/User'
 import { AddressData, PersonalData } from '../../../components/input-group'

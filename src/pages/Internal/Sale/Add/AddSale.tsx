@@ -15,7 +15,7 @@ export const AddSale = () => {
     customer: '',
     dateOfSale: null,
     formOfPayment: [],
-    products: [],
+    products: [{ 'product-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
     saleTotalAmount: 0,
     date: '',
     description: '',
@@ -35,7 +35,6 @@ export const AddSale = () => {
       products: 'Produtos',
       formOfPayment: 'Forma de Pagamento',
     }
-
     if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
       return false
     }
@@ -63,7 +62,7 @@ export const AddSale = () => {
   const calculateTotalAmount = () => {
     let totalAmount = 0
     state.products.forEach((_product: any, id: number) => {
-      const subTotalField = `subTotal_${id}`
+      const subTotalField = `subTotal-${id}`
       const subTotalValue = state.products[id]?.[subTotalField]
       if (subTotalValue) {
         totalAmount += parseFloat(subTotalValue.replace(',', '.'))

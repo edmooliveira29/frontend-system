@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
-import Button, { type ButtonProps } from '@mui/material/Button'
+import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
 export function ComponentButtonSuccess(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any }) {

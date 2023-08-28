@@ -18,16 +18,15 @@ const MenuProps = {
 
 
 
-export const MultiSelectFieldInput = (props: { options: any, label: string, required: boolean, onChange: any , value: any}) => {
+export const MultiSelectFieldInput = (props: { options: any, label: string, required: boolean, onChange: any , value: any, id:string}) => {
 
   return (
     <div>
-      <label id={`label-input-${(props.label).toLowerCase()}`} className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
+      <label id={`label-input-${props.id}`} className='form-label m-0'>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>
 
       <FormControl sx={{ m:0, width: '100%',top: '2px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 10px' } }}>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
+          id={`input-${props.id}`}
           multiple
           value={props.value}
           onChange={props.onChange}

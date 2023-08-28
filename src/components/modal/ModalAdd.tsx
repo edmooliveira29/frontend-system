@@ -7,8 +7,6 @@ import { AddCategory } from '../../pages/Internal/Category'
 
 export const ModalAdd: React.FC<{ titleOfModel: any, id: string }> = (props) => {
   const [openModal, setOpenModal] = React.useState(false)
-  console.log(props.titleOfModel)
-
   const openModalScreen = () => {
     if (props.titleOfModel == 'cliente') {
       return (<><AddCustomer /></>)

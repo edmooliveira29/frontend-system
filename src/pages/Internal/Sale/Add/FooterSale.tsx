@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentButtonCommon, ComponentButtonInherit, ComponentButtonSuccess } from '../../../../components'
+import { ComponentButtonInherit, ComponentButtonSuccess } from '../../../../components'
 import { useNavigate } from 'react-router-dom'
 
 export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handleSave: any }> = (props) => {

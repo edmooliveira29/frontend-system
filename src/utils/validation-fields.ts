@@ -4,29 +4,42 @@ export const validateFields = (inputs: any, translations: any) => {
   const emptyFields = []
   let elementInput, elementInputLabel
   for (const index in inputs) {
-    if (Array.isArray(inputs[index])) {
-      inputs[index].forEach((item: any, i: any) => {
-        Object.keys(item).forEach(key => {
-          if (!item[key]) {
-            const elementInput = document.getElementById(`input-${key}`)
-            const elementInputLabel = document.getElementById(`label-input-${key}`)
-            elementInputLabel?.classList.add('text-danger')
-            elementInput?.classList.add('border')
-            elementInput?.classList.add('border-danger')
-            emptyFields.push({ i: i + 1, key, locale: translations[index] })
-          } else {
-            const elementInput = document.getElementById(`input-${key}`)
-            const elementInputLabel = document.getElementById(`label-input-${key}`)
+    elementInput = document.getElementById(`input-${index}`)
+    elementInputLabel = document.getElementById(`label-input-${index}`)
 
-            elementInputLabel?.classList.remove('text-danger')
-            elementInput?.classList.remove('border')
-            elementInput?.classList.remove('border-danger')
-          }
+    if (Array.isArray(inputs[index])) {
+      console.log(inputs[index][0])
+      if ((inputs[index]).length == 0) {
+        elementInputLabel?.classList.add('text-danger')
+        elementInput?.classList.add('border')
+        elementInput?.classList.add('border-danger')
+        emptyFields.push(translations[index] || index)
+      } else if (typeof (inputs[index])[0] === 'string') {
+        console.log(elementInputLabel)
+        elementInputLabel?.classList.remove('text-danger')
+        elementInput?.classList.remove('border')
+        elementInput?.classList.remove('border-danger')
+      } else {
+
+        inputs[index].forEach((item: any, i: any) => {
+          Object.keys(item).forEach(key => {
+            const elementInput = document.getElementById(`input-${key}`)
+            const elementInputLabel = document.getElementById(`label-input-${key}`)
+            if (!item[key]) {
+              elementInputLabel?.classList.add('text-danger')
+              elementInput?.classList.add('border')
+              elementInput?.classList.add('border-danger')
+              emptyFields.push({ i: i + 1, key, locale: translations[index] })
+            } else {
+              elementInputLabel?.classList.remove('text-danger')
+              elementInput?.classList.remove('border')
+              elementInput?.classList.remove('border-danger')
+            }
+          })
         })
-      })
+      }
     } else {
-      elementInput = document.getElementById(`input-${index}`)
-      elementInputLabel = document.getElementById(`label-input-${index}`)
+
       elementInputLabel?.classList.remove('text-danger')
       elementInput?.classList.remove('border-danger')
       elementInput?.classList.remove('.Mui-focusVisible')
@@ -37,12 +50,12 @@ export const validateFields = (inputs: any, translations: any) => {
         emptyFields.push(translations[index] || index)
       }
       if (index === 'cpf' && inputs[index] && !validationCPF(inputs[index])) {
-        AlertGeneral({ message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' })
-        return false
+        AlertGeneral({ message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
       if (index === 'cnpj' && inputs[index]) {
         inputs[index].length !== 18 && AlertGeneral({ message: `O cnpj digitado '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
+
     }
   }
 
@@ -52,9 +65,10 @@ export const validateFields = (inputs: any, translations: any) => {
     return false
   }
   if (emptyFields.length > 0 && typeof emptyFields[0] == 'object') {
-    AlertGeneral({ message: `O item <strong>${emptyFields[0].i} dos ${emptyFields[0].locale}</strong> contém alguns campos que são é obrigatórios.`, type: 'error' })
+    AlertGeneral({ message: `O item ${emptyFields[0].i} dos <strong>${emptyFields[0].locale}</strong> contém alguns campos que são obrigatórios.`, type: 'error' })
     return false
   }
+  return true
 
 }
 

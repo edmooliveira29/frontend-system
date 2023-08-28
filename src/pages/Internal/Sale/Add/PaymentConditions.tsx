@@ -19,7 +19,7 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
                 formOfPayment: typeof event.target.value === 'string' ? event.value.split(',') : event.target.value
               })
             }}
-            options={['Boleto', 'Cartão de Crédito', 'Transferência Bancária', 'Pix', 'Dinheiro', 'Cheque']} label='Meio de Pagamento' required={true}
+            options={['Boleto', 'Cartão de Crédito', 'Transferência Bancária', 'Pix', 'Dinheiro', 'Cheque']} label='Forma de Pagamento' required={true}
           />
         </div>
         <div className="col-md-3 col-sm-3 d-flex align-items-center justify-content-center">

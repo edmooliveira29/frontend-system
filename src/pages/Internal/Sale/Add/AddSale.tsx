@@ -27,7 +27,6 @@ export const AddSale = () => {
 
   const handleSave = async () => {
     const { dateOfSale, customer, description, products, formOfPayment } = state
-
     const translations = {
       dateOfSale: 'Data da Venda',
       customer: 'Cliente',
@@ -36,6 +35,7 @@ export const AddSale = () => {
       formOfPayment: 'Forma de Pagamento',
     }
     if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
+      console.log(('aqui'))
       return false
     }
     alert('Em fase de construção!')

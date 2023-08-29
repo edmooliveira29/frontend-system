@@ -2,11 +2,11 @@ import React from 'react'
 import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../components/inputs'
 import { Masks } from '../../utils'
 
-export const PersonalData = (props: { state: any, setState: any }) => {
+export const PersonalData = (props: { state: any, setState: any, title?: string }) => {
   const masks = new Masks()
 
   return (<>
-    <h4 id="titles-custumer-add">ADICIONAR PESSOA JURÍDICA</h4>
+    <h4 id="titles-custumer-add">{props.title ? props.title : 'ADICIONAR PESSOA FÍSICA'}</h4>
     <div className="row m-0">
       <div className="col-md-6 col-sm-12">
         <TextFieldInput

@@ -35,7 +35,6 @@ export const AddSale = () => {
       formOfPayment: 'Forma de Pagamento',
     }
     if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
-      console.log(('aqui'))
       return false
     }
     alert('Em fase de construção!')

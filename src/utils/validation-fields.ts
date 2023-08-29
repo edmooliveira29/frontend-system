@@ -8,14 +8,12 @@ export const validateFields = (inputs: any, translations: any) => {
     elementInputLabel = document.getElementById(`label-input-${index}`)
 
     if (Array.isArray(inputs[index])) {
-      console.log(inputs[index][0])
       if ((inputs[index]).length == 0) {
         elementInputLabel?.classList.add('text-danger')
         elementInput?.classList.add('border')
         elementInput?.classList.add('border-danger')
         emptyFields.push(translations[index] || index)
       } else if (typeof (inputs[index])[0] === 'string') {
-        console.log(elementInputLabel)
         elementInputLabel?.classList.remove('text-danger')
         elementInput?.classList.remove('border')
         elementInput?.classList.remove('border-danger')

@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
     "@mui/joy": "^5.0.0-alpha.77",
+    "@mui/lab": "^5.0.0-alpha.141",
     "@mui/material": "^5.12.1",
     "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-date-pickers": "^6.10.2",

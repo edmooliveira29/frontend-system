@@ -16,7 +16,7 @@ export const AddCustomer = () => {
 
   }, [typeCustomerModal])
   return (<>
-    <div className="row border border-secondary rounded" id="content-container">
+    <div className="row border border-secondary rounded" id="div-list-customer">
       <h4 id="titles-custumer-add">ADICIONAR CLIENTE</h4>
       <div className="col-md-3 col-sm-12">
         <SelectFieldInput

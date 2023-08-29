@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
-
+import './styles.sass'
 
 export const AddCategory = () => {
   const [state, setState] = useState({
@@ -22,8 +22,8 @@ export const AddCategory = () => {
   }
 
   return (<>
-    <div className="row border border-secondary rounded" id="content-container">
-      <h4 id="titles-custumer-add">ADICIONAR CATEGORIA</h4>
+    <div className="row border border-secondary rounded" id="div-list-customer">
+      <h4 id="titles-category-add">ADICIONAR CATEGORIA</h4>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
           <SelectFieldInput id={'typeCategory'} value={state.typeCategory || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'product', label: 'Produto' }]} required={true} onChange={(event: any) => setState({ ...state, typeCategory: event.target.value })} />

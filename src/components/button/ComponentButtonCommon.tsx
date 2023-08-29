@@ -14,7 +14,7 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
   },
 }))
 
-export function ComponentButtonCommon(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?:any }) {
+export function ComponentButtonCommon(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any, uploadFile?: boolean }) {
   return (
     <Stack spacing={2} direction='row' onClick={props.onClick} >
       <ColorButton
@@ -26,6 +26,14 @@ export function ComponentButtonCommon(props: { text: string; sizeWidth?: string;
       >
         {props.loading ? <div className="spinner-border text-light" role="status" /> : props.text}
       </ColorButton>
+      {props.uploadFile && <input
+        type="file"
+        accept="image/jpeg, image/png"
+        onChange={() => props.onClick}
+        style={{ display: 'none' }}
+        id="image-upload-input"
+      />}
+
     </Stack>
   )
 }

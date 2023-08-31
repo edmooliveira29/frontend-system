@@ -20,13 +20,11 @@ export const MyAccount = () => {
             <Tab id='tab-1' label="Perfil" value="1" />
             <Tab label="Segurança" value="2" />
             <Tab label="Pagamentos" value="3" />
-            <Tab label="Pagamentos" value="4" />
           </Tabs>
         </Box>
         <TabPanel value="1">{<Profile />}</TabPanel>
         <TabPanel value="2">{<Password />}</TabPanel>
         <TabPanel value="3">{<><span>Tela de Pagamentos em construção</span></>}</TabPanel>
-        <TabPanel value="4">{<><span>Tela de Pagamentos em construção</span></>}</TabPanel>
       </TabContext>
     </Box>
   )

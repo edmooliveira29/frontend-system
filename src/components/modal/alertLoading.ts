@@ -4,7 +4,7 @@ export const alertLoading = (state: string, message?: string) => {
   if (state == 'open') {
     Swal.fire({
       title: 'Aguarde um momento...',
-      html: message ? message  : '',
+      html: message ? message : '',
       showConfirmButton: false,
       didRender: () => {
         Swal.showLoading()

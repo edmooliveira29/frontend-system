@@ -40,15 +40,15 @@ export const ListCustomer = () => {
       </div>
       <div className="col-sm-12 col-md-6 d-flex justify-content-end align-items-center">
         <div className="row">
-          <div className="col-sm-11 col-md-9 p-0">
+          <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um cliente' placement='bottom' arrow>
               <Link to="/clientes/adicionar">
-                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='200px' /></i>
+                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' /></i>
               </Link>
             </Tooltip>
 
           </div>
-          <div className="col-sm-1 col-md-3 d-flex justify-content-center align-items-center p-0">
+          <div className="col-3 d-flex justify-content-center align-items-center">
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CNPJ', 'TELEFONE', 'EMAIL', 'CIDADE', 'UF'], 'Clientes')} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>

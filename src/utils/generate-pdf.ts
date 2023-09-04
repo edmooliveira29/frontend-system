@@ -1,11 +1,11 @@
-import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent} from 'pdfmake/interfaces'
+import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent } from 'pdfmake/interfaces'
 import { alertLoading } from '../components'
 import pdfMake from 'pdfmake/build/pdfmake'
 
 export const generatePDF = (data: any[], header: any[], tableName: string) => {
   alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
   const titleOfReport: ContentText = { text: `Lista de ${tableName}`, style: 'title', bold: true, alignment: 'center', marginBottom: 20 }
-  const headerTable: ContentText[] = [{ text: header[0], bold: true, fontSize: 10 }, { text: header[1], bold: true, fontSize: 10 }, { text: header[2], bold: true, fontSize: 10 }, { text: header[3], bold: true, fontSize: 10 }, { text: header[4], bold: true, fontSize: 10 }, { text: header[5], bold: true, fontSize: 10 }]
+  const headerTable: ContentText[] = header.map(text => ({ text, bold: true, fontSize: 10 }))
   const bodyTable: any[] = []
   for (const item of data) {
     const itemValues: TableOfContent[] = Object.values(item)

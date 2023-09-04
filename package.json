@@ -31,6 +31,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.9",
+    "echarts": "^5.4.3",
     "firebase": "^9.21.0",
     "fs": "0.0.1-security",
     "google-auth-library": "^8.8.0",

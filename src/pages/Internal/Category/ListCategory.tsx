@@ -46,7 +46,7 @@ export const ListCategory = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} />
+      <TableComponent data={data} head={columnHeaders} title='categoria'  translations={columnHeaders}/>
     </div>
   </>
   )

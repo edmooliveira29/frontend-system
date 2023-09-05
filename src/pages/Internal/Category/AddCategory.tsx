@@ -11,9 +11,9 @@ export const AddCategory = () => {
     description: '',
   })
   const navigate = useNavigate()
+  const translations = { type: 'Tipo', name: 'Nome' }
   const handleSave = async () => {
     const { typeCategory, name } = state
-    const translations = { type: 'Tipo', name: 'Nome' }
 
     if (!validateFields({ typeCategory, name }, translations)) {
       return false

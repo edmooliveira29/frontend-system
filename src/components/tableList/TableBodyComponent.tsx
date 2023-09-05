@@ -3,7 +3,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { AlertConfirmationDelete, ModalDetails } from '../modal'
 type Order = 'asc' | 'desc' | undefined
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -36,10 +37,25 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 
 }
 
-
-export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any }> = (props) => {
+export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
   const keys = Object.keys(props.data[0] || {})
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedRowData, setSelectedRowData] = useState(null) // Armazena os dados da linha selecionada
 
+  const handleOpenDetails = (rowData: any) => {
+    setSelectedRowData(rowData) // Armazena os dados da linha selecionada
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setSelectedRowData(null) // Limpa os dados da linha selecionada
+    setIsModalOpen(false)
+  }
+  
+  const handleDeleteItem = (rowData: any) => {
+    setSelectedRowData(rowData)
+    AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
+  }
   return (
     <>
       <TableBody>
@@ -48,7 +64,7 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
             props.page * props.rowsPerPage,
             props.page * props.rowsPerPage + props.rowsPerPage
           )
-          .map((row,index) => (
+          .map((row, index) => (
             <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
               {keys.map((key) => (
                 <TableCell
@@ -63,15 +79,17 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
                 <IconButton color="primary" size="small" onClick={() => console.log('Edit')}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="primary" size="small" onClick={() => console.log('Details')}>
+                <IconButton color="primary" size="small" onClick={() => handleOpenDetails(row)}>
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton color="secondary" size="small" onClick={() => console.log('Delete')}>
+                <IconButton color="secondary" size="small" onClick={() => handleDeleteItem(row)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
           ))}
+        {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
+
       </TableBody>
     </>
   )

@@ -48,7 +48,7 @@ export const ListUserSystem = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} />
+      <TableComponent data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
     </div>
   </>
   )

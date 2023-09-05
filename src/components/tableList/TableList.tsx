@@ -17,6 +17,8 @@ type Order = 'asc' | 'desc'
 interface EnhancedTableProps {
   data: any
   head: any
+  title: string
+  translations: any
 }
 
 function EnhancedTable(props: EnhancedTableProps) {
@@ -68,7 +70,7 @@ function EnhancedTable(props: EnhancedTableProps) {
       <TableContainer>
         <Table sx={{ minWidth: 750 }}>
           <TableHeadComponent columnHeaders={props.head} orderBy={orderBy} setOrderBy={setOrderBy} order={order} setOrder={setOrder} />
-          <TableBodyComponent rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} />
+          <TableBodyComponent rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
         </Table>
       </TableContainer>
       <TablePagination
@@ -88,10 +90,10 @@ function EnhancedTable(props: EnhancedTableProps) {
   )
 }
 
-export const TableComponent: React.FC<{ data: any[], head: any[] }> = (props) => {
+export const TableComponent: React.FC<{ data: any[], head: any[], title: string, translations: any }> = (props) => {
   return (
     <Box sx={{ p: 0 }}>
-      <EnhancedTable data={props.data} head={props.head} />
+      <EnhancedTable data={props.data} head={props.head} title={props.title} translations={props.translations} />
     </Box>
   )
 }

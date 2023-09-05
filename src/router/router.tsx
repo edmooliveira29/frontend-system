@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem } from '../pages/Internal'
+import { Dashboard, ListSale, MyAccount, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 // import jwtDecode, { JwtPayload } from 'jwt-decode'
 // import { AlertGeneral, } from '../components/modal'

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { AiFillDashboard } from 'react-icons/ai'
-import { HiDocumentReport } from 'react-icons/hi'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MdPointOfSale } from 'react-icons/md'

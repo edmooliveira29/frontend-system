@@ -12,6 +12,7 @@ import { NotFound } from '../pages/NotFound'
 import { AddCategory, ListCategory } from '../pages/Internal/Category'
 
 const Internal = (props: { Page: any }) => {
+
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => { setShowMenu(!showMenu) }
 

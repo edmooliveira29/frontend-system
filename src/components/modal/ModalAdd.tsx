@@ -9,13 +9,13 @@ export const ModalAdd: React.FC<{ titleOfModel: any, id: string }> = (props) => 
   const [openModal, setOpenModal] = React.useState(false)
   const openModalScreen = () => {
     if (props.titleOfModel == 'cliente') {
-      return (<><AddCustomer /></>)
+      return (<AddCustomer />)
     }
     if (props.titleOfModel == 'categoria') {
-      return (<><AddCategory /></>)
+      return (<AddCategory />)
     }
     if (props.titleOfModel == 'produto') {
-      return (<><AddProducts /></>)
+      return (<AddProducts />)
     }
   }
   return (<>

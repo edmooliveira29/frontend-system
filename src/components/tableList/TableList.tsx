@@ -9,8 +9,9 @@ import Toolbar from '@mui/material/Toolbar'
 import Paper from '@mui/material/Paper'
 import SearchIcon from '@mui/icons-material/Search'
 import { InputAdornment } from '@mui/material'
-import { TableHeadComponent, TableBodyComponent } from '.'
 import './styles.sass'
+import { TableHeadComponent } from './TableHeadComponent'
+import { TableBodyComponent } from './TableBodyComponent'
 
 type Order = 'asc' | 'desc'
 

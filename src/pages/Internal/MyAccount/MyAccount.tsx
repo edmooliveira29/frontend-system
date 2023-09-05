@@ -2,9 +2,10 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import { TabContext, TabPanel } from '@mui/lab'
-import { Profile, Password } from './'
 import './styles.sass'
 import { Tabs } from '@mui/material'
+import { Profile } from './Profile'
+import { Password } from './Password'
 export const MyAccount = () => {
   const [value, setValue] = React.useState('1')
   return (

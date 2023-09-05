@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --fix ",
     "prepare": "husky install",
-    "tests-e2e": "unset ELECTRON_RUN_AS_NODE && cypress run"
+    "tests-e2e": "unset ELECTRON_RUN_AS_NODE && cypress run",
+    "dependency-violations": "npx depcruise src"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -57,6 +58,7 @@
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "cypress": "^12.17.4",
+    "dependency-cruiser": "^13.1.5",
     "eslint": "^8.37.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",

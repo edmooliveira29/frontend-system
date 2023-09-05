@@ -6,12 +6,6 @@ import './styles.sass'
 import { Link } from 'react-router-dom'
 export const Dashboard = () => {
   const [time, setTime] = useState(new Date().toLocaleTimeString('pt-BR'))
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime(new Date().toLocaleTimeString('pt-BR'))
-    }, 1000) // Atualiza a cada 1 segundo
-    return () => clearInterval(intervalId) // Limpa o intervalo ao desmontar o componente
-  }, [])
 
   useEffect(() => {
     bestSellingProductsChart()

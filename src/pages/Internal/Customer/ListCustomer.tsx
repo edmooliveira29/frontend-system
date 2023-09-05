@@ -6,10 +6,8 @@ import { ComponentButtonCommon } from '../../../components'
 import { Link } from 'react-router-dom'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { Tooltip } from '@mui/material'
-import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+
 import { generatePDF } from '../../../utils'
-pdfMake.vfs = pdfFonts.pdfMake.vfs
 export const ListCustomer = () => {
   function createData(): any {
     return {
@@ -35,15 +33,15 @@ export const ListCustomer = () => {
   return (<>
 
     <div className="row border border-secondary rounded" id="div-list-customer">
-      <div className="col-sm-12 col-md-6 p-0 border-secondary">
+      <div className="col-sm-12 col-md-9 p-0 border-secondary">
         <h4 className="col-sm-12" id="title-natural-person">Clientes</h4>
       </div>
-      <div className="col-sm-12 col-md-6 d-flex justify-content-end align-items-center">
+      <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2">
         <div className="row">
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um cliente' placement='bottom' arrow>
               <Link to="/clientes/adicionar">
-                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px'id='add-customer' /></i>
+                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-customer' /></i>
               </Link>
             </Tooltip>
 

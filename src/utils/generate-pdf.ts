@@ -1,6 +1,8 @@
 import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent } from 'pdfmake/interfaces'
 import { alertLoading } from '../components'
 import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 export const generatePDF = (data: any[], header: any[], tableName: string) => {
   alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
@@ -14,13 +16,15 @@ export const generatePDF = (data: any[], header: any[], tableName: string) => {
 
   const tableData: ContentTable = {
     table: {
+      widths: header.map(() => ('auto')),
       headerRows: 1,
       body: [
         headerTable,
         ...bodyTable,
-      ]
+      ],
     },
     style: 'table',
+    alignment: 'center',
     layout: {
       hLineColor: '#222222',
       vLineColor: '#222222',

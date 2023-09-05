@@ -45,7 +45,7 @@ function EnhancedTable(props: EnhancedTableProps) {
 
   const filteredData = data.filter((row: any) =>
     Object.values(row)
-      .slice(0, 2) // Filtra apenas as duas primeiras colunas para pesquisa
+      .slice(0, 3) 
       .some((value: any) => value.toString().toLowerCase().includes(searchValue.toLowerCase()))
   )
 

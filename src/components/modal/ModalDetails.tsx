@@ -6,7 +6,6 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
   const { data, title, onClose } = props // Desestruture os props para obter os dados e o título
   const [openModal, setOpenModal] = React.useState(true)
   const keys = Object.keys(data)
-  console.log(props.translations)
   return (
     <>
       <Modal

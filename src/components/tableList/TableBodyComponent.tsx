@@ -54,7 +54,12 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
   
   const handleDeleteItem = (rowData: any) => {
     setSelectedRowData(rowData)
-    AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
+    if(props.title == 'venda'){
+      AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[0]]}`)
+    }else{
+      AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
+
+    }
   }
   return (
     <>
@@ -76,13 +81,13 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
                 </TableCell>
               ))}
               <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="right">
-                <IconButton color="primary" size="small" onClick={() => console.log('Edit')}>
+                <IconButton color="default" size="small" onClick={() => console.log('Edit')}>
                   <EditIcon />
                 </IconButton>
-                <IconButton color="primary" size="small" onClick={() => handleOpenDetails(row)}>
+                <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton color="secondary" size="small" onClick={() => handleDeleteItem(row)}>
+                <IconButton color="error" size="small" onClick={() => handleDeleteItem(row)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>

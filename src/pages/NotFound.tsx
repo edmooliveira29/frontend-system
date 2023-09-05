@@ -15,7 +15,7 @@ export const NotFound = () => (
             O link que você digitou não existe. Por valor verifique-o.
           </p>
           <Link to='/' className='d-flex align-items-center justify-content-center'>
-            <ComponentButtonCommon text='Ir para a página inicial' />
+            <ComponentButtonCommon text='Ir para a página inicial' id='404'/>
           </Link>
         </div>
       </div>

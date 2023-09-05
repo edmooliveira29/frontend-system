@@ -33,7 +33,7 @@ export const Singin = () => {
         <div id='div-login' className='col-md-12'>
           <div id='div-login-form'>
             <h3 id='h3-enter-register'>Registrar</h3>
-            <div id='input-email' className='m-2'>
+            <div id='input-name-singin' className='m-2'>
               <TextFieldInput
                 id={'name'}
                 required={true}
@@ -45,7 +45,7 @@ export const Singin = () => {
                 }}
               />
             </div>
-            <div id='input-email' className='m-2'>
+            <div id='input-email-singin' className='m-2'>
               <TextFieldInput
                 id={'email'}
                 required={true}
@@ -57,7 +57,7 @@ export const Singin = () => {
                 }}
               />
             </div>
-            <div id='input-password' className='m-2'>
+            <div id='input-password-singin' className='m-2'>
               <TextFieldInput
                 id={'password'}
                 required={true}
@@ -68,7 +68,7 @@ export const Singin = () => {
                 }}
               />
             </div>
-            <div id='input-password' className='m-2'>
+            <div id='input-password-confirmation-singin' className='m-2'>
               <TextFieldInput
                 id={'passwordConfirmation'}
                 required={true} label='Confirme sua senha' typeInput='password'
@@ -79,7 +79,7 @@ export const Singin = () => {
               />
             </div>
             <div className='d-grid' id='button-login' onClick={handleCreateUserHook}>
-              <ComponentButtonCommon text='Registrar' loading={loading} />
+              <ComponentButtonCommon text='Registrar' loading={loading} id='register-singin'/>
             </div>
             <div id='error-response'>
               <span >{errorResponse ?? ''}</span>

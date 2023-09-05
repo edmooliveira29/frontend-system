@@ -37,8 +37,8 @@ export const AddCustomer = () => {
       {typeCustomerModal &&
         <div className="row p-3">
           <div className="d-flex justify-content-between" >
-            <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
-            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={() => handleSaveCustomer(typeCustomerModal, state)} />
+            <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-customer'/>
+            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={() => handleSaveCustomer(typeCustomerModal, state)} id='save-customer' />
           </div>
         </div>}
     </div>

@@ -85,11 +85,11 @@ export const Profile = () => {
         <div className="card-body p-5 text-center border rounded">
           <div className="card-title fs-5 m-1">Imagem do perfil</div>
           <div className="text-center">
-            <img className="img-fluid rounded-circle m-3" src={pictureProfile || "https://cdn-icons-png.flaticon.com/512/1144/1144760.png"} style={{ width: '200px', height: '200px' }} />
+            <img className="img-fluid rounded-circle m-3" src={pictureProfile || "https://cdn-icons-png.flaticon.com/512/1144/1144760.png"} style={{ width: '200px', height: '200px' }}  alt='Imagem de perfil' />
             <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 5MB</div>
             <div className='d-flex justify-content-center m-2' >
               <div className="mb-3">
-                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChange} />
+                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChange} id='upload-image-profile'/>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export const Profile = () => {
         <PersonalData setState={setState} state={state} title={'DADOS'} />
         <AddressData setUser={setState} state={state} cities={[]} />
         <div className="m-2 d-flex justify-content-end" >
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile'/>
         </div>
       </div>
 

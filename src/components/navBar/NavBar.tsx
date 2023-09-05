@@ -12,7 +12,7 @@ export const NavBar = () => (
       <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
         <div className='container-fluid'>
           <Link to='/' >
-            <img src={icon} width="60" height="60" className="rounded-circle" />
+            <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
           </Link>
           <button className='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon'></span>
@@ -37,7 +37,7 @@ export const NavBar = () => (
             </ul>
             <form className='d-flex align-items-center'>
               <input id="input-search" className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
-              <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' />
+              <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' sizeWidth='180px' id='search'/>
               <Link to='/entrar' title='Entrar' id="link-login" >
                 <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
               </Link>

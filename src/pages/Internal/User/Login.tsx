@@ -32,7 +32,7 @@ export const Login = () => {
       <div id='div-login'>
         <div id='div-login-form'>
           <h3 id='h3-enter-register'>Entrar</h3>
-          <div className='m-3' id='input-email'>
+          <div className='m-3' id='input-email-login'>
             <TextFieldInput
               id={'email'}
               required={true} label='E-mail'
@@ -41,7 +41,7 @@ export const Login = () => {
               onChange={(value: string) => { setState({ ...state, email: value }) }}
             />
           </div>
-          <div className='m-3' id='input-password'>
+          <div className='m-3' id='input-password-login'>
             <TextFieldInput
               id={'password'}
               required={true}
@@ -56,7 +56,7 @@ export const Login = () => {
               onChange={() => { setState({ ...state, remember: !state.remember }) }} />
           </div>
           <div className='d-flex justify-content-evenly' id='button-login' onClick={handleLoginHook}>
-            <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} />
+            <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} id='enter'/>
           </div>
           <div id='error-response'>
             <span >{errorResponse ?? ''}</span>
@@ -70,7 +70,7 @@ export const Login = () => {
             <span>OU</span>
           </div>
           <Link to='/registrar' className='d-flex justify-content-evenly' id='button-login'>
-            <ComponentButtonCommon text='Registrar' sizeWidth='310px' />
+            <ComponentButtonCommon text='Registrar' sizeWidth='310px' id='register' />
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >

@@ -56,7 +56,9 @@ export const ContactUs = () => {
                         <div className='form-group'><TextAreaInput /></div>
                       </div>
                       <div className='col-md-12 m-2'>
-                        <div className='form-group'><ComponentButtonCommon text='Enviar' sizeWidth='100%' /></div>
+                        <div className='form-group'>
+                          <ComponentButtonCommon text='Enviar' sizeWidth='100%' id='contact' />
+                        </div>
                       </div>
                     </div>
                   </form>

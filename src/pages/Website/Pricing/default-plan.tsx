@@ -22,7 +22,7 @@ export const DefaultPlan = () => {
           </div>
           <Link to='/registrar'>
             <div className="card-footer text-center">
-              <ComponentButtonCommon text='Comprar' />
+              <ComponentButtonCommon text='Comprar' id='default-plan'/>
             </div>
           </Link>
         </div>

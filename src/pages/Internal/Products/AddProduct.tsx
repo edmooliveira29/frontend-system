@@ -98,8 +98,8 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} />
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-product'/>
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product'/>
         </div>
       </div>    </div>
 

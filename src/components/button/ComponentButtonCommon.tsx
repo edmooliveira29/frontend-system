@@ -14,11 +14,11 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
   },
 }))
 
-export function ComponentButtonCommon(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any, uploadFile?: boolean }) {
+export function ComponentButtonCommon(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any, uploadFile?: boolean, id:string }) {
   return (
     <Stack spacing={2} direction='row' onClick={props.onClick} >
       <ColorButton
-        id='button'
+        id={`button-commom-${props.id}`}
         variant='contained'
         style={{ width: props.sizeWidth ?? '300px', height: props.sizeHeight ?? '40px', margin: '0px 10px' }}
         type='submit'

@@ -11,7 +11,7 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
   const symbolR$ = ['preço', 'subtotal', 'unitário', 'r$']
   return (
     <>
-      <label id={`label-input-${props.id}`}
+      <label htmlFor={`input-${props.id}`} id={`label-input-${props.id}`}
         data-bs-placement="top" className='form-label m-1'>{props.label}{props.required ? <em style={{ color: 'red' }}> *</em> : <em style={{ color: 'red' }}>  </em>}</label>
       <div className="input-group input-wrapper" >
         {symbolR$.some(symbol => props.label.toLowerCase().includes(symbol)) && <span className="input-group-text">R$</span>}

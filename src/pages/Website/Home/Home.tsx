@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
 import { OurServices } from './OurServices/Our-Services'
-import { AlertGeneral } from '../../../components/modal'
 export const Home = () => {
-  useEffect(() => {
-    AlertGeneral({ message: 'Este site está em fase de desenvolvimento. <strong style="font-weight: bold; color: red">Não</strong> nos responsabilizamos pelos dados aqui inseridos.', type: 'warning' })
-  })
   return (
     <>
       <div className='page-header-ui-content' id='image-primary-carroussel'>
@@ -18,7 +14,7 @@ export const Home = () => {
               <h5 className='page-header-ui-text mb-5' id='text-carroussel'>Transformamos ideias em soluções digitais. Agência de software para impulsionar seu negócio</h5>
               <div className='d-flex flex-column flex-sm-row'>
                 <Link to='/registrar'>
-                  <ComponentButtonCommon text='Cadastre-se agora' sizeWidth='300px' />
+                  <ComponentButtonCommon text='Cadastre-se agora' sizeWidth='300px' id='home' />
                 </Link>
                 <Link to='/caracteristica' id='link-more'>Saiba mais</Link>
               </div>

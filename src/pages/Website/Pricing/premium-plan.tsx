@@ -30,7 +30,7 @@ export const PremiumPlan = () => {
           </div>
           <Link to='/registrar'>
             <div className="card-footer text-center">
-              <ComponentButtonCommon text='Comprar' />
+              <ComponentButtonCommon text='Comprar' id='premium-plan' />
             </div>
           </Link>
         </div>

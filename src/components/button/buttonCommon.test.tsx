@@ -9,7 +9,7 @@ describe('ComponentButtonCommon', () => {
 
   test('Should renders button with text', () => {
     const buttonText = 'Click me!';
-    render(<ComponentButtonCommon text={buttonText} />);
+    render(<ComponentButtonCommon text={buttonText} id=''/>);
     const buttonElement = screen.getByText(buttonText);
     expect(buttonElement).toMatchSnapshot();
   });
@@ -17,7 +17,7 @@ describe('ComponentButtonCommon', () => {
   test('Should renders button with custom width', () => {
     const buttonText = 'Click me!';
     const buttonWidth = '200px';
-    render(<ComponentButtonCommon text={buttonText} sizeWidth={buttonWidth} />);
+    render(<ComponentButtonCommon text={buttonText} sizeWidth={buttonWidth} id=''/>);
     const buttonElement = screen.getByText(buttonText);
     expect(buttonElement).toMatchSnapshot();
     expect(buttonElement).toHaveStyle(`width: ${buttonWidth}`);
@@ -25,7 +25,7 @@ describe('ComponentButtonCommon', () => {
 
   test('Should applies styles to button on hover', () => {
     const buttonText = 'Click me!';
-    render(<ComponentButtonCommon text={buttonText} />);
+    render(<ComponentButtonCommon text={buttonText} id=''/>);
     const buttonElement = screen.getByText(buttonText);
     buttonElement.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
     expect(buttonElement).toHaveStyle('opacity: 0.8');

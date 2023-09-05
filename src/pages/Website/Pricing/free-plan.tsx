@@ -22,7 +22,7 @@ export const FreePlan = () => {
           </div>
           <Link to='/registrar'>
             <div className="card-footer text-center">
-              <ComponentButtonCommon text='CADASTRAR' />
+              <ComponentButtonCommon text='CADASTRAR' id='free-plan'/>
             </div>
           </Link>
         </div>

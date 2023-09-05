@@ -20,8 +20,8 @@ export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handl
         </div>
         <div className="row p-3">
           <div className="d-flex justify-content-between" >
-            <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} />
-            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} />
+            <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-footer' />
+            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} id='save-footer'/>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ const VisuallyHiddenInput = styled('input')`
   width: 1px;
 `;
 
-export const  ComponentButtonInputFile: React.FC<{title:string, onFileChange: any}>= (props)=> {
+export const  ComponentButtonInputFile: React.FC<{title:string, onFileChange: any, id:string}>= (props)=> {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -26,6 +26,7 @@ export const  ComponentButtonInputFile: React.FC<{title:string, onFileChange: an
   return (
     <Button
       component="label"
+      id={`button-input-file-${props.id}`}
       role={undefined}
       tabIndex={-1}
       variant="outlined"

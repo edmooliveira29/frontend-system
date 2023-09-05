@@ -43,7 +43,7 @@ export const ListCustomer = () => {
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um cliente' placement='bottom' arrow>
               <Link to="/clientes/adicionar">
-                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' /></i>
+                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px'id='add-customer' /></i>
               </Link>
             </Tooltip>
 

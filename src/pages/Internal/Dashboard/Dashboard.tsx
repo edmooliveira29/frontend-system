@@ -1,10 +1,18 @@
 /* eslint-disable max-lines */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as echarts from 'echarts'
 import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
 import { Link } from 'react-router-dom'
 export const Dashboard = () => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString('pt-BR'))
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('pt-BR'))
+    }, 1000) // Atualiza a cada 1 segundo
+    return () => clearInterval(intervalId) // Limpa o intervalo ao desmontar o componente
+  }, [])
+
   useEffect(() => {
     bestSellingProductsChart()
     last6MonthsSales()
@@ -165,9 +173,10 @@ export const Dashboard = () => {
             </div>
           </div>
           <div className="col-md-3 col-sm-12">
-            <div className="card border bg-light rounded shadow-sm" style={{ padding: '30px 10px' }}>
-              <div className="card-body">
-                <h4>Card .... </h4>
+            <div className="card border bg-light rounded shadow-sm" style={{ padding: '7px 10px' }}>
+              <div className="card-body d-flex flex-column align-items-center">
+                <h1 style={{ textShadow: '1px 1px 3px black' }}>{time} </h1>
+                <h6>{new Date().toLocaleDateString('pt-BR')} </h6>
               </div>
             </div>
           </div>

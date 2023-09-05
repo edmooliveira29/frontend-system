@@ -44,7 +44,6 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <hr />
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
-            <Link className='link-item-menu' to='/relatorios' onClick={props.showSiderbar}> <HiDocumentReport size={30} style={{ margin: '0 10px' }} />Relatórios </Link><hr />
             <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
             <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
@@ -79,6 +78,11 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
             <li>
               <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
                 Minha conta
+              </Link>
+            </li>
+            <li>
+              <Link id='user-register-dropdown' to='/usuario' className="dropdown-item" >
+                Registrar usuário
               </Link>
             </li>
             <li><hr className="dropdown-divider" /></li>

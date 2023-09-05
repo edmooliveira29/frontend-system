@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer } from '../pages/Internal'
+import { Dashboard, ListSale, MyAccount, Report, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 // import jwtDecode, { JwtPayload } from 'jwt-decode'
 // import { AlertGeneral, } from '../components/modal'
@@ -65,7 +65,6 @@ export const router = (
       <Route path="/sobre" element={<AboutPage />} />
       <Route path="/contato" element={<ContactUs />} />
       <Route path="/dashboard" element={<Internal Page={Dashboard} />} />
-      <Route path="/relatorios" element={<Internal Page={Report} />} />
       <Route path="/clientes" element={<Internal Page={ListCustomer} />} />
       <Route path="/categorias" element={<Internal Page={ListCategory} />} />
       <Route path="/categorias/adicionar" element={<Internal Page={AddCategory} />} />
@@ -73,6 +72,8 @@ export const router = (
       <Route path="/produtos" element={<Internal Page={ListProduct} />} />
       <Route path="/produtos/adicionar" element={<Internal Page={AddProducts} />} />
       <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />
+      <Route path="/usuario" element={<Internal Page={ListUserSystem} />} />
+      <Route path="/usuario/adicionar" element={<Internal Page={AddUserSystem} />} />
       <Route path="/vendas" element={<Internal Page={ListSale} />} />
       <Route path="/vendas/adicionar" element={<Internal Page={AddSale} />} />
     </Routes>

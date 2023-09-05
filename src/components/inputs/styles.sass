@@ -2,6 +2,9 @@
     color: #AAAAAA
     font-size: 12px
 
+.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating)
+    border-radius: 5px
+
 .select-field-input
     height: 40px
 
@@ -34,11 +37,16 @@ input::placeholder-show
 
 .form-control
     background-color: #FEFEFE
+    border-radius: 5px
+    
     &:hover, &:active, &:focus
         border: 1px solid #1a1a1a
-        border-radius: 5px
         box-shadow: none
 
+.input-group>.form-control:focus, .input-group>.form-floating:focus-within, .input-group>.form-select:focus
+    z-index: 0
+    form-control text-field-input
+        
 #i-icon
     position: absolute
     right: 10px

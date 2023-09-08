@@ -1,8 +1,8 @@
-// import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent } from 'pdfmake/interfaces'
+import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent } from 'pdfmake/interfaces'
 import { alertLoading } from '../components'
-// import pdfMake from 'pdfmake/build/pdfmake'
-// import pdfFonts from 'pdfmake/build/vfs_fonts'
-// pdfMake.vfs = pdfFonts.pdfMake.vfs
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 export const generatePDF = (data: any[], header: any[], tableName: string) => {
   alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')

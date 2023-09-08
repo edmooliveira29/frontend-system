@@ -40,15 +40,15 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
   const keys = Object.keys(props.data[0] || {})
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedRowData, setSelectedRowData] = useState(null) // Armazena os dados da linha selecionada
+  const [selectedRowData, setSelectedRowData] = useState(null) 
 
   const handleOpenDetails = (rowData: any) => {
-    setSelectedRowData(rowData) // Armazena os dados da linha selecionada
+    setSelectedRowData(rowData) 
     setIsModalOpen(true)
   }
 
   const handleCloseModal = () => {
-    setSelectedRowData(null) // Limpa os dados da linha selecionada
+    setSelectedRowData(null) 
     setIsModalOpen(false)
   }
   

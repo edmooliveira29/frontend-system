@@ -52,12 +52,6 @@ export const AddSale = () => {
     setCustumers(peopleList)
   }, [])
 
-  // useEffect(() => {
-
-  //   console.log(state)
-
-  // }, [state])
-
   const calculateTotalAmount = () => {
     let totalAmount = 0
     state.products.forEach((_product: any, id: number) => {

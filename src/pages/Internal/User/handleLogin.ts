@@ -2,15 +2,14 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
   setLoading(true)
   setErrorResponse('')
   try {
-    // const user = await userService.login({
-    //   email: state.email,
-    //   password: state.password,
-    //   remember: state.remember
-    // })
-
-    localStorage.setItem('sessionToken',' user.data.sessionToken')
-    localStorage.setItem('username', 'user.data.name')
-    localStorage.setItem('idUser', 'user.data._id')
+    const user = await userService.login({
+      email: state.email,
+      password: state.password,
+      remember: state.remember
+    })
+    localStorage.setItem('sessionToken',user.data.sessionToken)
+    localStorage.setItem('username', user.data.name)
+    localStorage.setItem('idUser', user.data.id)
 
     navigate('/dashboard')
   } catch (error: any) {

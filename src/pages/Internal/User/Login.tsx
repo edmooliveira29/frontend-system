@@ -6,6 +6,7 @@ import { UserService } from '../../../services/User/user-http'
 import { LoginGoogle } from '../../../services/User/user-google'
 import { handleLoginUser } from './handleLogin'
 import './stylesUser.sass'
+import { validateFields } from '../../../utils'
 
 export const Login = () => {
   const [state, setState] = React.useState({
@@ -20,6 +21,13 @@ export const Login = () => {
   const userService = new UserService()
 
   const handleLoginHook = async () => {
+    const translations = { email: 'Email', password: 'Senha' }
+    const { email, password } = state
+
+    if (!validateFields({ email, password }, translations)) {
+      return false
+    }
+
     handleLoginUser(setLoading, setErrorResponse, state, userService, navigate)
   }
 
@@ -56,7 +64,7 @@ export const Login = () => {
               onChange={() => { setState({ ...state, remember: !state.remember }) }} />
           </div>
           <div className='d-flex justify-content-evenly' id='button-login' onClick={handleLoginHook}>
-            <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} id='enter'/>
+            <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} id='enter' />
           </div>
           <div id='error-response'>
             <span >{errorResponse ?? ''}</span>

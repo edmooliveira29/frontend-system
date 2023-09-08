@@ -6,6 +6,7 @@ import { UserService, LoginGoogle } from '../../../services/User'
 import { useNavigate } from 'react-router-dom'
 import { handleCreateUser } from './handleLogin'
 import './stylesUser.sass'
+import { validateFields } from '../../../utils'
 
 export const Singin = () => {
   const navigate = useNavigate()
@@ -19,6 +20,12 @@ export const Singin = () => {
   const [errorResponse, setErrorResponse] = useState('')
 
   const handleCreateUserHook = async () => {
+    const translations = {name: 'Nome', email: 'Email', password: 'Senha', passwordConfirmation: 'Confirme sua senha'}
+    const { name, email, password, passwordConfirmation } = state
+
+    if (!validateFields({ name, email, password, passwordConfirmation }, translations)) {
+      return false
+    }
     handleCreateUser(setLoading, UserService, state, navigate, setErrorResponse)
   }
 

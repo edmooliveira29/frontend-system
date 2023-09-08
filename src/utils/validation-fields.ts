@@ -47,6 +47,9 @@ export const validateFields = (inputs: any, translations: any) => {
         elementInput?.classList.add('border-danger')
         emptyFields.push(translations[index] || index)
       }
+      if (index === 'email' && inputs[index] && !validationEmail(inputs[index])) {
+        AlertGeneral({ message: `O email '${inputs[index]}' é inválido!`, type: 'error' }); return false
+      }
       if (index === 'cpf' && inputs[index] && !validationCPF(inputs[index])) {
         AlertGeneral({ message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
@@ -92,4 +95,9 @@ export const validationCPF = (cpf: string): boolean => {
   if ((rest == 10) || (rest == 11)) rest = 0
   if (rest != parseInt(cpf.substring(10, 11))) return false
   return true
+}
+
+export const validationEmail = (email: string): boolean => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(String(email).toLowerCase())
 }

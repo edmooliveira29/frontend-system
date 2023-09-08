@@ -35,7 +35,7 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     })
     localStorage.setItem('sessionToken', user.data.sessionToken)
     localStorage.setItem('username', user.data.name)
-    localStorage.setItem('idUser', user.data._id)
+    localStorage.setItem('idUser', user.data.id)
 
     navigate('/dashboard')
   } catch (error: any) {

@@ -17,7 +17,7 @@ export const Profile = () => {
         const userResponse = await user.get(localStorage.getItem('idUser') as string)
         setState(
           {
-            id: userResponse.data._id,
+            _id:userResponse.data._id,
             address: userResponse.data.address || '',
             actualyPassword: userResponse.data.actualyPassword || '',
             birthday: userResponse.data.birthday || null,

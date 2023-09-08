@@ -6,7 +6,7 @@ import { DesktopDatePicker, ptBR } from '@mui/x-date-pickers'
 import "dayjs/locale/pt-br"
 import dayjs from 'dayjs'
 
-export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any, id: string }) => {
+export const DataFieldInput = (props: { label: string, required?: boolean, value?: string, onChange?: any, id:string }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='pt-br' localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <label className='form-label m-0' id={`label-input-${props.id}`}>{props.label}{props.required ? <a style={{ color: 'red' }}> *</a> : ''}</label>

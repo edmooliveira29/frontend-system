@@ -20,10 +20,10 @@ export const ListUserSystem = () => {
   const data: any[] = Array.from({ length: 3 }, () => createData())
 
   const columnHeaders = [
-    { id: 'role', label: 'PERMISSÃO', sortable: true },
-    { id: 'name', label: 'NOME', sortable: true },
-    { id: 'username', label: 'USUÁRIO', sortable: true },
-    { id: 'email', label: 'Email', sortable: true }
+    { _id:'role', label: 'PERMISSÃO', sortable: true },
+    { _id:'name', label: 'NOME', sortable: true },
+    { _id:'username', label: 'USUÁRIO', sortable: true },
+    { _id:'email', label: 'Email', sortable: true }
   ]
 
   return (<>

@@ -21,11 +21,11 @@ export const ListSale = () => {
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { id: 'number', label: 'Número', sortable: true },
-    { id: 'date', label: 'Data', sortable: true },
-    { id: 'customer', label: 'Cliente', sortable: true },
-    { id: 'price', label: 'Preço', sortable: true },
-    { id: 'status', label: 'Status', sortable: true },
+    { _id:'number', label: 'Número', sortable: true },
+    { _id:'date', label: 'Data', sortable: true },
+    { _id:'customer', label: 'Cliente', sortable: true },
+    { _id:'price', label: 'Preço', sortable: true },
+    { _id:'status', label: 'Status', sortable: true },
   ]
 
   return (<>

@@ -19,9 +19,9 @@ export const ListCategory = () => {
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { id: 'type', label: 'TIPO', sortable: true },
-    { id: 'name', label: 'NOME', sortable: true },
-    { id: 'description', label: 'Descrição', sortable: true }
+    { _id:'type', label: 'TIPO', sortable: true },
+    { _id:'name', label: 'NOME', sortable: true },
+    { _id:'description', label: 'Descrição', sortable: true }
   ]
 
   return (<>

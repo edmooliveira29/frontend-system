@@ -7,12 +7,12 @@ import { addProductRow, removeProductRow, updateProduct } from './hooks'
 import { ModalAdd } from '../../../../../components/modal/ModalAdd'
 
 export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTotalAmount: any }> = (props) => {
-  const [productRows, setProductRows] = useState([{ id: 0 }])
+  const [productRows, setProductRows] = useState([{ _id:0 }])
   const masks = new Masks()
 
   return <>
     <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS</h6>
-    {productRows.map((row, id: number) => (
+    {productRows.map((row, id:number) => (
       <div key={`list-${id}`} className="row px-3 m-0">
         <div className="col-md-1 ">
           <TextFieldInput
@@ -20,7 +20,7 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
             placeholder=''
             required={false}
             disabled={true}
-            value={String(row.id + 1)}
+            value={String(row._id + 1)}
             typeInput="number"
             id={`item-${id}`}
 
@@ -87,7 +87,7 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
             <i id={`add-product-${id}`} >  <AiOutlinePlusCircle size={25} color='black' style={{ cursor: 'pointer', margin: '20px 5px 0px 5px' }} onClick={() => addProductRow(productRows, setProductRows, props.state, props.setState)} /></i>
           </Tooltip>
           <Tooltip title="Remover um produto" placement='top' arrow style={{ right: '50px' }}>
-            <i id={`remove-product-${id}`}> <AiOutlineMinusCircle size={25} color='black' style={{ cursor: 'pointer', margin: '20px 5px 0px 5px' }} onClick={() => removeProductRow(props.state, row.id, productRows, setProductRows, props.setState)} /></i>
+            <i id={`remove-product-${id}`}> <AiOutlineMinusCircle size={25} color='black' style={{ cursor: 'pointer', margin: '20px 5px 0px 5px' }} onClick={() => removeProductRow(props.state, row._id, productRows, setProductRows, props.setState)} /></i>
           </Tooltip>
         </div>
         <div className="text-center mx-1 my-0"><hr /></div>

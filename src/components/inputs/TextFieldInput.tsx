@@ -2,7 +2,7 @@ import * as React from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import './styles.sass'
 
-export function TextFieldInput(props: { label: string; typeInput: string; onChange?: any; value: string; required: boolean, placeholder?: string, disabled?: boolean, id: string }) {
+export function TextFieldInput(props: { label: string; typeInput: string; onChange?: any; value: string; required: boolean, placeholder?: string, disabled?: boolean, id:string }) {
   const [HIDEPASSWORD, setHidePassword] = React.useState(true)
   const [typeInput, setTypeInput] = React.useState(props.typeInput)
 

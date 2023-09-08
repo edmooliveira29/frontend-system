@@ -15,14 +15,14 @@ export const TableHeadComponent: FC<{ columnHeaders: any, orderBy: any, setOrder
         <TableRow >
           {props.columnHeaders.map((column: any) => (
             <TableCell
-              key={column.id}
-              align={column.id === 'name' ? 'left' : 'right'}
-              sortDirection={props.orderBy === column.id ? props.order : false}
+              key={column._id}
+              align={column._id === 'name' ? 'left' : 'right'}
+              sortDirection={props.orderBy === column._id ? props.order : false}
             >
               <TableSortLabel
-                active={props.orderBy === column.id}
-                direction={props.orderBy === column.id ? props.order : 'asc'}
-                onClick={() => handleRequestSort(column.id)}
+                active={props.orderBy === column._id}
+                direction={props.orderBy === column._id ? props.order : 'asc'}
+                onClick={() => handleRequestSort(column._id)}
                 sx={{ fontWeight: 'bold' }}
               >
                 {(column.label).toUpperCase()}

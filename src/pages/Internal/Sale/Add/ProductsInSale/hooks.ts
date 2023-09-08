@@ -1,14 +1,14 @@
 export const addProductRow = (productRows: any[], setProductRows: any, state: any, setState: any) => {
-  const newRow = { id: productRows.length }
+  const newRow = { _id:productRows.length }
   setState((prevState: any) => ({
     ...prevState,
     products: [
       ...prevState.products,
       {
-        [`product-${newRow.id}`]: '',
-        [`quantity-${newRow.id}`]: '',
-        [`unitValue-${newRow.id}`]: '',
-        [`subTotal-${newRow.id}`]: ''
+        [`product-${newRow._id}`]: '',
+        [`quantity-${newRow._id}`]: '',
+        [`unitValue-${newRow._id}`]: '',
+        [`subTotal-${newRow._id}`]: ''
       }
 
     ]
@@ -16,9 +16,9 @@ export const addProductRow = (productRows: any[], setProductRows: any, state: an
   setProductRows([...productRows, newRow])
 }
 
-export const removeProductRow = (state: any, id: any, productRows: any[], setProductRows: any, setState: any) => {
+export const removeProductRow = (state: any, id:any, productRows: any[], setProductRows: any, setState: any) => {
   if (productRows.length > 1) {
-    const updatedProductRows = productRows.filter((row) => row.id !== id).map((row, index) => ({ ...row, id: index }))
+    const updatedProductRows = productRows.filter((row) => row._id !== id).map((row, index) => ({ ...row, _id:index }))
 
     const updatedProducts = state.products.filter((_: any, index: any) => index !== id)
     const updatedProductsWithRenamedFields = updatedProducts.map((product: any) => {
@@ -80,7 +80,7 @@ export const calculateSubTotal = (quantity: string, unitValue: string) => {
 
 export const calculateTotalAmount = (state: any) => {
   let totalAmount = 0
-  state.products.forEach((_product: any, id: number) => {
+  state.products.forEach((_product: any, id:number) => {
     const subTotalField = `subTotal-${id}`
     const subTotalValue = state.products[id]?.[subTotalField]
     if (subTotalValue) {

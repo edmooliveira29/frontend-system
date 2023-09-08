@@ -13,7 +13,7 @@ export const Password = () => {
 
         setState(
           {
-            id: state.id,
+            _id:state._id,
             newPassword: state.newPassword || '',
             newPasswordAgain: state.newPasswordAgain || '',
 

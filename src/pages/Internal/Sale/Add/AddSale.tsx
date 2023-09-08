@@ -54,7 +54,7 @@ export const AddSale = () => {
 
   const calculateTotalAmount = () => {
     let totalAmount = 0
-    state.products.forEach((_product: any, id: number) => {
+    state.products.forEach((_product: any, id:number) => {
       const subTotalField = `subTotal-${id}`
       const subTotalValue = state.products[id]?.[subTotalField]
       if (subTotalValue) {

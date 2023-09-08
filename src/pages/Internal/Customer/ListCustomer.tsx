@@ -23,12 +23,12 @@ export const ListCustomer = () => {
   const data: any[] = Array.from({ length: 100 }, () => createData())
 
   const columnHeaders = [
-    { id: 'name', label: 'NOME', sortable: true },
-    { id: 'cnpj', label: 'CNPJ', sortable: true },
-    { id: 'phonenumber', label: 'TELEFONE', sortable: true },
-    { id: 'email', label: 'EMAIL', sortable: true },
-    { id: 'city', label: 'Cidade', sortable: true },
-    { id: 'stateOfTheCountry', label: 'Estado', sortable: true }
+    { _id:'name', label: 'NOME', sortable: true },
+    { _id:'cnpj', label: 'CNPJ', sortable: true },
+    { _id:'phonenumber', label: 'TELEFONE', sortable: true },
+    { _id:'email', label: 'EMAIL', sortable: true },
+    { _id:'city', label: 'Cidade', sortable: true },
+    { _id:'stateOfTheCountry', label: 'Estado', sortable: true }
   ]
   return (<>
 

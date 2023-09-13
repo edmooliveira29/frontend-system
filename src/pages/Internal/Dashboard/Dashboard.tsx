@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import * as echarts from 'echarts'
 import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
@@ -60,7 +60,9 @@ export const Dashboard = () => {
     } else {
       myChart.resize()
     }
-    window.addEventListener('resize', () => myChart.resize())
+    window.addEventListener('resize', () => myChart.resize(), { passive: true })
+    window.removeEventListener('resize', () => myChart.resize())
+
   }
 
   const last6MonthsSales = () => {
@@ -151,7 +153,9 @@ export const Dashboard = () => {
       myChart.resize()
     }
 
-    window.addEventListener('resize', () => myChart.resize())
+    window.addEventListener('resize', () => myChart.resize(), { passive: true })
+    window.removeEventListener('resize', () => myChart.resize())
+
   }
 
   return (

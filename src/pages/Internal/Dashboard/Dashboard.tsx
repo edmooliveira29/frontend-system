@@ -5,7 +5,6 @@ import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
 import { Link } from 'react-router-dom'
 export const Dashboard = () => {
-  const [time, setTime] = useState(new Date().toLocaleTimeString('pt-BR'))
 
   useEffect(() => {
     bestSellingProductsChart()
@@ -169,7 +168,7 @@ export const Dashboard = () => {
           <div className="col-md-3 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '7px 10px' }}>
               <div className="card-body d-flex flex-column align-items-center">
-                <h1 style={{ textShadow: '1px 1px 3px black' }}>{time} </h1>
+                <h1 style={{ textShadow: '1px 1px 3px black' }}>{new Date().toLocaleTimeString('pt-BR')} </h1>
                 <h6>{new Date().toLocaleDateString('pt-BR')} </h6>
               </div>
             </div>

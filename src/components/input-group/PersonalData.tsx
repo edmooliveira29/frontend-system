@@ -34,7 +34,7 @@ export const PersonalData = (props: { state: any, setState: any, title?: string 
           }}
         />
       </div>
-      <div className="col-md-3 col-sm-12"><DataFieldInput id={'birthday'} label='Data de nascimento' value={props.state.birthday} /></div>
+      <div className="col-md-3 col-sm-12"><DataFieldInput id={'birthday'} label='Data de nascimento' value={props.state.birthday} onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }} /></div>
     </div>
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">

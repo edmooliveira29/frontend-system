@@ -17,7 +17,7 @@ export const Profile = () => {
         const userResponse = await user.get(localStorage.getItem('idUser') as string)
         setState(
           {
-            _id:userResponse.data._id,
+            _id: userResponse.data._id,
             address: userResponse.data.address || '',
             actualyPassword: userResponse.data.actualyPassword || '',
             birthday: userResponse.data.birthday || null,
@@ -45,13 +45,12 @@ export const Profile = () => {
   }, [])
 
   const handleSave = async () => {
-    const { name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const { name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
     const translations = {
       name: 'Nome',
       cpf: 'CPF',
       birthday: 'Data de nascimento',
       gender: 'Gênero',
-      nickname: 'Chama-me',
       phoneNumber: 'Telefone',
       email: 'Email',
       zipCode: 'CEP',
@@ -61,10 +60,18 @@ export const Profile = () => {
       stateOfTheCountry: 'Estado',
       city: 'Cidade'
     }
-    if (!validateFields({ name, cpf, birthday, gender, nickname, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
-      return false
+    // if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+    //   return false
+    // }
+
+    try {
+      const response = await user.edit(state)
+      AlertGeneral({ message: response.data.message, type: 'success' })
+
+    } catch (error: any) {
+      console.log(error)
+      AlertGeneral({ message: error.response.data.message, type: 'error' })
     }
-    alert('Em fase de construção!')
   }
 
   const handleImageChange = (file: any) => {

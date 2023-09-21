@@ -9,9 +9,8 @@ export class UserService {
     const userResponse = await (http.get<any>(`/user?objectId=${objectId}`))
     return userResponse.data
   }
-  async put() {
-    //return (await http.put<any>(`/user/${data._id}`, data))
-    alert('Conexão com o Banco de dados em construção!')
+  async edit(data: any) {
+    return (await http.put<any>(`/user/${data._id}`, data))
   }
 
   async login(data: any) {

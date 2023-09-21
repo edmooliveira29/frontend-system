@@ -6,7 +6,6 @@ export const validateFields = (inputs: any, translations: any) => {
   for (const index in inputs) {
     elementInput = document.getElementById(`input-${index}`)
     elementInputLabel = document.getElementById(`label-input-${index}`)
-
     if (Array.isArray(inputs[index])) {
       if ((inputs[index]).length == 0) {
         elementInputLabel?.classList.add('text-danger')
@@ -59,7 +58,6 @@ export const validateFields = (inputs: any, translations: any) => {
 
     }
   }
-
 
   if (emptyFields.length > 0 && typeof emptyFields[0] == 'string') {
     AlertGeneral({ message: `O campo <strong>${emptyFields[0]}</strong> é obrigatório.`, type: 'error' })

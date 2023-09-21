@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { AddressData, PersonalData } from '../../../components/input-group'
 import { AlertGeneral, ComponentButtonInputFile, ComponentButtonSuccess } from '../../../components'
-import { validateFields } from '../../../utils'
 import { UserService } from '../../../services/User'
 import './styles.sass'
+import { validateFields } from '../../../utils'
 export const Profile = () => {
   const [state, setState] = useState<any>({})
   const [pictureProfile, setPictureProfile] = useState(localStorage.getItem('picture_profile'))
@@ -60,9 +60,9 @@ export const Profile = () => {
       stateOfTheCountry: 'Estado',
       city: 'Cidade'
     }
-    // if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
-    //   return false
-    // }
+    if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+      return false
+    }
 
     try {
       const response = await user.edit(state)

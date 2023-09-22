@@ -46,7 +46,7 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
       navigate('/dashboard')
     }
   }
-
+  console.log(process.env.REACT_APP_CLIENT_ID_GOOGLE)
   return (
     <GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`
     } >

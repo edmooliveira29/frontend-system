@@ -37,16 +37,14 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
         }
       }
       if (user.data.sessionToken !== null) {
-        localStorage.setItem('sessionToken', user.data.sessionToken)
+        localStorage.setItem('userLogged', JSON.stringify(user.data))
+        localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
       }
-      localStorage.setItem('username', USER_CREDENTIAL.name)
-      localStorage.setItem('picture_profile', USER_CREDENTIAL.picture)
       setLoading(false)
 
       navigate('/dashboard')
     }
   }
-  console.log(process.env.REACT_APP_CLIENT_ID_GOOGLE)
   return (
     <GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`
     } >
@@ -58,6 +56,6 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
         containerProps={{ style: { width: '310px' } }}
         onSuccess={handleLoginGoogle}
         width='310px'
-      /> : <div className="spinner-border text-dark" role="status" />}
+      /> : <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black' }} role="status" />}
     </GoogleOAuthProvider>)
 }

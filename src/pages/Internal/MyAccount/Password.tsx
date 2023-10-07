@@ -4,42 +4,52 @@ import { validateFields } from '../../../utils'
 import { PasswordData } from './PasswordData'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
+import { UserService } from '../../../services/User'
 export const Password = () => {
   const [state, setState] = useState<any>({})
   const navigate = useNavigate()
+  const user = new UserService()
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      const userLogged = await user.get(JSON.parse(localStorage.getItem('userLogged') as any)._id as string)
 
+      try {
         setState(
           {
-            _id:state._id,
-            newPassword: state.newPassword || '',
-            newPasswordAgain: state.newPasswordAgain || '',
-
-          }
-        )
-
-
+            name: userLogged.data.name,
+            email: userLogged.data.email,
+            _id: userLogged.data._id,
+            lastChangedPassword: userLogged.data.lastChangedPassword
+          })
       } catch (error: any) {
-        AlertGeneral({ message: error.message, type: 'error' })
+        AlertGeneral({ title: 'Erro', message: error.message, type: 'error' })
       }
     }
     fetchData()
   }, [])
 
   const handleSave = async () => {
-    const { password, newPassword, newPasswordAgain } = state
+    const { password, newPassword, newPasswordConfirmation } = state
+
     const translations = {
-      password: 'Senha antiga',
+      password: 'Senha atual',
       newPassword: 'Senha Nova',
-      newPasswordAgain: 'Repita a nova senha'
+      newPasswordConfirmation: 'Repita a nova senha',
 
     }
-    if (!validateFields({ password, newPassword, newPasswordAgain }, translations)) {
+    if (state.newPassword !== state.newPasswordConfirmation) {
+      AlertGeneral({ title: 'Erro', message: 'As novas senhas digitadas não são iguais!', type: 'error' })
+      return false
+    } else if (!validateFields({ password, newPassword, newPasswordConfirmation }, translations)) {
       return false
     }
-    alert('Em fase de construção!')
+    try {
+      const response = await user.edit(state)
+      AlertGeneral({ title: 'Sucesso!', message: response.data.message, type: 'success' })
+
+    } catch (error: any) {
+      AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
+    }
   }
 
   return (<>
@@ -48,7 +58,7 @@ export const Password = () => {
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
           <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-password' />
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-password'/>
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-password' />
         </div>
       </div>
     </div>

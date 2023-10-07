@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { AddressData, PersonalData } from '../../../components/input-group'
-import { AlertGeneral, ComponentButtonInputFile, ComponentButtonSuccess } from '../../../components'
+import { AlertGeneral, ComponentButtonInputFile, ComponentButtonSuccess, alertLoading } from '../../../components'
 import { UserService } from '../../../services/User'
 import './styles.sass'
 import { validateFields } from '../../../utils'
 export const Profile = () => {
   const [state, setState] = useState<any>({})
-  const [pictureProfile, setPictureProfile] = useState(localStorage.getItem('picture_profile'))
-
+  const [profilePicture, setProfilePicture] = useState<string>(localStorage.getItem('picture_profile') as string)
+  const [loading, setLoading] = useState(false)
   const user = new UserService()
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
+        const userResponse = await user.get(JSON.parse(localStorage.getItem('userLogged') as any)._id as string)
 
-        const userResponse = await user.get(localStorage.getItem('idUser') as string)
         setState(
           {
             _id: userResponse.data._id,
             address: userResponse.data.address || '',
-            actualyPassword: userResponse.data.actualyPassword || '',
             birthday: userResponse.data.birthday || null,
             city: userResponse.data.city || '',
             complement: userResponse.data.complement || '',
@@ -29,22 +29,23 @@ export const Profile = () => {
             houseNumber: userResponse.data.houseNumber || '',
             name: userResponse.data.name || '',
             neighborhood: userResponse.data.neighborhood || '',
-            newPassword: userResponse.data.newPassword || '',
-            newPasswordAgain: userResponse.data.newPasswordAgain || '',
             nickname: userResponse.data.nickname || '',
             phoneNumber: userResponse.data.phoneNumber || '',
             stateOfTheCountry: userResponse.data.stateOfTheCountry || '',
             zipCode: userResponse.data.zipCode || '',
+            profilePicture: userResponse.data.profilePicture || ''
           }
         )
+        setProfilePicture(userResponse.data.profilePicture)
       } catch (error: any) {
-        AlertGeneral({ message: error.message, type: 'error' })
+        AlertGeneral({ title: 'Erro', message: error.message, type: 'error' })
       }
+      setLoading(false)
     }
     fetchData()
   }, [])
-
   const handleSave = async () => {
+    setLoading(true)
     const { name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
     const translations = {
       name: 'Nome',
@@ -60,42 +61,47 @@ export const Profile = () => {
       stateOfTheCountry: 'Estado',
       city: 'Cidade'
     }
+
     if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+      setLoading(false)
       return false
     }
 
     try {
       const response = await user.edit(state)
-      AlertGeneral({ message: response.data.message, type: 'success' })
+      setLoading(false)
+      AlertGeneral({ 'title': 'Sucesso!', message: response.data.message, type: 'success' })
 
     } catch (error: any) {
-      console.log(error)
-      AlertGeneral({ message: error.response.data.message, type: 'error' })
+      setLoading(false)
+      AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
     }
   }
 
-  const handleImageChange = (file: any) => {
+  const handleImageChangeAndSave = async (file: any) => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
-    reader.onload = function () {
-      localStorage.setItem('picture_profile', String(reader.result))
+    reader.onload = async function () {
+      const response: any = await user.edit({ ...state, profilePicture: reader.result })
+        .then((result) => result.data).catch(error => {
+          AlertGeneral({ title: 'Erro', message: error.response ? error.response.data.message : error.message, type: 'error' })
+        })
+      setProfilePicture(response.data.profilePicture)
     }
-    setPictureProfile(file)
   }
 
   return (<>
-    <div className="row border border-secondary rounded" id="content-container">
+    {!loading ? <div className="row border border-secondary rounded" id="content-container">
       <h4 id="titles-custumer-add">Perfil</h4>
-
       <div className="col-md-4 col-sm-12 mb-1">
         <div className="card-body p-5 text-center border rounded">
           <div className="card-title fs-5 m-1">Imagem do perfil</div>
           <div className="text-center">
-            <img className="img-fluid rounded-circle m-3" src={pictureProfile || "https://cdn-icons-png.flaticon.com/512/1144/1144760.png"} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' />
+            <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' />
             <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 5MB</div>
             <div className='d-flex justify-content-center m-2' >
               <div className="mb-3">
-                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChange} id='upload-image-profile' />
+                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChangeAndSave} id='upload-image-profile' />
               </div>
             </div>
           </div>
@@ -105,10 +111,9 @@ export const Profile = () => {
         <PersonalData setState={setState} state={state} title={'DADOS'} />
         <AddressData setUser={setState} state={state} cities={[]} />
         <div className="m-2 d-flex justify-content-end" >
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' loading={loading} />
         </div>
       </div>
-
-    </div>
+    </div> : alertLoading('open', 'Estamos buscando algumas informações...')}
   </>)
 }

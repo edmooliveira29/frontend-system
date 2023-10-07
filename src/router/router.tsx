@@ -80,10 +80,11 @@ export const router = (
   </BrowserRouter>
 )
 const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
-  if (localStorage.getItem('sessionToken') !== null) {
-    sessionTokenExpiry(String(localStorage.getItem('sessionToken')), navigate, route)
+  const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
+  if (userLogged !== null) {
+    sessionTokenExpiry(userLogged.sessionToken, navigate, route)
   } else {
-    AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
+    AlertGeneral({ title: 'Aviso', message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
     navigate('/entrar')
   }
 }
@@ -92,7 +93,7 @@ const sessionTokenExpiry = (sessionToken: string, navigate: any, route?: string)
   const expirationTime = decoded.exp || 0
   const currentTime = Math.floor(Date.now() / 1000)
   if (currentTime > expirationTime) {
-    AlertGeneral({ message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
+    AlertGeneral({ title: 'Aviso', message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
     localStorage.clear()
     navigate('/entrar')
   } else if (route) {

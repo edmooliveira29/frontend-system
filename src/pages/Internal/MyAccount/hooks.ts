@@ -9,7 +9,7 @@ export const onChangeZipCode = async (value: string, props: any, setCitySelected
   }
 
   if (value.length === 9) {
-    alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
+    alertLoading('open', 'estamos buscando o CEP')
     const data: any = await getZipCode(value)
     if (data.erro) {
       NotifyError()

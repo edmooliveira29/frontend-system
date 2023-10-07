@@ -47,24 +47,24 @@ export const validateFields = (inputs: any, translations: any) => {
         emptyFields.push(translations[index] || index)
       }
       if (index === 'email' && inputs[index] && !validationEmail(inputs[index])) {
-        AlertGeneral({ message: `O email '${inputs[index]}' é inválido!`, type: 'error' }); return false
+        AlertGeneral({title: 'Erro', message: `O email '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
       if (index === 'cpf' && inputs[index] && !validationCPF(inputs[index])) {
-        AlertGeneral({ message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
+        AlertGeneral({ title: 'Erro', message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
       if (index === 'cnpj' && inputs[index]) {
-        inputs[index].length !== 18 && AlertGeneral({ message: `O cnpj digitado '${inputs[index]}' é inválido!`, type: 'error' }); return false
+        inputs[index].length !== 18 && AlertGeneral({ title: 'Erro', message: `O cnpj digitado '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
 
     }
   }
 
   if (emptyFields.length > 0 && typeof emptyFields[0] == 'string') {
-    AlertGeneral({ message: `O campo <strong>${emptyFields[0]}</strong> é obrigatório.`, type: 'error' })
+    AlertGeneral({ title: 'Erro', message: `O campo <strong>${emptyFields[0]}</strong> é obrigatório.`, type: 'error' })
     return false
   }
   if (emptyFields.length > 0 && typeof emptyFields[0] == 'object') {
-    AlertGeneral({ message: `O item ${emptyFields[0].i} dos <strong>${emptyFields[0].locale}</strong> contém alguns campos que são obrigatórios.`, type: 'error' })
+    AlertGeneral({title: 'Erro', message: `O item ${emptyFields[0].i} dos <strong>${emptyFields[0].locale}</strong> contém alguns campos que são obrigatórios.`, type: 'error' })
     return false
   }
   return true

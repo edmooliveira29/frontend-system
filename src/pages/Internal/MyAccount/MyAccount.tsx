@@ -8,6 +8,7 @@ import { Profile } from './Profile'
 import { Password } from './Password'
 export const MyAccount = () => {
   const [value, setValue] = React.useState('1')
+
   return (
     <Box sx={{ width: '100%' }}>
       <TabContext value={value}>

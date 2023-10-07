@@ -1,8 +1,8 @@
 import Swal, { SweetAlertIcon } from 'sweetalert2'
 
-export const AlertGeneral = (props:{ message: string, type: SweetAlertIcon }) => {
+export const AlertGeneral = (props:{ title: string, message: string, type: SweetAlertIcon }) => {
   Swal.fire({
-    title: 'Alerta',
+    title: props.title,
     html: `<div>${props.message}</div>`,
     text: props.message,
     icon: props.type,

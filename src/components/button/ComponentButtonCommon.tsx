@@ -24,7 +24,7 @@ export function ComponentButtonCommon(props: { text: string; sizeWidth?: string;
         type='submit'
         disabled={props.loading}
       >
-        {props.loading ? <div className="spinner-border text-light" role="status" /> : props.text}
+        {props.loading ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black' }} role="status" /> : props.text}
       </ColorButton>
       {props.uploadFile && <input
         type="file"

@@ -8,7 +8,7 @@ export const onChangeZipCode = async (value: string, props: any, setCitySelected
     props.setUser({ ...props.state, zipCode: masks.maskZipCode(value) })
   }
   if (value.length === 9) {
-    alertLoading('open', 'Aguarde um momento, estamos buscando o CEP')
+    alertLoading('open', 'Estamos buscando o CEP')
     const data: any = await getZipCode(value)
     if (data.erro) {
       NotifyError()

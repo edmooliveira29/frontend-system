@@ -3,7 +3,7 @@ import * as React from 'react'
 import Stack from '@mui/material/Stack'
 import { Button } from '@mui/material'
 
-export function ComponentButtonInherit(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any, id:string }) {
+export function ComponentButtonInherit(props: { text: string; sizeWidth?: string; sizeHeight?: string; loading?: boolean, onClick?: any, id: string }) {
   return (
     <Stack spacing={2} onClick={props.onClick} >
       <Button
@@ -14,7 +14,7 @@ export function ComponentButtonInherit(props: { text: string; sizeWidth?: string
         type='submit'
         disabled={props.loading}
       >
-        {props.loading ? <div className="spinner-border text-light" role="status" /> : props.text}
+        {props.loading ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black' }} role="status" /> : props.text}
       </Button>
     </Stack>
   )

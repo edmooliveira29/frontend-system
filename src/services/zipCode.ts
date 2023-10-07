@@ -7,6 +7,6 @@ export const getZipCode = async (value: string) => {
     return data
 
   } catch (error) {
-    AlertGeneral({ message: 'CEP não encontrado', type: 'error' })
+    AlertGeneral({ title: 'Erro', message: 'CEP não encontrado', type: 'error' })
   }
 }

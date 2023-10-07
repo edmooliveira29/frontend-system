@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AiFillDashboard } from 'react-icons/ai'
+import { AiFillDashboard, AiOutlineUser } from 'react-icons/ai'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MdPointOfSale } from 'react-icons/md'
@@ -13,8 +13,9 @@ import './styles.scss'
 
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
   const navigate = useNavigate()
-  const userName = localStorage.getItem('username')
-  const [pictureProfile] = useState(localStorage.getItem('picture_profile'))
+  const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
+  const username: string = userLogged.name
+  const [pictureProfile] = useState(userLogged.profilePicture || '')
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
 
   // const toggleClientesSubmenu = () => {
@@ -23,7 +24,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
 
   const handleLogOut = () => {
     localStorage.clear()
-    navigate('/entrar')
+    navigate('/entrar', { state: { route: 'logout' } })
   }
 
   return (
@@ -32,7 +33,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
         {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh', position: 'fixed' }}>
           <div className="row">
             <div className='col-9 px-1'>
-              <img src={icon} width="60" height="60" className="rounded-circle"  alt='Logo' />
+              <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
             </div>
             <div className='col-3 p-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
               <FaTimes />
@@ -62,16 +63,18 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <hr />
         </div > :
           <div onClick={props.showSiderbar} id="div-icon-bar" >
-            <img src={icon} width="60" height="60" className="rounded-circle"  alt='Logo'  />
+            <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
             <HiBars3 className="icon-bar" />
           </div>
         }
       </div>
       <div className="col-3">
         <div className="dropdown justify-content-end">
-          <a className="d-flex align-items-center text-white dropdown-toggle p-2 justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src={pictureProfile || "https://github.com/mdo.png"} width="42" height="42" className="rounded-circle me-2"  alt='Imagem de perfil' />
-            <strong id='name-user-log'>{userName}</strong>
+          <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
+            {pictureProfile ?
+              <img style={{margin: '0 20px'}} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
+              <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }}/>}
+            <strong id='name-user-log'>{username}</strong>
           </a>
           <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
             <li>

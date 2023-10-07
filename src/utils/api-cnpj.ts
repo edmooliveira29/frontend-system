@@ -8,6 +8,6 @@ export const apiCnpj = async (cnpj: string): Promise<any> => {
     alertLoading('close')
     return response
   } catch (error:any) {
-    AlertGeneral({ message: `${error.response.data.message}`, type: 'error' })
+    AlertGeneral({ title: 'Erro', message: `${error.response.data.message}`, type: 'error' })
   }
 }

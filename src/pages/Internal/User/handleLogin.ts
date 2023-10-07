@@ -7,10 +7,8 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
       password: state.password,
       remember: state.remember
     })
-    localStorage.setItem('sessionToken',user.data.sessionToken)
-    localStorage.setItem('username', user.data.name)
-    localStorage.setItem('idUser', user.data._id)
 
+    localStorage.setItem('userLogged', JSON.stringify(user.data))
     navigate('/dashboard')
   } catch (error: any) {
     setLoading(false)
@@ -33,9 +31,7 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
       password: state.password,
       passwordConfirm: state.passwordConfirmation
     })
-    localStorage.setItem('sessionToken', user.data.sessionToken)
-    localStorage.setItem('username', user.data.name)
-    localStorage.setItem('idUser', user.data._id)
+    localStorage.setItem('userLogged', JSON.stringify(user.data))
 
     navigate('/dashboard')
   } catch (error: any) {

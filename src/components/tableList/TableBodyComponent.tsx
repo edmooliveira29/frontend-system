@@ -18,16 +18,16 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 }
 
 
-function getComparator<Key extends keyof any>(order: Order, orderBy: Key) {
+const getComparator = (order: Order, orderBy: any) => {
   return order === 'desc'
-    ? (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) =>
+    ? (a: { key: number | string }, b: { key: number | string }) =>
       descendingComparator(a, b, orderBy)
-    : (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) =>
+    : (a: { key: number | string }, b: { key: number | string }) =>
       -descendingComparator(a, b, orderBy)
 }
 
-function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
-  const stabilizedThis = array.map((el, index) => [el, index] as [T, number])
+const stableSort = (array: any[], comparator: any) => {
+  const stabilizedThis = array.map((el, index) => [el, index] as [any, number])
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0])
     if (order !== 0) return order
@@ -40,23 +40,23 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
 export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
   const keys = Object.keys(props.data[0] || {})
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedRowData, setSelectedRowData] = useState(null) 
+  const [selectedRowData, setSelectedRowData] = useState(null)
 
   const handleOpenDetails = (rowData: any) => {
-    setSelectedRowData(rowData) 
+    setSelectedRowData(rowData)
     setIsModalOpen(true)
   }
 
   const handleCloseModal = () => {
-    setSelectedRowData(null) 
+    setSelectedRowData(null)
     setIsModalOpen(false)
   }
-  
+
   const handleDeleteItem = (rowData: any) => {
     setSelectedRowData(rowData)
-    if(props.title == 'venda'){
+    if (props.title == 'venda') {
       AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[0]]}`)
-    }else{
+    } else {
       AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
 
     }

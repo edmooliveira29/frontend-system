@@ -7,7 +7,7 @@ import { LoginGoogle } from '../../../services/User/user-google'
 import { handleLoginUser } from './handleLogin'
 import './stylesUser.sass'
 import { validateFields } from '../../../utils'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const Login = () => {

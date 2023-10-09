@@ -15,15 +15,21 @@ import { ActionsTypes } from '../../redux/actions/reducers'
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  const [pictureProfile] = useState(currentUser?.profilePicture || '')
-  const [username] = useState(currentUser?.name || '')
-  // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
+  const { currentUser } = useSelector((reducers: any) => {
+    return reducers.userReducer
+  })
+  const [pictureProfile, setUserProfile] = useState(currentUser?.profilePicture || '')
+  const [username, setUsername] = useState(currentUser?.name || '')
 
+  // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
   // const toggleClientesSubmenu = () => {
   //   setShowClientesSubmenu(!showClientesSubmenu)
   // }
 
+  useEffect(() => {
+    setUsername(currentUser?.name)
+    setUserProfile(currentUser?.profilePicture)
+  }, [currentUser])
   const handleLogOut = () => {
     localStorage.clear()
     dispatch({ type: ActionsTypes.USER_LOGOUT })

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillDashboard, AiOutlineUser } from 'react-icons/ai'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
@@ -9,13 +9,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import icon from '../../assets/img/icon.png'
 import { AlertConfirmationLogout } from '../modal'
 import './styles.scss'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { ActionsTypes } from '../../redux/actions/reducers'
 
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
   const navigate = useNavigate()
-  const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
-  const username: string = userLogged.name
-  const [pictureProfile] = useState(userLogged.profilePicture || '')
+  const dispatch = useDispatch()
+  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
+  const [pictureProfile] = useState(currentUser?.profilePicture || '')
+  const [username] = useState(currentUser?.name || '')
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
 
   // const toggleClientesSubmenu = () => {
@@ -24,6 +26,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
 
   const handleLogOut = () => {
     localStorage.clear()
+    dispatch({ type: ActionsTypes.USER_LOGOUT })
     navigate('/entrar', { state: { route: 'logout' } })
   }
 
@@ -72,8 +75,8 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
         <div className="dropdown justify-content-end">
           <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
             {pictureProfile ?
-              <img style={{margin: '0 20px'}} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
-              <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }}/>}
+              <img style={{ margin: '0 20px' }} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
+              <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }} />}
             <strong id='name-user-log'>{username}</strong>
           </a>
           <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">

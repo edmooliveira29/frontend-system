@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Link, useRoutes } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { TextFieldInput, LinkComponent, CheckboxInput } from '../../../components/inputs'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
 import { UserService } from '../../../services/User/user-http'
@@ -7,6 +7,8 @@ import { LoginGoogle } from '../../../services/User/user-google'
 import { handleLoginUser } from './handleLogin'
 import './stylesUser.sass'
 import { validateFields } from '../../../utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const Login = () => {
   const [state, setState] = React.useState({
@@ -19,7 +21,7 @@ export const Login = () => {
   const [errorResponse, setErrorResponse] = useState('')
   const navigate = useNavigate()
   const userService = new UserService()
-
+  const dispatch = useDispatch()
   const handleLoginHook = async () => {
     const translations = { email: 'Email', password: 'Senha' }
     const { email, password } = state
@@ -27,8 +29,11 @@ export const Login = () => {
     if (!validateFields({ email, password }, translations)) {
       return false
     }
-
-    handleLoginUser(setLoading, setErrorResponse, state, userService, navigate)
+    const userLogged = await handleLoginUser(setLoading, setErrorResponse, state, userService)
+    if (userLogged) {
+      dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged })
+      navigate('/dashboard')
+    }
   }
 
   const handleGoogle = (error: string) => {

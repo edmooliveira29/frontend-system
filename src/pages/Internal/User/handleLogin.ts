@@ -1,4 +1,4 @@
-export const handleLoginUser = async (setLoading: any, setErrorResponse: any, state: any, userService: any, navigate: any) => {
+export const handleLoginUser = async (setLoading: any, setErrorResponse: any, state: any, userService: any) => {
   setLoading(true)
   setErrorResponse('')
   try {
@@ -9,7 +9,7 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
     })
 
     localStorage.setItem('userLogged', JSON.stringify(user.data))
-    navigate('/dashboard')
+    return user.data
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {

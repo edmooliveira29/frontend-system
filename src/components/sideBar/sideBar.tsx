@@ -18,6 +18,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   const { currentUser } = useSelector((reducers: any) => {
     return reducers.userReducer
   })
+  console.log(currentUser)
   const [pictureProfile, setUserProfile] = useState(currentUser?.profilePicture || '')
   const [username, setUsername] = useState(currentUser?.name || '')
 

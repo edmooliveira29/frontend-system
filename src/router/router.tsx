@@ -10,6 +10,7 @@ import Footer from '../components/footer/Footer'
 import './styles.sass'
 import { NotFound } from '../pages/NotFound'
 import { AddCategory, ListCategory } from '../pages/Internal/Category'
+import { useSelector } from 'react-redux'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
@@ -33,6 +34,10 @@ const Internal = (props: { Page: any }) => {
 
 const Website = (props: { Page: any }) => {
   const navigate = useNavigate()
+  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
+  console.log(currentUser)
+
+
   useEffect(() => {
     if (props.Page.name == 'Login') {
       userIsAlreadyLoggedIn(navigate, '/dashboard')

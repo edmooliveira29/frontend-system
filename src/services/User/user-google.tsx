@@ -29,10 +29,10 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
       } catch (error: any) {
         if (error.message == 'Network Error') {
           errorResponse('Verifique sua conexão de internet')
+          return
         }
         setLoading(false)
 
-        return
       }
       try {
         userLogged = await userService.create({

@@ -32,13 +32,17 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
           return
         } else {
 
-          userLogged = await userService.create({
-            email: USER_CREDENTIAL.email,
-            name: USER_CREDENTIAL.name,
-            password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
-            passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
-            profilePicture: USER_CREDENTIAL.picture
-          })
+          try {
+            userLogged = await userService.create({
+              email: USER_CREDENTIAL.email,
+              name: USER_CREDENTIAL.name,
+              password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+              passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+              profilePicture: USER_CREDENTIAL.picture
+            })
+          } catch (error: any) {
+            errorResponse(error.message)
+          }
         }
       }
 

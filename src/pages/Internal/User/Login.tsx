@@ -72,7 +72,7 @@ export const Login = () => {
             <ComponentButtonCommon text='Entrar' sizeWidth='310px' loading={loading} id='enter' />
           </div>
           <div id='error-response'>
-            <span >{errorResponse ?? ''}</span>
+            <span >{errorResponse ? errorResponse : ''}</span>
           </div>
           <LinkComponent
             hrefLink='/lembrar'
@@ -87,7 +87,7 @@ export const Login = () => {
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >
-            <LoginGoogle errorResponse={(error: any) => setErrorResponse(error)} />
+            <LoginGoogle errorResponse={(error: any) => setErrorResponse(error.message)} />
           </div>
         </div>
       </div>

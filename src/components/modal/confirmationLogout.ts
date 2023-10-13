@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 
 export const AlertConfirmationLogout = async (handleLogOut: any) => {
   await Swal.fire({
-    title: 'Deseja sair?',
+    title: 'Deseja sair do sistema?',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#8AC381',

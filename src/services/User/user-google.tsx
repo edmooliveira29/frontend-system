@@ -6,7 +6,7 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import { ActionsTypes } from '../../redux/actions/reducers'
 import { useDispatch } from 'react-redux'
 
-export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
+export const LoginGoogle: React.FC<any> = ({ setErrorResponse }) => {
   const userService = new UserService()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -25,10 +25,15 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
           password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
           remember: true
         })
-
+        if (userLogged) {
+          localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
+          dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
+          setLoading(false)
+          navigate('/dashboard')
+        }
       } catch (error: any) {
         if (error.message == 'Network Error') {
-          errorResponse('Verifique sua conexão de internet')
+          setErrorResponse('Verifique sua conexão de internet')
           return
         }
         setLoading(false)
@@ -42,19 +47,18 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
           passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
           profilePicture: USER_CREDENTIAL.picture
         })
+        if (userLogged) {
+          localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
+          dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
+          setLoading(false)
+          navigate('/dashboard')
+        }
       } catch (error: any) {
-        errorResponse(error.message)
+        console.log(error.response.data.message)
+        setErrorResponse(error.response.data.message)
         setLoading(false)
         return
       }
-    }
-
-    if (userLogged) {
-      console.log(userLogged)
-      localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
-      dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
-      setLoading(false)
-      navigate('/dashboard')
     }
   }
 

@@ -87,7 +87,7 @@ export const Login = () => {
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >
-            <LoginGoogle errorResponse={(error: any) => setErrorResponse(error.message)} />
+            <LoginGoogle setErrorResponse={setErrorResponse}/>
           </div>
         </div>
       </div>

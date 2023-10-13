@@ -1,13 +1,25 @@
 import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './styles.scss'
 import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
 import icon from '../../assets/img/icon.png'
+import { Dropdown } from '../sideBar'
+import { ActionsTypes } from '../../redux/actions/reducers'
+import { useDispatch } from 'react-redux'
 
-export const NavBar = () => (
-  <>
-    <div id="navbar" style={{marginBottom: '75px'}}>
+export const NavBar = () => {
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
+  console.log(userLogged)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleLogOut = () => {
+    localStorage.clear()
+    dispatch({ type: ActionsTypes.USER_LOGOUT })
+    navigate('/entrar', { state: { route: 'logout' } })
+  }
+  return (<>
+    <div id="navbar" style={{ marginBottom: '75px' }}>
 
       <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
         <div className='container-fluid'>
@@ -20,33 +32,37 @@ export const NavBar = () => (
           <div className='navbar-collapse collapse' id='navbarColor01'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
               <Link to='/' className='link-navbar'>
-								Início
+                Início
               </Link>
               <Link to='/caracteristica' className='link-navbar'>
-								Caracteristica
+                Caracteristica
               </Link>
               <Link to='/preco' className='link-navbar'>
-								Preço
+                Preço
               </Link>
               <Link to='/sobre' className='link-navbar'>
-								Sobre
+                Sobre
               </Link>
               <Link to='/contato' className='link-navbar'>
-								Contato
+                Contato
               </Link>
             </ul>
+
+
             <form className='d-flex align-items-center'>
               <input id="input-search" className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
-              <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' sizeWidth='180px' id='search'/>
-              <Link to='/entrar' title='Entrar' id="link-login" >
-                <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
-              </Link>
+              <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' sizeWidth='180px' id='search' />
+              {userLogged !== null ? Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut,true) :
+                <Link to='/entrar' title={userLogged !== null ? 'Usuário logado' : 'Entrar'} className='link-navbar' id="link-login">
+                  <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
+                </Link>}
             </form>
           </div>
         </div>
       </nav >
 
     </div></>
-)
+  )
+}
 
 export default NavBar

@@ -12,14 +12,40 @@ import './styles.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../redux/actions/reducers'
 
+export const Dropdown = (pictureProfile: string, username: string, handleLogOut: any, isAccessExternal?: boolean) => {
+  return (<div className="col-3">
+    <div className="dropdown justify-content-end">
+      <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
+        {pictureProfile ?
+          <img style={{ margin: '0 20px' }} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
+          <AiOutlineUser size={60} color='white' style={{ margin: '0px 20px' }} />}
+        {isAccessExternal ? null : <strong id='name-user-log'>{username}</strong>}
+      </a>
+      <ul id='user-dropdown' style={isAccessExternal ? { left: '-130px' } : { left: '100px' }} className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
+        <li>
+          <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
+            Minha conta
+          </Link>
+        </li>
+        <li>
+          <Link id='user-register-dropdown' to='/usuario' className="dropdown-item" >
+            Registrar usuário
+          </Link>
+        </li>
+        <li><hr className="dropdown-divider" /></li>
+        <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
+      </ul>
+    </div>
+  </div>)
+}
+
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { currentUser } = useSelector((reducers: any) => {
-    return reducers.userReducer
-  })
-  console.log(currentUser)
-  const [pictureProfile, setUserProfile] = useState(currentUser?.profilePicture || '')
+  let { currentUser } = useSelector((reducers: any) => reducers.userReducer)
+  const user = JSON.parse(localStorage.getItem('userLogged') as any)
+  currentUser = { ...currentUser, ...user }
+  const [profilePicture, setUserProfile] = useState(currentUser?.profilePicture || '')
   const [username, setUsername] = useState(currentUser?.name || '')
 
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
@@ -43,7 +69,9 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
         {props.showMenu ? <div id='div-sideBar' className="d-flex flex-column flex-shrink-0 px-2 py-0 text-white" style={{ backgroundColor: '#1A202C', width: '280px', height: '100vh', position: 'fixed' }}>
           <div className="row">
             <div className='col-9 px-1'>
-              <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
+              <Link to='/' >
+                <img src={icon} width="60" height="60" className="rounded-circle" alt='Página inicial' />
+              </Link>
             </div>
             <div className='col-3 p-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
               <FaTimes />
@@ -78,32 +106,8 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      <div className="col-3">
-        <div className="dropdown justify-content-end">
-          <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
-            {pictureProfile ?
-              <img style={{ margin: '0 20px' }} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
-              <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }} />}
-            <strong id='name-user-log'>{username}</strong>
-          </a>
-          <ul id='user-dropdown' className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
-            <li>
-              <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
-                Minha conta
-              </Link>
-            </li>
-            <li>
-              <Link id='user-register-dropdown' to='/usuario' className="dropdown-item" >
-                Registrar usuário
-              </Link>
-            </li>
-            <li><hr className="dropdown-divider" /></li>
-            <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
-          </ul>
-        </div>
-      </div>
+      {Dropdown(profilePicture, username, handleLogOut)}
     </div>
     </>
-
   )
 }

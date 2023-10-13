@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { TextFieldInput, LinkComponent, CheckboxInput } from '../../../components/inputs'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
@@ -6,7 +6,7 @@ import { UserService } from '../../../services/User/user-http'
 import { LoginGoogle } from '../../../services/User/user-google'
 import { handleLoginUser } from './handleLogin'
 import './stylesUser.sass'
-import { validateFields } from '../../../utils'
+import { userIsAlreadyLoggedIn, validateFields } from '../../../utils'
 import { useDispatch } from 'react-redux'
 import { ActionsTypes } from '../../../redux/actions/reducers'
 
@@ -35,10 +35,10 @@ export const Login = () => {
       navigate('/dashboard')
     }
   }
-
-  const handleGoogle = (error: string) => {
-    setErrorResponse(error)
-  }
+  
+  useEffect(() => {
+    userIsAlreadyLoggedIn(navigate, '/dashboard')
+  }, [])
 
   return (
     <>
@@ -87,7 +87,7 @@ export const Login = () => {
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >
-            <LoginGoogle errorResponse={handleGoogle} />
+            <LoginGoogle errorResponse={(error: any) => setErrorResponse(error)} />
           </div>
         </div>
       </div>

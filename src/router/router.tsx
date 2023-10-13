@@ -3,14 +3,12 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
 import { Dashboard, ListSale, MyAccount, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem } from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
-import jwtDecode, { JwtPayload } from 'jwt-decode'
-import { AlertGeneral, } from '../components/modal'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import './styles.sass'
 import { NotFound } from '../pages/NotFound'
 import { AddCategory, ListCategory } from '../pages/Internal/Category'
-import { useSelector } from 'react-redux'
+import { userIsAlreadyLoggedIn } from '../utils'
 
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
@@ -34,16 +32,11 @@ const Internal = (props: { Page: any }) => {
 
 const Website = (props: { Page: any }) => {
   const navigate = useNavigate()
-  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  console.log(currentUser)
-
-
   useEffect(() => {
     if (props.Page.name == 'Login') {
       userIsAlreadyLoggedIn(navigate, '/dashboard')
     }
   }, [])
-
 
   return (
     <>
@@ -84,24 +77,3 @@ export const router = (
     </Routes>
   </BrowserRouter>
 )
-const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
-  const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
-  if (userLogged !== null) {
-    sessionTokenExpiry(userLogged.sessionToken, navigate, route)
-  } else {
-    AlertGeneral({ title: 'Aviso', message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
-    navigate('/entrar')
-  }
-}
-const sessionTokenExpiry = (sessionToken: string, navigate: any, route?: string) => {
-  const decoded = jwtDecode(sessionToken) as JwtPayload
-  const expirationTime = decoded.exp || 0
-  const currentTime = Math.floor(Date.now() / 1000)
-  if (currentTime > expirationTime) {
-    AlertGeneral({ title: 'Aviso', message: 'Sua sessão expirou. Por favor entre novamente', type: 'warning' })
-    localStorage.clear()
-    navigate('/entrar')
-  } else if (route) {
-    navigate(route)
-  }
-}

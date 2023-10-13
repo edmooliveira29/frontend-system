@@ -1,4 +1,4 @@
-import { getZipCode } from '../../services/zipCode'
+import { getZipCode } from '../../utils/zipCode'
 import { Masks, citiesStates } from '../../utils'
 import { NotifyError, alertLoading } from '../modal'
 

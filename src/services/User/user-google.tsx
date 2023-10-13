@@ -14,10 +14,11 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
   const handleLoginGoogle = async (credentialResponse: any) => {
     setLoading(true)
     let USER_CREDENTIAL: any
+    console.log(credentialResponse)
+    let userLogged
     if (credentialResponse.credential != null) {
       USER_CREDENTIAL = jwtDecode(credentialResponse.credential)
 
-      let userLogged
       try {
         userLogged = await userService.login({
           email: USER_CREDENTIAL.email,
@@ -28,35 +29,35 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
       } catch (error: any) {
         if (error.message == 'Network Error') {
           errorResponse('Verifique sua conexão de internet')
-          setLoading(false)
-          return
-        } else {
-
-          try {
-            userLogged = await userService.create({
-              email: USER_CREDENTIAL.email,
-              name: USER_CREDENTIAL.name,
-              password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
-              passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
-              profilePicture: USER_CREDENTIAL.picture
-            })
-            setLoading(false)
-          } catch (error: any) {
-            setLoading(false)
-            errorResponse(error.message)
-          }
         }
-      }
-
-
-      if (userLogged) {
-        localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
-        dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
         setLoading(false)
-        navigate('/dashboard')
+
+        return
+      }
+      try {
+        userLogged = await userService.create({
+          email: USER_CREDENTIAL.email,
+          name: USER_CREDENTIAL.name,
+          password: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+          passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
+          profilePicture: USER_CREDENTIAL.picture
+        })
+      } catch (error: any) {
+        errorResponse(error.message)
+        setLoading(false)
+        return
       }
     }
+
+    if (userLogged) {
+      console.log(userLogged)
+      localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
+      dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
+      setLoading(false)
+      navigate('/dashboard')
+    }
   }
+
   return (
     <GoogleOAuthProvider clientId={`${process.env.REACT_APP_CLIENT_ID_GOOGLE}`
     } >

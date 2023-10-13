@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start --heapsnapshot-signal=SIGUSR2 --inspect",
-    "build": "node --trace-gc --max-old-space-size=4096 node_modules/react-scripts/scripts/build.js",
+    "build": "node --max-old-space-size=4096 node_modules/react-scripts/scripts/build.js",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --fix ",
     "prepare": "husky install",

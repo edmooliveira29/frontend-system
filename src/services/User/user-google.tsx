@@ -40,7 +40,9 @@ export const LoginGoogle: React.FC<any> = ({ errorResponse }) => {
               passwordConfirm: process.env.REACT_APP_CLIENT_PASSWORD_DEFAULT_GOOGLE,
               profilePicture: USER_CREDENTIAL.picture
             })
+            setLoading(false)
           } catch (error: any) {
+            setLoading(false)
             errorResponse(error.message)
           }
         }

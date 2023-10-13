@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
 import { AddressData, PersonalData } from '../../../components/input-group'
 import { AlertGeneral, ComponentButtonInputFile, ComponentButtonSuccess, alertLoading } from '../../../components'
@@ -10,10 +11,13 @@ export const Profile = () => {
   const [state, setState] = useState<any>({})
   const [profilePicture, setProfilePicture] = useState<string>(localStorage.getItem('picture_profile') as string)
   const [loading, setLoading] = useState(false)
+  const [loadingImage, setLoadingImage] = useState<boolean>()
   const user = new UserService()
   const dispatch = useDispatch()
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const userResponse = await user.get(JSON.parse(localStorage.getItem('userLogged') as any)._id as string)
       setState(
         {
@@ -36,10 +40,9 @@ export const Profile = () => {
         }
       )
       setProfilePicture(userResponse.data.profilePicture)
+      setLoading(false)
     }
-    setLoading(true)
     fetchData()
-    setLoading(false)
   }, [])
   const handleSave = async () => {
     setLoading(true)
@@ -64,8 +67,8 @@ export const Profile = () => {
     }
     try {
       const response = await (await user.edit(state)).data
+      localStorage.setItem('userLogged', JSON.stringify({ ...response.data, sessionToken: (JSON.parse(localStorage.getItem('userLogged') as string).sessionToken as string)}))
       dispatch({ type: ActionsTypes.USER_LOGGED, payload: response.data })
-
       setLoading(false)
       AlertGeneral({ 'title': 'Sucesso!', message: response.message, type: 'success' })
     } catch (error: any) {
@@ -75,35 +78,38 @@ export const Profile = () => {
   }
 
   const handleImageChangeAndSave = async (file: any) => {
+    setLoadingImage(true)
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = async function () {
-      const response: any = await user.edit({ ...state, profilePicture: reader.result })
+      await user.edit({ ...state, profilePicture: reader.result })
         .then((result) => {
           setProfilePicture(result.data.data.profilePicture)
+          localStorage.setItem('userLogged', JSON.stringify({ ...JSON.parse(localStorage.getItem('userLogged') as string), profilePicture: reader.result }))
+          dispatch({ type: ActionsTypes.USER_LOGGED, payload: { ...state, profilePicture: reader.result } })
           return result.data
-        }).catch(error => {
-          AlertGeneral({ title: 'Erro', message: error.response ? error.response.data.message : error.message, type: 'error' })
+        }).catch(() => {
+          AlertGeneral({ title: 'Erro', message: 'A imagem é maior que 1MB', type: 'error' })
         })
-      dispatch({ type: ActionsTypes.USER_LOGGED, payload: response.data })
+      setLoadingImage(false)
     }
   }
-  console.log(loading)
   return (<>{loading ? alertLoading('open', 'Estamos buscando algumas informações...') :
     <div className="row border border-secondary rounded" id="content-container">
       <h4 id="titles-custumer-add">Perfil</h4>
       <div className="col-md-4 col-sm-12 mb-1">
         <div className="card-body p-5 text-center border rounded">
           <div className="card-title fs-5 m-1">Imagem do perfil</div>
-          <div className="text-center">
-            <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' />
-            <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 5MB</div>
-            <div className='d-flex justify-content-center m-2' >
-              <div className="mb-3">
-                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChangeAndSave} id='upload-image-profile' />
+          {loadingImage ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black', alignContent: 'center' }} role="status" /> :
+            <div className="text-center">
+              <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' />
+              <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 1MB</div>
+              <div className='d-flex justify-content-center m-2' >
+                <div className="mb-3">
+                  <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChangeAndSave} id='upload-image-profile' />
+                </div>
               </div>
-            </div>
-          </div>
+            </div>}
         </div>
       </div>
       <div className="col-md-8 col-sm-12">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { AiFillDashboard, AiOutlineUser } from 'react-icons/ai'
 import { HiBars3 } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
@@ -42,21 +42,14 @@ export const Dropdown = (pictureProfile: string, username: string, handleLogOut:
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  let { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  const user = JSON.parse(localStorage.getItem('userLogged') as any)
-  currentUser = { ...currentUser, ...user }
-  const [profilePicture, setUserProfile] = useState(currentUser?.profilePicture || '')
-  const [username, setUsername] = useState(currentUser?.name || '')
-
+  let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
+  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
+  userLogged = { ...userLogged, ...currentUser }
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
   // const toggleClientesSubmenu = () => {
   //   setShowClientesSubmenu(!showClientesSubmenu)
   // }
 
-  useEffect(() => {
-    setUsername(currentUser?.name)
-    setUserProfile(currentUser?.profilePicture)
-  }, [currentUser])
   const handleLogOut = () => {
     localStorage.clear()
     dispatch({ type: ActionsTypes.USER_LOGOUT })
@@ -106,7 +99,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      {Dropdown(profilePicture, username, handleLogOut)}
+      {Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut)}
     </div>
     </>
   )

@@ -24,7 +24,6 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
           remember: true,
           loginWithGoogle: true
         })
-        console.log(userLogged)
         if (userLogged) {
           localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
           dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })

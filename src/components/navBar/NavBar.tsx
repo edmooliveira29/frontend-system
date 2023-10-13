@@ -6,11 +6,13 @@ import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
 import icon from '../../assets/img/icon.png'
 import { Dropdown } from '../sideBar'
 import { ActionsTypes } from '../../redux/actions/reducers'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const NavBar = () => {
-  const userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
-  console.log(userLogged)
+  let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
+  const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
+  userLogged = { ...userLogged, ...currentUser }
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogOut = () => {
@@ -52,7 +54,7 @@ export const NavBar = () => {
             <form className='d-flex align-items-center'>
               <input id="input-search" className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
               <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' sizeWidth='180px' id='search' />
-              {userLogged !== null ? Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut,true) :
+              {userLogged.name ? Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut, true) :
                 <Link to='/entrar' title={userLogged !== null ? 'Usuário logado' : 'Entrar'} className='link-navbar' id="link-login">
                   <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
                 </Link>}

@@ -35,7 +35,7 @@ export const Login = () => {
       navigate('/dashboard')
     }
   }
-  
+
   useEffect(() => {
     userIsAlreadyLoggedIn(navigate, '/dashboard')
   }, [])
@@ -87,7 +87,7 @@ export const Login = () => {
           </Link>
 
           <div className='justify-content-evenly p-2' id='button-login-google' >
-            <LoginGoogle setErrorResponse={setErrorResponse}/>
+            <LoginGoogle setErrorResponse={(error: string) => setErrorResponse(error)} />
           </div>
         </div>
       </div>

@@ -20,17 +20,13 @@ export const Singin = () => {
   const [errorResponse, setErrorResponse] = useState('')
 
   const handleCreateUserHook = async () => {
-    const translations = {name: 'Nome', email: 'Email', password: 'Senha', passwordConfirmation: 'Confirme sua senha'}
+    const translations = { name: 'Nome', email: 'Email', password: 'Senha', passwordConfirmation: 'Confirme sua senha' }
     const { name, email, password, passwordConfirmation } = state
 
     if (!validateFields({ name, email, password, passwordConfirmation }, translations)) {
       return false
     }
     handleCreateUser(setLoading, UserService, state, navigate, setErrorResponse)
-  }
-
-  const handleGoogle = (error: string) => {
-    setErrorResponse(error)
   }
 
   return (
@@ -86,7 +82,7 @@ export const Singin = () => {
               />
             </div>
             <div className='d-grid' id='button-login' onClick={handleCreateUserHook}>
-              <ComponentButtonCommon text='Registrar' loading={loading} id='register-singin'/>
+              <ComponentButtonCommon text='Registrar' loading={loading} id='register-singin' />
             </div>
             <div id='error-response'>
               <span >{errorResponse ?? ''}</span>
@@ -96,7 +92,7 @@ export const Singin = () => {
             </div>
 
             <div className='justify-content' id='button-login-google' >
-              <LoginGoogle errorResponse={handleGoogle} />
+              <LoginGoogle setErrorResponse={(error: string) => setErrorResponse(error)} />
             </div>
           </div>
         </div>

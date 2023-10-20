@@ -14,10 +14,10 @@ export const AddUserSystem = () => {
   })
   const navigate = useNavigate()
   const handleSave = async () => {
-    const { role, name, email, username } = state
-    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', username: 'Usuário' }
+    const { role, name, email, username, password} = state
+    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', username: 'Usuário', password: 'Senha' }
 
-    if (!validateFields({ role, name, email, username }, translations)) {
+    if (!validateFields({ role, name, email, username, password }, translations)) {
       return false
     }
     alert('Em fase de construção!')
@@ -68,7 +68,7 @@ export const AddUserSystem = () => {
             id={'password'}
             label="Senha"
             placeholder='Digite aqui uma senha'
-            required={false}
+            required={true}
             value={state.password}
             typeInput="password"
             onChange={(value: string) => { setState({ ...state, password: value }) }}

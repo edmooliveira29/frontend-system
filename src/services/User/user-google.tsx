@@ -33,6 +33,7 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
       } catch (error: any) {
         if (error.message == 'Network Error') {
           setErrorResponse('Verifique sua conexão de internet')
+          setLoading(false)
           return
         }
         setLoading(false)
@@ -43,7 +44,8 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
           userLogged = await userService.create({
             email: USER_CREDENTIAL.email,
             name: USER_CREDENTIAL.name,
-            profilePicture: USER_CREDENTIAL.picture
+            profilePicture: USER_CREDENTIAL.picture,
+            createWithGoogle: true
           })
           if (userLogged) {
             localStorage.setItem('userLogged', JSON.stringify(userLogged.data))

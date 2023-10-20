@@ -12,13 +12,14 @@ import './styles.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../redux/actions/reducers'
 
-export const Dropdown = (pictureProfile: string, username: string, handleLogOut: any, isAccessExternal?: boolean) => {
+export const Dropdown = (pictureProfile: string, username: string, handleLogOut: any, isAccessExternal: boolean) => {
+  console.log(isAccessExternal)
   return (<div className="col-3">
     <div className="dropdown justify-content-end">
       <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
-        {pictureProfile ?
+        {typeof pictureProfile == 'string' ?
           <img style={{ margin: '0 20px' }} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
-          <AiOutlineUser size={60} color='white' style={{ margin: '0px 20px' }} />}
+          <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }} />}
         {isAccessExternal ? null : <strong id='name-user-log'>{username}</strong>}
       </a>
       <ul id='user-dropdown' style={isAccessExternal ? { left: '-130px' } : { left: '100px' }} className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
@@ -99,7 +100,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      {Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut)}
+      {Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut, false)}
     </div>
     </>
   )

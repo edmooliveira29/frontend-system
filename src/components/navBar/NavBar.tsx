@@ -12,7 +12,6 @@ export const NavBar = () => {
   let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
   const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
   userLogged = { ...userLogged, ...currentUser }
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogOut = () => {

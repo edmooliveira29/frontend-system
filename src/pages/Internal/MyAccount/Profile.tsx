@@ -7,6 +7,7 @@ import './styles.sass'
 import { validateFields } from '../../../utils'
 import { useDispatch } from 'react-redux'
 import { ActionsTypes } from '../../../redux/actions/reducers'
+import { AiOutlineUser } from 'react-icons/ai'
 export const Profile = () => {
   const [state, setState] = useState<any>({})
   const [profilePicture, setProfilePicture] = useState<string>(localStorage.getItem('picture_profile') as string)
@@ -17,7 +18,7 @@ export const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
+      alertLoading('open', 'Estamos buscando algumas informações...')
       const userResponse = await user.get(JSON.parse(localStorage.getItem('userLogged') as any)._id as string)
       setState(
         {
@@ -40,7 +41,8 @@ export const Profile = () => {
         }
       )
       setProfilePicture(userResponse.data.profilePicture)
-      setLoading(false)
+
+      alertLoading('close')
     }
     fetchData()
   }, [])
@@ -67,7 +69,7 @@ export const Profile = () => {
     }
     try {
       const response = await (await user.edit(state)).data
-      localStorage.setItem('userLogged', JSON.stringify({ ...response.data, sessionToken: (JSON.parse(localStorage.getItem('userLogged') as string).sessionToken as string)}))
+      localStorage.setItem('userLogged', JSON.stringify({ ...response.data, sessionToken: (JSON.parse(localStorage.getItem('userLogged') as string).sessionToken as string) }))
       dispatch({ type: ActionsTypes.USER_LOGGED, payload: response.data })
       setLoading(false)
       AlertGeneral({ 'title': 'Sucesso!', message: response.message, type: 'success' })
@@ -94,31 +96,31 @@ export const Profile = () => {
       setLoadingImage(false)
     }
   }
-  return (<>{loading ? alertLoading('open', 'Estamos buscando algumas informações...') :
-    <div className="row border border-secondary rounded" id="content-container">
-      <h4 id="titles-custumer-add">Perfil</h4>
-      <div className="col-md-4 col-sm-12 mb-1">
-        <div className="card-body p-5 text-center border rounded">
-          <div className="card-title fs-5 m-1">Imagem do perfil</div>
-          {loadingImage ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black', alignContent: 'center' }} role="status" /> :
-            <div className="text-center">
-              <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' />
-              <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 1MB</div>
-              <div className='d-flex justify-content-center m-2' >
-                <div className="mb-3">
-                  <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChangeAndSave} id='upload-image-profile' />
-                </div>
+  return (<div className="row border border-secondary rounded" id="content-container">
+    <h4 id="titles-custumer-add">Perfil</h4>
+    <div className="col-md-4 col-sm-12 mb-1">
+      <div className="card-body p-5 text-center border rounded">
+        <div className="card-title fs-5 m-1">Imagem do perfil</div>
+        {loadingImage ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black', alignContent: 'center' }} role="status" /> :
+          <div className="text-center">
+            {typeof profilePicture === 'string' ? <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' /> :
+              <AiOutlineUser size={200} color='black' style={{ margin: '0px 20px' }} />}
+            <div className="caption fst-italic text-muted mb-4" style={{ fontSize: '10px' }}>Formato .jpg ou .png. Não pode ser maior que 1MB</div>
+            <div className='d-flex justify-content-center m-2' >
+              <div className="mb-3">
+                <ComponentButtonInputFile title='Carregar nova imagem' onFileChange={handleImageChangeAndSave} id='upload-image-profile' />
               </div>
-            </div>}
-        </div>
+            </div>
+          </div>}
       </div>
-      <div className="col-md-8 col-sm-12">
-        <PersonalData setState={setState} state={state} title={'DADOS'} />
-        <AddressData setUser={setState} state={state} cities={[]} />
-        <div className="m-2 d-flex justify-content-end" >
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' loading={loading} />
-        </div>
+    </div>
+    <div className="col-md-8 col-sm-12">
+      <PersonalData setState={setState} state={state} title={'DADOS'} />
+      <AddressData setUser={setState} state={state} cities={[]} />
+      <div className="m-2 d-flex justify-content-end" >
+        <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' loading={loading} />
       </div>
-    </div>}
-  </>)
+    </div>
+  </div>
+  )
 }

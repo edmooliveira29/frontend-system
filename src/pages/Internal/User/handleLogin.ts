@@ -5,7 +5,7 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
     const user = await userService.login({
       email: state.email,
       password: state.password,
-      remember: state.remember
+      remember: state.remember,
     })
 
     localStorage.setItem('userLogged', JSON.stringify(user.data))
@@ -29,7 +29,8 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
       email: state.email,
       name: state.name,
       password: state.password,
-      passwordConfirm: state.passwordConfirmation
+      passwordConfirm: state.passwordConfirmation,
+      createWithGoogle: false
     })
     localStorage.setItem('userLogged', JSON.stringify(user.data))
 

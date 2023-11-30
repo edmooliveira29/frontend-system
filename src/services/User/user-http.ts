@@ -9,6 +9,13 @@ export class UserService {
     const userResponse = await (http.get<any>(`/user?objectId=${objectId}`))
     return userResponse.data
   }
+
+  async getAll() {
+    console.log(await http.get<any>('/user'))
+    return (await http.get<any>('/user')).data
+  }
+
+
   async edit(data: any) {
     return (await http.put<any>(`/user/${data._id}`, data))
   }

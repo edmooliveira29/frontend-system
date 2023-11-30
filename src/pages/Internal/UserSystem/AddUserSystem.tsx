@@ -3,7 +3,7 @@ import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextF
 import { validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
-import { handleCreateUser } from './handleLogin'
+import { handleCreateUser } from './handle'
 import { UserService } from '../../../services/User'
 
 export const AddUserSystem = () => {

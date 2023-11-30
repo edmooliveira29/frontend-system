@@ -36,7 +36,7 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     })
     localStorage.setItem('userLogged', JSON.stringify(user.data))
 
-    navigate('/dashboard')
+    navigate('/usuario')
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {
@@ -44,5 +44,14 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     } else {
       AlertGeneral({title:'Erro', message:'Verifique sua conexão de internet', type:'error'})
     }
+  }
+}
+
+export const getAllUsers = async (UserService: any) => {
+  const userService = new UserService()
+  try{
+    return await userService.getAll()
+  }catch(error: any){
+    AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
   }
 }

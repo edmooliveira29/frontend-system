@@ -37,8 +37,9 @@ const stableSort = (array: any[], comparator: any) => {
 
 }
 
-export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
-  const keys = Object.keys(props.data[0] || {})
+export const TableBodyComponent: FC<{ columnHeaders: any, data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
+  const keys = props.columnHeaders
+  console.log(keys)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedRowData, setSelectedRowData] = useState(null)
 
@@ -71,15 +72,18 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
           )
           .map((row, index) => (
             <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
-              {keys.map((key) => (
-                <TableCell
-                  sx={{ padding: '2px 0px 0px 15px' }}
-                  align={key === 'name' ? 'left' : 'right'}
-                  key={key}
-                >
-                  {row[key]}
-                </TableCell>
-              ))}
+              {keys.map((key: any) => {
+                console.log(row)
+                return (
+                  <TableCell
+                    sx={{ padding: '2px 0px 0px 15px' }}
+                    align={key === 'name' ? 'left' : 'right'}
+                    key={key}
+                  >
+                    {row[key._id]}
+                  </TableCell>
+                )
+              })}
               <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="right">
                 <IconButton color="default" size="small" onClick={() => console.log('Edit')}>
                   <EditIcon />
@@ -95,7 +99,7 @@ export const TableBodyComponent: FC<{ data: any, orderBy: any, page: any, rowsPe
           ))}
         {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
 
-      </TableBody>
+      </TableBody >
     </>
   )
 }

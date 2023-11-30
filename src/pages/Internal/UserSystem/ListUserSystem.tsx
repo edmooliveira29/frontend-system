@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.sass'
 import { fakerPT_BR } from '@faker-js/faker'
 import { Link } from 'react-router-dom'
@@ -6,24 +6,24 @@ import { ComponentButtonCommon, TableComponent } from '../../../components'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { Tooltip } from '@mui/material'
 import { generatePDF } from '../../../utils'
+import { UserService } from '../../../services/User'
 
 export const ListUserSystem = () => {
-  function createData(): any {
-    return {
-      type: Math.floor(Math.random() * 2) === 0 ? 'PROPRIETARIO' : 'VENDEDOR',
-      name: fakerPT_BR.person.fullName().slice(0, 50),
-      username: fakerPT_BR.person.firstName().slice(0, 10),
-      email: fakerPT_BR.internet.email()
+  const [data, setData] = useState<any[]>([])
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      const userRespose = new UserService()
+      const users = await userRespose.getAll()
+      setData(users.data)
     }
-  }
-
-  const data: any[] = Array.from({ length: 3 }, () => createData())
-
+    getAllUsers()
+  }, [])
+  
   const columnHeaders = [
-    { _id:'role', label: 'PERMISSÃO', sortable: true },
-    { _id:'name', label: 'NOME', sortable: true },
-    { _id:'username', label: 'USUÁRIO', sortable: true },
-    { _id:'email', label: 'Email', sortable: true }
+    { _id: 'role', label: 'PERMISSÃO', sortable: true },
+    { _id: 'name', label: 'NOME', sortable: true },
+    { _id: 'email', label: 'EMAIL', sortable: true }
   ]
 
   return (<>

@@ -44,11 +44,15 @@ function EnhancedTable(props: EnhancedTableProps) {
     setPage(0)
   }
 
-  const filteredData = data.filter((row: any) =>
-    Object.values(row)
-      .slice(0, 3) 
-      .some((value: any) => value.toString().toLowerCase().includes(searchValue.toLowerCase()))
-  )
+  const filteredData = data.filter((row: any) => {
+    if (searchValue !== '') {
+      return Object.values(row)
+        .slice(0, 3)
+        .some((value: any) => value.toString().toLowerCase().includes(searchValue.toLowerCase()))
+    } else {
+      return data
+    }
+  })
 
   return (
     <Paper sx={{ width: '100%' }}>
@@ -71,7 +75,7 @@ function EnhancedTable(props: EnhancedTableProps) {
       <TableContainer>
         <Table sx={{ minWidth: 750 }}>
           <TableHeadComponent columnHeaders={props.head} orderBy={orderBy} setOrderBy={setOrderBy} order={order} setOrder={setOrder} />
-          <TableBodyComponent rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
+          <TableBodyComponent columnHeaders={props.head} rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
         </Table>
       </TableContainer>
       <TablePagination

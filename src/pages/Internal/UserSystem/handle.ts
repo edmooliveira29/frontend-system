@@ -32,7 +32,8 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
       name: state.name,
       password: state.password,
       passwordConfirm: state.passwordConfirmation,
-      createWithGoogle: false
+      createWithGoogle: false,
+      role: state.role
     })
     localStorage.setItem('userLogged', JSON.stringify(user.data))
 

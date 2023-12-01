@@ -5,6 +5,8 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 import React, { FC, useState } from 'react'
 import { AlertConfirmationDelete, ModalDetails } from '../modal'
+import { useDispatch } from 'react-redux'
+import { ActionsTypes } from '../../redux/actions/reducers'
 type Order = 'asc' | 'desc' | undefined
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -37,15 +39,20 @@ const stableSort = (array: any[], comparator: any) => {
 
 }
 
-export const TableBodyComponent: FC<{ columnHeaders: any, data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
+export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
   const keys = props.columnHeaders
-  console.log(keys)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedRowData, setSelectedRowData] = useState(null)
+  const dispatch = useDispatch()
 
   const handleOpenDetails = (rowData: any) => {
     setSelectedRowData(rowData)
     setIsModalOpen(true)
+  }
+  const handleOpenEdit = (rowData: any, navigate: any, dispatch: any) => {
+    setSelectedRowData(rowData)
+    dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: rowData })
+    navigate('/usuario/adicionar', { rowData })
   }
 
   const handleCloseModal = () => {
@@ -59,7 +66,6 @@ export const TableBodyComponent: FC<{ columnHeaders: any, data: any, orderBy: an
       AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[0]]}`)
     } else {
       AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
-
     }
   }
   return (
@@ -73,19 +79,18 @@ export const TableBodyComponent: FC<{ columnHeaders: any, data: any, orderBy: an
           .map((row, index) => (
             <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
               {keys.map((key: any) => {
-                console.log(row)
                 return (
                   <TableCell
                     sx={{ padding: '2px 0px 0px 15px' }}
                     align={key === 'name' ? 'left' : 'right'}
                     key={key}
                   >
-                    {row[key._id]}
+                    {row[key._id] === 'owner' ? 'PROPRIETÁRIO' : row[key._id] === 'salesman' ? 'VENDEDOR' : row[key._id]}
                   </TableCell>
                 )
               })}
               <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="right">
-                <IconButton color="default" size="small" onClick={() => console.log('Edit')}>
+                <IconButton color="default" size="small" onClick={() => handleOpenEdit(row, props.navigate, dispatch)}>
                   <EditIcon />
                 </IconButton>
                 <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>

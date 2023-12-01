@@ -15,6 +15,7 @@ export const Singin = () => {
     password: '',
     passwordConfirmation: '',
     name: '',
+    role: 'owner',
   })
   const [loading, setLoading] = useState(false)
   const [errorResponse, setErrorResponse] = useState('')

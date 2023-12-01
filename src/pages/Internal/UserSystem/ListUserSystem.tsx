@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
-import { fakerPT_BR } from '@faker-js/faker'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ComponentButtonCommon, TableComponent } from '../../../components'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { Tooltip } from '@mui/material'
@@ -10,7 +9,7 @@ import { UserService } from '../../../services/User'
 
 export const ListUserSystem = () => {
   const [data, setData] = useState<any[]>([])
-
+  const navigate = useNavigate()
   useEffect(() => {
     const getAllUsers = async () => {
       const userRespose = new UserService()
@@ -48,7 +47,7 @@ export const ListUserSystem = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
+      <TableComponent navigate={navigate} data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
     </div>
   </>
   )

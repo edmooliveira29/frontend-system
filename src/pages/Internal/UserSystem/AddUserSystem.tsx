@@ -5,36 +5,41 @@ import { useNavigate } from 'react-router-dom'
 import './styles.sass'
 import { handleCreateUser } from './handle'
 import { UserService } from '../../../services/User'
+import { useDispatch, useSelector } from 'react-redux'
+import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const AddUserSystem = () => {
+  const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const [state, setState] = useState({
-    role: '',
-    name: '',
-    email: '',
+    role: objectToEdit.role || '',
+    name: objectToEdit.name || '',
+    email: objectToEdit.email || '',
     password: '',
-    username: ''
   })
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
   const handleSave = async () => {
-    const { role, name, email, username, password} = state
-    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', username: 'Usuário', password: 'Senha' }
-
-    if (!validateFields({ role, name, email, username, password }, translations)) {
+    const { role, name, email, password } = state
+    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', password: 'Senha' }
+    let fieldsToValidate
+    Object.values(objectToEdit).length > 0 ? fieldsToValidate = { role, name, email } : fieldsToValidate = { role, name, email, password }
+    if (!validateFields(fieldsToValidate, translations)) {
       return false
     }
     handleCreateUser(setLoading, UserService, state, navigate)
   }
-
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
-      <h4 id="titles-category-add">ADICIONAR USUÁRIO</h4>
+      <h4 id="titles-category-add">{Object.values(objectToEdit).length > 0 ? 'EDITAR USUÁRIO' : 'ADICIONAR USUÁRIO'}</h4>
       <div className="row m-0">
         <div className="col-md-2 col-sm-12">
-          <SelectFieldInput id={'role-user'} value={state.role || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'salesman', label: 'Vendedor' }, { value: 'property', label: 'Proprietário' }]} required={true} onChange={(event: any) => setState({ ...state, role: event.target.value })} />
+          <SelectFieldInput id={'role-user'} value={state.role || ''} placeholder='Selecione um tipo' label='Tipo'
+            options={[{ value: 'salesman', label: 'Vendedor' }, { value: 'owner', label: 'Proprietário' }]}
+            required={true} onChange={(event: any) => setState({ ...state, role: event.target.value })} />
         </div>
-        <div className="col-md-3 col-sm-12">
+        <div className="col-md-4 col-sm-12">
           <TextFieldInput
             id={'name'}
             label="Nome"
@@ -45,18 +50,7 @@ export const AddUserSystem = () => {
             onChange={(value: string) => { setState({ ...state, name: value }) }}
           />
         </div>
-        <div className="col-md-2 col-sm-12">
-          <TextFieldInput
-            id={'username'}
-            label="Usuário"
-            placeholder='Digite aqui um usuário'
-            required={true}
-            value={state.username}
-            typeInput="text"
-            onChange={(value: string) => { setState({ ...state, username: value }) }}
-          />
-        </div>
-        <div className="col-md-2 col-sm-12">
+        <div className="col-md-3 col-sm-12">
           <TextFieldInput
             id={'email'}
             label="Email"
@@ -67,7 +61,7 @@ export const AddUserSystem = () => {
             onChange={(value: string) => { setState({ ...state, email: value }) }}
           />
         </div>
-        <div className="col-md-3 col-sm-12">
+        {Object.values(objectToEdit).length === 0 && <div className="col-md-3 col-sm-12">
           <TextFieldInput
             id={'password'}
             label="Senha"
@@ -77,12 +71,15 @@ export const AddUserSystem = () => {
             typeInput="password"
             onChange={(value: string) => { setState({ ...state, password: value }) }}
           />
-        </div>
+        </div>}
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-user' />
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-user' loading={loading} />
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+            dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: {} })
+            navigate(-1)
+          }} id='back-user' />
+          <ComponentButtonSuccess text={Object.values(objectToEdit).length > 0 ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSave} id='save-user' loading={loading} />
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ interface EnhancedTableProps {
   head: any
   title: string
   translations: any
+  navigate: any
 }
 
 function EnhancedTable(props: EnhancedTableProps) {
@@ -75,7 +76,7 @@ function EnhancedTable(props: EnhancedTableProps) {
       <TableContainer>
         <Table sx={{ minWidth: 750 }}>
           <TableHeadComponent columnHeaders={props.head} orderBy={orderBy} setOrderBy={setOrderBy} order={order} setOrder={setOrder} />
-          <TableBodyComponent columnHeaders={props.head} rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
+          <TableBodyComponent navigate={props.navigate} columnHeaders={props.head} rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
         </Table>
       </TableContainer>
       <TablePagination
@@ -95,10 +96,10 @@ function EnhancedTable(props: EnhancedTableProps) {
   )
 }
 
-export const TableComponent: React.FC<{ data: any[], head: any[], title: string, translations: any }> = (props) => {
+export const TableComponent: React.FC<{ navigate?: any, data: any[], head: any[], title: string, translations: any }> = (props) => {
   return (
     <Box sx={{ p: 0 }}>
-      <EnhancedTable data={props.data} head={props.head} title={props.title} translations={props.translations} />
+      <EnhancedTable navigate={props.navigate} data={props.data} head={props.head} title={props.title} translations={props.translations} />
     </Box>
   )
 }

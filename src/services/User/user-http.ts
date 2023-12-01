@@ -11,7 +11,6 @@ export class UserService {
   }
 
   async getAll() {
-    console.log(await http.get<any>('/user'))
     return (await http.get<any>('/user')).data
   }
 

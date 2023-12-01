@@ -51,6 +51,7 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
   }
   const handleOpenEdit = (rowData: any, navigate: any, dispatch: any) => {
     setSelectedRowData(rowData)
+    console.log(rowData)
     dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: rowData })
     navigate('/usuario/adicionar', { rowData })
   }
@@ -83,7 +84,7 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
                   <TableCell
                     sx={{ padding: '2px 0px 0px 15px' }}
                     align={key === 'name' ? 'left' : 'right'}
-                    key={key}
+                    key={key._id}
                   >
                     {row[key._id] === 'owner' ? 'PROPRIETÁRIO' : row[key._id] === 'salesman' ? 'VENDEDOR' : row[key._id]}
                   </TableCell>

@@ -45,7 +45,8 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
             email: USER_CREDENTIAL.email,
             name: USER_CREDENTIAL.name,
             profilePicture: USER_CREDENTIAL.picture,
-            createWithGoogle: true
+            createWithGoogle: true,
+            role: 'owner',
           })
           if (userLogged) {
             localStorage.setItem('userLogged', JSON.stringify(userLogged.data))

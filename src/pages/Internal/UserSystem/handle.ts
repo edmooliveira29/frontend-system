@@ -43,16 +43,38 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     if (error.message != 'Network Error') {
       AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
     } else {
-      AlertGeneral({title:'Erro', message:'Verifique sua conexão de internet', type:'error'})
+      AlertGeneral({ title: 'Erro', message: 'Verifique sua conexão de internet', type: 'error' })
     }
   }
 }
+export const handleEditUser = async (setLoading: any, UserService: any, state: any, navigate: any) => {
+  setLoading(true)
+  const userService = new UserService()
 
+  try {
+    const user = await userService.edit({
+      email: state.email,
+      name: state.name,
+      role: state.role,
+      _id: state._id
+    })
+    localStorage.setItem('userLogged', JSON.stringify(user.data))
+
+    navigate('/usuario')
+  } catch (error: any) {
+    setLoading(false)
+    if (error.message != 'Network Error') {
+      AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
+    } else {
+      AlertGeneral({ title: 'Erro', message: 'Verifique sua conexão de internet', type: 'error' })
+    }
+  }
+}
 export const getAllUsers = async (UserService: any) => {
   const userService = new UserService()
-  try{
+  try {
     return await userService.getAll()
-  }catch(error: any){
+  } catch (error: any) {
     AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
   }
 }

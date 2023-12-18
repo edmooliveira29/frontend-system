@@ -22,7 +22,8 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
   }
 }
 
-export const handleCreateUser = async (setLoading: any, UserService: any, state: any, createUser?: boolean) => {
+export const handleCreateUser = async (props: { setLoading: any, UserService: any, state: any, createUser?: boolean }) => {
+  const { setLoading, UserService, state, createUser } = props
   setLoading(true)
   const userService = new UserService()
 
@@ -38,7 +39,7 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     if (createUser) {
       localStorage.setItem('userLogged', JSON.stringify(user.data))
     }
-
+    return user
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {
@@ -46,9 +47,12 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     } else {
       AlertGeneral({ title: 'Erro', message: 'Verifique sua conexão de internet', type: 'error' })
     }
+    return false
   }
 }
-export const handleEditUser = async (setLoading: any, UserService: any, state: any, editUser?: boolean) => {
+export const handleEditUser = async (props: { setLoading: any, UserService: any, state: any, editUser?: boolean }) => {
+  const { setLoading, UserService, state, editUser } = props
+
   setLoading(true)
   const userService = new UserService()
 
@@ -62,6 +66,8 @@ export const handleEditUser = async (setLoading: any, UserService: any, state: a
     if (editUser) {
       localStorage.setItem('userLogged', JSON.stringify(user.data))
     }
+    return user
+
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {
@@ -69,6 +75,7 @@ export const handleEditUser = async (setLoading: any, UserService: any, state: a
     } else {
       AlertGeneral({ title: 'Erro', message: 'Verifique sua conexão de internet', type: 'error' })
     }
+    return false
   }
 }
 export const getAllUsers = async (UserService: any) => {

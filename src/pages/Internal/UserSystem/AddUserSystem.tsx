@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
+import { AlertConfirmationSaveEdit, ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
@@ -26,14 +26,19 @@ export const AddUserSystem = () => {
     if (!validateFields(fieldsToValidate, translations)) {
       return false
     }
+    let response
     if (hasObjectToEdit) {
-      handleEditUser(setLoading, UserService, state)
+      response = await AlertConfirmationSaveEdit('edit', handleEditUser, { setLoading, UserService, state })
     } else {
-      handleCreateUser(setLoading, UserService, state)
+      response = await AlertConfirmationSaveEdit('edit', handleCreateUser, { setLoading, UserService, state })
     }
-    dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-    navigate('/usuario')
+    if (response) {
+      dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+      navigate('/usuario')
+    }
   }
+
+
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <h4 id="titles-category-add">{hasObjectToEdit ? 'EDITAR USUÁRIO' : 'ADICIONAR USUÁRIO'}</h4>
@@ -43,7 +48,7 @@ export const AddUserSystem = () => {
             options={[{ value: 'salesman', label: 'Vendedor' }, { value: 'owner', label: 'Proprietário' }]}
             required={true} onChange={(event: any) => setState({ ...state, role: event.target.value })} />
         </div>
-        <div className="col-md-4 col-sm-12">
+        <div className={hasObjectToEdit ? "col-md-7 col-sm-12" : "col-md-4 col-sm-12"}>
           <TextFieldInput
             id={'name'}
             label="Nome"

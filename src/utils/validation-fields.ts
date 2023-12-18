@@ -1,5 +1,4 @@
 import { AlertGeneral } from '../components'
-
 export const validateFields = (inputs: any, translations: any) => {
   const emptyFields = []
   let elementInput, elementInputLabel
@@ -47,7 +46,7 @@ export const validateFields = (inputs: any, translations: any) => {
         emptyFields.push(translations[index] || index)
       }
       if (index === 'email' && inputs[index] && !validationEmail(inputs[index])) {
-        AlertGeneral({title: 'Erro', message: `O email '${inputs[index]}' é inválido!`, type: 'error' }); return false
+        AlertGeneral({ title: 'Erro', message: `O email '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
       if (index === 'cpf' && inputs[index] && !validationCPF(inputs[index])) {
         AlertGeneral({ title: 'Erro', message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
@@ -64,11 +63,10 @@ export const validateFields = (inputs: any, translations: any) => {
     return false
   }
   if (emptyFields.length > 0 && typeof emptyFields[0] == 'object') {
-    AlertGeneral({title: 'Erro', message: `O item ${emptyFields[0].i} dos <strong>${emptyFields[0].locale}</strong> contém alguns campos que são obrigatórios.`, type: 'error' })
+    AlertGeneral({ title: 'Erro', message: `O item ${emptyFields[0].i} dos <strong>${emptyFields[0].locale}</strong> contém alguns campos que são obrigatórios.`, type: 'error' })
     return false
   }
   return true
-
 }
 
 export const validationCPF = (cpf: string): boolean => {
@@ -98,4 +96,25 @@ export const validationCPF = (cpf: string): boolean => {
 export const validationEmail = (email: string): boolean => {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
+}
+
+export const validationPassword = (password: string): string => {
+  let message = ''
+  if (password.length < 8) {
+    message = message + ' - Sua senha deve ter pelo menos 8 caracteres</br>'
+  }
+  if (!(/[a-z]/.test(password))) {
+    message = message + ' - Sua senha deve ter pelo menos uma letra minuscula</br>'
+  }
+  if (!(/[A-Z]/.test(password))) {
+    message = message + ' - Sua senha deve ter pelo menos uma letra maiuscula</br>'
+  }
+  if (!(/[0-9]/.test(password))) {
+    message = message + ' - Sua senha deve ter pelo menos um número</br>'
+  }
+  if (!(/\W/.test(password))) {
+    message = message + ' - Sua senha deve ter pelo menos um caractere especial</br>'
+  }
+
+  return (`<div><span style="font-size: 12px; color: red"> ${message}</span></div>`)
 }

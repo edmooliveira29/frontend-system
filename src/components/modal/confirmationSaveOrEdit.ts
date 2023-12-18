@@ -14,14 +14,32 @@ export const AlertConfirmationSaveEdit = (editOrSave: string, callBackToSaveOrEd
 
   }).then(async (result) => {
     if (result.isConfirmed) {
-      const response = await callBackToSaveOrEdit(paramsToSaveOrEdit)
+      let response
+      try {
+        response = await callBackToSaveOrEdit(paramsToSaveOrEdit)
+        Swal.fire({
+          title: editOrSave == 'save' ? 'Salvo com sucesso!' : 'Editado com sucesso!',
+          icon: 'success',
+          allowOutsideClick: false,
+          width: 500
+        })
+      } catch (error: any) {
+        Swal.fire({
+          title: 'Erro',
+          text: error.response.data.message,
+          icon: 'error',
+          allowOutsideClick: false,
+          width: 500
+        })
+      }
+      return response
+    } else {
       Swal.fire({
-        title: editOrSave == 'save' ? 'Salvo com sucesso!' : 'Editado com sucesso!',
-        icon: 'success',
-        allowOutsideClick: false,
+        title: 'Cancelado',
+        text: 'Nada foi realizado!',
+        icon: 'error',
         width: 500
       })
-      return response
     }
   })
 }

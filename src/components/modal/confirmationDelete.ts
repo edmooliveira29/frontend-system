@@ -23,7 +23,7 @@ export const AlertConfirmationDelete = (subtitle: string) => {
     } else {
       Swal.fire({
         title: 'Cancelado',
-        text: 'Ok, nada foi realizado',
+        text: 'Nada foi realizado',
         icon: 'error',
         width: 500
       })

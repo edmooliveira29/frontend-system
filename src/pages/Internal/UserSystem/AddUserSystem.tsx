@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AlertConfirmationSaveEdit, ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
-import { validateFields } from '../../../utils'
+import { validateFields, validationPassword } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
 import { handleCreateUser, handleEditUser } from './handle'
@@ -10,15 +10,22 @@ import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const AddUserSystem = () => {
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
+  console.log(objectToEdit)
   const hasObjectToEdit = objectToEdit !== undefined
   const [state, setState] = useState(
-    hasObjectToEdit ? { ...objectToEdit } : {}
+    hasObjectToEdit ? objectToEdit : {
+      role: 'owner', 
+      name: '',
+      email: '',
+      password: '',
+    }
   )
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
   const handleSaveEdit = async () => {
+    setLoading(true)
     const { role, name, email, password } = state
     const translations = { role: 'Permissões', name: 'Nome', email: 'Email', password: 'Senha' }
     let fieldsToValidate
@@ -30,8 +37,9 @@ export const AddUserSystem = () => {
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditUser, { setLoading, UserService, state })
     } else {
-      response = await AlertConfirmationSaveEdit('edit', handleCreateUser, { setLoading, UserService, state })
+      response = await AlertConfirmationSaveEdit('save', handleCreateUser, { setLoading, UserService, state })
     }
+    setLoading(false)
     if (response) {
       dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
       navigate('/usuario')
@@ -81,6 +89,7 @@ export const AddUserSystem = () => {
             typeInput="password"
             onChange={(value: string) => { setState({ ...state, password: value }) }}
           />
+          {state.password.length > 0 && <div dangerouslySetInnerHTML={{ __html: validationPassword(state.password) }} />}
         </div>}
       </div>
       <div className="row p-3">

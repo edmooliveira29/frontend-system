@@ -51,7 +51,6 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
   }
   const handleOpenEdit = (rowData: any, navigate: any, dispatch: any) => {
     setSelectedRowData(rowData)
-    console.log(rowData)
     dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: rowData })
     navigate('/usuario/adicionar', { rowData })
   }

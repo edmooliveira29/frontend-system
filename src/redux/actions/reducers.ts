@@ -4,7 +4,7 @@ const initialStateUser = {
 }
 
 const initialStateObject = {
-  objectToEdit: null
+  objectToEdit: undefined
 }
 
 

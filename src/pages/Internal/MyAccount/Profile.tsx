@@ -37,7 +37,8 @@ export const Profile = () => {
           phoneNumber: userResponse.data.phoneNumber || '',
           stateOfTheCountry: userResponse.data.stateOfTheCountry || '',
           zipCode: userResponse.data.zipCode || '',
-          profilePicture: userResponse.data.profilePicture || ''
+          profilePicture: userResponse.data.profilePicture || '',
+          role: userResponse.data.role || 'owner'
         }
       )
       setProfilePicture(userResponse.data.profilePicture)
@@ -61,7 +62,7 @@ export const Profile = () => {
       houseNumber: 'Número',
       neighborhood: 'Bairro',
       stateOfTheCountry: 'Estado',
-      city: 'Cidade'
+      city: 'Cidade',
     }
     if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
       setLoading(false)

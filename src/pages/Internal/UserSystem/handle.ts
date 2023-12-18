@@ -22,7 +22,7 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
   }
 }
 
-export const handleCreateUser = async (setLoading: any, UserService: any, state: any, navigate: any) => {
+export const handleCreateUser = async (setLoading: any, UserService: any, state: any, createUser?: boolean) => {
   setLoading(true)
   const userService = new UserService()
 
@@ -35,9 +35,10 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
       createWithGoogle: false,
       role: state.role
     })
-    localStorage.setItem('userLogged', JSON.stringify(user.data))
+    if (createUser) {
+      localStorage.setItem('userLogged', JSON.stringify(user.data))
+    }
 
-    navigate('/usuario')
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {
@@ -47,7 +48,7 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
     }
   }
 }
-export const handleEditUser = async (setLoading: any, UserService: any, state: any, navigate: any) => {
+export const handleEditUser = async (setLoading: any, UserService: any, state: any, editUser?: boolean) => {
   setLoading(true)
   const userService = new UserService()
 
@@ -58,9 +59,9 @@ export const handleEditUser = async (setLoading: any, UserService: any, state: a
       role: state.role,
       _id: state._id
     })
-    localStorage.setItem('userLogged', JSON.stringify(user.data))
-
-    navigate('/usuario')
+    if (editUser) {
+      localStorage.setItem('userLogged', JSON.stringify(user.data))
+    }
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {

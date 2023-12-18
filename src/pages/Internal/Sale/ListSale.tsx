@@ -43,7 +43,7 @@ export const ListSale = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 d-flex justify-content-center align-items-center">
+          <div className="col-3 justify-content-center align-items-center">
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'PREÇO', 'STATUS'], 'vendas')} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>

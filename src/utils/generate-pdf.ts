@@ -1,26 +1,33 @@
-import { Content, ContentTable, ContentText, TDocumentDefinitions, TableOfContent } from 'pdfmake/interfaces'
+import { Content, ContentTable, ContentText, TDocumentDefinitions } from 'pdfmake/interfaces'
 import { alertLoading } from '../components'
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-export const generatePDF = (data: any[], header: any[], tableName: string) => {
-  alertLoading('open', 'Estamos buscando o CEP')
+export const generatePDF = (data: any[], header: any[], tableName: string, fields?: any) => {
+  alertLoading('open', 'Estamos gerando o PDF...')
   const titleOfReport: ContentText = { text: `Lista de ${tableName}`, style: 'title', bold: true, alignment: 'center', marginBottom: 20 }
   const headerTable: ContentText[] = header.map(text => ({ text, bold: true, fontSize: 10 }))
   const bodyTable: any[] = []
+  console.log(data)
   for (const item of data) {
-    const itemValues: TableOfContent[] = Object.values(item)
-    bodyTable.push(itemValues)
+    const row: any[] = []
+    for (const field of fields) {
+      if (Object.prototype.hasOwnProperty.call(item,field)) {
+        row.push(item[field])
+      }
+    }
+  
+    bodyTable.push(row)
   }
-
+  console.log(header.map(() => ('*')))
   const tableData: ContentTable = {
     table: {
-      widths: header.map(() => ('auto')),
+      widths: header.map(() => ('*')),
       headerRows: 1,
       body: [
         headerTable,
-        ...bodyTable,
+        ...bodyTable
       ],
     },
     style: 'table',
@@ -30,13 +37,14 @@ export const generatePDF = (data: any[], header: any[], tableName: string) => {
       vLineColor: '#222222',
       fillColor: function (rowIndex) {
         if (rowIndex === 0) {
-          return '#CCCCCC'
+          return '#CCCCCC';
         } else {
-          return (rowIndex % 2 === 0) ? '#EEEEEE' : null
+          return (rowIndex % 2 === 0) ? '#EEEEEE' : null;
         }
       }
     }
   }
+  
 
   const currentDate = new Date()
   const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()} às ${currentDate.getHours()}:${currentDate.getMinutes()}`
@@ -72,7 +80,7 @@ export const generatePDF = (data: any[], header: any[], tableName: string) => {
         bold: true
       },
       table: {
-        fontSize: 8,
+        fontSize: 10,
         alignment: 'center',
         margin: [0, 10, 0, 10]
       },

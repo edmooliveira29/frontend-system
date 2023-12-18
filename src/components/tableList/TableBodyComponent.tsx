@@ -82,15 +82,15 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
               {keys.map((key: any) => {
                 return (
                   <TableCell
-                    sx={{ padding: '2px 0px 0px 15px' }}
-                    align={key === 'name' ? 'left' : 'right'}
+                    sx={{ padding: '2px 0px 0px 0px' }}
+                    align={'center'}
                     key={key._id}
                   >
                     {row[key._id] === 'owner' ? 'PROPRIETÁRIO' : row[key._id] === 'salesman' ? 'VENDEDOR' : row[key._id]}
                   </TableCell>
                 )
               })}
-              <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="right">
+              <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
                 <IconButton color="default" size="small" onClick={() => handleOpenEdit(row, props.navigate, dispatch)}>
                   <EditIcon />
                 </IconButton>

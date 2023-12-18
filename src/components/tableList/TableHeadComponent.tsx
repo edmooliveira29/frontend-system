@@ -18,12 +18,13 @@ export const TableHeadComponent: FC<{ columnHeaders: any, orderBy: any, setOrder
               key={column._id}
               align={column._id === 'name' ? 'left' : 'right'}
               sortDirection={props.orderBy === column._id ? props.order : false}
+              sx={{textAlign: 'center'}}
             >
               <TableSortLabel
                 active={props.orderBy === column._id}
                 direction={props.orderBy === column._id ? props.order : 'asc'}
                 onClick={() => handleRequestSort(column._id)}
-                sx={{ fontWeight: 'bold' }}
+                sx={{ fontWeight: 'bold'}}
               >
                 {(column.label).toUpperCase()}
               </TableSortLabel>

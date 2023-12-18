@@ -3,14 +3,16 @@ import React from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => void, translations: any }> = (props) => {
-  const { data, title, onClose } = props // Desestruture os props para obter os dados e o título
+  const { data, title, onClose } = props
   const [openModal, setOpenModal] = React.useState(true)
-  const keys = Object.keys(data)
+  const fieldsNotToShow = ['password', 'createdAt', 'editAt', 'updatedAt', '_id', 'profilePicture', 'sessionToken', 'createWithGoogle', 'lastChangedPassword']
+  const keys = Object.keys(data).filter(key => !fieldsNotToShow.includes(key))
+
   return (
     <>
       <Modal
-        open={openModal} // Use a variável de estado openModal para controlar a abertura do modal
-        onClose={() => { setOpenModal(false); onClose() }} // Feche o modal e chame a função onClose ao fechar
+        open={openModal}
+        onClose={() => { setOpenModal(false); onClose() }}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
         style={{ zIndex: 1000 }}
@@ -37,18 +39,26 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
           </div>
           <div className="row d-flex align-items-center justify-content-center" style={{ maxHeight: 'calc(90vh - 150px)', overflowY: 'auto', overflowX: 'hidden' }}>
             <h2 className='text-center'>Detalhes de {title}</h2>
-            <hr/>
+            <hr />
             <ul>
-              {keys.map((key, index) => (
-                <div className="row" key={key} style={{ fontSize: '14px', listStyleType: 'none' }}>
-                  <div className="col-6 text-end mx-0 my-1 px-1 ">
-                    <strong>{props.translations[index].label}: </strong>
-                  </div>
-                  <div className="col-6 text-start mx-0 my-1 px-1">
-                    {data[key]}
-                  </div>
-                </div>
-              ))}
+              {keys.map((key, index) => {
+                if (props.translations.length > index) {
+
+                  return (
+                    data[props.translations[index]._id] !== '' && data[props.translations[index]._id] !== null && data[props.translations[index]._id] !== undefined ? <div className="row" key={props.translations[index]._id} style={{ fontSize: '14px', listStyleType: 'none' }}>
+                      <div className="col-6 text-end mx-0 my-1 px-1 ">
+                        <strong>{props.translations[index].label}: </strong>
+                      </div>
+                      <div className="col-6 text-start mx-0 my-1 px-1">
+                        {props.translations[index]._id === 'role' ?
+                          data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : data[props.translations[index]._id] === 'salesman' ? 'VENDEDOR' : data[props.translations[index]._id]
+                          : data[props.translations[index]._id]}
+                      </div>
+                    </div> : null
+
+                  )
+                }
+              })}
             </ul>
 
           </div>

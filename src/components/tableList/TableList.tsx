@@ -21,10 +21,12 @@ interface EnhancedTableProps {
   title: string
   translations: any
   navigate: any
+  deleteItem: any
 }
 
 function EnhancedTable(props: EnhancedTableProps) {
-  const { data } = props
+  let { data } = props
+  data = Object.prototype.hasOwnProperty.call(data, 'data') ? data.data : data
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof any>('')
   const [page, setPage] = React.useState(0)
@@ -76,7 +78,7 @@ function EnhancedTable(props: EnhancedTableProps) {
       <TableContainer>
         <Table sx={{ minWidth: 750 }}>
           <TableHeadComponent columnHeaders={props.head} orderBy={orderBy} setOrderBy={setOrderBy} order={order} setOrder={setOrder} />
-          <TableBodyComponent navigate={props.navigate} columnHeaders={props.head} rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
+          <TableBodyComponent deleteItem={props.deleteItem} navigate={props.navigate} columnHeaders={props.head} rowsPerPage={rowsPerPage} orderBy={orderBy} page={page} order={order} setOrder={setOrder} data={filteredData} title={props.title} translations={props.translations} />
         </Table>
       </TableContainer>
       <TablePagination
@@ -96,10 +98,10 @@ function EnhancedTable(props: EnhancedTableProps) {
   )
 }
 
-export const TableComponent: React.FC<{ navigate?: any, data: any[], head: any[], title: string, translations: any }> = (props) => {
+export const TableComponent: React.FC<{ navigate?: any, data: any[], head: any[], title: string, translations: any, deleteItem: any }> = (props) => {
   return (
     <Box sx={{ p: 0 }}>
-      <EnhancedTable navigate={props.navigate} data={props.data} head={props.head} title={props.title} translations={props.translations} />
+      <EnhancedTable deleteItem={props.deleteItem} navigate={props.navigate} data={props.data} head={props.head} title={props.title} translations={props.translations} />
     </Box>
   )
 }

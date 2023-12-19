@@ -50,7 +50,7 @@ export const ListSale = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} title='venda' translations={columnHeaders}/>
+      <TableComponent deleteItem={() => { return }}  data={data} head={columnHeaders} title='venda' translations={columnHeaders}/>
     </div>
   </>
   )

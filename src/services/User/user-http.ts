@@ -1,6 +1,9 @@
 import http from '../http-common'
 
 export class UserService {
+  async getAll() {
+    return (await http.get<any>('/user')).data
+  }
   async create(data: any) {
     return (await http.post<any>('/user', data)).data
   }
@@ -10,17 +13,16 @@ export class UserService {
     return userResponse.data
   }
 
-  async getAll() {
-    return (await http.get<any>('/user')).data
-  }
-
-
   async edit(data: any) {
     return (await http.put<any>(`/user/${data._id}`, data))
   }
 
   async login(data: any) {
     return (await (http.post<any>('/login', data))).data
+  }
+
+  async delete(objectId: string) {
+    return (await http.delete<any>(`/user/${objectId}`))
   }
 
 }

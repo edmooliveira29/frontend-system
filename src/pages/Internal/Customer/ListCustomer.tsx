@@ -53,7 +53,7 @@ export const ListCustomer = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} title='cliente' translations={columnHeaders}/>
+      <TableComponent deleteItem={() => { return }}  data={data} head={columnHeaders} title='cliente' translations={columnHeaders}/>
     </div>
   </>
   )

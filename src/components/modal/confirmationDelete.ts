@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 
-export const AlertConfirmationDelete = (subtitle: string) => {
+export const AlertConfirmationDelete = (subtitle: string, callbackDelete?: any, paramsToDelete?: any) => {
   Swal.fire({
     title: 'Você tem certeza que quer apagar esta informação?',
     text: subtitle,
@@ -11,15 +11,25 @@ export const AlertConfirmationDelete = (subtitle: string) => {
     confirmButtonText: 'SIM',
     allowOutsideClick: false,
     width: 500
-
-  }).then((result) => {
+    
+  }).then(async (result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Deletado',
-        text: 'Informação deletada com sucesso',
-        icon: 'success',
-        width: 500
-      })
+      try {
+        await callbackDelete(paramsToDelete._id)
+        Swal.fire({
+          title: 'Deletado',
+          text: 'Informação deletada com sucesso',
+          icon: 'success',
+          width: 500
+        })
+      } catch (error: any) {
+        Swal.fire({
+          title: 'Erro',
+          text: error.response.data.message,
+          icon: 'error',
+          width: 500
+        })
+      }
     } else {
       Swal.fire({
         title: 'Cancelado',

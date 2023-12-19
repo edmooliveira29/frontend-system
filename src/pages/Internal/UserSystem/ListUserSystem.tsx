@@ -18,7 +18,15 @@ export const ListUserSystem = () => {
     }
     getAllUsers()
   }, [])
-  
+
+  const deleteItem = async (id: string) => {
+    console.log(id)
+    const userRespose = new UserService()
+    await userRespose.delete(id)
+    const users = await userRespose.delete(id)
+    setData(users.data)
+  }
+
   const columnHeaders = [
     { _id: 'role', label: 'PERMISSÃO', sortable: true },
     { _id: 'name', label: 'NOME', sortable: true },
@@ -47,7 +55,7 @@ export const ListUserSystem = () => {
           </div>
         </div>
       </div>
-      <TableComponent navigate={navigate} data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
+      <TableComponent deleteItem={deleteItem} navigate={navigate} data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
     </div>
   </>
   )

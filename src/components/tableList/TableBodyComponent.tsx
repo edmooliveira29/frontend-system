@@ -2,7 +2,6 @@ import { TableRow, TableCell, IconButton, TableBody } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import DeleteIcon from '@mui/icons-material/Delete'
-
 import React, { FC, useState } from 'react'
 import { AlertConfirmationDelete, ModalDetails } from '../modal'
 import { useDispatch } from 'react-redux'
@@ -39,7 +38,19 @@ const stableSort = (array: any[], comparator: any) => {
 
 }
 
-export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: any, orderBy: any, page: any, rowsPerPage: any, order: Order, setOrder: any, title: string, translations: any }> = (props) => {
+export const TableBodyComponent: FC<{
+  navigate: any,
+  columnHeaders: any,
+  data: any,
+  orderBy: any,
+  page: any,
+  rowsPerPage: any,
+  order: Order,
+  setOrder: any,
+  title: string,
+  translations: any,
+  deleteItem: any
+}> = (props) => {
   const keys = props.columnHeaders
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedRowData, setSelectedRowData] = useState(null)
@@ -60,12 +71,12 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
     setIsModalOpen(false)
   }
 
-  const handleDeleteItem = (rowData: any) => {
+  const handleDeleteItem = (rowData: any, callbackDelete: any) => {
     setSelectedRowData(rowData)
     if (props.title == 'venda') {
-      AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[0]]}`)
+      AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[1]]}`, callbackDelete, { id: rowData[Object.keys(rowData)[0]] })
     } else {
-      AlertConfirmationDelete(`${rowData[Object.keys(rowData)[0]]}`)
+      AlertConfirmationDelete('', callbackDelete, { _id: rowData[Object.keys(rowData)[0]] })
     }
   }
   return (
@@ -96,14 +107,13 @@ export const TableBodyComponent: FC<{ navigate: any, columnHeaders: any, data: a
                 <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton color="error" size="small" onClick={() => handleDeleteItem(row)}>
+                <IconButton color="error" size="small" onClick={() => handleDeleteItem(row, props.deleteItem)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
           ))}
         {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
-
       </TableBody >
     </>
   )

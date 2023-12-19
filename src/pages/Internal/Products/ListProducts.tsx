@@ -21,11 +21,11 @@ export const ListProduct = () => {
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { _id:'name', label: 'NOME', sortable: true },
-    { _id:'description', label: 'Descrição', sortable: true },
-    { _id:'category', label: 'Categoria', sortable: true },
-    { _id:'price', label: 'Preço', sortable: true },
-    { _id:'stock', label: 'Estoque', sortable: true },
+    { _id: 'name', label: 'NOME', sortable: true },
+    { _id: 'description', label: 'Descrição', sortable: true },
+    { _id: 'category', label: 'Categoria', sortable: true },
+    { _id: 'price', label: 'Preço', sortable: true },
+    { _id: 'stock', label: 'Estoque', sortable: true },
   ]
 
   return (<>
@@ -50,7 +50,7 @@ export const ListProduct = () => {
           </div>
         </div>
       </div>
-      <TableComponent data={data} head={columnHeaders} title='produto' translations={columnHeaders} />
+      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='produto' translations={columnHeaders} />
     </div>
   </>
   )

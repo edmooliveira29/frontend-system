@@ -1,7 +1,7 @@
 import { Box, Modal, Tooltip } from '@mui/material'
 import React from 'react'
 import { AiFillCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
-import { AddProducts } from '../../pages/Internal/Products'
+import { AddProducts } from '../../pages/Internal/Product'
 import { AddCustomer } from '../../pages/Internal/Customer'
 import { AddCategory } from '../../pages/Internal/Category'
 

@@ -23,7 +23,6 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
       setOptions(props.options)
     }
   }, [props.options, value])
-  console.log(options)
   const isValueValid = options.some((option: { value: string }) => {
     return option.value === props.value
   }

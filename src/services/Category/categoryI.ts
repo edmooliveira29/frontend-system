@@ -2,7 +2,7 @@ type CategoryI = {
 	data: {
 		_id?: string
 		name: string
-		typw: string
+		type: string
 		description?: string
 	}
 }

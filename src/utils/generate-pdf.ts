@@ -9,7 +9,6 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
   const titleOfReport: ContentText = { text: `Lista de ${tableName}`, style: 'title', bold: true, alignment: 'center', marginBottom: 20 }
   const headerTable: ContentText[] = header.map(text => ({ text, bold: true, fontSize: 10 }))
   const bodyTable: any[] = []
-  console.log(data)
   for (const item of data) {
     const row: any[] = []
     for (const field of fields) {
@@ -20,7 +19,6 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
   
     bodyTable.push(row)
   }
-  console.log(header.map(() => ('*')))
   const tableData: ContentTable = {
     table: {
       widths: header.map(() => ('*')),

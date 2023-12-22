@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
-import { Dashboard, ListSale, MyAccount, Login, Singin, ListProduct, AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem } from '../pages/Internal'
+import {
+  Dashboard, ListSale, MyAccount, Login, Singin, ListProduct,
+  AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem, AddCategory, ListCategory, AddEmployee, ListEmployee
+} from '../pages/Internal'
 import { SideBar } from '../components/sideBar/sideBar'
 import NavBar from '../components/navBar/NavBar'
 import Footer from '../components/footer/Footer'
 import './styles.sass'
 import { NotFound } from '../pages/NotFound'
-import { AddCategory, ListCategory } from '../pages/Internal/Category'
 import { userIsAlreadyLoggedIn } from '../utils'
 
 const Internal = (props: { Page: any }) => {
@@ -66,6 +68,8 @@ export const router = (
       <Route path="/clientes" element={<Internal Page={ListCustomer} />} />
       <Route path="/categorias" element={<Internal Page={ListCategory} />} />
       <Route path="/categorias/adicionar" element={<Internal Page={AddCategory} />} />
+      <Route path="/colaboradores" element={<Internal Page={ListEmployee} />} />
+      <Route path="/colaboradores/adicionar" element={<Internal Page={AddEmployee} />} />
       <Route path="/clientes/adicionar" element={<Internal Page={AddCustomer} />} />
       <Route path="/produtos" element={<Internal Page={ListProduct} />} />
       <Route path="/produtos/adicionar" element={<Internal Page={AddProducts} />} />

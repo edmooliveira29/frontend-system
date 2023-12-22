@@ -21,11 +21,11 @@ export const ListSale = () => {
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { _id:'number', label: 'Número', sortable: true },
-    { _id:'date', label: 'Data', sortable: true },
-    { _id:'customer', label: 'Cliente', sortable: true },
-    { _id:'price', label: 'Preço', sortable: true },
-    { _id:'status', label: 'Status', sortable: true },
+    { _id: 'number', label: 'Número', sortable: true },
+    { _id: 'date', label: 'Data', sortable: true },
+    { _id: 'customer', label: 'Cliente', sortable: true },
+    { _id: 'price', label: 'Preço', sortable: true },
+    { _id: 'status', label: 'Status', sortable: true },
   ]
 
   return (<>
@@ -43,14 +43,14 @@ export const ListSale = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 justify-content-center align-items-center">
+          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'PREÇO', 'STATUS'], 'vendas')} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }}  data={data} head={columnHeaders} title='venda' translations={columnHeaders}/>
+      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='venda' translations={columnHeaders} />
     </div>
   </>
   )

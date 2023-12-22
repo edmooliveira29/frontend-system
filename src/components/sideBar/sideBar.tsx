@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillDashboard, AiOutlineUser } from 'react-icons/ai'
 import { HiBars3 } from 'react-icons/hi2'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaUsersCog } from 'react-icons/fa'
 import { MdPointOfSale } from 'react-icons/md'
 import { BsFillPersonLinesFill, BsInboxesFill } from 'react-icons/bs'
 import { BiCategoryAlt } from 'react-icons/bi'
@@ -12,14 +12,14 @@ import './styles.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../redux/actions/reducers'
 
-export const Dropdown = (pictureProfile: string, username: string, handleLogOut: any, isAccessExternal: boolean) => {
+export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: boolean) => {
   return (<div className="col-3">
     <div className="dropdown justify-content-end">
       <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
-        {typeof pictureProfile == 'string' ?
-          <img style={{ margin: '0 20px' }} src={pictureProfile} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
+        {typeof userLogged.profilePicture == 'string' ?
+          <img style={{ margin: '0 20px' }} src={userLogged.profilePicture} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
           <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }} />}
-        {isAccessExternal ? null : <strong id='name-user-log'>{username}</strong>}
+        {isAccessExternal ? null : <strong id='name-user-log'>{userLogged.name}</strong>}
       </a>
       <ul id='user-dropdown' style={isAccessExternal ? { left: '-130px' } : { left: '100px' }} className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
         <li>
@@ -27,11 +27,11 @@ export const Dropdown = (pictureProfile: string, username: string, handleLogOut:
             Minha conta
           </Link>
         </li>
-        <li>
+        {userLogged.role == 'salesman' ? null : <li>
           <Link id='user-register-dropdown' to='/usuario' className="dropdown-item" >
             Registrar usuário
           </Link>
-        </li>
+        </li>}
         <li><hr className="dropdown-divider" /></li>
         <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
       </ul>
@@ -55,7 +55,6 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
     dispatch({ type: ActionsTypes.USER_LOGOUT })
     navigate('/entrar', { state: { route: 'logout' } })
   }
-
   return (
     <><div className='row div-header'>
       <div className="col-9 p-0">
@@ -75,7 +74,8 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <hr />
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
-            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
+            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar}> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
+            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr /> </>}
             <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
@@ -88,7 +88,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                 </ul>
               )}
             </li><hr /> */}
-            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
+            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr /></>}
             <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
           </ul>
           <hr />
@@ -99,7 +99,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      {Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut, false)}
+      {Dropdown(userLogged, handleLogOut, false)}
     </div>
     </>
   )

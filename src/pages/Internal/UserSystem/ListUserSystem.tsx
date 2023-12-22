@@ -48,7 +48,7 @@ export const ListUserSystem = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 justify-content-center align-items-center">
+          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['PERMISSÃO', 'NOME', 'EMAIL'], 'usuários', ['role', 'name', 'email'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>

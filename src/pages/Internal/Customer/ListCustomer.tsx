@@ -23,12 +23,12 @@ export const ListCustomer = () => {
   const data: any[] = Array.from({ length: 100 }, () => createData())
 
   const columnHeaders = [
-    { _id:'name', label: 'NOME', sortable: true },
-    { _id:'cnpj', label: 'CNPJ', sortable: true },
-    { _id:'phonenumber', label: 'TELEFONE', sortable: true },
-    { _id:'email', label: 'EMAIL', sortable: true },
-    { _id:'city', label: 'Cidade', sortable: true },
-    { _id:'stateOfTheCountry', label: 'Estado', sortable: true }
+    { _id: 'name', label: 'NOME', sortable: true },
+    { _id: 'cnpj', label: 'CNPJ', sortable: true },
+    { _id: 'phonenumber', label: 'TELEFONE', sortable: true },
+    { _id: 'email', label: 'EMAIL', sortable: true },
+    { _id: 'city', label: 'Cidade', sortable: true },
+    { _id: 'stateOfTheCountry', label: 'Estado', sortable: true }
   ]
   return (<>
 
@@ -46,14 +46,14 @@ export const ListCustomer = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 justify-content-center align-items-center">
+          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CNPJ', 'TELEFONE', 'EMAIL', 'CIDADE', 'UF'], 'Clientes')} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }}  data={data} head={columnHeaders} title='cliente' translations={columnHeaders}/>
+      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='cliente' translations={columnHeaders} />
     </div>
   </>
   )

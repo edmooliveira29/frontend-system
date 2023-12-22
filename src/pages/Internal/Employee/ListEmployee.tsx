@@ -7,37 +7,37 @@ import { Tooltip } from '@mui/material'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { generatePDF } from '../../../utils'
 
-export const ListProduct = () => {
+export const ListEmployee: React.FC = () => {
   function createData(): any {
     return {
-      name: fakerPT_BR.commerce.productName(),
-      description: fakerPT_BR.commerce.productDescription().slice(0, 50),
-      category: fakerPT_BR.commerce.department(),
-      price: fakerPT_BR.commerce.price({ symbol: 'R$ ' }),
-      stock: fakerPT_BR.number.int({ min: 0, max: 150 })
+      name: fakerPT_BR.person.fullName(),
+      office: fakerPT_BR.person.jobArea(),
+      department: fakerPT_BR.commerce.department(),
+      hiringDate: new Date().toLocaleDateString('pt-BR'),
+      wage: fakerPT_BR.finance.amount(0, 10000, 2, 'R$'),
     }
   }
 
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { _id: 'name', label: 'NOME', sortable: true },
-    { _id: 'description', label: 'Descrição', sortable: true },
-    { _id: 'category', label: 'Categoria', sortable: true },
-    { _id: 'price', label: 'Preço', sortable: true },
-    { _id: 'stock', label: 'Estoque', sortable: true },
+    { _id: 'name', label: 'Nome', sortable: true },
+    { _id: 'office', label: 'Cargo', sortable: true },
+    { _id: 'department', label: 'Categoria', sortable: true },
+    { _id: 'hiringDate', label: 'Data de contratação', sortable: true },
+    { _id: 'wage', label: 'Salário', sortable: true },
   ]
 
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
-        <h4 className="col-sm-12" id="title-natural-person">Produtos</h4>
+        <h4 className="col-sm-12" id="title-natural-person">Colaboradores</h4>
       </div>
       <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-center p-2">
         <div className="row">
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um produto' placement='bottom' arrow>
-              <Link to="/produtos/adicionar">
+              <Link to="/colaboradores/adicionar">
                 <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-product' /></i>
               </Link>
             </Tooltip>
@@ -45,7 +45,7 @@ export const ListProduct = () => {
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
-              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'DESCRIÇÃO', 'CATEGORIA', 'PREÇO', 'ESTOQUE'], 'produtos')} style={{ cursor: 'pointer' }} /></i>
+              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CARGO', 'DEPARTAMENTO', 'DATA DE CONTRATACÃO', 'SALÁRIO'], 'colaboradores', ['name', 'office', 'department', 'hiringDate', 'wage'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>

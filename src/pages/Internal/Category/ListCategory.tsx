@@ -19,9 +19,9 @@ export const ListCategory = () => {
   const data: any[] = Array.from({ length: 50 }, () => createData())
 
   const columnHeaders = [
-    { _id:'type', label: 'TIPO', sortable: true },
-    { _id:'name', label: 'NOME', sortable: true },
-    { _id:'description', label: 'Descrição', sortable: true }
+    { _id: 'type', label: 'TIPO', sortable: true },
+    { _id: 'name', label: 'NOME', sortable: true },
+    { _id: 'description', label: 'Descrição', sortable: true }
   ]
 
   return (<>
@@ -39,14 +39,14 @@ export const ListCategory = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 justify-content-center align-items-center">
+          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'TIPO', 'DESCRIÇÃO'], 'categoria')} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }}  data={data} head={columnHeaders} title='categoria'  translations={columnHeaders}/>
+      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='categoria' translations={columnHeaders} />
     </div>
   </>
   )

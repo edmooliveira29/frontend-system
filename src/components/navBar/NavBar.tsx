@@ -53,7 +53,7 @@ export const NavBar = () => {
             <form className='d-flex align-items-center'>
               <input id="input-search" className='form-control m-0' type='search' placeholder='Pesquisar' aria-label='Search' />
               <ComponentButtonCommon text='Pesquisar' sizeHeight='50px' sizeWidth='180px' id='search' />
-              {userLogged.name ? Dropdown(userLogged.profilePicture, userLogged.name, handleLogOut, true) :
+              {userLogged.name ? Dropdown(userLogged, handleLogOut, true) :
                 <Link to='/entrar' title={userLogged !== null ? 'Usuário logado' : 'Entrar'} className='link-navbar' id="link-login">
                   <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />
                 </Link>}

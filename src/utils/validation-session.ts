@@ -18,8 +18,5 @@ export const userIsAlreadyLoggedIn = (navigate: any, route?: string) => {
   const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
   if (userLogged !== null) {
     sessionTokenExpiry(userLogged.sessionToken, navigate, route)
-  }else{
-    AlertGeneral({ title: 'Aviso', message: 'Usuário não logado. Por favor entre novamente', type: 'warning' })
-    navigate('/entrar')
   }
 }

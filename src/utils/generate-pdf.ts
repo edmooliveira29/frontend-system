@@ -4,7 +4,7 @@ import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-export const generatePDF = (data: any[], header: any[], tableName: string, fields?: any) => {
+export const generatePDF = (data: any[], header: any[], tableName: string, fields: any[]) => {
   alertLoading('open', 'Estamos gerando o PDF...')
   const titleOfReport: ContentText = { text: `Lista de ${tableName}`, style: 'title', bold: true, alignment: 'center', marginBottom: 20 }
   const headerTable: ContentText[] = header.map(text => ({ text, bold: true, fontSize: 10 }))

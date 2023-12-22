@@ -5,14 +5,14 @@ import { AddProducts } from '../../pages/Internal/Products'
 import { AddCustomer } from '../../pages/Internal/Customer'
 import { AddCategory } from '../../pages/Internal/Category'
 
-export const ModalAdd: React.FC<{ titleOfModel: any, id:string }> = (props) => {
+export const ModalAdd: React.FC<{ titleOfModel: any, id: string }> = (props) => {
   const [openModal, setOpenModal] = React.useState(false)
   const openModalScreen = () => {
     if (props.titleOfModel == 'cliente') {
       return (<AddCustomer />)
     }
     if (props.titleOfModel == 'categoria') {
-      return (<AddCategory />)
+      return (<AddCategory addedOutSideMainScreen={true} />)
     }
     if (props.titleOfModel == 'produto') {
       return (<AddProducts />)

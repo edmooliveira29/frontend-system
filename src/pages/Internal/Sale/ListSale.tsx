@@ -45,7 +45,7 @@ export const ListSale = () => {
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
-              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'PREÇO', 'STATUS'], 'vendas')} style={{ cursor: 'pointer' }} /></i>
+              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'PREÇO', 'STATUS'], 'vendas',['number', 'date', 'customer', 'price', 'status'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import { ModalAdd } from '../../../components/modal/ModalAdd'
+import { CategoryService } from '../../../services/Category'
 
 
 export const AddProducts: React.FC<{ state?: any }> = (props) => {
   const mask = new Masks()
   const navigate = useNavigate()
+  const [categories, setCategories] = useState<any[]>([])
   const [state, setState] = useState({
     name: props.state?.name || '',
     description: props.state?.description || '',
@@ -15,6 +17,15 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
     price: props.state?.price || '',
     stock: props.state?.stock || '',
   })
+  useEffect(() => {
+    const getDatas = async () => {
+      let categories = await new CategoryService().getAll()
+      categories = categories.data.map((category: any) => ({ value: category.name, label: category.name }))
+      setCategories(categories)
+    }
+    getDatas()
+  }, [])
+
 
   const handleSave = async () => {
     const { name, category, price, stock } = state
@@ -62,7 +73,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
                 id={'category'}
                 placeholder='Selecione uma categoria'
                 value={state.category || ''}
-                label='Categoria' options={[]}
+                label='Categoria' options={categories}
                 required={true}
                 onChange={(event: any) => setState({ ...state, category: event.target.value })}
               />
@@ -98,8 +109,8 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-product'/>
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product'/>
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-product' />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product' />
         </div>
       </div>    </div>
 

@@ -1,27 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.sass'
-import { fakerPT_BR } from '@faker-js/faker'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ComponentButtonCommon, TableComponent } from '../../../components'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { Tooltip } from '@mui/material'
 import { generatePDF } from '../../../utils'
+import { CategoryService } from '../../../services/Category'
 
 export const ListCategory = () => {
-  function createData(): any {
-    return {
-      type: Math.floor(Math.random() * 2) === 0 ? 'COMPRA' : 'VENDA',
-      name: fakerPT_BR.commerce.productDescription().slice(0, 50),
-      description: fakerPT_BR.string.alpha(20)
-    }
-  }
+  const [data, setData] = useState<any[]>([])
+  const navigate = useNavigate()
 
-  const data: any[] = Array.from({ length: 50 }, () => createData())
+  useEffect(() => {
+    const getAllCategories = async () => {
+      const categoryRespose = new CategoryService()
+      const categories = await categoryRespose.getAll()
+      categories.data = categories.data.map((category: any) => {
+        return {
+          _id: category._id,
+          type: category.type === 'product' ? 'PRODUTO' : 'SERVIÇO',
+          name: category.name,
+          description: category.description
+        }
+      })
+      setData(categories.data)
+    }
+    getAllCategories()
+  }, [])
+
+  const deleteItem = async (id: string) => {
+    const categoryRespose = new CategoryService()
+    await categoryRespose.delete(id)
+    const categories = await categoryRespose.delete(id)
+    setData(categories.data)
+  }
 
   const columnHeaders = [
     { _id: 'type', label: 'TIPO', sortable: true },
     { _id: 'name', label: 'NOME', sortable: true },
-    { _id: 'description', label: 'Descrição', sortable: true }
+    { _id: 'description', label: 'DESCRIÇÃO', sortable: true }
   ]
 
   return (<>
@@ -41,12 +58,12 @@ export const ListCategory = () => {
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
-              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'TIPO', 'DESCRIÇÃO'], 'categoria')} style={{ cursor: 'pointer' }} /></i>
+              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'TIPO', 'DESCRIÇÃO'], 'categoria', ['name', 'type', 'description'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='categoria' translations={columnHeaders} />
+      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='categorias' translations={columnHeaders} />
     </div>
   </>
   )

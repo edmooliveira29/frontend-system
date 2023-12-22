@@ -10,7 +10,6 @@ import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const AddUserSystem = () => {
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
-  console.log(objectToEdit)
   const hasObjectToEdit = objectToEdit !== undefined
   const [state, setState] = useState(
     hasObjectToEdit ? objectToEdit : {
@@ -42,10 +41,9 @@ export const AddUserSystem = () => {
     setLoading(false)
     if (response) {
       dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-      navigate('/usuario')
+      navigate('/usuarios')
     }
   }
-
 
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">

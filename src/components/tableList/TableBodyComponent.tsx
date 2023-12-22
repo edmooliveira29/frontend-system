@@ -60,10 +60,10 @@ export const TableBodyComponent: FC<{
     setSelectedRowData(rowData)
     setIsModalOpen(true)
   }
-  const handleOpenEdit = (rowData: any, navigate: any, dispatch: any) => {
+  const handleOpenEdit = (title: string, rowData: any, navigate: any, dispatch: any) => {
     setSelectedRowData(rowData)
     dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: rowData })
-    navigate('/usuario/adicionar', { rowData })
+    navigate(`/${title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}/adicionar`, { rowData })
   }
 
   const handleCloseModal = () => {
@@ -101,7 +101,7 @@ export const TableBodyComponent: FC<{
                 )
               })}
               <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
-                <IconButton color="default" size="small" onClick={() => handleOpenEdit(row, props.navigate, dispatch)}>
+                <IconButton color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>
                   <EditIcon />
                 </IconButton>
                 <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>

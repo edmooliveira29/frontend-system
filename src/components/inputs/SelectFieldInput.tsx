@@ -15,7 +15,7 @@ const MenuProps = {
   }
 }
 
-export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any, id:string }> = (props) => {
+export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any, id: string }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
   const [value, setValue] = useState(props.value)
   useEffect(() => {
@@ -23,7 +23,13 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
       setOptions(props.options)
     }
   }, [props.options, value])
-  const isValueValid = options.some((option: { value: string }) => option.value === props.value) || props.value === ''
+  console.log(options)
+  const isValueValid = options.some((option: { value: string }) => {
+    return option.value === props.value
+  }
+  ) || props.value === ''
+
+
   if (isValueValid) {
     return (
       <>

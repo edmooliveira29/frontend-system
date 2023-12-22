@@ -28,7 +28,7 @@ export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: b
           </Link>
         </li>
         {userLogged.role == 'salesman' ? null : <li>
-          <Link id='user-register-dropdown' to='/usuario' className="dropdown-item" >
+          <Link id='user-register-dropdown' to='/usuarios' className="dropdown-item" >
             Registrar usuário
           </Link>
         </li>}

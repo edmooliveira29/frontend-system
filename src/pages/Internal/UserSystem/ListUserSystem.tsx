@@ -20,7 +20,6 @@ export const ListUserSystem = () => {
   }, [])
 
   const deleteItem = async (id: string) => {
-    console.log(id)
     const userRespose = new UserService()
     await userRespose.delete(id)
     const users = await userRespose.delete(id)
@@ -42,7 +41,7 @@ export const ListUserSystem = () => {
         <div className="row">
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um usuário' placement='bottom' arrow>
-              <Link to="/usuario/adicionar">
+              <Link to="/usuarios/adicionar">
                 <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-category' /></i>
               </Link>
             </Tooltip>
@@ -55,7 +54,7 @@ export const ListUserSystem = () => {
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={deleteItem} navigate={navigate} data={data} head={columnHeaders} title='usuário' translations={columnHeaders} />
+      <TableComponent deleteItem={deleteItem} navigate={navigate} data={data} head={columnHeaders} title='usuários' translations={columnHeaders} />
     </div>
   </>
   )

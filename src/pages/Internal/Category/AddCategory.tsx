@@ -1,24 +1,50 @@
 import React, { useState } from 'react'
-import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
+import { AlertConfirmationSaveEdit, ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
 import { validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleCreateCategory, handleEditCategory } from './handle'
+import { ActionsTypes } from '../../../redux/actions/reducers'
+import { CategoryService } from '../../../services/Category'
 
-export const AddCategory = () => {
-  const [state, setState] = useState({
-    typeCategory: '',
-    name: '',
-    description: '',
-  })
+export const AddCategory = (props: { addedOutSideMainScreen: boolean }) => {
+  let { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const hasObjectToEdit = objectToEdit !== undefined
+  if (hasObjectToEdit) {
+    objectToEdit = {
+      ...objectToEdit,
+      type: objectToEdit.type === 'PRODUTO' ? 'product' : 'service',
+    }
+  }
+  const [state, setState] = useState(
+    hasObjectToEdit ? objectToEdit : {
+      type: '',
+      name: '',
+      description: ''
+    }
+  )
   const navigate = useNavigate()
-  const translations = { type: 'Tipo', name: 'Nome' }
-  const handleSave = async () => {
-    const { typeCategory, name } = state
+  const handleSaveEdit = async () => {
+    const { type, name } = state
+    const translations = { name: 'Nome', type: 'Tipo', description: 'Descrição' }
 
-    if (!validateFields({ typeCategory, name }, translations)) {
+    if (!validateFields({ type, name }, translations)) {
       return false
     }
-    alert('Em fase de construção!')
+    let response
+    if (hasObjectToEdit) {
+      response = await AlertConfirmationSaveEdit('edit', handleEditCategory, { setLoading, CategoryService, state })
+    } else {
+      response = await AlertConfirmationSaveEdit('save', handleCreateCategory, { setLoading, CategoryService, state })
+    }
+    setLoading(false)
+    if (response) {
+      dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+      !props.addedOutSideMainScreen && navigate('/categorias')
+    }
   }
 
   return (<>
@@ -26,7 +52,13 @@ export const AddCategory = () => {
       <h4 id="titles-category-add">ADICIONAR CATEGORIA</h4>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <SelectFieldInput id={'typeCategory'} value={state.typeCategory || ''} placeholder='Selecione um tipo' label='Tipo' options={[{ value: 'product', label: 'Produto' }]} required={true} onChange={(event: any) => setState({ ...state, typeCategory: event.target.value })} />
+          <SelectFieldInput id={'type'}
+            value={state.type || ''}
+            placeholder='Selecione um tipo'
+            label='Tipo'
+            options={[{ value: 'product', label: 'Produto' }, { value: 'service', label: 'Serviço' }]}
+            required={true}
+            onChange={(event: any) => setState({ ...state, type: event.target.value })} />
         </div>
         <div className="col-md-4 col-sm-12">
           <TextFieldInput
@@ -53,8 +85,11 @@ export const AddCategory = () => {
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-category'/>
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-category'/>
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+            dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+            navigate(-1)
+          }} id='back-category' />
+          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-category' loading={loading} />
         </div>
       </div>
     </div>

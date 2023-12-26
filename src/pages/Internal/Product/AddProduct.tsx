@@ -14,7 +14,6 @@ import { CategoryService } from '../../../services/Category'
 export const AddProducts: React.FC<{ state?: any }> = (props) => {
   const mask = new Masks()
   let { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
-  console.log(objectToEdit)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [categories, setCategories] = useState<any[]>([])
@@ -27,7 +26,6 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       quantityInStock: Number(objectToEdit.quantityInStock)
     }
   }
-  console.log(objectToEdit)
   const [state, setState] = useState(
     hasObjectToEdit ? objectToEdit : {
       name: props.state?.name || '',
@@ -47,7 +45,6 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
     }
     getDatas()
   }, [])
-
 
   const handleSave = async () => {
     try {
@@ -116,7 +113,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              <ModalAdd id='add-new-category' titleOfModel={'categoria'} />
+              <ModalAdd id='add-new-category' titleOfModel={'categoria'} setData={setCategories} data={categories} setDataDB={setCategoriesDB}/>
             </div>
           </div>
 

@@ -25,7 +25,6 @@ export const ListProduct = () => {
           quantityInStock: product.quantityInStock,
         }
       })
-      console.log(products.data)
       setData(products.data)
     }
     getAllProducts()

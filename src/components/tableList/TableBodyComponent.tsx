@@ -82,7 +82,7 @@ export const TableBodyComponent: FC<{
   return (
     <>
       <TableBody>
-        {stableSort(props.data, getComparator(props.order, props.orderBy))
+        {props.data.length > 0 ? stableSort(props.data, getComparator(props.order, props.orderBy))
           .slice(
             props.page * props.rowsPerPage,
             props.page * props.rowsPerPage + props.rowsPerPage
@@ -112,7 +112,7 @@ export const TableBodyComponent: FC<{
                 </IconButton>
               </TableCell>
             </TableRow>
-          ))}
+          )) : <TableRow sx={{ padding: '0px', textAlign: 'center', fontSize: '12px' }}>Nenhum item encontrado</TableRow>}
         {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
       </TableBody >
     </>

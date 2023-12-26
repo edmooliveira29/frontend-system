@@ -8,7 +8,7 @@ import { handleCreateCategory, handleEditCategory } from './handle'
 import { ActionsTypes } from '../../../redux/actions/reducers'
 import { CategoryService } from '../../../services/Category'
 
-export const AddCategory = (props: { addedOutSideMainScreen: boolean }) => {
+export const AddCategory = (props: { addedOutSideMainScreen: boolean, setOpenModal: any, setCategories: any, data: any, setCategoriesDB: any }) => {
   let { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
@@ -43,7 +43,14 @@ export const AddCategory = (props: { addedOutSideMainScreen: boolean }) => {
     setLoading(false)
     if (response) {
       dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-      !props.addedOutSideMainScreen && navigate('/categorias')
+      if(!props.addedOutSideMainScreen) {
+        navigate('/categorias')
+      }else{
+        const categoriesResponse = await new CategoryService().getAll()
+        props.setCategoriesDB(categoriesResponse)
+        props.setCategories(categoriesResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
+        props.setOpenModal(false)
+      }
     }
   }
 

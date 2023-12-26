@@ -1,29 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.sass'
-import { fakerPT_BR } from '@faker-js/faker'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ComponentButtonCommon, TableComponent } from '../../../components'
 import { Tooltip } from '@mui/material'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { generatePDF } from '../../../utils'
+import { EmployeeService } from '../../../services/Employee'
 
 export const ListEmployee: React.FC = () => {
-  function createData(): any {
-    return {
-      name: fakerPT_BR.person.fullName(),
-      office: fakerPT_BR.person.jobArea(),
-      department: fakerPT_BR.commerce.department(),
-      hiringDate: new Date().toLocaleDateString('pt-BR'),
-      wage: fakerPT_BR.finance.amount(0, 10000, 2, 'R$'),
-    }
-  }
+  const [data, setData] = useState<any[]>([])
+  const navigate = useNavigate()
 
-  const data: any[] = Array.from({ length: 50 }, () => createData())
+  useEffect(() => {
+    const getAllCategories = async () => {
+      const employeeRespose = new EmployeeService()
+      const categories = await employeeRespose.getAll()
+      categories.data = categories.data.map((employee: any) => {
+        return {
+          _id: employee._id,
+          name: employee.name,
+          office: employee.office,
+          department: employee.department,
+          hiringDate: employee.hiringDate,
+          wage: employee.wage
+        }
+      })
+      setData(categories.data)
+    }
+    getAllCategories()
+  }, [])
+
+  const deleteItem = async (id: string) => {
+    const categoryRespose = new EmployeeService()
+    await categoryRespose.delete(id)
+    const categories = await categoryRespose.delete(id)
+    setData(categories.data)
+  }
 
   const columnHeaders = [
     { _id: 'name', label: 'Nome', sortable: true },
     { _id: 'office', label: 'Cargo', sortable: true },
-    { _id: 'department', label: 'Categoria', sortable: true },
+    { _id: 'department', label: 'Departamento', sortable: true },
     { _id: 'hiringDate', label: 'Data de contratação', sortable: true },
     { _id: 'wage', label: 'Salário', sortable: true },
   ]
@@ -50,7 +67,7 @@ export const ListEmployee: React.FC = () => {
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='produto' translations={columnHeaders} />
+      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='colaboradores' translations={columnHeaders} />
     </div>
   </>
   )

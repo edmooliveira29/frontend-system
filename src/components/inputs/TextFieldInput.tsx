@@ -23,14 +23,13 @@ export function TextFieldInput(props: { label: string; typeInput: string; onChan
           type={typeInput}
           className='form-control text-field-input'
           id={`input-${props.id}`}
-          value={props.value ? props.value : props.typeInput == 'date' ? `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}` : props.value}
+          value={props.value}
           required={props.required}
           min={props.typeInput == 'date' ? '01-01-1900' : ''}
           max={props.typeInput == 'date' ? `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}` : ''}
           onChange={(e: any) => props.onChange(e.target.value)}
           placeholder={props.placeholder || ''}
           disabled={props.disabled || false}
-          pattern="\d{4}-\d{2}-\d{2}"
         />
         {props.typeInput == 'password' ?
           <i id='i-icon' onClick={handleShowPassword}>

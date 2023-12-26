@@ -67,7 +67,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
         complement: 'Complemento',
         neighborhood: 'Bairro',
       }
-
+      console.log(state)
       if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, address, houseNumber, neighborhood }, translations)) {
         return false
       }
@@ -121,7 +121,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
             label="Data de contratação"
             placeholder='Digite aqui a data de contratação'
             required={true}
-            value={state.hiringDate}
+            value={state.hiringDate.replace('/', '-')}
             typeInput="date"
             onChange={(value: string) => { setState({ ...state, hiringDate: value }) }}
           />

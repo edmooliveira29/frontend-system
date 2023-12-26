@@ -1,12 +1,12 @@
 import React from 'react'
-import { SelectFieldInput, DataFieldInput, TextFieldInput } from '../../components/inputs'
+import { SelectFieldInput, TextFieldInput } from '../../components/inputs'
 import { Masks } from '../../utils'
 
 export const PersonalData = (props: { state: any, setState: any, title?: string }) => {
   const masks = new Masks()
 
   return (<>
-    <h4 id="titles-custumer-add">{props.title ? props.title : 'ADICIONAR PESSOA FÍSICA'}</h4>
+    {props.title && <h4 id="titles-custumer-add">{props.title ? props.title : 'ADICIONAR PESSOA FÍSICA'}</h4>}
     <div className="row m-0">
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
@@ -34,12 +34,21 @@ export const PersonalData = (props: { state: any, setState: any, title?: string 
           }}
         />
       </div>
-      <div className="col-md-3 col-sm-12"><DataFieldInput id={'birthday'} label='Data de nascimento' value={props.state.birthday} onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }} /></div>
+      <div className="col-md-3 col-sm-12">
+        <TextFieldInput
+          id={'birthday'}
+          label='Data de nascimento'
+          placeholder='Digite aqui a data de contratação'
+          required={true}
+          value={props.state.birthday}
+          typeInput="date"
+          onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }} />
+      </div>
     </div>
     <div className="row m-0">
       <div className="col-md-3 col-sm-12">
-        <div className="row m-0">
-          <div className="col-md-6 col-sm-12" style={{ marginTop: '0px', padding: '0px', paddingRight: '2px' }}>
+        <div className="row">
+          <div className="col-md-6 col-sm-12">
             <SelectFieldInput
               id={'gender'}
               value={props.state.gender || ''}
@@ -50,7 +59,7 @@ export const PersonalData = (props: { state: any, setState: any, title?: string 
               onChange={(event: any) => { props.setState({ ...props.state, gender: event.target.value }) }}
             />
           </div>
-          <div className="col-md-6 col-sm-12 " style={{ marginTop: '0px', padding: '0px', paddingLeft: '2px' }}>
+          <div className="col-md-6 col-sm-12 ">
             <TextFieldInput
               id={'nickname'}
               label="Chame-me"

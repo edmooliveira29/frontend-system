@@ -1,106 +1,153 @@
+/* eslint-disable max-lines */
 import React, { useState } from 'react'
-import { ComponentButtonInherit, ComponentButtonSuccess, SelectFieldInput, TextFieldInput } from '../../../components'
+import { AlertConfirmationSaveEdit, AlertGeneral, ComponentButtonInherit, ComponentButtonSuccess, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
-import { ModalAdd } from '../../../components/modal/ModalAdd'
-
+import './styles.sass'
+import { useDispatch, useSelector } from 'react-redux'
+import { ActionsTypes } from '../../../redux/actions/reducers'
+import { handleCreateEmployee, handleEditEmployee } from './handle'
+import { EmployeeService } from '../../../services/Employee/index'
+import { AddressData, PersonalData } from '../../../components/input-group'
 export const AddEmployee: React.FC<{ state?: any }> = (props) => {
   const mask = new Masks()
+  let { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [state, setState] = useState({
-    name: props.state?.name || '',
-    description: props.state?.description || '',
-    category: props.state?.category || '',
-    price: props.state?.price || '',
-    stock: props.state?.stock || '',
-  })
+  const [loading, setLoading] = useState(false)
 
-  const handleSave = async () => {
-    const { name, category, price, stock } = state
-    const translations = { name: 'Nome', category: 'Categoria', price: 'Preço', stock: 'Estoque' }
+  const hasObjectToEdit = objectToEdit !== undefined
+  const [state, setState] = useState(
+    hasObjectToEdit ? objectToEdit : {
+      name: props.state?.name || '',
+      cpf: props.state?.cpf || '',
+      birthday: props.state?.birthday || '',
+      gender: props.state?.gender || '',
+      nickname: props.state?.nickname || '',
+      phoneNumber: props.state?.phoneNumber || '',
+      email: props.state?.email || '',
+      office: props.state?.office || '',
+      hiringDate: props.state?.hiringDate || '',
+      wage: props.state?.wage || '',
+      zipCode: props.state?.zipCode || '',
+      city: props.state?.city || '',
+      address: props.state?.address || '',
+      houseNumber: props.state?.houseNumber || '',
+      complement: props.state?.complement || '',
+      neighborhood: props.state?.neighborhood || '',
+      stateOfTheCountry: props.state?.stateOfTheCountry || '',
 
-    if (!validateFields({ name, category, price, stock }, translations)) {
-      return false
+    })
+
+  if (hasObjectToEdit) {
+    objectToEdit = {
+      ...objectToEdit,
+      quantityInStock: Number(objectToEdit.quantityInStock)
     }
-    alert('Em fase de construção!')
   }
 
+  const handleSave = async () => {
+    try {
+      const { name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, address, houseNumber, neighborhood, stateOfTheCountry } = state
+      const translations = {
+        name: 'Nome',
+        cpf: 'CPF',
+        birthday: 'Data de nascimento',
+        gender: 'Gênero',
+        phoneNumber: 'Telefone',
+        email: 'E-mail',
+        office: 'Cargo',
+        hiringDate: 'Data de contratação',
+        wage: 'Salario',
+        zipCode: 'CEP',
+        city: 'Cidade',
+        stateOfTheCountry: 'Estado',
+        address: 'Rua/Avenida',
+        houseNumber: 'Numero',
+        complement: 'Complemento',
+        neighborhood: 'Bairro',
+      }
+
+      if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, address, houseNumber, neighborhood }, translations)) {
+        return false
+      }
+
+      let response
+      if (hasObjectToEdit) {
+        response = await AlertConfirmationSaveEdit('edit', handleEditEmployee, { setLoading, EmployeeService, state })
+      } else {
+        response = await AlertConfirmationSaveEdit('save', handleCreateEmployee, { setLoading, EmployeeService, state })
+      }
+      setLoading(false)
+      if (response) {
+        dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+        navigate('/colaboradores')
+      }
+    } catch (error: any) {
+      AlertGeneral({ title: 'Erro', message: error.message, type: 'error' })
+    }
+  }
   return (<>
-    <div className="row border border-secondary rounded" id="content-container">
-      <h4 id="titles-custumer-add">ADICIONAR COLABORADOR</h4>
-      <div className="row">
-        <div className="col-md-6 col-sm-12">
+    <div className="row" id="content-container">
+      <h4 id="titles-employee-add">ADICIONAR COLABORADOR</h4>
+      <PersonalData setState={setState} state={state} />
+      <div className='row m-0'>
+        <div className="col-sm-12 col-md-3">
           <TextFieldInput
-            id={'name'}
-            label="Nome"
-            placeholder='Digite aqui o nome do produto'
+            id={'office'}
+            label="Cargo"
+            placeholder='Digite aqui o cargo'
             required={true}
-            value={state.name}
+            value={state.office}
             typeInput="text"
-            onChange={(value: string) => { setState({ ...state, name: value }) }}
+            onChange={(value: string) => { setState({ ...state, office: value }) }}
           />
         </div>
-        <div className="col-md-6 col-sm-12">
+        <div className="col-sm-12 col-md-3">
           <TextFieldInput
-            id={'description'}
-            label="Descrição"
-            placeholder='Digite aqui uma descrição'
+            id='department'
+            label="Departamento"
+            placeholder='Digite aqui o departamento'
             required={false}
-            value={state.description}
+            value={state.department}
             typeInput="text"
-            onChange={(value: string) => { setState({ ...state, description: value }) }}
-
+            onChange={(value: string) => { setState({ ...state, department: value }) }}
+          />
+        </div>
+        <div className="col-sm-12 col-md-3">
+          <TextFieldInput
+            // eslint-disable-next-line max-lines
+            id={'hiringDate'}
+            label="Data de contratação"
+            placeholder='Digite aqui a data de contratação'
+            required={true}
+            value={state.hiringDate}
+            typeInput="date"
+            onChange={(value: string) => { setState({ ...state, hiringDate: value }) }}
+          />
+        </div>
+        <div className="col-sm-12 col-md-3">
+          <TextFieldInput
+            id={'wage'}
+            label="Salário"
+            placeholder='Digite aqui o salário'
+            required={true}
+            value={state.wage}
+            typeInput="text"
+            onChange={(value: string) => { setState({ ...state, wage: mask.maskMoney(value) }) }}
           />
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-6 col-sm-12">
-          <div className="row">
-            <div className="col-11">
-              <SelectFieldInput
-                id={'category'}
-                placeholder='Selecione uma categoria'
-                value={state.category || ''}
-                label='Categoria' options={[]}
-                required={true}
-                onChange={(event: any) => setState({ ...state, category: event.target.value })}
-              />
-            </div>
-            <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              <ModalAdd id='add-new-category' titleOfModel={'categoria'} />
-            </div>
-          </div>
-
-        </div>
-        <div className="col-md-3 col-sm-12">
-          <TextFieldInput
-            id={'price'}
-            label="Preço"
-            placeholder='Digite aqui o preço'
-            required={true}
-            value={state.price}
-            typeInput="text"
-            onChange={(value: string) => { setState({ ...state, price: mask.maskMoney(value) }) }}
-          />
-        </div>
-        <div className="col-md-3 col-sm-12">
-          <TextFieldInput
-            id={'stock'}
-            label="Estoque"
-            placeholder='Digite aqui o estoque'
-            required={true}
-            value={state.stock}
-            typeInput="number"
-            onChange={(value: string) => { setState({ ...state, stock: value }) }}
-          />
-        </div>
-      </div>
+      <AddressData setUser={setState} state={state} cities={[]} />
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-product'/>
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product'/>
+          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+            dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+            navigate(-1)
+          }} id='back-employee' />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
         </div>
-      </div>    </div>
-
+      </div>
+    </div >
   </>)
 }

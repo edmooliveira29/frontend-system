@@ -5,7 +5,7 @@ import { AddProducts } from '../../pages/Internal/Product'
 import { AddCustomer } from '../../pages/Internal/Customer'
 import { AddCategory } from '../../pages/Internal/Category'
 
-export const ModalAdd: React.FC<{ titleOfModel: any, id: string, setData: any,data: any, setDataDB: any }> = (props) => {
+export const ModalAdd: React.FC<{ titleOfModel: any, id: string, setData?: any,data?: any, setDataDB?: any }> = (props) => {
   const [openModal, setOpenModal] = React.useState(false)
   const openModalScreen = () => {
     if (props.titleOfModel == 'cliente') {

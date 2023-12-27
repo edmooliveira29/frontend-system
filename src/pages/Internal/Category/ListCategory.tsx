@@ -36,9 +36,9 @@ export const ListCategory = () => {
   }
 
   const columnHeaders = [
-    { _id: 'type', label: 'TIPO', sortable: true },
-    { _id: 'name', label: 'NOME', sortable: true },
-    { _id: 'description', label: 'DESCRIÇÃO', sortable: true }
+    { _id: 'type', label: 'TIPO', sortable: true, viewInTable: true },
+    { _id: 'name', label: 'NOME', sortable: true, viewInTable: true},
+    { _id: 'description', label: 'DESCRIÇÃO', sortable: true, viewInTable: true}
   ]
 
   return (<>

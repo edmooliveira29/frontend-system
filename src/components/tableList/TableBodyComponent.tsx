@@ -18,7 +18,6 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0
 }
 
-
 const getComparator = (order: Order, orderBy: any) => {
   return order === 'desc'
     ? (a: { key: number | string }, b: { key: number | string }) =>
@@ -35,7 +34,6 @@ const stableSort = (array: any[], comparator: any) => {
     return a[1] - b[1]
   })
   return stabilizedThis.map((el) => el[0])
-
 }
 
 export const TableBodyComponent: FC<{
@@ -57,6 +55,7 @@ export const TableBodyComponent: FC<{
   const dispatch = useDispatch()
 
   const handleOpenDetails = (rowData: any) => {
+    console.log(rowData)
     setSelectedRowData(rowData)
     setIsModalOpen(true)
   }
@@ -92,6 +91,7 @@ export const TableBodyComponent: FC<{
               {keys.map((key: any) => {
                 return (
                   <TableCell
+                    hidden={!key.viewInTable}
                     sx={{ padding: '2px 0px 0px 0px' }}
                     align={'center'}
                     key={key._id}

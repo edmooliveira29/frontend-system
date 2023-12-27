@@ -12,7 +12,7 @@ export const handleCreateEmployee = async (props: { EmployeeService: any, state:
   return employee
 
 }
-export const handleEditEmployee = async (props: { EmployeeService: any, state: any, editEmployee?: boolean, categoriesDB: any }) => {
+export const handleEditEmployee = async (props: { EmployeeService: any, state: any, editEmployee?: boolean }) => {
   const { EmployeeService, state, editEmployee } = props
 
   const employeeService = new EmployeeService()

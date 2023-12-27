@@ -27,9 +27,9 @@ export const ListUserSystem = () => {
   }
 
   const columnHeaders = [
-    { _id: 'role', label: 'PERMISSÃO', sortable: true },
-    { _id: 'name', label: 'NOME', sortable: true },
-    { _id: 'email', label: 'EMAIL', sortable: true },
+    { _id: 'role', label: 'PERMISSÃO', sortable: true ,viewInTable: true},
+    { _id: 'name', label: 'NOME', sortable: true ,viewInTable: true},
+    { _id: 'email', label: 'EMAIL', sortable: true ,viewInTable: true},
   ]
 
   return (<>

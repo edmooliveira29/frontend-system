@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react'
-import { AlertConfirmationSaveEdit, AlertGeneral, ComponentButtonInherit, ComponentButtonSuccess, TextFieldInput } from '../../../components'
+import { AlertConfirmationSaveEdit, AlertGeneral, ComponentButtonInherit, ComponentButtonSuccess, DataFieldInput, TextFieldInput } from '../../../components'
 import { Masks, validateFields } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
 import './styles.sass'
@@ -67,12 +67,15 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
         complement: 'Complemento',
         neighborhood: 'Bairro',
       }
-      console.log(state)
       if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, address, houseNumber, neighborhood }, translations)) {
         return false
+      } else {
+        state.birthday = new Date(state.birthday).toLocaleDateString('pt-BR')
+        state.hiringDate = new Date(state.hiringDate).toLocaleDateString('pt-BR')
       }
 
       let response
+      console.log(state)
       if (hasObjectToEdit) {
         response = await AlertConfirmationSaveEdit('edit', handleEditEmployee, { setLoading, EmployeeService, state })
       } else {
@@ -115,14 +118,11 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
           />
         </div>
         <div className="col-sm-12 col-md-3">
-          <TextFieldInput
-            // eslint-disable-next-line max-lines
+          <DataFieldInput
             id={'hiringDate'}
-            label="Data de contratação"
-            placeholder='Digite aqui a data de contratação'
+            label='Data de contratação'
             required={true}
-            value={state.hiringDate.replace('/', '-')}
-            typeInput="date"
+            value={state.hiringDate}
             onChange={(value: string) => { setState({ ...state, hiringDate: value }) }}
           />
         </div>
@@ -145,7 +145,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
           }} id='back-employee' />
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
+          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
         </div>
       </div>
     </div >

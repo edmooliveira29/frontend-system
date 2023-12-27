@@ -4,6 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 
 export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => void, translations: any }> = (props) => {
   const { data, title, onClose } = props
+  console.log(props.translations)
   const [openModal, setOpenModal] = React.useState(true)
   const fieldsNotToShow = ['password', 'createdAt', 'editAt', 'updatedAt', '_id', 'profilePicture', 'sessionToken', 'createWithGoogle', 'lastChangedPassword']
   const keys = Object.keys(data).filter(key => !fieldsNotToShow.includes(key))

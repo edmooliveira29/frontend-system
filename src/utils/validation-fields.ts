@@ -74,7 +74,7 @@ export const validationCPF = (cpf: string): boolean => {
   let sum
   let rest
   sum = 0
-  if (cpf == "00000000000") return false
+  
 
   for (let i = 1; i <= 9; i++)
     sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i)

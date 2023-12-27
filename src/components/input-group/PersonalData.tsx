@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectFieldInput, TextFieldInput } from '../../components/inputs'
+import { DataFieldInput, SelectFieldInput, TextFieldInput } from '../../components/inputs'
 import { Masks } from '../../utils'
 
 export const PersonalData = (props: { state: any, setState: any, title?: string }) => {
@@ -35,14 +35,13 @@ export const PersonalData = (props: { state: any, setState: any, title?: string 
         />
       </div>
       <div className="col-md-3 col-sm-12">
-        <TextFieldInput
+        <DataFieldInput
           id={'birthday'}
           label='Data de nascimento'
-          placeholder='Digite aqui a data de contratação'
           required={true}
           value={props.state.birthday}
-          typeInput="date"
-          onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }} />
+          onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }}
+        />
       </div>
     </div>
     <div className="row m-0">

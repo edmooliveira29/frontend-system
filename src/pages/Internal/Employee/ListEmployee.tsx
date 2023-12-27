@@ -15,36 +15,38 @@ export const ListEmployee: React.FC = () => {
     const getAllCategories = async () => {
       const employeeRespose = new EmployeeService()
       const categories = await employeeRespose.getAll()
-      categories.data = categories.data.map((employee: any) => {
-        return {
-          _id: employee._id,
-          name: employee.name,
-          office: employee.office,
-          department: employee.department,
-          hiringDate: employee.hiringDate,
-          wage: employee.wage
-        }
-      })
       setData(categories.data)
     }
     getAllCategories()
   }, [])
 
   const deleteItem = async (id: string) => {
-    const categoryRespose = new EmployeeService()
-    await categoryRespose.delete(id)
-    const categories = await categoryRespose.delete(id)
-    setData(categories.data)
+    const employeeResponse = new EmployeeService()
+    await employeeResponse.delete(id)
+    const employee = await employeeResponse.delete(id)
+    setData(employee.data)
   }
 
-  const columnHeaders = [
-    { _id: 'name', label: 'Nome', sortable: true },
-    { _id: 'office', label: 'Cargo', sortable: true },
-    { _id: 'department', label: 'Departamento', sortable: true },
-    { _id: 'hiringDate', label: 'Data de contratação', sortable: true },
-    { _id: 'wage', label: 'Salário', sortable: true },
+  const infoData = [
+    { _id: 'name', label: 'Nome', sortable: true, viewInTable: true },
+    { _id: 'cpf', label: 'CPF', sortable: true, viewInTable: false },
+    { _id: 'birthday', label: 'Data de nascimento', sortable: true, viewInTable: false },
+    { _id: 'gender', label: 'Gênero', sortable: true, viewInTable: false },
+    { _id: 'phoneNumber', label: 'Telefone', sortable: true, viewInTable: false },
+    { _id: 'email', label: 'E-mail', sortable: true, viewInTable: true },
+    { _id: 'zipCode', label: 'CEP', sortable: true, viewInTable: false },
+    { _id: 'city', label: 'Cidade', sortable: true, viewInTable: false },
+    { _id: 'stateOfTheCountry', label: 'Estado', sortable: true, viewInTable: false },
+    { _id: 'address', label: 'Rua/Avenida', sortable: true, viewInTable: false },
+    { _id: 'houseNumber', label: 'Numero', sortable: true, viewInTable: false },
+    { _id: 'complement', label: 'Complemento', sortable: true, viewInTable: false },
+    { _id: 'neighborhood', label: 'Bairro', sortable: true, viewInTable: false },
+    { _id: 'office', label: 'Cargo', sortable: true, viewInTable: true},
+    { _id: 'department', label: 'Departamento', sortable: true, viewInTable: false },
+    { _id: 'hiringDate', label: 'Data de contratação', sortable: true, viewInTable: true },
+    { _id: 'wage', label: 'Salário', sortable: true, viewInTable: true },
   ]
-
+  
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -62,12 +64,12 @@ export const ListEmployee: React.FC = () => {
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
-              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CARGO', 'DEPARTAMENTO', 'DATA DE CONTRATACÃO', 'SALÁRIO'], 'colaboradores', ['name', 'office', 'department', 'hiringDate', 'wage'])} style={{ cursor: 'pointer' }} /></i>
+              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CARGO', 'EMAIL', 'DATA DE CONTRATACÃO', 'SALÁRIO'], 'colaboradores', ['name', 'office', 'email', 'hiringDate', 'wage'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>
       </div>
-      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='colaboradores' translations={columnHeaders} />
+      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={infoData} title='colaboradores' translations={infoData} />
     </div>
   </>
   )

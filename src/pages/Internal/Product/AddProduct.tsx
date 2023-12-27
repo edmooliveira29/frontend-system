@@ -64,12 +64,12 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
       setLoading(false)
       if (response) {
         dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-        if(!props.addedOutSideMainScreen) {
+        if (!props.addedOutSideMainScreen) {
           navigate('/produtos')
-        }else{
+        } else {
           const productsResponse = await new ProductService().getAll()
           props.setProductsDB(productsResponse)
-          props.setProductsDB(productsResponse.data.map((products: any) => ({ value: products.name, label: products.name })))
+          props.setProducts(productsResponse.data.map((products: any) => ({ value: products.name, label: products.name })))
           props.setOpenModal(false)
         }
       }
@@ -150,13 +150,13 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+          {!props.addedOutSideMainScreen && <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
-          }} id='back-product' />
+          }} id='back-product' />}
           <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
         </div>
-      </div>    </div>
-
+      </div>
+    </div>
   </>)
 }

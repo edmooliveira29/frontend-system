@@ -92,10 +92,10 @@ export const AddCategory = (props: { addedOutSideMainScreen: boolean, setOpenMod
       </div>
       <div className="row p-3">
         <div className="d-flex justify-content-between" >
-          <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+          {!props.addedOutSideMainScreen && <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
-          }} id='back-category' />
+          }} id='back-category' />}
           <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-category' loading={loading} />
         </div>
       </div>

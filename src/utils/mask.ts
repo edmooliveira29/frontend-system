@@ -52,7 +52,6 @@ export class Masks {
     if (value.length == 5 && value[0] == '0') {
       value = value.slice(1, value.length)
     }
-
     return value
   }
   maskCapitalizeFirstLetter(string: any) {

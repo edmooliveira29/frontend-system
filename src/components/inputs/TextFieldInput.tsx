@@ -5,7 +5,6 @@ import './styles.sass'
 export function TextFieldInput(props: { label: string; typeInput: string; onChange?: any; value: string; required: boolean, placeholder?: string, disabled?: boolean, id: string }) {
   const [HIDEPASSWORD, setHidePassword] = React.useState(true)
   const [typeInput, setTypeInput] = React.useState(props.typeInput)
-
   const handleShowPassword = (): void => {
     setHidePassword(!HIDEPASSWORD)
     setTypeInput(HIDEPASSWORD ? 'text' : 'password')

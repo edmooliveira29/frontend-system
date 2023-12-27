@@ -4,7 +4,7 @@ import { Masks } from '../../../../utils'
 
 export const PaymentConditions: React.FC<{ state: any, setState: any, calculateTotalAmount: any }> = (props) => {
   const masks = new Masks()
-
+  const [typeOfDiscount, setTypeOfDiscount] = React.useState('R$')
   return (
     <>
       <div className='row m-0'>
@@ -28,17 +28,19 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
             label1='R$'
             label2='%'
             value={props.state.typeOfDiscount}
-            onChange={(event: any) => { props.setState({ ...props.state, typeOfDiscount: !event.target.checked, valueDiscount: '0,00', discount: event.target.checked == true ? '0' : '0,00' }) }}
+            onChange={(event: any) => { 
+              setTypeOfDiscount(event.target.checked ? '%' : 'R$')
+              props.setState({ ...props.state, typeOfDiscount: !event.target.checked, valueDiscount: '0,00', discount: event.target.checked == true ? '0' : '0,00' }) }}
           />
         </div>
         <div className="col-md-3 col-sm-3">
           <TextFieldInput
             id={'discount'}
-            label={`Desconto em ${props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? 'R$' : '%'}`}
-            placeholder={props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? 'Desconto R$' : 'Desconto em %'}
+            label={`Desconto em ${typeOfDiscount}`}
+            placeholder={`Desconto em ${typeOfDiscount}`}
             required={false}
             value={props.state.discount}
-            typeInput={props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? "text" : 'number'}
+            typeInput={'text'}
             onChange={(value: string) => {
               props.setState({
                 ...props.state,

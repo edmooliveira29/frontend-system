@@ -1,6 +1,7 @@
 import { AlertGeneral } from '../../../components'
 
 export const handleCreateSale = async (props: { SaleService: any, state: any }) => {
+  console.log(props.state)
   const { SaleService, state } = props
   const saleService = new SaleService()
   const sale = await saleService.create(state)

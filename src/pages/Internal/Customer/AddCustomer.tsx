@@ -47,8 +47,9 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
     })
     setKey((prevKey) => prevKey + 1)
   }, [typeCustomerModal])
-
+  
   const handleSave = async (state: any) => {
+    console.log(state)
     try {
       if (state.typeCustomer == 'natural') {
         const { name, cpf, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city } = state
@@ -99,7 +100,7 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
         dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
         if (!props.addedOutSideMainScreen) {
           navigate('/clientes')
-        }else{
+        } else {
           const customersResponse = await new CustomerService().getAll()
           props.setCustomersDB(customersResponse)
           props.setCustomers(customersResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
@@ -137,10 +138,10 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
       {typeCustomerModal &&
         <div className="row p-3">
           <div className="d-flex justify-content-between" >
-            <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
+            {!props.addedOutSideMainScreen && <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => {
               dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
               navigate(-1)
-            }} id='back-customer' />
+            }} id='back-customer' />}
             <ComponentButtonSuccess loading={loading} text={objectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={() => handleSave(state)} id='save-customer' />
           </div>
         </div>}

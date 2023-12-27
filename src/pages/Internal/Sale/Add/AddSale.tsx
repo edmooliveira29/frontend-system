@@ -13,11 +13,13 @@ import { ActionsTypes } from '../../../../redux/actions/reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { CustomerService } from '../../../../services/Customer'
+import { ProductService } from '../../../../services/Product'
 
-export const AddSale = () => {
+export const AddSale: React.FC<{ state?: any}> = (props) => {
   const [customers, setCustomers] = useState<any>([])
   const [customersDB, setCustomersDB] = useState<any>([])
-
+  const [products, setProducts] = useState<any>([])
+  const [productsDB, setProductsDB] = useState<any>([])
   const [loading, setLoading] = useState(false)
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const hasObjectToEdit = objectToEdit !== undefined
@@ -28,11 +30,10 @@ export const AddSale = () => {
   const [state, setState] = useState<any>(
     hasObjectToEdit ? objectToEdit : {
       customer: '',
-      dateOfSale: null,
+      dateOfSale: props.state?.dateOfSale || '',
       formOfPayment: [],
       products: [{ 'product-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
       saleTotalAmount: 0,
-      date: '',
       description: '',
       discount: '',
       valueDiscount: '',
@@ -41,15 +42,14 @@ export const AddSale = () => {
     })
 
   const handleSave = async () => {
-    const { dateOfSale, customer, description, products, formOfPayment } = state
+    const { dateOfSale, customer, products, formOfPayment } = state
     const translations = {
       dateOfSale: 'Data da Venda',
       customer: 'Cliente',
-      description: 'Descrição',
       products: 'Produtos',
       formOfPayment: 'Forma de Pagamento',
     }
-    if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
+    if (!validateFields({ dateOfSale, customer, products, formOfPayment }, translations)) {
       return false
     }
     let response
@@ -67,10 +67,17 @@ export const AddSale = () => {
 
   useEffect(() => {
     const getAllCustomers = async () => {
-      const customerResponse  = await new CustomerService().getAll()
-      setCustomersDB(customerResponse )
+      const customerResponse = await new CustomerService().getAll()
+      setCustomersDB(customerResponse)
       setCustomers(customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name })))
     }
+
+    const getAllProducts = async () => {
+      const productsResponse = await new ProductService().getAll()
+      setProductsDB(productsResponse.data)
+      setProducts(productsResponse.data.map((product: any) => ({ value: product.name, label: product.name })))
+    }
+    getAllProducts()
     getAllCustomers()
   }, [])
 
@@ -94,7 +101,12 @@ export const AddSale = () => {
       </div>
       <div className="row m-0">
         <div className="col-md-3 col-sm-12">
-          <DataFieldInput id={'dateOfSale'} label='Data da Venda' required={true} value={state.dateOfSale} onChange={(value: string) => { setState({ ...state, dateOfSale: value }) }} />
+          <DataFieldInput
+            id={'dateOfSale'}
+            label='Data da Venda'
+            required={true}
+            value={state.dateOfSale}
+            onChange={(value: string) => { setState({ ...state, dateOfSale: value }) }} />
         </div>
         <div className="col-md-5 col-sm-12">
           <div className="row">
@@ -119,7 +131,7 @@ export const AddSale = () => {
             id={'description'}
             label="Descrição"
             placeholder='Descrição da venda'
-            required={true}
+            required={false}
             value={state.description}
             typeInput="text"
             onChange={(value: string) => {
@@ -130,8 +142,7 @@ export const AddSale = () => {
 
       </div>
       <div style={{ borderTop: '1px solid #E0E0E0', borderBottom: '1px solid #E0E0E0', margin: '0px 0px' }}>
-
-        <ProductsInSale state={state} calculateTotalAmount={calculateTotalAmount} setState={setState} />
+        <ProductsInSale state={state} calculateTotalAmount={calculateTotalAmount} setState={setState} products={products} setProducts={setProducts} setProductsDB={setProductsDB} productsDB={productsDB} />
       </div>
       <PaymentConditions state={state} setState={setState} calculateTotalAmount={calculateTotalAmount} />
       <div className='row py-2 m-0'>

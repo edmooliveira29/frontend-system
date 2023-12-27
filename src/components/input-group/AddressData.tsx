@@ -36,13 +36,13 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
       </div>
       <div className="col-md-6 col-sm-12">
         <TextFieldInput
-          id={'address'}
+          id={'street'}
           label="Rua/Avenida"
           placeholder='Digite aqui sua rua/avenida'
           required={true}
-          value={props.state.address}
+          value={props.state.street}
           typeInput="text"
-          onChange={(value: string) => { props.setUser({ ...props.state, address: value }) }}
+          onChange={(value: string) => { props.setUser({ ...props.state, street: value }) }}
         />
       </div>
       <div className="col-md-3 col-sm-12">

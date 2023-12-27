@@ -38,7 +38,7 @@ export const PersonalData = (props: { state: any, setState: any, title?: string 
         <DataFieldInput
           id={'birthday'}
           label='Data de nascimento'
-          required={true}
+          required={false}
           value={props.state.birthday}
           onChange={(value: string) => { props.setState({ ...props.state, birthday: value }) }}
         />

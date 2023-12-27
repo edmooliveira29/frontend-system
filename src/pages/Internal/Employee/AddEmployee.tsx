@@ -31,7 +31,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
       wage: props.state?.wage || '',
       zipCode: props.state?.zipCode || '',
       city: props.state?.city || '',
-      address: props.state?.address || '',
+      street: props.state?.street || '',
       houseNumber: props.state?.houseNumber || '',
       complement: props.state?.complement || '',
       neighborhood: props.state?.neighborhood || '',
@@ -48,7 +48,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
 
   const handleSave = async () => {
     try {
-      const { name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, address, houseNumber, neighborhood, stateOfTheCountry } = state
+      const { name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, street, houseNumber, neighborhood, stateOfTheCountry } = state
       const translations = {
         name: 'Nome',
         cpf: 'CPF',
@@ -62,20 +62,16 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
         zipCode: 'CEP',
         city: 'Cidade',
         stateOfTheCountry: 'Estado',
-        address: 'Rua/Avenida',
+        street: 'Rua/Avenida',
         houseNumber: 'Numero',
         complement: 'Complemento',
         neighborhood: 'Bairro',
       }
-      if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, address, houseNumber, neighborhood }, translations)) {
+      if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, street, houseNumber, neighborhood }, translations)) {
         return false
-      } else {
-        state.birthday = new Date(state.birthday).toLocaleDateString('pt-BR')
-        state.hiringDate = new Date(state.hiringDate).toLocaleDateString('pt-BR')
-      }
+      } 
 
       let response
-      console.log(state)
       if (hasObjectToEdit) {
         response = await AlertConfirmationSaveEdit('edit', handleEditEmployee, { setLoading, EmployeeService, state })
       } else {

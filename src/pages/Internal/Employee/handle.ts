@@ -1,25 +1,17 @@
 import { AlertGeneral } from '../../../components'
 
-
-export const handleCreateEmployee = async (props: { EmployeeService: any, state: any, createEmployee?: boolean }) => {
-  const { EmployeeService, state, createEmployee } = props
+export const handleCreateEmployee = async (props: { EmployeeService: any, state: any }) => {
+  const { EmployeeService, state } = props
   const employeeService = new EmployeeService()
-
   const employee = await employeeService.create(state)
-  if (createEmployee) {
-    localStorage.setItem('employeeLogged', JSON.stringify(employee.data))
-  }
   return employee
 
 }
-export const handleEditEmployee = async (props: { EmployeeService: any, state: any, editEmployee?: boolean }) => {
-  const { EmployeeService, state, editEmployee } = props
+export const handleEditEmployee = async (props: { EmployeeService: any, state: any }) => {
+  const { EmployeeService, state } = props
 
   const employeeService = new EmployeeService()
   const employee = await employeeService.edit(state)
-  if (editEmployee) {
-    localStorage.setItem('employeeLogged', JSON.stringify(employee.data))
-  }
   return employee
 
 }

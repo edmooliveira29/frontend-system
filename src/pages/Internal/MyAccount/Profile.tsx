@@ -23,7 +23,7 @@ export const Profile = () => {
       setState(
         {
           _id: userResponse.data._id,
-          address: userResponse.data.address || '',
+          street: userResponse.data.street || '',
           birthday: userResponse.data.birthday || null,
           city: userResponse.data.city || '',
           complement: userResponse.data.complement || '',
@@ -49,7 +49,7 @@ export const Profile = () => {
   }, [])
   const handleSave = async () => {
     setLoading(true)
-    const { name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const { name, cpf, birthday, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city } = state
     const translations = {
       name: 'Nome',
       cpf: 'CPF',
@@ -58,13 +58,13 @@ export const Profile = () => {
       phoneNumber: 'Telefone',
       email: 'Email',
       zipCode: 'CEP',
-      address: 'Rua/Avenida',
+      street: 'Rua/Avenida',
       houseNumber: 'Número',
       neighborhood: 'Bairro',
       stateOfTheCountry: 'Estado',
       city: 'Cidade',
     }
-    if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, address, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+    if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
       setLoading(false)
       return false
     }

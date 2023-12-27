@@ -9,12 +9,8 @@ import { ActionsTypes } from '../../redux/actions/reducers'
 type Order = 'asc' | 'desc' | undefined
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1
-  }
+  if (b[orderBy] < a[orderBy]) return -1
+  if (b[orderBy] > a[orderBy]) return 1
   return 0
 }
 
@@ -55,7 +51,6 @@ export const TableBodyComponent: FC<{
   const dispatch = useDispatch()
 
   const handleOpenDetails = (rowData: any) => {
-    console.log(rowData)
     setSelectedRowData(rowData)
     setIsModalOpen(true)
   }
@@ -96,7 +91,9 @@ export const TableBodyComponent: FC<{
                     align={'center'}
                     key={key._id}
                   >
-                    {row[key._id] === 'owner' ? 'PROPRIETÁRIO' : row[key._id] === 'salesman' ? 'VENDEDOR' : row[key._id]}
+                    {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
+                    {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                    {key._id !== 'role' && key._id !== 'typeCustomer' ? row[key._id] : null}
                   </TableCell>
                 )
               })}
@@ -112,7 +109,7 @@ export const TableBodyComponent: FC<{
                 </IconButton>
               </TableCell>
             </TableRow>
-          )) : <TableRow sx={{ padding: '0px', textAlign: 'center', fontSize: '12px' }}>Nenhum item encontrado</TableRow>}
+          )) : <TableRow sx={{ padding: '0px', textAlign: 'center', fontSize: '12px' }}><TableCell> Nenhum item encontrado</TableCell></TableRow>}
         {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
       </TableBody >
     </>

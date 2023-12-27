@@ -37,7 +37,7 @@ export const ListEmployee: React.FC = () => {
     { _id: 'zipCode', label: 'CEP', sortable: true, viewInTable: false },
     { _id: 'city', label: 'Cidade', sortable: true, viewInTable: false },
     { _id: 'stateOfTheCountry', label: 'Estado', sortable: true, viewInTable: false },
-    { _id: 'address', label: 'Rua/Avenida', sortable: true, viewInTable: false },
+    { _id: 'street', label: 'Rua/Avenida', sortable: true, viewInTable: false },
     { _id: 'houseNumber', label: 'Numero', sortable: true, viewInTable: false },
     { _id: 'complement', label: 'Complemento', sortable: true, viewInTable: false },
     { _id: 'neighborhood', label: 'Bairro', sortable: true, viewInTable: false },

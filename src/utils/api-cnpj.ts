@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AlertGeneral, alertLoading } from '../components'
+import {alertLoading } from '../components'
 
 export const apiCnpj = async (cnpj: string): Promise<any> => {
   alertLoading('open', 'Carregando dados do CNPJ digitado...')
@@ -8,6 +8,8 @@ export const apiCnpj = async (cnpj: string): Promise<any> => {
     alertLoading('close')
     return response
   } catch (error:any) {
-    AlertGeneral({ title: 'Erro', message: `${error.response.data.message}`, type: 'error' })
+    alertLoading('close')
+
+    throw new Error(error.response.data.message)
   }
 }

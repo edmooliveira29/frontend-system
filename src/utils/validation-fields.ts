@@ -51,10 +51,10 @@ export const validateFields = (inputs: any, translations: any) => {
       if (index === 'cpf' && inputs[index] && !validationCPF(inputs[index])) {
         AlertGeneral({ title: 'Erro', message: `O cpf '${inputs[index]}' é inválido!`, type: 'error' }); return false
       }
-      if (index === 'cnpj' && inputs[index]) {
-        inputs[index].length !== 18 && AlertGeneral({ title: 'Erro', message: `O cnpj digitado '${inputs[index]}' é inválido!`, type: 'error' }); return false
+      if (index === 'cnpj' && inputs[index] && inputs[index].length < 18) {
+        AlertGeneral({ title: 'Erro', message: `O cnpj digitado '${inputs[index]}' é inválido!`, type: 'error' })
+        return false
       }
-
     }
   }
 
@@ -74,7 +74,6 @@ export const validationCPF = (cpf: string): boolean => {
   let sum
   let rest
   sum = 0
-  
 
   for (let i = 1; i <= 9; i++)
     sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i)
@@ -94,6 +93,7 @@ export const validationCPF = (cpf: string): boolean => {
 }
 
 export const validationEmail = (email: string): boolean => {
+  if (!email) return false
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
 }

@@ -44,7 +44,6 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
             <ul>
               {keys.map((key, index) => {
                 if (props.translations.length > index) {
-
                   return (
                     data[props.translations[index]._id] !== '' && data[props.translations[index]._id] !== null && data[props.translations[index]._id] !== undefined ? <div className="row" key={props.translations[index]._id} style={{ fontSize: '14px', listStyleType: 'none' }}>
                       <div className="col-6 text-end mx-0 my-1 px-1 ">
@@ -52,8 +51,10 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
                       </div>
                       <div className="col-6 text-start mx-0 my-1 px-1">
                         {props.translations[index]._id === 'role' ?
-                          data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : data[props.translations[index]._id] === 'salesman' ? 'VENDEDOR' : data[props.translations[index]._id]
-                          : data[props.translations[index]._id]}
+                          (data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
+                        {props.translations[index]._id === 'typeCustomer' ?
+                          (data[props.translations[index]._id] == 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                        {props.translations[index]._id !== 'role' && props.translations[index]._id !== 'typeCustomer' ? data[props.translations[index]._id] : null}
                       </div>
                     </div> : null
 

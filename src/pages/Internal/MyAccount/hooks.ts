@@ -17,7 +17,7 @@ export const onChangeZipCode = async (value: string, props: any, setCitySelected
       props.setUser({
         ...props.state,
         zipCode: data.cep,
-        address: data.logradouro,
+        street: data.logradouro,
         neighborhood: data.bairro,
         city: data.localidade,
         stateOfTheCountry: data.uf,

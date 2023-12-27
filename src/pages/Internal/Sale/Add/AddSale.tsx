@@ -1,29 +1,44 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
 import '../styles.sass'
-import { fakerPT_BR } from '@faker-js/faker'
-import { DataFieldInput, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
+import { AlertConfirmationSaveEdit, DataFieldInput, SelectFieldInput, TextAreaInput, TextFieldInput } from '../../../../components'
 import { validateFields } from '../../../../utils'
 import { FooterSale } from './FooterSale'
+import { SaleService } from '../../../../services/Sale'
 import { ProductsInSale } from './ProductsInSale/ProductsInSale'
 import { PaymentConditions } from './PaymentConditions'
 import { ModalAdd } from '../../../../components/modal/ModalAdd'
+import { handleCreateSale, handleEditSale } from '../handle'
+import { ActionsTypes } from '../../../../redux/actions/reducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { CustomerService } from '../../../../services/Customer'
 
 export const AddSale = () => {
-  const [customers, setCustumers] = useState<any>()
-  const [state, setState] = useState<any>({
-    customer: '',
-    dateOfSale: null,
-    formOfPayment: [],
-    products: [{ 'product-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
-    saleTotalAmount: 0,
-    date: '',
-    description: '',
-    discount: '',
-    valueDiscount: '',
-    typeOfDiscount: false,
-    informationAboutTheSale: ''
-  })
+  const [customers, setCustomers] = useState<any>([])
+  const [customersDB, setCustomersDB] = useState<any>([])
+
+  const [loading, setLoading] = useState(false)
+  const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
+  const hasObjectToEdit = objectToEdit !== undefined
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+
+  const [state, setState] = useState<any>(
+    hasObjectToEdit ? objectToEdit : {
+      customer: '',
+      dateOfSale: null,
+      formOfPayment: [],
+      products: [{ 'product-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
+      saleTotalAmount: 0,
+      date: '',
+      description: '',
+      discount: '',
+      valueDiscount: '',
+      typeOfDiscount: false,
+      informationAboutTheSale: ''
+    })
 
   const handleSave = async () => {
     const { dateOfSale, customer, description, products, formOfPayment } = state
@@ -37,24 +52,31 @@ export const AddSale = () => {
     if (!validateFields({ dateOfSale, customer, description, products, formOfPayment }, translations)) {
       return false
     }
-    alert('Em fase de construção!')
+    let response
+    if (hasObjectToEdit) {
+      response = await AlertConfirmationSaveEdit('edit', handleEditSale, { setLoading, SaleService, state })
+    } else {
+      response = await AlertConfirmationSaveEdit('save', handleCreateSale, { setLoading, SaleService, state })
+    }
+    setLoading(false)
+    if (response) {
+      dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
+      navigate('/produtos')
+    }
   }
 
   useEffect(() => {
-    const peopleList = []
-    for (let i = 0; i < 50; i++) {
-      const name = fakerPT_BR.person.fullName()
-      peopleList.push({
-        value: `objectId${i}`,
-        label: name,
-      })
+    const getAllCustomers = async () => {
+      const customerResponse  = await new CustomerService().getAll()
+      setCustomersDB(customerResponse )
+      setCustomers(customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name })))
     }
-    setCustumers(peopleList)
+    getAllCustomers()
   }, [])
 
   const calculateTotalAmount = () => {
     let totalAmount = 0
-    state.products.forEach((_product: any, id:number) => {
+    state.products.forEach((_product: any, id: number) => {
       const subTotalField = `subTotal-${id}`
       const subTotalValue = state.products[id]?.[subTotalField]
       if (subTotalValue) {
@@ -88,7 +110,7 @@ export const AddSale = () => {
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              <ModalAdd titleOfModel={'cliente'} id={'add-new-customer'} />
+              <ModalAdd setData={setCustomers} data={customersDB} setDataDB={setCustomersDB} titleOfModel={'cliente'} id={'add-new-customer'} />
             </div>
           </div>
         </div>
@@ -116,7 +138,7 @@ export const AddSale = () => {
         <label id={`label - input`}>Observações sobre a venda</label>
         <TextAreaInput onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
-      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={handleSave} />
+      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={handleSave} loading={loading} />
     </div >
 
   </>

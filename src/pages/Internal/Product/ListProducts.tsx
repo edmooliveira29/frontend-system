@@ -13,8 +13,8 @@ export const ListProduct = () => {
   const navigate = useNavigate()
   useEffect(() => {
     const getAllProducts = async () => {
-      const productRespose = new ProductService()
-      const products = await productRespose.getAll()
+      const productResponse  = new ProductService()
+      const products = await productResponse .getAll()
       products.data = products.data.map((product: any) => {
         return {
           _id: product._id,
@@ -31,11 +31,11 @@ export const ListProduct = () => {
   }, [])
 
   const columnHeaders = [
-    { _id: 'name', label: 'NOME', sortable: true },
-    { _id: 'description', label: 'DESCRICÃO', sortable: true },
-    { _id: 'categoryId', label: 'CATEGORIA', sortable: true },
-    { _id: 'price', label: 'PREÇO', sortable: true },
-    { _id: 'quantityInStock', label: 'QUANT. EM ESTOQUE', sortable: true },
+    { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
+    { _id: 'description', label: 'DESCRICÃO', sortable: true, viewInTable: true },
+    { _id: 'categoryId', label: 'CATEGORIA', sortable: true, viewInTable: true },
+    { _id: 'price', label: 'PREÇO', sortable: true, viewInTable: true },
+    { _id: 'quantityInStock', label: 'QUANT. EM ESTOQUE', sortable: true, viewInTable: true },
   ]
 
   const deleteItem = async (id: string) => {

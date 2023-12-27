@@ -12,17 +12,17 @@ export const ListUserSystem = () => {
   const navigate = useNavigate()
   useEffect(() => {
     const getAllUsers = async () => {
-      const userRespose = new UserService()
-      const users = await userRespose.getAll()
+      const userResponse  = new UserService()
+      const users = await userResponse .getAll()
       setData(users.data)
     }
     getAllUsers()
   }, [])
 
   const deleteItem = async (id: string) => {
-    const userRespose = new UserService()
-    await userRespose.delete(id)
-    const users = await userRespose.delete(id)
+    const userResponse  = new UserService()
+    await userResponse .delete(id)
+    const users = await userResponse .delete(id)
     setData(users.data)
   }
 

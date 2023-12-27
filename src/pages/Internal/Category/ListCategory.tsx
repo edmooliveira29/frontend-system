@@ -13,8 +13,8 @@ export const ListCategory = () => {
 
   useEffect(() => {
     const getAllCategories = async () => {
-      const categoryRespose = new CategoryService()
-      const categories = await categoryRespose.getAll()
+      const categoryResponse  = new CategoryService()
+      const categories = await categoryResponse .getAll()
       categories.data = categories.data.map((category: any) => {
         return {
           _id: category._id,
@@ -29,9 +29,9 @@ export const ListCategory = () => {
   }, [])
 
   const deleteItem = async (id: string) => {
-    const categoryRespose = new CategoryService()
-    await categoryRespose.delete(id)
-    const categories = await categoryRespose.delete(id)
+    const categoryResponse  = new CategoryService()
+    await categoryResponse .delete(id)
+    const categories = await categoryResponse .delete(id)
     setData(categories.data)
   }
 

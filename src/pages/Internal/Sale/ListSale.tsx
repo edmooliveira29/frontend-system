@@ -1,25 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.sass'
-import { fakerPT_BR } from '@faker-js/faker'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ComponentButtonCommon, TableComponent } from '../../../components'
 import { Tooltip } from '@mui/material'
 import { generatePDF } from '../../../utils'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
+import { SaleService } from '../../../services/Sale'
 
 export const ListSale = () => {
-  function createData(): any {
-    return {
-      number: fakerPT_BR.number.int({ min: 1, max: 100 }),
-      date: fakerPT_BR.date.anytime().toLocaleDateString(),
-      customer: fakerPT_BR.person.fullName(),
-      price: fakerPT_BR.commerce.price({ symbol: 'R$ ' }),
-      status: fakerPT_BR.datatype.boolean() ? 'FINALIZADO' : 'ABERTO',
+  const [data, setData] = useState<any[]>([])
+  const navigate = useNavigate()
+  useEffect(() => {
+    const getAllSales = async () => {
+      const saleResponse  = new SaleService()
+      const sales = await saleResponse .getAll()
+      setData(sales.data)
     }
-  }
-
-  const data: any[] = Array.from({ length: 50 }, () => createData())
-
+    getAllSales()
+  })
   const columnHeaders = [
     { _id: 'number', label: 'Número', sortable: true },
     { _id: 'date', label: 'Data', sortable: true },
@@ -27,6 +25,13 @@ export const ListSale = () => {
     { _id: 'price', label: 'Preço', sortable: true },
     { _id: 'status', label: 'Status', sortable: true },
   ]
+
+  const deleteItem = async (id: string) => {
+    const saleResponse = new SaleService()
+    await saleResponse.delete(id)
+    const sales = await saleResponse.delete(id)
+    setData(sales.data)
+  }
 
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
@@ -41,7 +46,6 @@ export const ListSale = () => {
                 <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-sale' /></i>
               </Link>
             </Tooltip>
-
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
@@ -50,7 +54,7 @@ export const ListSale = () => {
           </div>
         </div>
       </div>
-      <TableComponent deleteItem={() => { return }} data={data} head={columnHeaders} title='venda' translations={columnHeaders} />
+      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='venda' translations={columnHeaders} />
     </div>
   </>
   )

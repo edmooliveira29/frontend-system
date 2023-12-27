@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentButtonInherit, ComponentButtonSuccess } from '../../../../components'
 import { useNavigate } from 'react-router-dom'
 
-export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handleSave: any }> = (props) => {
+export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handleSave: any, loading: boolean }> = (props) => {
   const navigate = useNavigate()
   return <>
     <div className="mt-auto m-0">
@@ -21,7 +21,7 @@ export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handl
         <div className="row p-3">
           <div className="d-flex justify-content-between" >
             <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-footer' />
-            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} id='save-footer'/>
+            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} id='save-footer' loading={props.loading}/>
           </div>
         </div>
       </div>

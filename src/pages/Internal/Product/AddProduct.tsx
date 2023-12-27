@@ -11,7 +11,7 @@ import { ProductService } from '../../../services/Product'
 import { CategoryService } from '../../../services/Category'
 
 
-export const AddProducts: React.FC<{ state?: any }> = (props) => {
+export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolean, setOpenModal: any, setProducts: any, data: any, setProductsDB: any }> = (props) => {
   const mask = new Masks()
   let { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const dispatch = useDispatch()
@@ -36,7 +36,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
     }
   )
 
-  
+
   useEffect(() => {
     const getDatas = async () => {
       const categoriesResponse = await new CategoryService().getAll()
@@ -64,7 +64,14 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
       setLoading(false)
       if (response) {
         dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-        navigate('/produtos')
+        if(!props.addedOutSideMainScreen) {
+          navigate('/produtos')
+        }else{
+          const productsResponse = await new ProductService().getAll()
+          props.setProductsDB(productsResponse)
+          props.setProductsDB(productsResponse.data.map((products: any) => ({ value: products.name, label: products.name })))
+          props.setOpenModal(false)
+        }
       }
     } catch (error: any) {
       AlertGeneral({ title: 'Erro', message: error.message, type: 'error' })
@@ -113,7 +120,7 @@ export const AddProducts: React.FC<{ state?: any }> = (props) => {
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
-              <ModalAdd id='add-new-category' titleOfModel={'categoria'} setData={setCategories} data={categories} setDataDB={setCategoriesDB}/>
+              <ModalAdd id='add-new-category' titleOfModel={'categoria'} setData={setCategories} data={categories} setDataDB={setCategoriesDB} />
             </div>
           </div>
 

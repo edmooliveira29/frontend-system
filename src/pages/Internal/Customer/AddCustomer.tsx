@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../../redux/actions/reducers'
 import { handleCreateCustomer, handleEditCustomer } from './handle'
 
-export const AddCustomer: React.FC<{ state?: any }> = (props) => {
+export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolean, setOpenModal: any, setCustomers?: any, data?: any, setCustomersDB?: any }> = (props) => {
   const [loading, setLoading] = useState(false)
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
 
@@ -97,7 +97,14 @@ export const AddCustomer: React.FC<{ state?: any }> = (props) => {
       setLoading(false)
       if (response) {
         dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-        navigate('/clientes')
+        if (!props.addedOutSideMainScreen) {
+          navigate('/clientes')
+        }else{
+          const customersResponse = await new CustomerService().getAll()
+          props.setCustomersDB(customersResponse)
+          props.setCustomers(customersResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
+          props.setOpenModal(false)
+        }
       }
     } catch (error: any) {
       AlertGeneral({ title: 'Erro', message: error.message ? error.message : error, type: 'error' })
@@ -123,8 +130,8 @@ export const AddCustomer: React.FC<{ state?: any }> = (props) => {
         </div>
       </div>
       <br />
-      {typeCustomerModal === 'natural' && <PersonalData setState={setState} state={state} title='ADICIONAR PESSOA FÍSICA' /> }
-      {(typeCustomerModal === 'juristic') && <BussinesData setState={setState} state={state} /> }
+      {typeCustomerModal === 'natural' && <PersonalData setState={setState} state={state} title='ADICIONAR PESSOA FÍSICA' />}
+      {(typeCustomerModal === 'juristic') && <BussinesData setState={setState} state={state} />}
       <hr />
       {(typeCustomerModal) && < AddressData setUser={setState} state={state} cities={[]} key={key} />}
       {typeCustomerModal &&

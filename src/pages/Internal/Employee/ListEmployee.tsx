@@ -13,8 +13,8 @@ export const ListEmployee: React.FC = () => {
 
   useEffect(() => {
     const getAllCategories = async () => {
-      const employeeRespose = new EmployeeService()
-      const categories = await employeeRespose.getAll()
+      const employeeResponse  = new EmployeeService()
+      const categories = await employeeResponse .getAll()
       setData(categories.data)
     }
     getAllCategories()

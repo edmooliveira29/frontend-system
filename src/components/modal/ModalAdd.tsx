@@ -9,13 +9,13 @@ export const ModalAdd: React.FC<{ titleOfModel: any, id: string, setData?: any,d
   const [openModal, setOpenModal] = React.useState(false)
   const openModalScreen = () => {
     if (props.titleOfModel == 'cliente') {
-      return (<AddCustomer />)
+      return (<AddCustomer addedOutSideMainScreen={true} setOpenModal={setOpenModal} setCustomers={props.setData} data={props.data} setCustomersDB={props.setDataDB}/>)
     }
     if (props.titleOfModel == 'categoria') {
       return (<AddCategory addedOutSideMainScreen={true} setOpenModal={setOpenModal} setCategories={props.setData} data={props.data} setCategoriesDB={props.setDataDB}/>)
     }
     if (props.titleOfModel == 'produto') {
-      return (<AddProducts />)
+      return (<AddProducts addedOutSideMainScreen={true} setOpenModal={setOpenModal} setProducts={props.setData} data={props.data} setProductsDB={props.setDataDB} />)
     }
   }
   return (<>

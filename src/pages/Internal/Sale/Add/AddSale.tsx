@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { CustomerService } from '../../../../services/Customer'
 import { ProductService } from '../../../../services/Product'
 
-export const AddSale: React.FC<{ state?: any }> = (props) => {
+export const AddSale = (props: { state: any }) => {
   const [customers, setCustomers] = useState<any>([])
   const [customersDB, setCustomersDB] = useState<any>([])
   const [products, setProducts] = useState<any>([])
@@ -23,10 +23,29 @@ export const AddSale: React.FC<{ state?: any }> = (props) => {
   const [loading, setLoading] = useState(false)
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const hasObjectToEdit = objectToEdit !== undefined
+  let newObjectToEdit: any = {
+    products: []
+  }
+  if (hasObjectToEdit) {
+    for (const index in objectToEdit.products) {
+      newObjectToEdit.products.push({
+        [`productId-${index}`]: objectToEdit.products[index][`productId-${index}`].name,
+        [`quantity-${index}`]: objectToEdit.products[index][`quantity-${index}`],
+        [`unitValue-${index}`]: objectToEdit.products[index][`unitValue-${index}`],
+        [`subTotal-${index}`]: objectToEdit.products[index][`subTotal-${index}`]
+      })
+    }
+    newObjectToEdit = {
+      ...objectToEdit,
+      products: newObjectToEdit.products,
+      customerId: objectToEdit.customerId.name,
+    }
+  }
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [state, setState] = useState<any>(
-    hasObjectToEdit ? objectToEdit : {
+    hasObjectToEdit ? newObjectToEdit : {
       customerId: '',
       dateOfSale: props.state?.dateOfSale || new Date().toLocaleString('pt-BR'),
       formOfPayment: [],
@@ -87,7 +106,6 @@ export const AddSale: React.FC<{ state?: any }> = (props) => {
     const getAllCustomers = async () => {
       const customerResponse = await new CustomerService().getAll()
       setCustomersDB(customerResponse.data)
-      console.log((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
       setCustomers((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
     }
 

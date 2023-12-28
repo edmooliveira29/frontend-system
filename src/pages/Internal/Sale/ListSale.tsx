@@ -54,7 +54,7 @@ export const ListSale = () => {
           </div>
         </div>
       </div>
-      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='venda' translations={columnHeaders} />
+      <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='vendas' translations={columnHeaders} />
     </div>
   </>
   )

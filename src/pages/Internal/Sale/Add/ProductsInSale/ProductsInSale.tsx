@@ -6,8 +6,9 @@ import { addProductRow, removeProductRow, updateProduct } from './hooks'
 import { ModalAdd } from '../../../../../components/modal/ModalAdd'
 
 export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTotalAmount: any, products: any, setProducts: any, setProductsDB: any, productsDB: any }> = (props) => {
-  const [productRows, setProductRows] = useState([{ _id: 0 }])
-
+  const numberOfProductsInSale: any[] = []
+  props.state.products.map((_: any, index: number) => numberOfProductsInSale.push({_id: index}))
+  const [productRows, setProductRows] = useState(numberOfProductsInSale)
   return <>
     <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS</h6>
     {productRows.map((row, id: number) => (

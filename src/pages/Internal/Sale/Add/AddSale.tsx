@@ -53,15 +53,12 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
       return false
     }
     let response
-    
-    state.customerId = customersDB.find((customer: any) => customer.name === state.customerId)._id
+    state.customerId = customersDB.find((customer: any) => (customer.name).toUpperCase() === (state.customerId).toUpperCase())._id
 
     for (const index in state.products) {
-
-      console.log(state.products[index][`productId-${index}`])
-      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === (state.products[index][`productId-${index}`]).toUpperCase())._id
+      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((state.products[index][`productId-${index}`]).toUpperCase()))._id
     }
-    console.log(state)
+
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditSale, { setLoading, SaleService, state })
     } else {
@@ -70,7 +67,7 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
     setLoading(false)
     if (response) {
       dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
-      navigate('/produtos')
+      navigate('/vendas')
     }
   }
 

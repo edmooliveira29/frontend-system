@@ -17,13 +17,13 @@ export const ListSale = () => {
       setData(sales.data)
     }
     getAllSales()
-  })
+  },[])
   const columnHeaders = [
-    { _id: 'number', label: 'Número', sortable: true },
-    { _id: 'date', label: 'Data', sortable: true },
-    { _id: 'customer', label: 'Cliente', sortable: true },
-    { _id: 'price', label: 'Preço', sortable: true },
-    { _id: 'status', label: 'Status', sortable: true },
+    { _id: 'saleNumber', label: 'Número da venda', sortable: true, viewInTable: true },
+    { _id: 'dateOfSale', label: 'Data', sortable: true ,viewInTable: true},
+    { _id: 'customer.name', label: 'Cliente', sortable: true ,viewInTable: true},
+    { _id: 'price', label: 'Preço', sortable: true ,viewInTable: true},
+    { _id: 'status', label: 'Status', sortable: true ,viewInTable: true},
   ]
 
   const deleteItem = async (id: string) => {

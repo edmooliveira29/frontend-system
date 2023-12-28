@@ -15,7 +15,7 @@ export const AlertConfirmationDelete = (subtitle: string, callbackDelete?: any, 
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
-        await callbackDelete(paramsToDelete._id)
+        await callbackDelete(paramsToDelete)
         Swal.fire({
           title: 'Deletado',
           text: 'Informação deletada com sucesso',

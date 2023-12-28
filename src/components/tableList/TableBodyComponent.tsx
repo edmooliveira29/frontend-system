@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { TableRow, TableCell, IconButton, TableBody } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -68,9 +69,9 @@ export const TableBodyComponent: FC<{
   const handleDeleteItem = (rowData: any, callbackDelete: any) => {
     setSelectedRowData(rowData)
     if (props.title == 'venda') {
-      AlertConfirmationDelete(`Venda de número: ${rowData[Object.keys(rowData)[1]]}`, callbackDelete, { id: rowData[Object.keys(rowData)[0]] })
+      AlertConfirmationDelete(`Venda de número: ${rowData['saleNumber']}`, callbackDelete, rowData['_id'])
     } else {
-      AlertConfirmationDelete('', callbackDelete, { _id: rowData[Object.keys(rowData)[0]] })
+      AlertConfirmationDelete('', callbackDelete, rowData['_id'])
     }
   }
   return (
@@ -84,18 +85,35 @@ export const TableBodyComponent: FC<{
           .map((row, index) => (
             <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
               {keys.map((key: any) => {
-                return (
-                  <TableCell
-                    hidden={!key.viewInTable}
-                    sx={{ padding: '2px 0px 0px 0px' }}
-                    align={'center'}
-                    key={key._id}
-                  >
-                    {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
-                    {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
-                    {key._id !== 'role' && key._id !== 'typeCustomer' ? row[key._id] : null}
-                  </TableCell>
-                )
+                if ((key._id).includes('.')) {
+                  const keySplit = key._id.split('.')
+                  return (
+                    <TableCell
+                      hidden={!key.viewInTable}
+                      sx={{ padding: '2px 0px 0px 0px' }}
+                      align={'center'}
+                      key={key._id}
+                    >
+                      {(row[keySplit[0]][keySplit[1]]).includes(',') ? `R$ ${(row[keySplit[0]][keySplit[1]]).replace('.', ',')}` : row[keySplit[0]][keySplit[1]]}
+                    </TableCell>
+                  )
+                } else {
+
+                  return (
+                    <TableCell
+                      hidden={!key.viewInTable}
+                      sx={{ padding: '2px 0px 0px 0px' }}
+                      align={'center'}
+                      key={key._id}
+                    >
+                      {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
+                      {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                      {key._id.includes('date') ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
+                      {key._id !== 'role' && key._id !== 'typeCustomer' && !key._id.includes('date') ? row[key._id] : null}
+
+                    </TableCell>
+                  )
+                }
               })}
               <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
                 <IconButton color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>

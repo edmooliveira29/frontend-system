@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { CustomerService } from '../../../../services/Customer'
 import { ProductService } from '../../../../services/Product'
 
-export const AddSale: React.FC<{ state?: any}> = (props) => {
+export const AddSale: React.FC<{ state?: any }> = (props) => {
   const [customers, setCustomers] = useState<any>([])
   const [customersDB, setCustomersDB] = useState<any>([])
   const [products, setProducts] = useState<any>([])
@@ -25,23 +25,35 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
   const hasObjectToEdit = objectToEdit !== undefined
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-
   const [state, setState] = useState<any>(
     hasObjectToEdit ? objectToEdit : {
       customerId: '',
       dateOfSale: props.state?.dateOfSale || new Date().toLocaleString('pt-BR'),
       formOfPayment: [],
       products: [{ 'productId-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
-      saleTotalAmount: 0,
       description: '',
       discount: '',
-      valueDiscount: '',
       typeOfDiscount: false,
-      informationAboutTheSale: ''
+      informationAboutTheSale: '',
+      resumeOfSale: {
+        totalAmount: '',
+        valueDiscount: '',
+        totalOfSale: ''
+      }
     })
-
-  const handleSave = async (customersDB: any, productsDB: any) => {
+  const [resumeOfSale, setResumeOfSale] = useState({
+    totalAmount: '',
+    valueDiscount: '',
+    totalOfSale: ''
+  })
+  useEffect(() => {
+    setResumeOfSale({
+      totalAmount: calculateTotalAmount(),
+      valueDiscount: state.discount,
+      totalOfSale: String((Number(calculateTotalAmount().replace(',', '.')) - Number((state.valueDiscount || '0,00').replace(',', '.'))).toFixed(2)).replace('.', ',')
+    })
+  }, [state])
+  const handleSave = async (customersDB: any, productsDB: any, resumeOfSale: any) => {
     const { dateOfSale, customerId, products, formOfPayment } = state
     const translations = {
       dateOfSale: 'Data da Venda',
@@ -58,7 +70,7 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
     for (const index in state.products) {
       state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((state.products[index][`productId-${index}`]).toUpperCase()))._id
     }
-
+    state.resumeOfSale = resumeOfSale
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditSale, { setLoading, SaleService, state })
     } else {
@@ -100,6 +112,7 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
 
     return String(totalAmount.toFixed(2)).replace('.', ',')
   }
+
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -155,9 +168,8 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
         <label id={`label - input`}>Observações sobre a venda</label>
         <TextAreaInput onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
-      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={()=>handleSave(customersDB, productsDB)} loading={loading} />
+      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={() => handleSave(customersDB, productsDB, resumeOfSale)} loading={loading} />
     </div >
-
   </>
   )
 }

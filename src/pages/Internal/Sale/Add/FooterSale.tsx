@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handleSave: any, loading: boolean }> = (props) => {
   const navigate = useNavigate()
+  
   return <>
     <div className="mt-auto m-0">
       <div id="div-footer-sale" className="row d-flex flex-wrap justify-content-between align-items-center p-3 border">
@@ -21,7 +22,7 @@ export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handl
         <div className="row p-3">
           <div className="d-flex justify-content-between" >
             <ComponentButtonInherit text='Voltar' sizeWidth='100px' onClick={() => navigate(-1)} id='back-footer' />
-            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} id='save-footer' loading={props.loading}/>
+            <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={props.handleSave} id='save-footer' loading={props.loading} />
           </div>
         </div>
       </div>

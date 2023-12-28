@@ -71,11 +71,10 @@ export const updateProduct = (state: any, setState: any, calculateTotalAmount: a
       product[`subTotal-${id}`] = (newSubTotal)
     }
   })
-
+  
   setState({
     ...state,
     products: updatedProducts,
-    saleTotalAmount: calculateTotalAmount(),
   })
 }
 

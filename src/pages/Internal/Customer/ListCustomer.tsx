@@ -15,7 +15,7 @@ export const ListCustomer = () => {
   useEffect(() => {
     const getAllCustomers = async () => {
       const customerResponse  = new CustomerService()
-      const customers = await customerResponse .getAll()
+      const customers = await customerResponse.getAll()
       setData(customers.data)
     }
     getAllCustomers()

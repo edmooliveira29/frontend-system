@@ -19,14 +19,16 @@ export const addProductRow = (productRows: any[], setProductRows: any, state: an
 }
 
 export const removeProductRow = (state: any, id: any, productRows: any[], setProductRows: any, setState: any) => {
+
   if (productRows.length > 1) {
     const updatedProductRows = productRows.filter((row) => row._id !== id).map((row, index) => ({ ...row, _id: index }))
-
     const updatedProducts = state.products.filter((_: any, index: any) => index !== id)
     const updatedProductsWithRenamedFields = updatedProducts.map((product: any) => {
       const updatedProduct: any = {}
       Object.keys(product).forEach((key) => {
-        const matches = key.match(/^(.*?)_(\d+)$/)
+        console.log(key)
+        const matches = key.match(/^(.*?)-(\d+)$/)
+        console.log(matches)
         if (matches) {
           const fieldName = matches[1]
           const fieldIndex = matches[2]
@@ -39,6 +41,7 @@ export const removeProductRow = (state: any, id: any, productRows: any[], setPro
           updatedProduct[key] = product[key]
         }
       })
+      console.log('updatedProduct', updatedProduct)
       return updatedProduct
     })
 
@@ -61,14 +64,15 @@ export const updateProduct = (state: any, setState: any, calculateTotalAmount: a
   const updatedProducts = [...state.products]
   updatedProducts[productId] = updatedProduct
   updatedProducts.forEach((product, id) => {
-    
-    product[`unitValue-${id}`] = updatedManually ? mask.maskMoney(product[`unitValue-${id}`]) : productsDB.find((productDB: any) => productDB.name === product[`product-${id}`]).price
-    product[`quantity-${id}`] = product[`quantity-${id}`] || '1'
-    const quantityField = `quantity-${id}`
-    const unitValueField = `unitValue-${id}`
-    product[unitValueField] = product[unitValueField].replace("R$ ", "").replace('.','')
-    const newSubTotal = calculateSubTotal(product[quantityField], product[unitValueField])
-    product[`subTotal-${id}`] = (newSubTotal)
+    if (product[`product-${id}`] !== '' && product[`product-${id}`] !== undefined) {
+      product[`unitValue-${id}`] = updatedManually ? mask.maskMoney(product[`unitValue-${id}`]) : productsDB.find((productDB: any) => productDB.name === product[`product-${id}`]).price
+      product[`quantity-${id}`] = product[`quantity-${id}`] || '1'
+      const quantityField = `quantity-${id}`
+      const unitValueField = `unitValue-${id}`
+      product[unitValueField] = product[unitValueField].replace("R$ ", "").replace('.', '')
+      const newSubTotal = calculateSubTotal(product[quantityField], product[unitValueField])
+      product[`subTotal-${id}`] = (newSubTotal)
+    }
   })
 
   setState({

@@ -26,9 +26,7 @@ export const removeProductRow = (state: any, id: any, productRows: any[], setPro
     const updatedProductsWithRenamedFields = updatedProducts.map((product: any) => {
       const updatedProduct: any = {}
       Object.keys(product).forEach((key) => {
-        console.log(key)
         const matches = key.match(/^(.*?)-(\d+)$/)
-        console.log(matches)
         if (matches) {
           const fieldName = matches[1]
           const fieldIndex = matches[2]
@@ -41,7 +39,6 @@ export const removeProductRow = (state: any, id: any, productRows: any[], setPro
           updatedProduct[key] = product[key]
         }
       })
-      console.log('updatedProduct', updatedProduct)
       return updatedProduct
     })
 

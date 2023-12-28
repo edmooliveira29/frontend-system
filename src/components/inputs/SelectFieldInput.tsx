@@ -28,6 +28,18 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
   }
   ) || props.value === ''
 
+  const ordenationOptions = (a: any, b: any) => {
+    const nameA = a.label.toUpperCase()
+    const nameB = b.label.toUpperCase()
+
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  }
 
   if (isValueValid) {
     return (
@@ -49,7 +61,7 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
           >
             <MenuItem selected={true} value='' disabled key=''>Selecione um {props.label} </MenuItem>
 
-            {options.map((option: any, index: number) => (
+            {options.sort(ordenationOptions).map((option: any, index: number) => (
               < MenuItem key={index} value={option.value} >
                 {option.label}
               </MenuItem>

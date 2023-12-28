@@ -69,7 +69,7 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
     const getAllCustomers = async () => {
       const customerResponse = await new CustomerService().getAll()
       setCustomersDB(customerResponse)
-      setCustomers(customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name })))
+      setCustomers((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
     }
 
     const getAllProducts = async () => {

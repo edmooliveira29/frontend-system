@@ -49,7 +49,6 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
   }, [typeCustomerModal])
   
   const handleSave = async (state: any) => {
-    console.log(state)
     try {
       if (state.typeCustomer == 'natural') {
         const { name, cpf, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city } = state

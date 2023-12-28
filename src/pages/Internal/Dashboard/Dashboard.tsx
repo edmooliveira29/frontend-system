@@ -165,7 +165,7 @@ export const Dashboard = () => {
           <div className="col-md-9 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '30px 10px' }} >
               <div className="card-body">
-                <h4>Seja bem vindo <strong> {'Fulano' || ''}</strong>!</h4>
+                <h4>Seja bem vindo <strong> {JSON.parse(localStorage.getItem('userLogged') as any).name}</strong>!</h4>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@ export const Dashboard = () => {
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '7px 10px' }}>
               <div className="card-body d-flex flex-column align-items-center">
                 <h1 style={{ textShadow: '1px 1px 3px black' }}>{new Date().toLocaleTimeString('pt-BR')} </h1>
-                <h6>{new Date().toLocaleDateString('pt-BR')} </h6>
+                <h6>{new Date().toLocaleString('pt-BR')} </h6>
               </div>
             </div>
           </div>

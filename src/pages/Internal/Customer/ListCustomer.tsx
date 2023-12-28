@@ -26,7 +26,6 @@ export const ListCustomer = () => {
     await customerResponse.delete(id)
     const customer = await customerResponse.delete(id)
     customer.data.map((customer: any) => customer.typeCustomer === 'natural' ? { ...customer, typeCustomer: 'FÍSICA'} : {...customer, typeCustomer: 'JURÍDICA'})
-    console.log(customer.data)
     setData(customer.data)
   }
   const columnHeaders = [

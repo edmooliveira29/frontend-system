@@ -29,10 +29,10 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
 
   const [state, setState] = useState<any>(
     hasObjectToEdit ? objectToEdit : {
-      customer: '',
-      dateOfSale: props.state?.dateOfSale || '',
+      customerId: '',
+      dateOfSale: props.state?.dateOfSale || new Date().toLocaleString('pt-BR'),
       formOfPayment: [],
-      products: [{ 'product-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
+      products: [{ 'productId-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
       saleTotalAmount: 0,
       description: '',
       discount: '',
@@ -41,18 +41,27 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
       informationAboutTheSale: ''
     })
 
-  const handleSave = async () => {
-    const { dateOfSale, customer, products, formOfPayment } = state
+  const handleSave = async (customersDB: any, productsDB: any) => {
+    const { dateOfSale, customerId, products, formOfPayment } = state
     const translations = {
       dateOfSale: 'Data da Venda',
-      customer: 'Cliente',
+      customerId: 'Cliente',
       products: 'Produtos',
       formOfPayment: 'Forma de Pagamento',
     }
-    if (!validateFields({ dateOfSale, customer, products, formOfPayment }, translations)) {
+    if (!validateFields({ dateOfSale, customerId, products, formOfPayment }, translations)) {
       return false
     }
     let response
+    
+    state.customerId = customersDB.find((customer: any) => customer.name === state.customerId)._id
+
+    for (const index in state.products) {
+
+      console.log(state.products[index][`productId-${index}`])
+      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === (state.products[index][`productId-${index}`]).toUpperCase())._id
+    }
+    console.log(state)
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditSale, { setLoading, SaleService, state })
     } else {
@@ -68,7 +77,8 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
   useEffect(() => {
     const getAllCustomers = async () => {
       const customerResponse = await new CustomerService().getAll()
-      setCustomersDB(customerResponse)
+      setCustomersDB(customerResponse.data)
+      console.log((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
       setCustomers((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
     }
 
@@ -93,7 +103,6 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
 
     return String(totalAmount.toFixed(2)).replace('.', ',')
   }
-
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -112,13 +121,13 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
           <div className="row">
             <div className="col-11">
               <SelectFieldInput
-                id={'customer'}
+                id={'customerId'}
                 required={true}
                 label='Cliente'
-                value={state.customer}
+                value={state.customerId}
                 options={customers}
                 placeholder='Selecione um cliente'
-                onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}
+                onChange={(event: any) => { setState({ ...state, customerId: event.target.value }) }}
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
@@ -149,7 +158,7 @@ export const AddSale: React.FC<{ state?: any}> = (props) => {
         <label id={`label - input`}>Observações sobre a venda</label>
         <TextAreaInput onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
-      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={handleSave} loading={loading} />
+      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={()=>handleSave(customersDB, productsDB)} loading={loading} />
     </div >
 
   </>

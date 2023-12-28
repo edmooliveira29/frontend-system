@@ -7,7 +7,7 @@ export const addProductRow = (productRows: any[], setProductRows: any, state: an
     products: [
       ...prevState.products,
       {
-        [`product-${newRow._id}`]: '',
+        [`productId-${newRow._id}`]: '',
         [`quantity-${newRow._id}`]: '',
         [`unitValue-${newRow._id}`]: '',
         [`subTotal-${newRow._id}`]: ''
@@ -61,8 +61,8 @@ export const updateProduct = (state: any, setState: any, calculateTotalAmount: a
   const updatedProducts = [...state.products]
   updatedProducts[productId] = updatedProduct
   updatedProducts.forEach((product, id) => {
-    if (product[`product-${id}`] !== '' && product[`product-${id}`] !== undefined) {
-      product[`unitValue-${id}`] = updatedManually ? mask.maskMoney(product[`unitValue-${id}`]) : productsDB.find((productDB: any) => productDB.name === product[`product-${id}`]).price
+    if (product[`productId-${id}`] !== '' && product[`productId-${id}`] !== undefined) {
+      product[`unitValue-${id}`] = updatedManually ? mask.maskMoney(product[`unitValue-${id}`]) : productsDB.find((productDB: any) => productDB.name === product[`productId-${id}`]).price
       product[`quantity-${id}`] = product[`quantity-${id}`] || '1'
       const quantityField = `quantity-${id}`
       const unitValueField = `unitValue-${id}`

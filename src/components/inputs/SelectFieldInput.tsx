@@ -63,7 +63,7 @@ export const SelectFieldInput: React.FC<{ label: string, required: boolean, opti
 
             {options.sort(ordenationOptions).map((option: any, index: number) => (
               < MenuItem key={index} value={option.value} >
-                {option.label}
+                {(option.label).toUpperCase()}
               </MenuItem>
 
             ))}

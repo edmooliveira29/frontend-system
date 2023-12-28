@@ -44,8 +44,8 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
             onChange={(value: string) => {
               props.setState({
                 ...props.state,
-                discount: props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? masks.maskMoney(value) : (parseFloat(value) > 100 ? '100' : value),
-                valueDiscount: props.state.typeOfDiscount || props.state.typeOfDiscount == undefined ? masks.maskMoney(value) : String((Number(props.calculateTotalAmount().replace(',', '.')) * (Number(value.replace(',', '.')) / 100)).toFixed(2)).replace('.', ',')
+                discount: typeOfDiscount == 'R$' ? masks.maskMoney(value) : (parseFloat(value) > 100 ? '100' : value),
+                valueDiscount: typeOfDiscount == 'R$'? masks.maskMoney(value) : String((Number(props.calculateTotalAmount().replace(',', '.')) * (Number(value.replace(',', '.')) / 100)).toFixed(2)).replace('.', ',')
               })
             }} />
         </div>

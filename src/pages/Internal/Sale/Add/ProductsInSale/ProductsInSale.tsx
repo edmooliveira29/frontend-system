@@ -26,13 +26,13 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
           <div className="row">
             <div className="col-11">
               <SelectFieldInput
-                id={`product-${id}`}
+                id={`productId-${id}`}
                 required={true}
                 label='Produto'
-                value={props.state.products[id]?.[`product-${id}`] || ''}
+                value={props.state.products[id]?.[`productId-${id}`] || ''}
                 options={props.products}
                 placeholder='Selecione um produto'
-                onChange={(event: any) => updateProduct(props.state, props.setState, props.calculateTotalAmount, id, `product-${id}`, event.target.value, props.productsDB, false)}
+                onChange={(event: any) => updateProduct(props.state, props.setState, props.calculateTotalAmount, id, `productId-${id}`, event.target.value, props.productsDB, false)}
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center" style={{ top: '15px', position: 'relative' }}>

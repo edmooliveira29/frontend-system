@@ -18,7 +18,7 @@ export class CustomerService {
   }
 
   async delete(objectId: string) {
-    return (await http.delete<any>(`/customer/${objectId}`))
+    return (await http.delete<any>(`/customer/${objectId}`)).data
   }
 
 }

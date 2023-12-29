@@ -77,57 +77,59 @@ export const TableBodyComponent: FC<{
   return (
     <>
       <TableBody>
-        {props.data.length > 0 ? stableSort(props.data, getComparator(props.order, props.orderBy))
-          .slice(
-            props.page * props.rowsPerPage,
-            props.page * props.rowsPerPage + props.rowsPerPage
-          )
-          .map((row, index) => (
-            <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
-              {keys.map((key: any) => {
-                if ((key._id).includes('.')) {
-                  const keySplit = key._id.split('.')
-                  return (
-                    <TableCell
-                      hidden={!key.viewInTable}
-                      sx={{ padding: '2px 0px 0px 0px' }}
-                      align={'center'}
-                      key={key._id}
-                    >
-                      {(row[keySplit[0]][keySplit[1]]).includes(',') ? `R$ ${(row[keySplit[0]][keySplit[1]]).replace('.', ',')}` : row[keySplit[0]][keySplit[1]]}
-                    </TableCell>
-                  )
-                } else {
+        {props.data.length > 0 ?
+          stableSort(props.data, getComparator(props.order, props.orderBy))
+            .slice(
+              props.page * props.rowsPerPage,
+              props.page * props.rowsPerPage + props.rowsPerPage
+            )
+            .map((row, index) => (
+              <TableRow sx={{ padding: '0px' }} key={`${keys[0]}-${index}`}>
+                {keys.map((key: any) => {
+                  if ((key._id).includes('.')) {
+                    const keySplit = key._id.split('.')
+                    console.log(row)
+                    return (
+                      <TableCell
+                        hidden={!key.viewInTable}
+                        sx={{ padding: '2px 0px 0px 0px' }}
+                        align={'center'}
+                        key={key._id}
+                      >
+                        {(row[keySplit[0]][keySplit[1]]).includes(',') ? `R$ ${(row[keySplit[0]][keySplit[1]]).replace('.', ',')}` : row[keySplit[0]][keySplit[1]]}
+                      </TableCell>
+                    )
+                  } else {
 
-                  return (
-                    <TableCell
-                      hidden={!key.viewInTable}
-                      sx={{ padding: '2px 0px 0px 0px' }}
-                      align={'center'}
-                      key={key._id}
-                    >
-                      {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
-                      {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
-                      {key._id.includes('date') ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
-                      {key._id !== 'role' && key._id !== 'typeCustomer' && !key._id.includes('date') ? row[key._id] : null}
-
-                    </TableCell>
-                  )
-                }
-              })}
-              <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
-                <IconButton color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>
-                  <VisibilityIcon />
-                </IconButton>
-                <IconButton color="error" size="small" onClick={() => handleDeleteItem(row, props.deleteItem)}>
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          )) : <TableRow sx={{ padding: '0px', textAlign: 'center', fontSize: '12px' }}><TableCell> Nenhum item encontrado</TableCell></TableRow>}
+                    return (
+                      <TableCell
+                        hidden={!key.viewInTable}
+                        sx={{ padding: '2px 0px 0px 0px' }}
+                        align={'center'}
+                        key={key._id}
+                      >
+                        {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
+                        {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                        {key._id.includes('date') ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
+                        {key._id !== 'role' && key._id !== 'typeCustomer' && !key._id.includes('date') ? row[key._id] : null}
+                      </TableCell>
+                    )
+                  }
+                })}
+                <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
+                  <IconButton color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>
+                    <VisibilityIcon />
+                  </IconButton>
+                  <IconButton color="error" size="small" onClick={() => handleDeleteItem(row, props.deleteItem)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            )) :
+          <TableRow sx={{ padding: '0px', textAlign: 'center', fontSize: '12px' }}><TableCell> Nenhum item encontrado</TableCell></TableRow>}
         {isModalOpen && selectedRowData ? (<ModalDetails data={selectedRowData} title={props.title} onClose={handleCloseModal} translations={props.translations} />) : null}
       </TableBody >
     </>

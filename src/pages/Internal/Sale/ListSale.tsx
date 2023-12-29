@@ -13,20 +13,21 @@ export const ListSale = () => {
   useEffect(() => {
     const getAllSales = async () => {
       const saleResponse  = new SaleService()
-      const sales = await saleResponse .getAll()
+      const sales = await saleResponse.getAll()
+      console.log(sales.data)
       setData(sales.data)
     }
     getAllSales()
   },[])
+  
   const columnHeaders = [
     { _id: 'saleNumber', label: 'Número da venda', sortable: true, viewInTable: true },
     { _id: 'dateOfSale', label: 'Data', sortable: true ,viewInTable: true},
-    { _id: 'customerId.name', label: 'Cliente', sortable: true ,viewInTable: true},
+    { _id: 'customer.name', label: 'Cliente', sortable: true ,viewInTable: true},
     { _id: 'resumeOfSale.totalOfSale', label: 'Preço', sortable: true ,viewInTable: true},
   ]
 
   const deleteItem = async (id: string) => {
-    console.log(id)
     const saleResponse = new SaleService()
     await saleResponse.delete(id)
     const sales = await saleResponse.delete(id)

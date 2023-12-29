@@ -4,7 +4,7 @@ type ProductI = {
 		name: string
 		description?: string
 		price: number
-		categoryId: string
+		category: string
 		quantityInStock: number
 	}
 }

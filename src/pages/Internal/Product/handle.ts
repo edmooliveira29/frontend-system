@@ -1,17 +1,14 @@
 import { AlertGeneral } from '../../../components'
 
 
-export const handleCreateProduct = async (props: { ProductService: any, state: any, createProduct?: boolean, categoriesDB: any }) => {
-  const { ProductService, state, createProduct, categoriesDB } = props
+export const handleCreateProduct = async (props: { ProductService: any, state: any, categoriesDB: any }) => {
+  const { ProductService, state, categoriesDB } = props
   const productService = new ProductService()
   const newProduct = {
     ...state,
-    categoryId: categoriesDB.data.filter((category: any) => category.name === state.categoryId)[0]._id
+    category: categoriesDB.data.filter((categoryDB: any) => categoryDB.name === state.category)[0]
   }
   const product = await productService.create(newProduct)
-  if (createProduct) {
-    localStorage.setItem('productLogged', JSON.stringify(product.data))
-  }
   return product
 
 }
@@ -21,7 +18,7 @@ export const handleEditProduct = async (props: { ProductService: any, state: any
   const productService = new ProductService()
   const newProduct = {
     ...state,
-    categoryId: categoriesDB.data.filter((category: any) => category.name === state.categoryId)[0]._id
+    category: categoriesDB.data.filter((categoryDB: any) => categoryDB.name === state.category)[0]
   }
   const product = await productService.edit(newProduct)
   if (editProduct) {

@@ -30,7 +30,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
     hasObjectToEdit ? objectToEdit : {
       name: props.state?.name || '',
       description: props.state?.description || '',
-      categoryId: props.state?.categoryId || '',
+      category: props.state?.category || '',
       price: props.state?.price || '',
       quantityInStock: props.state?.quantityInStock || '',
     }
@@ -49,10 +49,10 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
   const handleSave = async () => {
     try {
 
-      const { name, categoryId, price, quantityInStock } = state
-      const translations = { name: 'Nome', categoryId: 'Categoria', price: 'Preço', quantityInStock: 'Quantidade em estoque' }
+      const { name, category, price, quantityInStock } = state
+      const translations = { name: 'Nome', category: 'Categoria', price: 'Preço', quantityInStock: 'Quantidade em estoque' }
 
-      if (!validateFields({ name, categoryId, price, quantityInStock }, translations)) {
+      if (!validateFields({ name, category, price, quantityInStock }, translations)) {
         return false
       }
       let response
@@ -111,12 +111,12 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
           <div className="row">
             <div className="col-11">
               <SelectFieldInput
-                id={'categoryId'}
+                id={'category'}
                 placeholder='Selecione uma categoria'
-                value={state.categoryId || ''}
+                value={state.category || ''}
                 label='Categoria' options={categories}
                 required={true}
-                onChange={(event: any) => setState({ ...state, categoryId: event.target.value })}
+                onChange={(event: any) => setState({ ...state, category: event.target.value })}
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>

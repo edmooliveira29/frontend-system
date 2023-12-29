@@ -16,11 +16,12 @@ export const ListProduct = () => {
       const productResponse  = new ProductService()
       const products = await productResponse .getAll()
       products.data = products.data.map((product: any) => {
+        console.log(product)
         return {
           _id: product._id,
           name: product.name,
           description: product.description,
-          categoryId: product.categoryId.name,
+          category: product.category.name,
           price: "R$ " + mask.maskMoney(product.price),
           quantityInStock: product.quantityInStock,
         }
@@ -33,7 +34,7 @@ export const ListProduct = () => {
   const columnHeaders = [
     { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
     { _id: 'description', label: 'DESCRICÃO', sortable: true, viewInTable: true },
-    { _id: 'categoryId', label: 'CATEGORIA', sortable: true, viewInTable: true },
+    { _id: 'category', label: 'CATEGORIA', sortable: true, viewInTable: true },
     { _id: 'price', label: 'PREÇO', sortable: true, viewInTable: true },
     { _id: 'quantityInStock', label: 'QUANT. EM ESTOQUE', sortable: true, viewInTable: true },
   ]

@@ -38,7 +38,7 @@ export const AddSale = (props: { state: any }) => {
     newObjectToEdit = {
       ...objectToEdit,
       products: newObjectToEdit.products,
-      customerId: objectToEdit.customerId.name,
+      customer: objectToEdit.customer.name,
     }
   }
 
@@ -46,7 +46,7 @@ export const AddSale = (props: { state: any }) => {
   const navigate = useNavigate()
   const [state, setState] = useState<any>(
     hasObjectToEdit ? newObjectToEdit : {
-      customerId: '',
+      customer: '',
       dateOfSale: props.state?.dateOfSale || new Date().toLocaleString('pt-BR'),
       formOfPayment: [],
       products: [{ 'productId-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
@@ -73,21 +73,21 @@ export const AddSale = (props: { state: any }) => {
     })
   }, [state])
   const handleSave = async (customersDB: any, productsDB: any, resumeOfSale: any) => {
-    const { dateOfSale, customerId, products, formOfPayment } = state
+    const { dateOfSale, customer, products, formOfPayment } = state
     const translations = {
       dateOfSale: 'Data da Venda',
-      customerId: 'Cliente',
+      customer: 'Cliente',
       products: 'Produtos',
       formOfPayment: 'Forma de Pagamento',
     }
-    if (!validateFields({ dateOfSale, customerId, products, formOfPayment }, translations)) {
+    if (!validateFields({ dateOfSale, customer, products, formOfPayment }, translations)) {
       return false
     }
     let response
-    state.customerId = customersDB.find((customer: any) => (customer.name).toUpperCase() === (state.customerId).toUpperCase())._id
+    state.customer = customersDB.find((customer: any) => (customer.name).toUpperCase() === (state.customer).toUpperCase())
 
     for (const index in state.products) {
-      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((state.products[index][`productId-${index}`]).toUpperCase()))._id
+      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((state.products[index][`productId-${index}`]).toUpperCase()))
     }
     state.resumeOfSale = resumeOfSale
     if (hasObjectToEdit) {
@@ -149,13 +149,13 @@ export const AddSale = (props: { state: any }) => {
           <div className="row">
             <div className="col-11">
               <SelectFieldInput
-                id={'customerId'}
+                id={'customer'}
                 required={true}
                 label='Cliente'
-                value={state.customerId}
+                value={state.customer}
                 options={customers}
                 placeholder='Selecione um cliente'
-                onChange={(event: any) => { setState({ ...state, customerId: event.target.value }) }}
+                onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}
               />
             </div>
             <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>

@@ -33,9 +33,9 @@ export const ListCustomer = () => {
     { _id: 'cnpj', label: 'CNPJ', sortable: true, viewInTable: false },
     { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
     { _id: 'phoneNumber', label: 'TELEFONE', sortable: true, viewInTable: true },
+    { _id: 'birthday', label: 'DATA DE NASCIMENTO', sortable: true, viewInTable: false },
     { _id: 'email', label: 'EMAIL', sortable: true, viewInTable: true },
     { _id: 'city', label: 'Cidade', sortable: true, viewInTable: true },
-    { _id: 'stateOfTheCountry', label: 'Estado', sortable: true, viewInTable: true },
     { _id: 'legalResponsible', label: 'RESPONSAVEL LEGAL', sortable: true, viewInTable: false },
     {_id: 'fantasyName', label: 'NOME FANTASIA', sortable: true, viewInTable: false},
     {_id:'stateRegistration', label: 'INSC. ESTADUAL', sortable: true, viewInTable: false},
@@ -45,7 +45,7 @@ export const ListCustomer = () => {
     {_id:'houseNumber', label: 'NUMERO', sortable: true, viewInTable: false},
     {_id:'complement', label: 'COMPLEMENTO', sortable: true, viewInTable: false},
     {_id:'neighborhood', label: 'BAIRRO', sortable: true, viewInTable: false},
-    {_id:'stateOfTheCountry', label: 'ESTADO', sortable: true, viewInTable: false},
+    {_id:'stateOfTheCountry', label: 'ESTADO', sortable: true, viewInTable: true},
     {_id:'city', label: 'CIDADE', sortable: true, viewInTable: false},
 
   ]

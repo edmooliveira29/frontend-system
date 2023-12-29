@@ -100,7 +100,7 @@ export const TableBodyComponent: FC<{
                       </TableCell>
                     )
                   } else {
-
+                    const fieldsDate = ['hiringDate', 'date', 'dateOfSale']
                     return (
                       <TableCell
                         hidden={!key.viewInTable}
@@ -110,8 +110,8 @@ export const TableBodyComponent: FC<{
                       >
                         {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
                         {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
-                        {key._id.includes('date') ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
-                        {key._id !== 'role' && key._id !== 'typeCustomer' && !key._id.includes('date') ? row[key._id] : null}
+                        {fieldsDate.includes(key._id) ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
+                        {key._id !== 'role' && key._id !== 'typeCustomer' && !fieldsDate.includes(key._id) ? row[key._id] : null}
                       </TableCell>
                     )
                   }

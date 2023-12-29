@@ -16,7 +16,6 @@ export const ListProduct = () => {
       const productResponse  = new ProductService()
       const products = await productResponse .getAll()
       products.data = products.data.map((product: any) => {
-        console.log(product)
         return {
           _id: product._id,
           name: product.name,

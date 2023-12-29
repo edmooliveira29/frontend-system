@@ -14,7 +14,6 @@ export const ListSale = () => {
     const getAllSales = async () => {
       const saleResponse  = new SaleService()
       const sales = await saleResponse.getAll()
-      console.log(sales.data)
       setData(sales.data)
     }
     getAllSales()

@@ -88,7 +88,6 @@ export const TableBodyComponent: FC<{
                 {keys.map((key: any) => {
                   if ((key._id).includes('.')) {
                     const keySplit = key._id.split('.')
-                    console.log(row)
                     return (
                       <TableCell
                         hidden={!key.viewInTable}

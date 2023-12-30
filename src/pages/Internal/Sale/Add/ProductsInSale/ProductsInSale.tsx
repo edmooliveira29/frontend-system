@@ -5,9 +5,9 @@ import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import { addProductRow, removeProductRow, updateProduct } from './hooks'
 import { ModalAdd } from '../../../../../components/modal/ModalAdd'
 
-export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTotalAmount: any, products: any, setProducts: any, setProductsDB: any, productsDB: any }> = (props) => {
+export const ProductsInSale: React.FC<{ hasObjectToEdit: boolean, state: any, setState: any, calculateTotalAmount: any, products: any, setProducts: any, setProductsDB: any, productsDB: any }> = (props) => {
   const numberOfProductsInSale: any[] = []
-  props.state.products.map((_: any, index: number) => numberOfProductsInSale.push({_id: index}))
+  props.state.products.map((_: any, index: number) => numberOfProductsInSale.push({ _id: index }))
   const [productRows, setProductRows] = useState(numberOfProductsInSale)
   return <>
     <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS</h6>
@@ -37,9 +37,9 @@ export const ProductsInSale: React.FC<{ state: any, setState: any, calculateTota
                 onChange={(event: any) => updateProduct(props.state, props.setState, props.calculateTotalAmount, id, `productId-${id}`, event.target.value, props.productsDB, false)}
               />
             </div>
-            <div className="col-1 d-flex align-items-center justify-content-center" style={{ top: '15px', position: 'relative' }}>
+            {!props.hasObjectToEdit ? <div className="col-1 d-flex align-items-center justify-content-center" style={{ top: '15px', position: 'relative' }}>
               <ModalAdd titleOfModel={'produto'} id={`add-new-product-${id}`} setData={props.setProducts} data={props.productsDB} setDataDB={props.setProductsDB} />
-            </div>
+            </div> : null}
           </div>
 
         </div>

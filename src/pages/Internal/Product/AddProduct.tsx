@@ -119,9 +119,9 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
                 onChange={(event: any) => setState({ ...state, category: event.target.value })}
               />
             </div>
-            <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
+            {!hasObjectToEdit ? <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
               <ModalAdd id='add-new-category' titleOfModel={'categoria'} setData={setCategories} data={categories} setDataDB={setCategoriesDB} />
-            </div>
+            </div> : null}
           </div>
 
         </div>

@@ -158,9 +158,9 @@ export const AddSale = (props: { state: any }) => {
                 onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}
               />
             </div>
-            <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
+            {!hasObjectToEdit ? <div className="col-1 d-flex align-items-center justify-content-center p-0" style={{ top: '15px', position: 'relative' }}>
               <ModalAdd setData={setCustomers} data={customersDB} setDataDB={setCustomersDB} titleOfModel={'cliente'} id={'add-new-customer'} />
-            </div>
+            </div> : null}
           </div>
         </div>
         <div className="col-md-4 col-sm-12">
@@ -179,7 +179,7 @@ export const AddSale = (props: { state: any }) => {
 
       </div>
       <div style={{ borderTop: '1px solid #E0E0E0', borderBottom: '1px solid #E0E0E0', margin: '0px 0px' }}>
-        <ProductsInSale state={state} calculateTotalAmount={calculateTotalAmount} setState={setState} products={products} setProducts={setProducts} setProductsDB={setProductsDB} productsDB={productsDB} />
+        <ProductsInSale hasObjectToEdit={hasObjectToEdit} state={state} calculateTotalAmount={calculateTotalAmount} setState={setState} products={products} setProducts={setProducts} setProductsDB={setProductsDB} productsDB={productsDB} />
       </div>
       <PaymentConditions state={state} setState={setState} calculateTotalAmount={calculateTotalAmount} />
       <div className='row py-2 m-0'>

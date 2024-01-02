@@ -26,7 +26,7 @@ export const AlertConfirmationDelete = (subtitle: string, callbackDelete?: any, 
         console.log(error)
         Swal.fire({
           title: 'Erro',
-          text: error.response.data.message,
+          text: error.response,
           icon: 'error',
           width: 500
         })

@@ -100,7 +100,7 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
         if (!props.addedOutSideMainScreen) {
           navigate('/clientes')
         } else {
-          const customersResponse = await new CustomerService().getAll()
+          const customersResponse = await new CustomerService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
           props.setCustomersDB(customersResponse)
           props.setCustomers(customersResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
           props.setOpenModal(false)

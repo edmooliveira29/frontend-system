@@ -5,6 +5,10 @@ export class ProductService {
     return (await http.get<any>('/product')).data
   }
   async create(data: any) {
+    data = {
+      ...data,
+      createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
+    }
     return (await http.post<any>('/product', data)).data
   }
 

@@ -104,7 +104,7 @@ export const AddSale = (props: { state: any }) => {
 
   useEffect(() => {
     const getAllCustomers = async () => {
-      const customerResponse = await new CustomerService().getAll()
+      const customerResponse = await new CustomerService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setCustomersDB(customerResponse.data)
       setCustomers((customerResponse.data.map((customer: any) => ({ value: customer.name, label: customer.name }))))
     }

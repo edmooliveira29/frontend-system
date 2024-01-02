@@ -14,8 +14,8 @@ export const ListCustomer = () => {
 
   useEffect(() => {
     const getAllCustomers = async () => {
-      const customerResponse  = new CustomerService()
-      const customers = await customerResponse.getAll()
+      const customerResponse = new CustomerService()
+      const customers = await customerResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(customers.data)
     }
     getAllCustomers()
@@ -24,10 +24,11 @@ export const ListCustomer = () => {
   const deleteItem = async (id: string) => {
     const customerResponse = new CustomerService()
     await customerResponse.delete(id)
-    const customer = await customerResponse.delete(id)
-    customer.data.map((customer: any) => customer.typeCustomer === 'natural' ? { ...customer, typeCustomer: 'FÍSICA'} : {...customer, typeCustomer: 'JURÍDICA'})
-    setData(customer.data)
+    const customers = await customerResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+    customers.data.map((customer: any) => customer.typeCustomer === 'natural' ? { ...customer, typeCustomer: 'FÍSICA' } : { ...customer, typeCustomer: 'JURÍDICA' })
+    setData(customers.data)
   }
+  
   const columnHeaders = [
     { _id: 'typeCustomer', label: 'TIPO', sortable: true, viewInTable: true },
     { _id: 'cnpj', label: 'CNPJ', sortable: true, viewInTable: false },
@@ -37,16 +38,16 @@ export const ListCustomer = () => {
     { _id: 'email', label: 'EMAIL', sortable: true, viewInTable: true },
     { _id: 'city', label: 'Cidade', sortable: true, viewInTable: true },
     { _id: 'legalResponsible', label: 'RESPONSAVEL LEGAL', sortable: true, viewInTable: false },
-    {_id: 'fantasyName', label: 'NOME FANTASIA', sortable: true, viewInTable: false},
-    {_id:'stateRegistration', label: 'INSC. ESTADUAL', sortable: true, viewInTable: false},
-    {_id:'additionalInformation', label: 'INFORMAÇOES ADICIONAIS', sortable: true, viewInTable: false},
-    {_id:'zipCode', label: 'CEP', sortable: true, viewInTable: false},
-    {_id:'street', label: 'RUA/AVENIDA', sortable: true, viewInTable: false},
-    {_id:'houseNumber', label: 'NUMERO', sortable: true, viewInTable: false},
-    {_id:'complement', label: 'COMPLEMENTO', sortable: true, viewInTable: false},
-    {_id:'neighborhood', label: 'BAIRRO', sortable: true, viewInTable: false},
-    {_id:'stateOfTheCountry', label: 'ESTADO', sortable: true, viewInTable: true},
-    {_id:'city', label: 'CIDADE', sortable: true, viewInTable: false},
+    { _id: 'fantasyName', label: 'NOME FANTASIA', sortable: true, viewInTable: false },
+    { _id: 'stateRegistration', label: 'INSC. ESTADUAL', sortable: true, viewInTable: false },
+    { _id: 'additionalInformation', label: 'INFORMAÇOES ADICIONAIS', sortable: true, viewInTable: false },
+    { _id: 'zipCode', label: 'CEP', sortable: true, viewInTable: false },
+    { _id: 'street', label: 'RUA/AVENIDA', sortable: true, viewInTable: false },
+    { _id: 'houseNumber', label: 'NUMERO', sortable: true, viewInTable: false },
+    { _id: 'complement', label: 'COMPLEMENTO', sortable: true, viewInTable: false },
+    { _id: 'neighborhood', label: 'BAIRRO', sortable: true, viewInTable: false },
+    { _id: 'stateOfTheCountry', label: 'ESTADO', sortable: true, viewInTable: true },
+    { _id: 'city', label: 'CIDADE', sortable: true, viewInTable: false },
 
   ]
   return (<>

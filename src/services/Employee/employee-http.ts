@@ -5,6 +5,10 @@ export class EmployeeService {
     return (await http.get<any>('/employee')).data
   }
   async create(data: any) {
+    data = {
+      ...data,
+      createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
+    }
     return (await http.post<any>('/employee', data)).data
   }
 

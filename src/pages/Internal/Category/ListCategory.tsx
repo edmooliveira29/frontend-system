@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './styles.sass'
 import { Link, useNavigate } from 'react-router-dom'
-import { ComponentButtonCommon, TableComponent } from '../../../components'
+import { AlertGeneral, ComponentButtonCommon, TableComponent } from '../../../components'
 import { BsFileEarmarkPdf } from 'react-icons/bs'
 import { Tooltip } from '@mui/material'
 import { generatePDF } from '../../../utils'
@@ -13,8 +13,8 @@ export const ListCategory = () => {
 
   useEffect(() => {
     const getAllCategories = async () => {
-      const categoryResponse  = new CategoryService()
-      const categories = await categoryResponse .getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+      const categoryResponse = new CategoryService()
+      const categories = await categoryResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       categories.data = categories.data.map((category: any) => {
         return {
           _id: category._id,
@@ -29,16 +29,21 @@ export const ListCategory = () => {
   }, [])
 
   const deleteItem = async (id: string) => {
-    const categoryResponse  = new CategoryService()
-    await categoryResponse .delete(id)
-    const categories = await categoryResponse .delete(id)
+    const categoryResponse = new CategoryService()
+    try {
+      await categoryResponse.delete(id)
+    } catch (error: any) {
+      AlertGeneral({ title: 'Erro', message: error, type: 'error' })
+    }
+    const categories = await categoryResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
     setData(categories.data)
   }
 
+
   const columnHeaders = [
     { _id: 'type', label: 'TIPO', sortable: true, viewInTable: true },
-    { _id: 'name', label: 'NOME', sortable: true, viewInTable: true},
-    { _id: 'description', label: 'DESCRIÇÃO', sortable: true, viewInTable: true}
+    { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
+    { _id: 'description', label: 'DESCRIÇÃO', sortable: true, viewInTable: true }
   ]
 
   return (<>

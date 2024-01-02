@@ -1,10 +1,16 @@
 import http from '../http-common'
 
 export class CustomerService {
-  async getAll() {
-    return (await http.get<any>('/customer')).data
+  async getAll(companyId: any) {
+    const params = { companyId: companyId }
+    const customerResponse = (await http.get<any>(`/customer`, { params }))
+    return customerResponse.data
   }
   async create(data: any) {
+    data = {
+      ...data,
+      createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
+    }
     return (await http.post<any>('/customer', data)).data
   }
 
@@ -18,7 +24,6 @@ export class CustomerService {
   }
 
   async delete(objectId: string) {
-    return (await http.delete<any>(`/customer/${objectId}`)).data
+    return await (http.delete<any>(`/customer/${objectId}`))
   }
-
 }

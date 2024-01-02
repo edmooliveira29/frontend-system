@@ -5,6 +5,10 @@ export class SaleService {
     return (await http.get<any>('/sale')).data
   }
   async create(data: any) {
+    data = {
+      ...data,
+      createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
+    }
     return (await http.post<any>('/sale', data)).data
   }
 

@@ -5,6 +5,10 @@ export class CategoryService {
     return (await http.get<any>('/category')).data
   }
   async create(data: any) {
+    data ={
+      ...data,
+      createdByTheCompany: (JSON.parse(localStorage.getItem('company') as any))._id
+    }
     return (await http.post<any>('/category', data)).data
   }
 

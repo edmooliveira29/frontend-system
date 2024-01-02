@@ -9,12 +9,8 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
       password: state.password,
       remember: state.remember,
     })
-    console.log(user)
-    // dar um get em companyid para inserir no localstorage
-    console.log(user.data.createdBy)
     const company = await new CompanyService().get(user.data.companyId)
-    console.log(company)
-    localStorage.setItem('companyLogged', JSON.stringify(user.data))
+    localStorage.setItem('companyLogged', JSON.stringify(company.data))
     return user.data
   } catch (error: any) {
     setLoading(false)
@@ -46,7 +42,8 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
       password: state.password,
       passwordConfirm: state.passwordConfirmation,
       createWithGoogle: false,
-      role: state.role
+      role: state.role,
+      createdByTheCompany: company.data._id
     })
     const user = await userService.login({
       email: state.email,
@@ -56,7 +53,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
 
     localStorage.setItem('userLogged', JSON.stringify(user.data))
     localStorage.setItem('company', JSON.stringify(company.data))
-    
+    navigate('/dashboard')
     return user.data
   } catch (error: any) {
     setLoading(false)

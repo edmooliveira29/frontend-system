@@ -25,13 +25,10 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
           remember: true,
           loginWithGoogle: true
         })
-        const companyService = new CompanyService()
-
-        const company = await companyService.get(userLogged.data.createdBy)
-        console.log(company)
-        localStorage.setItem('company', JSON.stringify(company.data))
-
         if (userLogged) {
+          const companyService = new CompanyService()
+          const company = await companyService.get(userLogged.data.createdByTheCompany)
+          localStorage.setItem('company', JSON.stringify(company.data))
           localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
           dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
           setLoading(false)
@@ -48,15 +45,28 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
       }
       if (!userLogged) {
         try {
+          const companyService = new CompanyService()
+
+          const company = await companyService.create({
+            email: USER_CREDENTIAL.email,
+            name: USER_CREDENTIAL.name,
+            password: USER_CREDENTIAL.password,
+            passwordConfirm: USER_CREDENTIAL.passwordConfirmation,
+            createWithGoogle: false,
+            role: 'owner'
+          })
           userLogged = await userService.create({
             email: USER_CREDENTIAL.email,
             name: USER_CREDENTIAL.name,
             profilePicture: USER_CREDENTIAL.picture,
             createWithGoogle: true,
             role: 'owner',
+            createdByTheCompany: company.data._id
           })
           if (userLogged) {
             localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
+            localStorage.setItem('company', JSON.stringify(company.data))
+
             dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
             setLoading(false)
             navigate('/dashboard')

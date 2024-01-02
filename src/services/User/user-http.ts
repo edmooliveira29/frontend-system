@@ -9,6 +9,7 @@ export class UserService {
   }
 
   async get(objectId: string): Promise<any> {
+
     const userResponse = await (http.get<any>(`/user?objectId=${objectId}`))
     return userResponse.data
   }

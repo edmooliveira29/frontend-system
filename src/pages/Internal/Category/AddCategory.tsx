@@ -46,7 +46,7 @@ export const AddCategory = (props: { addedOutSideMainScreen: boolean, setOpenMod
       if(!props.addedOutSideMainScreen) {
         navigate('/categorias')
       }else{
-        const categoriesResponse = await new CategoryService().getAll()
+        const categoriesResponse = await new CategoryService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
         props.setCategoriesDB(categoriesResponse)
         props.setCategories(categoriesResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
         props.setOpenModal(false)

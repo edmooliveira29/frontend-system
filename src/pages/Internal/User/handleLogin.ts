@@ -9,8 +9,9 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
       password: state.password,
       remember: state.remember,
     })
-    const company = await new CompanyService().get(user.data.companyId)
-    localStorage.setItem('companyLogged', JSON.stringify(company.data))
+    const company = await new CompanyService().get(user.data.createdByTheCompanyId)
+    localStorage.setItem('userLogged', JSON.stringify(user.data))
+    localStorage.setItem('company', JSON.stringify(company.data))
     return user.data
   } catch (error: any) {
     setLoading(false)
@@ -43,7 +44,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
       passwordConfirm: state.passwordConfirmation,
       createWithGoogle: false,
       role: state.role,
-      createdByTheCompany: company.data._id
+      createdByTheCompanyId: company.data._id
     })
     const user = await userService.login({
       email: state.email,

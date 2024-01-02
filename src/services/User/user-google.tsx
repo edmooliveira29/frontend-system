@@ -27,7 +27,7 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
         })
         if (userLogged) {
           const companyService = new CompanyService()
-          const company = await companyService.get(userLogged.data.createdByTheCompany)
+          const company = await companyService.get(userLogged.data.createdByTheCompanyId)
           localStorage.setItem('company', JSON.stringify(company.data))
           localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
           dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })
@@ -61,7 +61,7 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
             profilePicture: USER_CREDENTIAL.picture,
             createWithGoogle: true,
             role: 'owner',
-            createdByTheCompany: company.data._id
+            createdByTheCompanyId: company.data._id
           })
           if (userLogged) {
             localStorage.setItem('userLogged', JSON.stringify(userLogged.data))

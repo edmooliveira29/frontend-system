@@ -9,6 +9,7 @@ export class CompanyService {
   }
 
   async get(objectId: string): Promise<any> {
+    console.log(objectId)
     const companyResponse = await (http.get<any>(`/company?objectId=${objectId}`))
     return companyResponse.data
   }

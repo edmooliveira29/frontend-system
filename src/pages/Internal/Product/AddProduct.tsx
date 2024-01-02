@@ -39,7 +39,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
 
   useEffect(() => {
     const getDatas = async () => {
-      const categoriesResponse = await new CategoryService().getAll()
+      const categoriesResponse = await new CategoryService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setCategoriesDB(categoriesResponse)
       setCategories(categoriesResponse.data.map((category: any) => ({ value: category.name, label: category.name })))
     }

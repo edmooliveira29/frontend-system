@@ -14,7 +14,7 @@ export const ListCategory = () => {
   useEffect(() => {
     const getAllCategories = async () => {
       const categoryResponse  = new CategoryService()
-      const categories = await categoryResponse .getAll()
+      const categories = await categoryResponse .getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       categories.data = categories.data.map((category: any) => {
         return {
           _id: category._id,

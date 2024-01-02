@@ -1,19 +1,21 @@
 import http from '../http-common'
 
 export class CategoryService {
-  async getAll() {
-    return (await http.get<any>('/category')).data
+  async getAll(companyId: any) {
+    const params = { companyId: companyId };
+    const categoryResponse = (await http.get<any>(`/category`,{ params }))
+    return categoryResponse.data
   }
   async create(data: any) {
-    data ={
+    data = {
       ...data,
-      createdByTheCompany: (JSON.parse(localStorage.getItem('company') as any))._id
+      createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
     }
     return (await http.post<any>('/category', data)).data
   }
 
-  async get(objectId: string): Promise<any> {
-    const categoryResponse = await (http.get<any>(`/category?objectId=${objectId}`))
+  async get(data: any): Promise<any> {
+    const categoryResponse = await ((await http.get<any>(`/category`, { params: data })))
     return categoryResponse.data
   }
 

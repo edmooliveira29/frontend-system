@@ -3,7 +3,6 @@ import { AlertGeneral } from '../components'
 
 const sessionTokenExpiry = (sessionToken: string, navigate: any, route?: string) => {
   const decoded = jwtDecode(sessionToken) as JwtPayload
-  console.log(decoded)
   const expirationTime = decoded.exp || 0
   const currentTime = Math.floor(Date.now() / 1000)
   if (currentTime > expirationTime) {

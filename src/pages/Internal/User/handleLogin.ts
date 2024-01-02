@@ -1,3 +1,5 @@
+import { CompanyService } from '../../../services/Company'
+
 export const handleLoginUser = async (setLoading: any, setErrorResponse: any, state: any, userService: any) => {
   setLoading(true)
   setErrorResponse('')
@@ -7,8 +9,12 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
       password: state.password,
       remember: state.remember,
     })
-
-    localStorage.setItem('userLogged', JSON.stringify(user.data))
+    console.log(user)
+    // dar um get em companyid para inserir no localstorage
+    console.log(user.data.createdBy)
+    const company = await new CompanyService().get(user.data.companyId)
+    console.log(company)
+    localStorage.setItem('companyLogged', JSON.stringify(user.data))
     return user.data
   } catch (error: any) {
     setLoading(false)
@@ -25,7 +31,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
   const companyService = new CompanyService()
   const userService = new UserService()
   try {
-    await companyService.create({
+    const company =await companyService.create({
       email: state.email,
       name: state.name,
       password: state.password,
@@ -49,6 +55,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
     })
 
     localStorage.setItem('userLogged', JSON.stringify(user.data))
+    localStorage.setItem('company', JSON.stringify(company.data))
     
     return user.data
   } catch (error: any) {

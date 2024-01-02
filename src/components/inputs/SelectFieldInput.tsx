@@ -18,7 +18,6 @@ const MenuProps = {
 export const SelectFieldInput: React.FC<{ label: string, required: boolean, options: any, value?: string, placeholder?: string, onChange?: any, id: string }> = (props) => {
   const [options, setOptions] = useState(props.options || [])
   const [value, setValue] = useState(props.value)
-  console.log(options)
   useEffect(() => {
     if (props.options) {
       setOptions(props.options)

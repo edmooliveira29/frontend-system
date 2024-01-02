@@ -27,7 +27,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const bestSellingProductsChart = async () => {
-      const { data } = await report.getAll()
+      const { data } = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(data)
       const dom = document.getElementById('best-selling-products-chart')
       const myChart = echarts.init(dom)

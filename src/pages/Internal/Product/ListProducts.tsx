@@ -14,7 +14,7 @@ export const ListProduct = () => {
   useEffect(() => {
     const getAllProducts = async () => {
       const productResponse  = new ProductService()
-      const products = await productResponse .getAll()
+      const products = await productResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       products.data = products.data.map((product: any) => {
         return {
           _id: product._id,
@@ -41,8 +41,8 @@ export const ListProduct = () => {
   const deleteItem = async (id: string) => {
     const productResponse = new ProductService()
     await productResponse.delete(id)
-    const categories = await productResponse.delete(id)
-    setData(categories.data)
+    const employees = await productResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+    setData(employees.data)
   }
 
   return (<>

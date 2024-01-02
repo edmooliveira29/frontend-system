@@ -31,7 +31,10 @@ export const ListCategory = () => {
   const deleteItem = async (id: string) => {
     const categoryResponse = new CategoryService()
     try {
-      await categoryResponse.delete(id)
+      const categories = new CategoryService()
+      await categories.delete(id)
+      const categoriesResponse = await categories.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+      setData(categoriesResponse.data)
     } catch (error: any) {
       AlertGeneral({ title: 'Erro', message: error, type: 'error' })
     }

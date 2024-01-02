@@ -67,7 +67,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
         if (!props.addedOutSideMainScreen) {
           navigate('/produtos')
         } else {
-          const productsResponse = await new ProductService().getAll()
+          const productsResponse = await new ProductService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
           props.setProductsDB(productsResponse)
           props.setProducts(productsResponse.data.map((products: any) => ({ value: products.name, label: products.name })))
           props.setOpenModal(false)

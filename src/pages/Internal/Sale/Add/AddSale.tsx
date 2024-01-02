@@ -110,7 +110,7 @@ export const AddSale = (props: { state: any }) => {
     }
 
     const getAllProducts = async () => {
-      const productsResponse = await new ProductService().getAll()
+      const productsResponse = await new ProductService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setProductsDB(productsResponse.data)
       setProducts(productsResponse.data.map((product: any) => ({ value: product.name, label: product.name })))
     }

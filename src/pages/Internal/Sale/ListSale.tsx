@@ -13,7 +13,7 @@ export const ListSale = () => {
   useEffect(() => {
     const getAllSales = async () => {
       const saleResponse  = new SaleService()
-      const sales = await saleResponse.getAll()
+      const sales = await saleResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(sales.data)
     }
     getAllSales()
@@ -29,8 +29,8 @@ export const ListSale = () => {
   const deleteItem = async (id: string) => {
     const saleResponse = new SaleService()
     await saleResponse.delete(id)
-    const sales = await saleResponse.delete(id)
-    setData(sales.data)
+    const employees = await saleResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+    setData(employees.data)
   }
 
   return (<>

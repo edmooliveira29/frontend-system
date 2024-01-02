@@ -48,11 +48,10 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
 
   const handleSave = async () => {
     try {
-      const { name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, street, houseNumber, neighborhood, stateOfTheCountry } = state
+      const { name, cpf, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, street, houseNumber, neighborhood, stateOfTheCountry } = state
       const translations = {
         name: 'Nome',
         cpf: 'CPF',
-        birthday: 'Data de nascimento',
         gender: 'Gênero',
         phoneNumber: 'Telefone',
         email: 'E-mail',
@@ -67,7 +66,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
         complement: 'Complemento',
         neighborhood: 'Bairro',
       }
-      if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, street, houseNumber, neighborhood }, translations)) {
+      if (!validateFields({ name, cpf, gender, phoneNumber, email, office, hiringDate, wage, zipCode, city, stateOfTheCountry, street, houseNumber, neighborhood }, translations)) {
         return false
       } 
 

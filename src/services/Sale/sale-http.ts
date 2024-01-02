@@ -1,8 +1,10 @@
 import http from '../http-common'
 
 export class SaleService {
-  async getAll() {
-    return (await http.get<any>('/sale')).data
+  async getAll(companyId: any) {
+    const params = { companyId: companyId };
+    const saleResponse = (await http.get<any>(`/sale`,{ params }))
+    return saleResponse.data
   }
   async create(data: any) {
     data = {

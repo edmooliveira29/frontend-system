@@ -1,8 +1,10 @@
 import http from '../http-common'
 
 export class UserService {
-  async getAll() {
-    return (await http.get<any>('/user')).data
+  async getAll(companyId: any) {
+    const params = { companyId: companyId };
+    const userResponse = (await http.get<any>(`/user`,{ params }))
+    return userResponse.data
   }
   async create(data: any) {
     return (await http.post<any>('/user', data)).data

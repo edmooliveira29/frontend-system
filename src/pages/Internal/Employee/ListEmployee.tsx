@@ -14,7 +14,7 @@ export const ListEmployee: React.FC = () => {
   useEffect(() => {
     const getAllCategories = async () => {
       const employeeResponse  = new EmployeeService()
-      const categories = await employeeResponse .getAll()
+      const categories = await employeeResponse .getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(categories.data)
     }
     getAllCategories()
@@ -23,8 +23,8 @@ export const ListEmployee: React.FC = () => {
   const deleteItem = async (id: string) => {
     const employeeResponse = new EmployeeService()
     await employeeResponse.delete(id)
-    const employee = await employeeResponse.delete(id)
-    setData(employee.data)
+    const employees = await employeeResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+    setData(employees.data)
   }
 
   const infoData = [

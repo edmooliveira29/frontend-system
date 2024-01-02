@@ -1,9 +1,12 @@
 import http from '../http-common'
 
 export class EmployeeService {
-  async getAll() {
-    return (await http.get<any>('/employee')).data
+  async getAll(companyId: any) {
+    const params = { companyId: companyId };
+    const employeeResponse = (await http.get<any>(`/employee`,{ params }))
+    return employeeResponse.data
   }
+
   async create(data: any) {
     data = {
       ...data,

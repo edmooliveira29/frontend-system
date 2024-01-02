@@ -20,12 +20,12 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
   }
 }
 
-export const handleCreateUser = async (setLoading: any, UserService: any, state: any, navigate: any, setErrorResponse: any) => {
+export const handleCreateCompany = async (setLoading: any, CompanyService: any, UserService: any, state: any, navigate: any, setErrorResponse: any) => {
   setLoading(true)
+  const companyService = new CompanyService()
   const userService = new UserService()
-
   try {
-    const user = await userService.create({
+    await companyService.create({
       email: state.email,
       name: state.name,
       password: state.password,
@@ -33,9 +33,24 @@ export const handleCreateUser = async (setLoading: any, UserService: any, state:
       createWithGoogle: false,
       role: state.role
     })
-    localStorage.setItem('userLogged', JSON.stringify(user.data))
+    
+    await userService.create({
+      email: state.email,
+      name: state.name,
+      password: state.password,
+      passwordConfirm: state.passwordConfirmation,
+      createWithGoogle: false,
+      role: state.role
+    })
+    const user = await userService.login({
+      email: state.email,
+      password: state.password,
+      remember: state.remember,
+    })
 
-    navigate('/dashboard')
+    localStorage.setItem('userLogged', JSON.stringify(user.data))
+    
+    return user.data
   } catch (error: any) {
     setLoading(false)
     if (error.message != 'Network Error') {

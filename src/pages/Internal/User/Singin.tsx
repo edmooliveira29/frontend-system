@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { ComponentButtonCommon } from '../../../components/button/ComponentButtonCommon'
 import { TextFieldInput } from '../../../components/inputs'
 import NavBar from '../../../components/navBar/NavBar'
-import { UserService, LoginGoogle } from '../../../services/User'
+import { LoginGoogle } from '../../../services/User'
+import { UserService } from '../../../services/User'
 import { useNavigate } from 'react-router-dom'
-import { handleCreateUser } from './handleLogin'
+import { handleCreateCompany } from './handleLogin'
 import './stylesUser.sass'
 import { validateFields } from '../../../utils'
+import { CompanyService } from '../../../services/Company'
 
 export const Singin = () => {
   const navigate = useNavigate()
@@ -20,14 +22,14 @@ export const Singin = () => {
   const [loading, setLoading] = useState(false)
   const [errorResponse, setErrorResponse] = useState('')
 
-  const handleCreateUserHook = async () => {
+  const handleCreateCompanyHook = async () => {
     const translations = { name: 'Nome', email: 'Email', password: 'Senha', passwordConfirmation: 'Confirme sua senha' }
     const { name, email, password, passwordConfirmation } = state
 
     if (!validateFields({ name, email, password, passwordConfirmation }, translations)) {
       return false
     }
-    handleCreateUser(setLoading, UserService, state, navigate, setErrorResponse)
+    handleCreateCompany(setLoading, CompanyService, UserService, state, navigate, setErrorResponse)
   }
 
   return (
@@ -82,7 +84,7 @@ export const Singin = () => {
                 }}
               />
             </div>
-            <div className='d-grid' id='button-login' onClick={handleCreateUserHook}>
+            <div className='d-grid' id='button-login' onClick={handleCreateCompanyHook}>
               <ComponentButtonCommon text='Registrar' loading={loading} id='register-singin' />
             </div>
             <div id='error-response'>

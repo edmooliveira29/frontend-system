@@ -86,7 +86,7 @@ export const Profile = () => {
     reader.readAsDataURL(file)
     reader.onload = async function () {
       await user.edit({ ...state, profilePicture: reader.result })
-        .then((result) => {
+        .then((result: any) => {
           setProfilePicture(result.data.data.profilePicture)
           localStorage.setItem('userLogged', JSON.stringify({ ...JSON.parse(localStorage.getItem('userLogged') as string), profilePicture: reader.result }))
           dispatch({ type: ActionsTypes.USER_LOGGED, payload: { ...state, profilePicture: reader.result } })

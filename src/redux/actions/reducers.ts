@@ -10,12 +10,16 @@ const initialStateObject = {
 
 export const ActionsTypes = {
   USER_LOGGED: 'user/login',
+  COMPANY_LOGGED: 'company/login',
   USER_LOGOUT: 'user/logout',
   OBJECT_EDIT: 'object/edit'
 }
 
 const userReducer = (state = initialStateUser, action: { type: string, payload: any }) => {
   if (action.type === ActionsTypes.USER_LOGGED) {
+    return { ...state, currentUser: action.payload }
+  }
+  if (action.type === ActionsTypes.COMPANY_LOGGED) {
     return { ...state, currentUser: action.payload }
   }
   if (action.type === ActionsTypes.USER_LOGOUT) {

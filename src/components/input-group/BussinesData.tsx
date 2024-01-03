@@ -4,10 +4,10 @@ import { TextFieldInput } from '../inputs'
 import { Masks, apiCnpj } from '../../utils'
 import { AlertGeneral } from '../modal'
 
-export const BussinesData = (props: { state: any, setState: any, disabled?: boolean }) => {
+export const BussinesData = (props: { state: any, setState: any, disabled?: boolean, title?: string }) => {
   const masks = new Masks()
   return (<>
-    <h4 id="titles-custumer-add">ADICIONAR PESSOA JURÍDICA</h4>
+    <h4 id="titles-custumer-add">{props.title ? props.title : 'ADICIONAR PESSOA JURÍDICA'}</h4>
     <div className="row m-0">
       <div className="col-md-2 col-sm-12">
         <TextFieldInput

@@ -44,7 +44,7 @@ export const Singin = () => {
               <TextFieldInput
                 id={'name'}
                 required={true}
-                label='Nome'
+                label='Nome da empresa'
                 typeInput='text'
                 value={state.name}
                 onChange={(value: string) => {
@@ -66,7 +66,7 @@ export const Singin = () => {
               <TextFieldInput
                 id={'username'}
                 required={true}
-                label='Nome de Usuário'
+                label='Nome do usuário principal'
                 typeInput='text'
                 value={state.username}
                 onChange={(value: string) => {

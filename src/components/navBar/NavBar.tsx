@@ -10,8 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const NavBar = () => {
   let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
+  const company = JSON.parse(localStorage.getItem('company') as any)
   const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  userLogged = { ...userLogged, ...currentUser }
+  userLogged = { ...userLogged, ...currentUser, profilePicture: company?.profilePicture }
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogOut = () => {

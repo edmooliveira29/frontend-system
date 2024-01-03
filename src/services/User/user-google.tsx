@@ -50,13 +50,12 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
           const company = await companyService.create({
             email: USER_CREDENTIAL.email,
             name: USER_CREDENTIAL.name,
-            password: USER_CREDENTIAL.password,
-            passwordConfirm: USER_CREDENTIAL.passwordConfirmation,
             createWithGoogle: false,
-            role: 'owner'
           })
+
           userLogged = await userService.create({
             email: USER_CREDENTIAL.email,
+            username: USER_CREDENTIAL.email,
             name: USER_CREDENTIAL.name,
             profilePicture: USER_CREDENTIAL.picture,
             createWithGoogle: true,

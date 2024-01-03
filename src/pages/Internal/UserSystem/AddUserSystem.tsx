@@ -74,7 +74,6 @@ export const AddUserSystem = () => {
             required={true}
             value={state.email}
             typeInput="text"
-            disabled={hasObjectToEdit}
             onChange={(value: string) => { setState({ ...state, email: value }) }}
           />
         </div>

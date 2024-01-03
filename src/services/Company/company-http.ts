@@ -11,4 +11,8 @@ export class CompanyService {
     return companyResponse.data
   }
 
+  async edit(data: any) {
+    return (await http.put<any>(`/company/${data._id}`, data))
+  }
+
 }

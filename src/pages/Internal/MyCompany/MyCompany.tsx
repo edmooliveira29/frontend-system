@@ -7,8 +7,8 @@ import { Tabs } from '@mui/material'
 import { Profile } from './Profile'
 import { Password } from './Password'
 export const MyAccount = () => {
-  const [value, setValue] = React.useState('1')
-
+  const roleUser = JSON.parse(localStorage.getItem('userLogged') as any).role
+  const [value, setValue] = React.useState(roleUser === 'salesman' ? '2' : '1')
   return (
     <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
@@ -19,12 +19,12 @@ export const MyAccount = () => {
             variant="scrollable"
             scrollButtons="auto"
             sx={{ width: '80%' }}>
-            <Tab id='tab-1' label="Perfil" value="1" />
+            {roleUser !== 'salesman' && <Tab id='tab-1' label="Perfil" value="1" />}
             <Tab label="Segurança" value="2" />
             <Tab label="Pagamentos" value="3" />
           </Tabs>
         </Box>
-        <TabPanel value="1">{<Profile />}</TabPanel>
+        {roleUser !== 'salesman' && <TabPanel value="1">{<Profile />}</TabPanel>}
         <TabPanel value="2">{<Password />}</TabPanel>
         <TabPanel value="3">{<><span>Tela de Pagamentos em construção</span></>}</TabPanel>
       </TabContext>

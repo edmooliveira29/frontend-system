@@ -36,7 +36,6 @@ const Internal = (props: { Page: any }) => {
 const Website = (props: { Page: any }) => {
   const navigate = useNavigate()
   useEffect(() => {
-    console.log(props.Page.name)
     if (props.Page.name == 'Login') {
       if (userIsAlreadyLoggedIn()) {
         navigate('/dashboard')

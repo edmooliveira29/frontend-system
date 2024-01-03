@@ -1,6 +1,6 @@
 export * from './Customer'
 export * from './Dashboard'
-export * from './MyAccount'
+export * from './MyCompany'
 export * from './Product'
 export * from './Report'
 export * from './Sale'

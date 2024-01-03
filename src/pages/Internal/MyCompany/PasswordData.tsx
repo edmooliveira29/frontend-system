@@ -41,7 +41,7 @@ export const PasswordData = (props: { state: any, setUser: any }) => {
       </div>
       {state.lastChangedPassword &&
         <div>
-          <span style={{ fontSize: '12px', color: 'gray' }}><span style={{fontWeight: 'bold'}}>Última alteração da senha:</span> {state.lastChangedPassword} </span>
+          <span style={{ fontSize: '12px', color: 'gray' }}><span style={{fontWeight: 'bold'}}>Última alteração da senha:</span> {(state.lastChangedPassword)} </span>
         </div>}
     </div>
   </>)

@@ -1,60 +1,57 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
-import { AddressData, PersonalData } from '../../../components/input-group'
+import { AddressData, BussinesData } from '../../../components/input-group'
 import { AlertGeneral, ComponentButtonInputFile, ComponentButtonSuccess, alertLoading } from '../../../components'
-import { UserService } from '../../../services/User'
 import './styles.sass'
 import { validateFields } from '../../../utils'
 import { useDispatch } from 'react-redux'
 import { ActionsTypes } from '../../../redux/actions/reducers'
 import { AiOutlineUser } from 'react-icons/ai'
+import { CompanyService } from '../../../services/Company'
 export const Profile = () => {
   const [state, setState] = useState<any>({})
-  const [profilePicture, setProfilePicture] = useState<string>(localStorage.getItem('picture_profile') as string)
+  const [profilePicture, setProfilePicture] = useState<string>(JSON.parse(localStorage.getItem('company') as any).profilePicture as string)
   const [loading, setLoading] = useState(false)
   const [loadingImage, setLoadingImage] = useState<boolean>()
-  const user = new UserService()
+  const company = new CompanyService()
   const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchData = async () => {
       alertLoading('open', 'Estamos buscando algumas informações...')
-      const userResponse = await user.get(JSON.parse(localStorage.getItem('userLogged') as any)._id as string)
+      const companyResponse = await company.get(JSON.parse(localStorage.getItem('company') as any)._id as string)
       setState(
         {
-          _id: userResponse.data._id,
-          street: userResponse.data.street || '',
-          birthday: userResponse.data.birthday || null,
-          city: userResponse.data.city || '',
-          complement: userResponse.data.complement || '',
-          cpf: userResponse.data.cpf || '',
-          email: userResponse.data.email || '',
-          gender: userResponse.data.gender || '',
-          houseNumber: userResponse.data.houseNumber || '',
-          name: userResponse.data.name || '',
-          neighborhood: userResponse.data.neighborhood || '',
-          nickname: userResponse.data.nickname || '',
-          phoneNumber: userResponse.data.phoneNumber || '',
-          stateOfTheCountry: userResponse.data.stateOfTheCountry || '',
-          zipCode: userResponse.data.zipCode || '',
-          profilePicture: userResponse.data.profilePicture || '',
-          role: userResponse.data.role || 'owner'
+          _id: companyResponse.data._id || '',
+          cnpj: companyResponse.data.cnpj || '',
+          name: companyResponse.data.name || '',
+          legalResponsible: companyResponse.data.legalResponsible || '',
+          fantasyName: companyResponse.data.fantasyName || '',
+          phoneNumber: companyResponse.data.phoneNumber || '',
+          email: companyResponse.data.email || '',
+          stateRegistration: companyResponse.data.stateRegistration || '',
+          additionalInformation: companyResponse.data.additionalInformation || '',
+          zipCode: companyResponse.data.zipCode || '',
+          street: companyResponse.data.street || '',
+          houseNumber: companyResponse.data.houseNumber || '',
+          complement: companyResponse.data.complement || '',
+          neighborhood: companyResponse.data.neighborhood || '',
+          stateOfTheCountry: companyResponse.data.stateOfTheCountry || '',
+          city: companyResponse.data.city || '',
         }
       )
-      setProfilePicture(userResponse.data.profilePicture)
+      setProfilePicture(companyResponse.data.profilePicture)
 
       alertLoading('close')
     }
     fetchData()
   }, [])
   const handleSave = async () => {
-    setLoading(true)
-    const { name, cpf, birthday, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city } = state
+    const { name, cnpj, legalResponsible, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city } = state
     const translations = {
-      name: 'Nome',
-      cpf: 'CPF',
-      birthday: 'Data de nascimento',
-      gender: 'Gênero',
+      cnpj: 'CNPJ',
+      name: 'Nome Empresarial',
+      legalResponsible: 'Responsável Legal',
       phoneNumber: 'Telefone',
       email: 'Email',
       zipCode: 'CEP',
@@ -64,14 +61,13 @@ export const Profile = () => {
       stateOfTheCountry: 'Estado',
       city: 'Cidade',
     }
-    if (!validateFields({ name, cpf, birthday, gender, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
+    if (!validateFields({ name, cnpj, legalResponsible, phoneNumber, email, zipCode, street, houseNumber, neighborhood, stateOfTheCountry, city }, translations)) {
       setLoading(false)
       return false
     }
     try {
-      const response = await (await user.edit(state)).data
-      localStorage.setItem('userLogged', JSON.stringify({ ...response.data, sessionToken: (JSON.parse(localStorage.getItem('userLogged') as string).sessionToken as string) }))
-      dispatch({ type: ActionsTypes.USER_LOGGED, payload: response.data })
+      const response = await (await company.edit(state)).data
+      localStorage.setItem('company', JSON.stringify(response.data) as string)
       setLoading(false)
       AlertGeneral({ 'title': 'Sucesso!', message: response.message, type: 'success' })
     } catch (error: any) {
@@ -85,11 +81,11 @@ export const Profile = () => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = async function () {
-      await user.edit({ ...state, profilePicture: reader.result })
-        .then((result: any) => {
-          setProfilePicture(result.data.data.profilePicture)
-          localStorage.setItem('userLogged', JSON.stringify({ ...JSON.parse(localStorage.getItem('userLogged') as string), profilePicture: reader.result }))
-          dispatch({ type: ActionsTypes.USER_LOGGED, payload: { ...state, profilePicture: reader.result } })
+      await company.edit({ ...state, profilePicture: reader.result })
+        .then(({ data: result }: any) => {
+          setProfilePicture(result.data.profilePicture)
+          localStorage.setItem('company', JSON.stringify({ ...JSON.parse(localStorage.getItem('company') as string), profilePicture: reader.result }))
+          dispatch({ type: ActionsTypes.COMPANY_LOGGED, payload: { ...state, profilePicture: reader.result } })
           return result.data
         }).catch(() => {
           AlertGeneral({ title: 'Erro', message: 'A imagem é maior que 1MB', type: 'error' })
@@ -98,10 +94,10 @@ export const Profile = () => {
     }
   }
   return (<div className="row border border-secondary rounded" id="content-container">
-    <h4 id="titles-custumer-add">Perfil</h4>
+    <h4 id="titles-custumer-add">Dados da empresa</h4>
     <div className="col-md-4 col-sm-12 mb-1">
       <div className="card-body p-5 text-center border rounded">
-        <div className="card-title fs-5 m-1">Imagem do perfil</div>
+        <div className="card-title fs-5 m-1">Logo da empresa</div>
         {loadingImage ? <div className="spinner-border" style={{ width: '20px', height: '20px', color: 'black', alignContent: 'center' }} role="status" /> :
           <div className="text-center">
             {typeof profilePicture === 'string' ? <img className="img-fluid rounded-circle m-3" src={profilePicture} style={{ width: '200px', height: '200px' }} alt='Imagem de perfil' /> :
@@ -116,7 +112,7 @@ export const Profile = () => {
       </div>
     </div>
     <div className="col-md-8 col-sm-12">
-      <PersonalData setState={setState} state={state} title={'DADOS'} />
+      <BussinesData setState={setState} state={state} title='DADOS EMPRESARIAL' />
       <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-end" >
         <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' loading={loading} />

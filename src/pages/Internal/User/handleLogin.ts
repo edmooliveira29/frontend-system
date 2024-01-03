@@ -31,10 +31,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
     const company =await companyService.create({
       email: state.email,
       name: state.name,
-      password: state.password,
-      passwordConfirm: state.passwordConfirmation,
       createWithGoogle: false,
-      role: state.role
     })
     await userService.create({
       email: state.email,

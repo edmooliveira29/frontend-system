@@ -24,7 +24,7 @@ export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: b
       <ul id='user-dropdown' style={isAccessExternal ? { left: '-130px' } : { left: '100px' }} className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
         <li>
           <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
-            Minha conta
+            {userLogged.role !== 'salesman'? 'Minha conta': 'Alterar senha'}
           </Link>
         </li>
         {userLogged.role == 'salesman' ? null : <li>
@@ -43,8 +43,9 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   const navigate = useNavigate()
   const dispatch = useDispatch()
   let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
+  const company = JSON.parse(localStorage.getItem('company') as any)
   const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  userLogged = { ...userLogged, ...currentUser }
+  userLogged = { ...userLogged, ...currentUser, profilePicture: company?.profilePicture }
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
   // const toggleClientesSubmenu = () => {
   //   setShowClientesSubmenu(!showClientesSubmenu)

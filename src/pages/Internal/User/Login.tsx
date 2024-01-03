@@ -12,7 +12,6 @@ import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const Login = () => {
   const [state, setState] = React.useState({
-    email: '',
     password: '',
     username: '',
     remember: false
@@ -23,10 +22,10 @@ export const Login = () => {
   const userService = new UserService()
   const dispatch = useDispatch()
   const handleLoginHook = async () => {
-    const translations = { email: 'Email', password: 'Senha' }
-    const { email, password } = state
+    const translations = { username: 'Nome de Usuário', password: 'Senha' }
+    const { username, password } = state
 
-    if (!validateFields({ email, password }, translations)) {
+    if (!validateFields({ username, password }, translations)) {
       return false
     }
     const userLogged = await handleLoginUser(setLoading, setErrorResponse, state, userService)
@@ -37,7 +36,9 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    userIsAlreadyLoggedIn(navigate, '/dashboard')
+    if(userIsAlreadyLoggedIn()){
+      navigate('/dashboard')
+    }
   }, [])
 
   return (
@@ -47,11 +48,11 @@ export const Login = () => {
           <h3 id='h3-enter-register'>Entrar</h3>
           <div className='m-3' id='input-email-login'>
             <TextFieldInput
-              id={'email'}
-              required={true} label='E-mail'
+              id={'username'}
+              required={true} label='Nome de Usuário'
               typeInput='text'
-              value={state.email}
-              onChange={(value: string) => { setState({ ...state, email: value }) }}
+              value={state.username}
+              onChange={(value: string) => { setState({ ...state, username: value }) }}
             />
           </div>
           <div className='m-3' id='input-password-login'>

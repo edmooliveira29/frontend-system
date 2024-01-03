@@ -5,7 +5,7 @@ export const handleLoginUser = async (setLoading: any, setErrorResponse: any, st
   setErrorResponse('')
   try {
     const user = await userService.login({
-      email: state.email,
+      username: state.username,
       password: state.password,
       remember: state.remember,
     })
@@ -38,6 +38,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
     })
     await userService.create({
       email: state.email,
+      username: state.username,
       name: state.name,
       password: state.password,
       passwordConfirm: state.passwordConfirmation,
@@ -46,7 +47,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
       createdByTheCompanyId: company.data._id
     })
     const user = await userService.login({
-      email: state.email,
+      username: state.username,
       password: state.password,
       remember: state.remember,
     })

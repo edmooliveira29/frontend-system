@@ -15,28 +15,32 @@ import { userIsAlreadyLoggedIn } from '../utils'
 const Internal = (props: { Page: any }) => {
   const [showMenu, setShowMenu] = useState(true)
   const showSiderbar = () => { setShowMenu(!showMenu) }
+  const userLogged = userIsAlreadyLoggedIn()
+  if (userLogged) {
 
-  const navigate = useNavigate()
-  useEffect(() => {
-    setShowMenu(window.innerWidth < 768 ? false : true)
-    userIsAlreadyLoggedIn(navigate)
-  }, [])
-
-  const closeSidebar = () => setShowMenu(true)
-  const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }
-  return (<>
-    <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
-    <div className={showMenu ? 'contents' : ''} style={{ marginLeft: stylesContainer.marginRight }}>
-      <props.Page />
-    </div>
-  </>)
+    const closeSidebar = () => setShowMenu(window.innerWidth < 768 ? false : true)
+    const stylesContainer = showMenu ? { marginRight: '280px' } : { marginRight: '0px' }
+    return (<>
+      <SideBar showMenu={showMenu} closeSidebar={closeSidebar} showSiderbar={showSiderbar} />
+      <div className={showMenu ? 'contents' : ''} style={{ marginLeft: stylesContainer.marginRight }}>
+        <props.Page />
+      </div>
+    </>)
+  } else {
+    return (
+      <Website Page={Login} />
+    )
+  }
 }
 
 const Website = (props: { Page: any }) => {
   const navigate = useNavigate()
   useEffect(() => {
+    console.log(props.Page.name)
     if (props.Page.name == 'Login') {
-      userIsAlreadyLoggedIn(navigate, '/dashboard')
+      if (userIsAlreadyLoggedIn()) {
+        navigate('/dashboard')
+      }
     }
   }, [])
 

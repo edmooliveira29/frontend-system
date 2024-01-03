@@ -13,8 +13,9 @@ export const AddUserSystem = () => {
   const hasObjectToEdit = objectToEdit !== undefined
   const [state, setState] = useState(
     hasObjectToEdit ? objectToEdit : {
-      role: 'owner', 
+      role: 'owner',
       name: '',
+      username: '',
       email: '',
       password: '',
     }
@@ -25,10 +26,10 @@ export const AddUserSystem = () => {
 
   const handleSaveEdit = async () => {
     setLoading(true)
-    const { role, name, email, password } = state
-    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', password: 'Senha' }
+    const { role, name, email, password, username } = state
+    const translations = { role: 'Permissões', name: 'Nome', email: 'Email', password: 'Senha', username: 'Nome de Usuário' }
     let fieldsToValidate
-    hasObjectToEdit ? fieldsToValidate = { role, name, email } : fieldsToValidate = { role, name, email, password }
+    hasObjectToEdit ? fieldsToValidate = { role, name, email, username } : fieldsToValidate = { role, name, email, username, password }
     if (!validateFields(fieldsToValidate, translations)) {
       return false
     }
@@ -54,7 +55,7 @@ export const AddUserSystem = () => {
             options={[{ value: 'salesman', label: 'Vendedor' }, { value: 'owner', label: 'Proprietário' }]}
             required={true} onChange={(event: any) => setState({ ...state, role: event.target.value })} />
         </div>
-        <div className={hasObjectToEdit ? "col-md-7 col-sm-12" : "col-md-4 col-sm-12"}>
+        <div className={hasObjectToEdit ? "col-md-5 col-sm-12" : "col-md-3 col-sm-12"}>
           <TextFieldInput
             id={'name'}
             label="Nome"
@@ -77,7 +78,19 @@ export const AddUserSystem = () => {
             onChange={(value: string) => { setState({ ...state, email: value }) }}
           />
         </div>
-        {!hasObjectToEdit && <div className="col-md-3 col-sm-12">
+        <div className="col-md-2 col-sm-12">
+          <TextFieldInput
+            id={'username'}
+            label="Nome de Usuário"
+            placeholder='Digite aqui um usuario'
+            required={true}
+            value={state.username}
+            typeInput="text"
+            disabled={hasObjectToEdit}
+            onChange={(value: string) => { setState({ ...state, username: value }) }}
+          />
+        </div>
+        {!hasObjectToEdit && <div className="col-md-2 col-sm-12">
           <TextFieldInput
             id={'password'}
             label="Senha"

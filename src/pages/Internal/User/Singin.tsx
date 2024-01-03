@@ -17,6 +17,7 @@ export const Singin = () => {
     password: '',
     passwordConfirmation: '',
     name: '',
+    username: '',
     role: 'owner',
   })
   const [loading, setLoading] = useState(false)
@@ -60,6 +61,16 @@ export const Singin = () => {
                 value={state.email}
                 onChange={(value: string) => {
                   setState({ ...state, email: value })
+                }}
+              />
+              <TextFieldInput
+                id={'username'}
+                required={true}
+                label='Nome de Usuário'
+                typeInput='text'
+                value={state.username}
+                onChange={(value: string) => {
+                  setState({ ...state, username: value })
                 }}
               />
             </div>

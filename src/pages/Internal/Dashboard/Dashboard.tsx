@@ -5,6 +5,7 @@ import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
 import { Link } from 'react-router-dom'
 import { ReportService } from '../../../services/Report'
+import { AlertGeneral } from '../../../components'
 export const Dashboard = () => {
   const report = new ReportService()
   const [data, setData] = useState<
@@ -27,7 +28,14 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const bestSellingProductsChart = async () => {
-      const { data } = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+      let data
+      try {
+        data = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+        data = data.data
+      } catch (error: any) {
+        AlertGeneral({ title: 'Erro', message: error.response.data.message, type: 'error' })
+        return
+      }
       setData(data)
       const dom = document.getElementById('best-selling-products-chart')
       const myChart = echarts.init(dom)
@@ -162,7 +170,9 @@ export const Dashboard = () => {
       window.removeEventListener('resize', () => myChart.resize())
 
     }
+
     bestSellingProductsChart()
+
   }, [])
 
 

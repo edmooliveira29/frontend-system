@@ -36,7 +36,6 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
       createWithGoogle: false,
       role: state.role
     })
-    
     await userService.create({
       email: state.email,
       name: state.name,
@@ -57,6 +56,7 @@ export const handleCreateCompany = async (setLoading: any, CompanyService: any, 
     navigate('/dashboard')
     return user.data
   } catch (error: any) {
+    console.trace()
     setLoading(false)
     if (error.message != 'Network Error') {
       setErrorResponse(error.response.data.message)

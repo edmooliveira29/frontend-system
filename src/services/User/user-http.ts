@@ -2,11 +2,17 @@ import http from '../http-common'
 
 export class UserService {
   async getAll(companyId: any) {
-    const params = { companyId: companyId };
-    const userResponse = (await http.get<any>(`/user`,{ params }))
+    const userResponse = await (http.get<any>(`/user?companyId=${companyId}`))
     return userResponse.data
   }
   async create(data: any) {
+    if (!Object.prototype.hasOwnProperty.call(data, 'createdByTheCompanyId')) {
+      data = {
+        ...data,
+        createdByTheCompanyId: (JSON.parse(localStorage.getItem('company') as any))._id
+      }
+    }
+
     return (await http.post<any>('/user', data)).data
   }
 

@@ -13,7 +13,7 @@ export const ListUserSystem = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       const userResponse  = new UserService()
-      const users = await userResponse .getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+      const users = await userResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(users.data)
     }
     getAllUsers()

@@ -14,7 +14,7 @@ export const ListEmployee: React.FC = () => {
   useEffect(() => {
     const getAllCategories = async () => {
       const employeeResponse  = new EmployeeService()
-      const categories = await employeeResponse .getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+      const categories = await employeeResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(categories.data)
     }
     getAllCategories()

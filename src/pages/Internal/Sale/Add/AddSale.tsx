@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { CustomerService } from '../../../../services/Customer'
 import { ProductService } from '../../../../services/Product'
+import { formatNowDate } from '../../../../utils/date'
 
 export const AddSale = (props: { state: any }) => {
   const [customers, setCustomers] = useState<any>([])
@@ -47,7 +48,7 @@ export const AddSale = (props: { state: any }) => {
   const [state, setState] = useState<any>(
     hasObjectToEdit ? newObjectToEdit : {
       customer: '',
-      dateOfSale: props.state?.dateOfSale || new Date().toLocaleString('pt-BR'),
+      dateOfSale: props.state?.dateOfSale || formatNowDate(),
       formOfPayment: [],
       products: [{ 'productId-0': '', 'quantity-0': '', 'unitValue-0': '', 'subTotal-0': '' }],
       description: '',
@@ -72,7 +73,7 @@ export const AddSale = (props: { state: any }) => {
       totalOfSale: String((Number(calculateTotalAmount().replace(',', '.')) - Number((state.valueDiscount || '0,00').replace(',', '.'))).toFixed(2)).replace('.', ',')
     })
   }, [state])
-  const handleSave = async (customersDB: any, productsDB: any, resumeOfSale: any) => {
+  const handleSave = async (resumeOfSale: any) => {
     const { dateOfSale, customer, products, formOfPayment } = state
     const translations = {
       dateOfSale: 'Data da Venda',
@@ -186,7 +187,7 @@ export const AddSale = (props: { state: any }) => {
         <label id={`label - input`}>Observações sobre a venda</label>
         <TextAreaInput onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
-      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={() => handleSave(customersDB, productsDB, resumeOfSale)} loading={loading} />
+      <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={() => handleSave(resumeOfSale)} loading={loading} />
     </div >
   </>
   )

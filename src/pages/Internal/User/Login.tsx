@@ -67,6 +67,7 @@ export const Login = () => {
           <div className='m-3' id='checkbox-remember'>
             <CheckboxInput
               label='Lembrar durante 7 dias'
+              name='remember'
               onChange={() => { setState({ ...state, remember: !state.remember }) }} />
           </div>
           <div className='d-flex justify-content-evenly' id='button-login' onClick={handleLoginHook}>

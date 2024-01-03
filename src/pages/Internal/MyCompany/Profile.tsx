@@ -94,7 +94,6 @@ export const Profile = () => {
     }
   }
   return (<div className="row border border-secondary rounded" id="content-container">
-    <h4 id="titles-custumer-add">Dados da empresa</h4>
     <div className="col-md-4 col-sm-12 mb-1">
       <div className="card-body p-5 text-center border rounded">
         <div className="card-title fs-5 m-1">Logo da empresa</div>

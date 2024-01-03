@@ -28,7 +28,7 @@ export const BussinesData = (props: { state: any, setState: any, disabled?: bool
                   legalResponsible: data?.qsa.length > 0 ? data?.qsa[0].nome_socio : '',
                   name: data?.razao_social,
                   nomeFantasia: data?.nome_fantasia,
-                  email: data?.email !== null ? data?.email : '',
+                  email: data?.email !== null ? data?.email : props.state.email,
                   zipCode: masks.maskZipCode(data?.cep || ''),
                   street: data?.logradouro,
                   houseNumber: data?.numero,

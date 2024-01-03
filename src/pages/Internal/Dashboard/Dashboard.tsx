@@ -199,8 +199,8 @@ export const Dashboard = () => {
           </div>
           <div className="col-md-3 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '7px 10px' }}>
-              <div className="card-body d-flex flex-column align-items-center">
-                <h3>Sua sessão expira no dia {expireSession[0]} às {expireSession[1]}</h3>
+              <div className="card-body d-flex flex-column align-items-center" id="expire-session">
+                <h3>Sua sessão expira no dia {expireSession[0]} às{expireSession[1]}</h3>
               </div>
             </div>
           </div>

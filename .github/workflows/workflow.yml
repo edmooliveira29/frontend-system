@@ -15,14 +15,11 @@ jobs:
         uses: actions/checkout@v3
       - run: npm install --legacy-peer-deps
       
-      - name: Run tests and build
-        uses: actions/checkout@v3
-      - run: |-
-          echo "RUN TEST============"
-          npm install --save react react-dom react-scripts
-          npm run build   
-    
-    
+      - uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run tests-e2e
+          
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:

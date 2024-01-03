@@ -33,7 +33,7 @@ export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: b
           </Link>
         </li>}
         <li><hr className="dropdown-divider" /></li>
-        <li><a className="dropdown-item" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
+        <li><a className="dropdown-item" id="logout-system" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
       </ul>
     </div>
   </div>)

@@ -21,12 +21,10 @@ export const MyAccount = () => {
             sx={{ width: '80%' }}>
             {roleUser !== 'salesman' && <Tab id='tab-1' label="Perfil" value="1" />}
             <Tab label="Segurança" value="2" />
-            <Tab label="Pagamentos" value="3" />
           </Tabs>
         </Box>
         {roleUser !== 'salesman' && <TabPanel value="1">{<Profile />}</TabPanel>}
         <TabPanel value="2">{<Password />}</TabPanel>
-        <TabPanel value="3">{<><span>Tela de Pagamentos em construção</span></>}</TabPanel>
       </TabContext>
     </Box>
   )

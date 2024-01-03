@@ -21,7 +21,7 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
       USER_CREDENTIAL = jwtDecode(credentialResponse.credential)
       try {
         userLogged = await userService.login({
-          email: USER_CREDENTIAL.email,
+          username: USER_CREDENTIAL.email,
           remember: true,
           loginWithGoogle: true
         })

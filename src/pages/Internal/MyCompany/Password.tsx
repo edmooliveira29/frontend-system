@@ -17,6 +17,8 @@ export const Password = () => {
         setState(
           {
             name: userLogged.data.name,
+            username: userLogged.data.username,
+            createWithGoogle: userLogged.data.createWithGoogle,
             email: userLogged.data.email,
             _id: userLogged.data._id,
             lastChangedPassword: userLogged.data.lastChangedPassword

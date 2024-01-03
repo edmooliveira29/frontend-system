@@ -6,8 +6,11 @@ import './styles.sass'
 import { Link } from 'react-router-dom'
 import { ReportService } from '../../../services/Report'
 import { AlertGeneral } from '../../../components'
+import jwtDecode from 'jwt-decode'
 export const Dashboard = () => {
   const report = new ReportService()
+  const [userLogged, setUserLogged] = useState<any>({})
+  const [expireSession, setExpireSession] = useState<any>(['', ''])
   const [data, setData] = useState<
     {
       products: any[],
@@ -170,7 +173,13 @@ export const Dashboard = () => {
       window.removeEventListener('resize', () => myChart.resize())
 
     }
-
+    const expireSession = () => {
+      const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
+      setUserLogged(userLogged)
+      const endSession = jwtDecode(userLogged.sessionToken) as any
+      setExpireSession((new Date(endSession.exp * 1000).toLocaleString('pt-BR')).split(','))
+    }
+    expireSession()
     bestSellingProductsChart()
 
   }, [])
@@ -184,15 +193,14 @@ export const Dashboard = () => {
           <div className="col-md-9 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '30px 10px' }} >
               <div className="card-body">
-                <h4>Seja bem vindo <strong> {JSON.parse(localStorage.getItem('userLogged') as any).name}</strong>!</h4>
+                <h4>Seja bem vindo(a) <strong> {userLogged.name}</strong>!</h4>
               </div>
             </div>
           </div>
           <div className="col-md-3 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '7px 10px' }}>
               <div className="card-body d-flex flex-column align-items-center">
-                <h1 style={{ textShadow: '1px 1px 3px black' }}>{new Date().toLocaleTimeString('pt-BR')} </h1>
-                <h6>{new Date().toLocaleString('pt-BR')} </h6>
+                <h3>Sua sessão expira no dia {expireSession[0]} às {expireSession[1]}</h3>
               </div>
             </div>
           </div>

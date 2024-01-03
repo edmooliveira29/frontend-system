@@ -10,9 +10,10 @@ import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const AddUserSystem = () => {
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
+  console.log(objectToEdit)
   const hasObjectToEdit = objectToEdit !== undefined
   const [state, setState] = useState(
-    hasObjectToEdit ? objectToEdit : {
+    hasObjectToEdit ? { ...objectToEdit, password: objectToEdit.password ? objectToEdit.password : '' } : {
       role: 'owner',
       name: '',
       username: '',
@@ -37,7 +38,7 @@ export const AddUserSystem = () => {
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditUser, { setLoading, UserService, state })
     } else {
-      response = await AlertConfirmationSaveEdit('save', handleCreateUser, { setLoading, UserService, state })
+      response = await AlertConfirmationSaveEdit('save', handleCreateUser, { setLoading, UserService, state: { ...state, createWithGoogle: false } })
     }
     setLoading(false)
     if (response) {
@@ -97,7 +98,7 @@ export const AddUserSystem = () => {
             required={true}
             value={state.password}
             typeInput="password"
-            onChange={(value: string) => { setState({ ...state, password: value }) }}
+            onChange={(value: string) => { console.log(state); setState({ ...state, password: value }) }}
           />
           {state.password.length > 0 && <div dangerouslySetInnerHTML={{ __html: validationPassword(state.password) }} />}
         </div>}

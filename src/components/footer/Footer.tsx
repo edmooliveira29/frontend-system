@@ -2,48 +2,23 @@ import React from 'react'
 import { Facebook, Twitter, Instagram } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import './styles.sass'
-import { ComponentButtonCommon } from '../button/ComponentButtonCommon'
-import { TextFieldInput } from '../inputs'
 
 
 export const Footer = () => {
-  const [state, setState] = React.useState({
-    email: '',
-  })
   return (
     <>
       <div className='bg-secondary' >
         < div className='container ' >
           <footer className='m-0 p-3'>
             <div className='row'>
-              <div className='col-6 mb-6'>
-                <h5 className='link-icon-website'>Sessões</h5>
-                <ul className='nav flex-column'>
+              <div className='col-12'>
+                <ul className='nav text-center'>
                   <Link to='/' className='link-icon-website'>Início</Link>
                   <Link to='/caracteristica' className='link-icon-website'>Característica</Link>
                   <Link to='/preco' className='link-icon-website'>Preço</Link>
                   <Link to='/sobre' className='link-icon-website'>Sobre</Link>
-
+                  <Link to='/contato' className='link-icon-website'>Contato</Link>
                 </ul>
-              </div>
-
-              <div className='col-6 mb-6'>
-                <form>
-                  <h5 className='link-icon-website'>Se inscreva para receber notícias</h5>
-                  <p className='link-icon-website'>Resumo mensal do que há de novo e empolgante de nós.</p>
-                  <div className='d-flex flex-column flex-sm-row w-100 gap-2'>
-                    <label htmlFor='newsletter1' className='visually-hidden'>Email</label>
-                    <TextFieldInput
-                      id={'name'}
-                      required={true} label='E-mail' typeInput='text'
-                      value={state.email}
-                      onChange={(value: string) => {
-                        return setState({ ...state, email: value })
-                      }}
-                    />
-                    <ComponentButtonCommon text='Inscrever-se' sizeWidth='180px' id='register-footer' />
-                  </div>
-                </form>
               </div>
             </div>
 

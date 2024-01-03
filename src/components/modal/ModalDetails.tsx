@@ -54,7 +54,7 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
                         {props.translations[index]._id === 'role' ?
                           (data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
                         {props.translations[index]._id === 'typeCustomer' ?
-                          (data[props.translations[index]._id] == 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                          (data[props.translations[index]._id] == 'natural' ? 'FÍSICO' : 'JURÍDICA') : null}
                         {fieldsDate.includes(props.translations[index]._id) ? new Date(data[props.translations[index]._id]).toLocaleDateString('pt-BR') : null}
                         {props.translations[index]._id !== 'role' && props.translations[index]._id !== 'typeCustomer' && !fieldsDate.includes(props.translations[index]._id) ? data[props.translations[index]._id] : null}
                       </div>

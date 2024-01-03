@@ -25,7 +25,7 @@ export const ListCustomer = () => {
     const customerResponse = new CustomerService()
     await customerResponse.delete(id)
     const customers = await customerResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
-    customers.data.map((customer: any) => customer.typeCustomer === 'natural' ? { ...customer, typeCustomer: 'FÍSICA' } : { ...customer, typeCustomer: 'JURÍDICA' })
+    customers.data.map((customer: any) => customer.typeCustomer === 'natural' ? { ...customer, typeCustomer: 'FÍSICO' } : { ...customer, typeCustomer: 'JURÍDICA' })
     setData(customers.data)
   }
   

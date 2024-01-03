@@ -24,7 +24,7 @@ export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: b
       <ul id='user-dropdown' style={isAccessExternal ? { left: '-130px' } : { left: '100px' }} className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="img-user">
         <li>
           <Link id='my-account-dropdown' to='/minha-conta' className="dropdown-item" >
-            {userLogged.role !== 'salesman'? 'Minha conta': 'Alterar senha'}
+            {userLogged.role !== 'salesman' ? 'Minha conta' : 'Alterar senha'}
           </Link>
         </li>
         {userLogged.role == 'salesman' ? null : <li>
@@ -45,7 +45,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   let userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
   const company = JSON.parse(localStorage.getItem('company') as any)
   const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
-  userLogged = { ...userLogged, ...currentUser, profilePicture: company?.profilePicture }
+  userLogged = { ...userLogged, ...currentUser, profilePicture: company?.profilePicture, companyName: company?.name }
   // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
   // const toggleClientesSubmenu = () => {
   //   setShowClientesSubmenu(!showClientesSubmenu)
@@ -73,10 +73,16 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
 
           <hr />
+          <div className="text-center mb-3">
+            {typeof userLogged.profilePicture == 'string' ?
+              <img src={userLogged.profilePicture} width="100" height="100" className="rounded-circle" alt='Imagem de perfil' />
+              : <AiOutlineUser size={80} color='white' style={{ margin: '0px 20px' }} />}
+            <><br /></><strong >{userLogged.companyName}</strong>
+          </div>
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
             {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar}> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
-            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr /> </>}
+            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
             <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
@@ -89,7 +95,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                 </ul>
               )}
             </li><hr /> */}
-            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr /></>}
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
             <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
           </ul>
           <hr />
@@ -101,7 +107,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
         }
       </div>
       {Dropdown(userLogged, handleLogOut, false)}
-    </div>
+    </div >
     </>
   )
 }

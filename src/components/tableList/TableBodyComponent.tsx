@@ -108,7 +108,7 @@ export const TableBodyComponent: FC<{
                         key={key._id}
                       >
                         {key._id === 'role' ? (row[key._id] === 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
-                        {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICA' : 'JURÍDICA') : null}
+                        {key._id === 'typeCustomer' ? (row[key._id] === 'natural' ? 'FÍSICO' : 'JURÍDICA') : null}
                         {fieldsDate.includes(key._id) ? new Date(row[key._id]).toLocaleDateString('pt-BR') : null}
                         {key._id !== 'role' && key._id !== 'typeCustomer' && !fieldsDate.includes(key._id) ? row[key._id] : null}
                       </TableCell>

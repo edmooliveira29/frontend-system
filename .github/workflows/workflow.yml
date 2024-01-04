@@ -10,7 +10,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - run: npm install --legacy-peer-deps
-      - run: git clone git@github.com:edmooliveira29/backend-system.git
+      - run: git clone https://oauth2:${{ secrets.DEPLOY_FROM_GITHUB }}@edmooliveira29/frontend-system.git
       - run: cd backend-system
       - run: npm install --legacy-peer-deps
       - run: apt-get install gnupg && curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor 

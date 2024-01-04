@@ -1,29 +1,31 @@
-
- 
-
 name: Node.js deploy
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
   run-tests:
+    runs-on: node:latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - run: npm install --legacy-peer-deps
+      - run: git clone git@github.com:edmooliveira29/backend-system.git
+      - run: cd backend-system
+      - run: npm install --legacy-peer-deps
+      - run: apt-get install gnupg && curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor 
+      - run: echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+      - run: apt-get update && apt-get install -y mongodb-org
+      - run: npm run start-test & sleep 15
+      - run: cd .. && npm run tests-e2e
+
+  deploy-to-netlify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - run: npm install --legacy-peer-deps
-      
-      - uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm run tests-e2e
-          
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
-          publish-dir: './build'
+          publish-dir: "./build"
           production-branch: main
           github-token: ${{ secrets.NETLIFY_GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"

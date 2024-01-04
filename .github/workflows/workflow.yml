@@ -19,9 +19,6 @@ jobs:
       - run: npm run start-test & sleep 15
       - run: cd .. && npm run tests-e2e
 
-  deploy-to-netlify:
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:

@@ -2,11 +2,11 @@ import Swal from 'sweetalert2'
 
 export const AlertConfirmationSaveEdit = (editOrSave: string, callBackToSaveOrEdit: any, paramsToSaveOrEdit?: any) => {
   return Swal.fire({
-    title: editOrSave == 'save' ? 'Deseja salvar as informações?' : 'Deseja editar as informações?',
+    title: editOrSave == 'save' ? '<p style="font-size: 2rem" id="confirm-text-save">Deseja salvar as informações?</p>' : '<p style="font-size: 2rem" id="confirm-text-edit">Deseja editar as informações?</p>',
     showCancelButton: true,
     confirmButtonColor: '#8AC381',
     cancelButtonColor: '#F56666',
-    confirmButtonText: 'SIM',
+    confirmButtonText: '<p id="confirm-text-yes" style="font-size: 1rem;margin:1px">SIM</p>',
     cancelButtonText: 'NÃO',
     icon: 'question',
     allowOutsideClick: false,
@@ -18,10 +18,12 @@ export const AlertConfirmationSaveEdit = (editOrSave: string, callBackToSaveOrEd
       try {
         response = await callBackToSaveOrEdit(paramsToSaveOrEdit)
         Swal.fire({
-          title: editOrSave == 'save' ? 'Salvo com sucesso!' : 'Editado com sucesso!',
+          title: editOrSave == 'save' ? '<p style="font-size: 2rem" id="confirm-text-save">Salvo com sucesso!</p>'
+            : '<p style="font-size: 2rem" id="confirm-text-save">Editado com sucesso!</p>',
           icon: 'success',
           allowOutsideClick: false,
-          width: 500
+          width: 500,
+          confirmButtonText: '<p id="confirm-text-ok" style="font-size: 1rem;margin:1px">OK</p>'
         })
       } catch (error: any) {
         Swal.fire({

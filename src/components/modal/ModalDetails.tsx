@@ -34,7 +34,7 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
         }}>
           <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }}>
             <Tooltip title="Fechar sem salvar" placement='left' arrow>
-              <i><AiFillCloseCircle className="align-self-end" size={20} color='#FF0000' onClick={() => { setOpenModal(false); onClose() }} /></i>
+              <i><AiFillCloseCircle id='close-modal-details' className="align-self-end" size={20} color='#FF0000' onClick={() => { setOpenModal(false); onClose() }} /></i>
             </Tooltip>
           </div>
           <div className="row d-flex align-items-center justify-content-center" style={{ maxHeight: 'calc(90vh - 150px)', overflowY: 'auto', overflowX: 'hidden' }}>
@@ -47,10 +47,10 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
 
                   return (
                     data[props.translations[index]._id] !== '' && data[props.translations[index]._id] !== null && data[props.translations[index]._id] !== undefined ? <div className="row" key={props.translations[index]._id} style={{ fontSize: '14px', listStyleType: 'none' }}>
-                      <div className="col-6 text-end mx-0 my-1 px-1 ">
+                      <div className="col-6 text-end mx-0 my-1 px-1 " id={`label-${props.translations[index]._id}`}>
                         <strong>{props.translations[index].label}: </strong>
                       </div>
-                      <div className="col-6 text-start mx-0 my-1 px-1">
+                      <div className="col-6 text-start mx-0 my-1 px-1" id={`value-${props.translations[index]._id}`}>
                         {props.translations[index]._id === 'role' ?
                           (data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
                         {props.translations[index]._id === 'typeCustomer' ?

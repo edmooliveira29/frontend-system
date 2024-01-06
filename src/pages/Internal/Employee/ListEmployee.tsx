@@ -28,7 +28,7 @@ export const ListEmployee: React.FC = () => {
   }
 
   const infoData = [
-    { _id: 'name', label: 'Nome', sortable: true, viewInTable: true },
+    { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
     { _id: 'cpf', label: 'CPF', sortable: true, viewInTable: false },
     { _id: 'birthday', label: 'Data de nascimento', sortable: true, viewInTable: false },
     { _id: 'gender', label: 'Gênero', sortable: true, viewInTable: false },
@@ -57,7 +57,7 @@ export const ListEmployee: React.FC = () => {
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um produto' placement='bottom' arrow>
               <Link to="/colaboradores/adicionar">
-                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-product' /></i>
+                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-employee' /></i>
               </Link>
             </Tooltip>
 

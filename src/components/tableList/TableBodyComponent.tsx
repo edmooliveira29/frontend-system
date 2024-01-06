@@ -116,13 +116,13 @@ export const TableBodyComponent: FC<{
                   }
                 })}
                 <TableCell sx={{ padding: '2px 0px 0px 15px' }} align="center">
-                  <IconButton color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>
+                  <IconButton id={`edit-${index}`} color="default" size="small" onClick={() => handleOpenEdit(props.title, row, props.navigate, dispatch)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color="default" size="small" onClick={() => handleOpenDetails(row)}>
+                  <IconButton id={`details-${index}`} color="default" size="small" onClick={() => handleOpenDetails(row)}>
                     <VisibilityIcon />
                   </IconButton>
-                  <IconButton color="error" size="small" onClick={() => handleDeleteItem(row, props.deleteItem)}>
+                  <IconButton id={`delete-${index}`} color="error" size="small" onClick={() => handleDeleteItem(row, props.deleteItem)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

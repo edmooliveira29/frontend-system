@@ -109,7 +109,7 @@ export const AddUserSystem = () => {
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
           }} id='back-user' />
-          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-user' loading={loading} />
+          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-edit-user' loading={loading} />
         </div>
       </div>
     </div>

@@ -140,7 +140,7 @@ export const AddEmployee: React.FC<{ state?: any }> = (props) => {
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
           }} id='back-employee' />
-          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
+          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSave} id='save-edit-employee' loading={loading} />
         </div>
       </div>
     </div >

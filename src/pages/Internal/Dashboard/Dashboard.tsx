@@ -192,8 +192,8 @@ export const Dashboard = () => {
         <div className='row'>
           <div className="col-md-9 col-sm-12">
             <div className="card border bg-light rounded shadow-sm" style={{ padding: '30px 10px' }} >
-              <div className="card-body">
-                <h4>Seja bem vindo(a) <strong> {userLogged.name}</strong>!</h4>
+              <div className="card-body" id="welcome-message">
+                <h4 id="welcome-message">Seja bem vindo(a) <strong>{userLogged.name}</strong>!</h4>
               </div>
             </div>
           </div>

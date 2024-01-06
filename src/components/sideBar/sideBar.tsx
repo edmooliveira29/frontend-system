@@ -80,10 +80,10 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
             <><br /></><strong >{userLogged.companyName}</strong>
           </div>
           <ul className="nav flex-column mb-auto">
-            <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
-            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar}> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
-            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
-            <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
+            <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} id='link-dashboard' > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
+            {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar} id='link-employees'> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
+            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar}> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} id='link-categories'/>Categorias </Link><hr />
+            <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar}> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} id='link-clients'/>Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
               {showClientesSubmenu ? <MdOutlineArrowDropUp size={30} id='icon-arrow' />
@@ -95,14 +95,14 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                 </ul>
               )}
             </li><hr /> */}
-            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
-            <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} id='link-products'/>Produtos </Link><hr />
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} id='link-sales'/>Venda </Link><hr />
           </ul>
           <hr />
         </div > :
           <div onClick={props.showSiderbar} id="div-icon-bar" >
             <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
-            <HiBars3 className="icon-bar" />
+            <HiBars3 id='icon-bar-menu' className="icon-bar" />
           </div>
         }
       </div>

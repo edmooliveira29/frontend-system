@@ -13,6 +13,7 @@ export const ListUserSystem = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       const userResponse  = new UserService()
+      console.log(JSON.parse(localStorage.getItem('company') as any))
       const users = await userResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(users.data)
     }
@@ -42,7 +43,7 @@ export const ListUserSystem = () => {
           <div className="col-9">
             <Tooltip title='Clique aqui para adicionar um usuário' placement='bottom' arrow>
               <Link to="/usuarios/adicionar">
-                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-category' /></i>
+                <i> <ComponentButtonCommon text='Adicionar' sizeWidth='250px' id='add-user' /></i>
               </Link>
             </Tooltip>
 

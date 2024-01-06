@@ -10,7 +10,7 @@ describe('Create Employee', () => {
     cy.visit('http://localhost:3000/')
   })
 
-  it('Create owner user ', () => {
+  it('Create employee ', () => {
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -48,7 +48,7 @@ describe('Create Employee', () => {
 
   })
 
-  it('Read owner user ', () => {
+  it('Read employee ', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -63,15 +63,15 @@ describe('Create Employee', () => {
 
   })
 
-  it('Update owner user ', () => {
+  it('Update employee ', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.get('#button-login').click()
     cy.get('#link-employees').click()
     cy.get('#edit-0').click()
-    cy.get('#input-name').clear().type('Owner Employee Updated')
-    cy.get('#input-email').clear().type('owner-employee-updated@gmail.com')
+    cy.get('#input-name').clear().type('Employee Updated')
+    cy.get('#input-email').clear().type('employee-updated@gmail.com')
     cy.get('#button-success-save-edit-employee').click()
     cy.get('#confirm-text-edit').should('have.text', 'Deseja editar as informações?')
     cy.get('#confirm-text-yes').click()
@@ -79,11 +79,11 @@ describe('Create Employee', () => {
     cy.get('#confirm-text-ok').click()
     cy.get('#details-0').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
-    cy.get('#value-name').should('have.text', 'Owner Employee Updated')
+    cy.get('#value-name').should('have.text', 'Employee Updated')
     cy.get('#close-modal-details').click()
   })
 
-  it('Delete owner user ', () => {
+  it('Delete employee ', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')

@@ -96,7 +96,7 @@ export const AddCategory = (props: { addedOutSideMainScreen: boolean, setOpenMod
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
           }} id='back-category' />}
-          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-category' loading={loading} />
+          <ComponentButtonSuccess text={hasObjectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={handleSaveEdit} id='save-edit-category' loading={loading} />
         </div>
       </div>
     </div>

@@ -13,8 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../redux/actions/reducers'
 
 export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: boolean) => {
-  console.log(userLogged)
-  console.log(isAccessExternal)
   return (
     <div className="dropdown d-flex justify-content-end">
       <a className="my-2 align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">

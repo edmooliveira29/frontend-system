@@ -50,7 +50,7 @@ export const NavBar = () => {
             </ul>
 
 
-            <form className='d-flex align-items-center'>
+            <form className='align-items-center'>
               {userLogged.name ? Dropdown(userLogged, handleLogOut, true) :
                 <Link to='/entrar' title={userLogged !== null ? 'Usuário logado' : 'Entrar'} className='link-navbar' id="link-login">
                   <AccountCircleIcon className='mx-auto' sx={{ color: '#FFFFFF' }} fontSize='large' />

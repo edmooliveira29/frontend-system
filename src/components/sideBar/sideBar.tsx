@@ -13,11 +13,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActionsTypes } from '../../redux/actions/reducers'
 
 export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: boolean) => {
-  return (<div className="col-3">
-    <div className="dropdown justify-content-end">
-      <a className="my-2 d-flex align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
+  console.log(userLogged)
+  console.log(isAccessExternal)
+  return (
+    <div className="dropdown d-flex justify-content-end">
+      <a className="my-2 align-items-center text-white dropdown-toggle justify-content-end align-items-center" id="img-user" data-bs-toggle="dropdown" aria-expanded="false">
         {typeof userLogged.profilePicture == 'string' ?
-          <img style={{ margin: '0 20px' }} src={userLogged.profilePicture} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
+          <img style={{ margin: '0 0px' }} src={userLogged.profilePicture} width="45" height="45" className="rounded-circle" alt='Imagem de perfil' /> :
           <AiOutlineUser size={40} color='white' style={{ margin: '0px 20px' }} />}
         {isAccessExternal ? null : <strong id='name-user-log'>{userLogged.name}</strong>}
       </a>
@@ -35,8 +37,7 @@ export const Dropdown = (userLogged: any, handleLogOut: any, isAccessExternal: b
         <li><hr className="dropdown-divider" /></li>
         <li><a className="dropdown-item" id="logout-system" onClick={() => AlertConfirmationLogout(handleLogOut)}>Sair</a></li>
       </ul>
-    </div>
-  </div>)
+    </div>)
 }
 
 export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSidebar: any }) => {
@@ -82,7 +83,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           <ul className="nav flex-column mb-auto">
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} id='link-dashboard' > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
             {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar} id='link-employees'> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
-            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar} id='link-categories'> <BiCategoryAlt size={30} style={{ margin: '0 10px' }}/>Categorias </Link><hr />
+            <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar} id='link-categories'> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
             <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar} id='link-clients'> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
@@ -106,7 +107,9 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
           </div>
         }
       </div>
-      {Dropdown(userLogged, handleLogOut, false)}
+      <div className=" col-3 align-items-center">
+        {Dropdown(userLogged, handleLogOut, false)}
+      </div>
     </div >
     </>
   )

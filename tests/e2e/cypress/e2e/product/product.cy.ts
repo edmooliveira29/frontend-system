@@ -19,8 +19,8 @@ describe('Create Product', () => {
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
-    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
+    cy.wait(3000)
     cy.get('#link-categories').click()
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 2; i++) {

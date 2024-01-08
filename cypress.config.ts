@@ -12,12 +12,12 @@ export default defineConfig({
     specPattern: 'tests/e2e/cypress/e2e/**/*.cy.ts',
     video: false,
     screenshotOnRunFailure: false,
-    fixturesFolder: false
+    fixturesFolder: false,
   },
   component: {
     devServer: {
       framework: "create-react-app",
       bundler: "webpack",
-    }
+    },
   },
 })

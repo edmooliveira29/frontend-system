@@ -82,7 +82,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
             <Link className='link-item-menu' to='/dashboard' onClick={props.showSiderbar} id='link-dashboard' > <AiFillDashboard size={30} style={{ margin: '0 10px' }} />Dashboard </Link><hr />
             {userLogged.role === 'salesman' ? null : <> <Link className='link-item-menu' to='/colaboradores' onClick={props.showSiderbar} id='link-employees'> <FaUsersCog size={30} style={{ margin: '0 10px' }} />Colaboradores </Link><hr /> </>}
             <Link className='link-item-menu' to='/categorias' onClick={props.showSiderbar} id='link-categories'> <BiCategoryAlt size={30} style={{ margin: '0 10px' }} />Categorias </Link><hr />
-            <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar} id='link-clients'> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
+            <Link className='link-item-menu' to='/clientes' onClick={props.showSiderbar} id='link-customers'> <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes </Link><hr />
             {/* <li className="nav-item" onClick={toggleClientesSubmenu}>
               <BsFillPersonLinesFill size={30} style={{ margin: '0 10px' }} />Clientes
               {showClientesSubmenu ? <MdOutlineArrowDropUp size={30} id='icon-arrow' />

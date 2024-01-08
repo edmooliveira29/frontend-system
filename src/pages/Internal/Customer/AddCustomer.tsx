@@ -141,7 +141,7 @@ export const AddCustomer: React.FC<{ state?: any, addedOutSideMainScreen: boolea
               dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
               navigate(-1)
             }} id='back-customer' />}
-            <ComponentButtonSuccess loading={loading} text={objectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={() => handleSave(state)} id='save-customer' />
+            <ComponentButtonSuccess loading={loading} text={objectToEdit ? 'Editar' : 'Salvar'} sizeWidth='200px' onClick={() => handleSave(state)} id='save-edit-customer' />
           </div>
         </div>}
     </div>

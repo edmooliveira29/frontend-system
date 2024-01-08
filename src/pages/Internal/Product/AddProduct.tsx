@@ -138,7 +138,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
         </div>
         <div className="col-md-3 col-sm-12">
           <TextFieldInput
-            id={'quantityInStock}'}
+            id={'quantityInStock'}
             label="Quantidade em estoque"
             placeholder='Digite aqui a quantidade em estoque'
             required={true}
@@ -154,7 +154,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
             dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
             navigate(-1)
           }} id='back-product' />}
-          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-product' loading={loading} />
+          <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-edit-product' loading={loading} />
         </div>
       </div>
     </div>

@@ -13,16 +13,13 @@ export const ListProduct = () => {
   const navigate = useNavigate()
   useEffect(() => {
     const getAllProducts = async () => {
-      const productResponse  = new ProductService()
+      const productResponse = new ProductService()
       const products = await productResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       products.data = products.data.map((product: any) => {
         return {
-          _id: product._id,
-          name: product.name,
-          description: product.description,
+          ...product,
           category: product.category.name,
           price: "R$ " + mask.maskMoney(product.price),
-          quantityInStock: product.quantityInStock,
         }
       })
       setData(products.data)
@@ -32,7 +29,7 @@ export const ListProduct = () => {
 
   const columnHeaders = [
     { _id: 'name', label: 'NOME', sortable: true, viewInTable: true },
-    { _id: 'description', label: 'DESCRICÃO', sortable: true, viewInTable: true },
+    { _id: 'description', label: 'DESCRIÇÃO', sortable: true, viewInTable: true },
     { _id: 'category', label: 'CATEGORIA', sortable: true, viewInTable: true },
     { _id: 'price', label: 'PREÇO', sortable: true, viewInTable: true },
     { _id: 'quantityInStock', label: 'QUANT. EM ESTOQUE', sortable: true, viewInTable: true },
@@ -41,8 +38,15 @@ export const ListProduct = () => {
   const deleteItem = async (id: string) => {
     const productResponse = new ProductService()
     await productResponse.delete(id)
-    const employees = await productResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
-    setData(employees.data)
+    const products = await productResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
+    products.data = products.data.map((product: any) => {
+      return {
+        ...product,
+        category: product.category.name,
+        price: "R$ " + mask.maskMoney(product.price),
+      }
+    })
+    setData(products.data)
   }
 
   return (<>

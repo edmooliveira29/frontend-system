@@ -25,7 +25,7 @@ describe('Create Employee', () => {
     cy.get('#input-cpf').type('123.456.789.10')
     cy.get('#input-birthday').type('01/01/2023')
     cy.get('#input-gender').click()
-    cy.get('#option-female').click()
+    cy.get('#option-0').click()
     cy.get('#input-nickname').type('employeenickname')
     cy.get('#input-phoneNumber').type('11999999999')
     cy.get('#input-email').type('employee-tests@gmail.com') 

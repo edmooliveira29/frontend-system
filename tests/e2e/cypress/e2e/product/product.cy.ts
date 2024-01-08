@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Create Category', () => {
+describe('Create Product', () => {
   before(() => {
     cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
   })
@@ -10,18 +10,18 @@ describe('Create Category', () => {
     cy.visit('http://localhost:3000/')
   })
 
-  it('Create category ', () => {
+  it('Create product ', () => {
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
-    cy.get('#input-email').type('category-tests@gmail.com')
-    cy.get('#input-username').type('category-tests')
+    cy.get('#input-email').type('product-tests@gmail.com')
+    cy.get('#input-username').type('product-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
     cy.get('#button-commom-register-singin').click()
     cy.get('#link-categories').click()
     cy.get('#button-commom-add-category').click()
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 2; i++) {
       cy.get('#input-type').click()
       if (i % 2 == 0) {
         cy.get('#option-0').click()
@@ -35,65 +35,79 @@ describe('Create Category', () => {
       cy.get('#confirm-text-yes').click()
       cy.get('#confirm-text-save').should('have.text', 'Salvo com sucesso!')
       cy.get('#confirm-text-ok').click()
-      if ((i != 5)) {
+      if ((i != 2)) {
         cy.get('#button-commom-add-category').click()
       }
     }
-  })
 
-  it('Read category ', () => {
-    cy.get('#link-login').click()
-    cy.get('#input-username').type('category-tests')
-    cy.get('#input-password').type('1234*Abcd')
-    cy.get('#button-login').click()
-    cy.get('#link-categories').click()
-    for (let i = 0; i < 5; i++) {
-      cy.get('#details-' + i).click()
-      if (i % 2 == 0) {
-        cy.get('#label-type').should('have.text', 'TIPO: ')
-        cy.get('#value-type').should('have.text', 'SERVIÇO')
-      } else {
-        cy.get('#label-type').should('have.text', 'TIPO: ')
-        cy.get('#value-type').should('have.text', 'PRODUTO')
-      }
-      cy.get('#label-name').should('have.text', 'NOME: ')
-      cy.get('#value-name').should('have.text', 'Category ' + (i + 1))
-      cy.get('#label-description').should('have.text', 'DESCRIÇÃO: ')
-      cy.get('#value-description').should('have.text', 'Description of Category ' + (i + 1))
-
-      if (i != 4) {
-        cy.get('#close-modal-details').click()
+    cy.get('#icon-bar-menu').click()
+    cy.get('#link-products').click()
+    cy.get('#button-commom-add-product').click()
+    for (let i = 1; i <= 3; i++) {
+      cy.get('#input-name').type('Product ' + i)
+      cy.get('#input-description').type('Description of Product ' + i)
+      cy.get('#input-category').click()
+      cy.get('#option-0').click()
+      cy.get('#input-price').type('1099')
+      cy.get('#input-quantityInStock').type('10')
+      cy.get('#button-success-save-edit-product').click()
+      cy.get('#confirm-text-save').should('have.text', 'Deseja salvar as informações?')
+      cy.get('#confirm-text-yes').click()
+      cy.get('#confirm-text-save').should('have.text', 'Salvo com sucesso!')
+      cy.get('#confirm-text-ok').click()
+      if ((i != 3)) {
+        cy.get('#button-commom-add-product').click()
       }
     }
   })
 
-  it('Update category ', () => {
+  it('Read product ', () => {
     cy.get('#link-login').click()
-    cy.get('#input-username').type('category-tests')
+    cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.get('#button-login').click()
-    cy.get('#link-categories').click()
+    cy.get('#link-products').click()
+    for (let i = 0; i < 3; i++) {
+      cy.get('#details-' + i).click()
+      cy.get('#label-name').should('have.text', 'NOME: ')
+      cy.get('#value-name').should('have.text', 'Product ' + (i + 1))
+      cy.get('#label-description').should('have.text', 'DESCRIÇÃO: ')
+      cy.get('#value-description').should('have.text', 'Description of Product ' + (i + 1))
+
+      if (i != 3) {
+        cy.get('#close-modal-details').click()
+      }
+    }
+
+  })
+
+  it('Update product ', () => {
+    cy.get('#link-login').click()
+    cy.get('#input-username').type('product-tests')
+    cy.get('#input-password').type('1234*Abcd')
+    cy.get('#button-login').click()
+    cy.get('#link-products').click()
     cy.get('#edit-2').click()
-    cy.get('#input-name').clear().type('Category Updated')
-    cy.get('#button-success-save-edit-category').click()
+    cy.get('#input-name').clear().type('Product Updated')
+    cy.get('#button-success-save-edit-product').click()
     cy.get('#confirm-text-edit').should('have.text', 'Deseja editar as informações?')
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-save').should('have.text', 'Editado com sucesso!')
     cy.get('#confirm-text-ok').click()
     cy.get('#details-2').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
-    cy.get('#value-name').should('have.text', 'Category Updated')
+    cy.get('#value-name').should('have.text', 'Product Updated')
     cy.get('#close-modal-details').click()
   })
 
-  it('Delete category ', () => {
+  it('Delete product ', () => {
     cy.get('#link-login').click()
-    cy.get('#input-username').type('category-tests')
+    cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.get('#button-login').click()
-    cy.get('#link-categories').click()
-    for(let i = 0; i < 3; i++){
-      cy.get('#delete-' + i).click()
+    cy.get('#link-products').click()
+    for (let i = 0; i < 2; i++) {
+      cy.get('#delete-0').click()
       cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
       cy.get('#confirm-text-yes').click()
       cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

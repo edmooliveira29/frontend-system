@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.sass'
 import { Grid, Switch } from '@mui/material'
 
-export const SwitchInput: React.FC<{ labelTitle: string, label1: string, label2: string, onChange: any, value: boolean }> = (props) => {
+export const SwitchInput: React.FC<{ labelTitle: string, label1: string, label2: string, onChange: any, value: boolean, id: string }> = (props) => {
 
   return (
     <>
@@ -11,6 +11,7 @@ export const SwitchInput: React.FC<{ labelTitle: string, label1: string, label2:
         <Grid item>{props.label1}</Grid>
         <Grid item alignItems="center">
           <Switch
+            id={`input-${props.id}`}
             color='success'
             onChange={props.onChange}
             value={props.value}

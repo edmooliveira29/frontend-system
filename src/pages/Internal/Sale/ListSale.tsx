@@ -20,12 +20,11 @@ export const ListSale = () => {
   },[])
   
   const columnHeaders = [
-    { _id: 'saleNumber', label: 'Número da venda', sortable: true, viewInTable: true },
-    { _id: 'dateOfSale', label: 'Data', sortable: true ,viewInTable: true},
-    { _id: 'customer.name', label: 'Cliente', sortable: true ,viewInTable: true},
-    { _id: 'resumeOfSale.totalOfSale', label: 'Preço', sortable: true ,viewInTable: true},
+    { _id: 'saleNumber', label: 'NÚMERO', sortable: true, viewInTable: true },
+    { _id: 'dateOfSale', label: 'DATA', sortable: true ,viewInTable: true},
+    { _id: 'customer.name', label: 'CLIENTE', sortable: true ,viewInTable: true},
+    { _id: 'resumeOfSale.totalOfSale', label: 'VALOR', sortable: true ,viewInTable: true},
   ]
-
   const deleteItem = async (id: string) => {
     const saleResponse = new SaleService()
     await saleResponse.delete(id)

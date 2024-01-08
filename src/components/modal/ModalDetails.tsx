@@ -7,7 +7,8 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
   const [openModal, setOpenModal] = React.useState(true)
   const fieldsNotToShow = ['password', 'createdAt', 'editAt', 'updatedAt', '_id', 'profilePicture', 'sessionToken', 'createWithGoogle', 'lastChangedPassword']
   const keys = Object.keys(data).filter(key => !fieldsNotToShow.includes(key))
-
+  console.log(data)
+  console.log(props.translations)
   return (
     <>
       <Modal
@@ -44,21 +45,28 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
               {keys.map((key, index) => {
                 if (props.translations.length > index) {
                   const fieldsDate = ['hiringDate', 'birthday', 'date', 'dateOfSale']
-
+                  if (props.translations[index]._id.includes('.')) {
+                    const splitKey = props.translations[index]._id.split('.')
+                    data[props.translations[index]._id] = data[splitKey[0]][splitKey[1]]
+                  }
+                  if (String(data[props.translations[index]._id]).includes(',') && (String(data[props.translations[index]._id]).match(/,/g) || []).length === 1) {
+                    data[props.translations[index]._id] = `R$ ${data[props.translations[index]._id]}`
+                  }
                   return (
-                    data[props.translations[index]._id] !== '' && data[props.translations[index]._id] !== null && data[props.translations[index]._id] !== undefined ? <div className="row" key={props.translations[index]._id} style={{ fontSize: '14px', listStyleType: 'none' }}>
-                      <div className="col-6 text-end mx-0 my-1 px-1 " id={`label-${props.translations[index]._id}`}>
-                        <strong>{props.translations[index].label}: </strong>
-                      </div>
-                      <div className="col-6 text-start mx-0 my-1 px-1" id={`value-${props.translations[index]._id}`}>
-                        {props.translations[index]._id === 'role' ?
-                          (data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
-                        {props.translations[index]._id === 'typeCustomer' ?
-                          (data[props.translations[index]._id] == 'natural' ? 'FÍSICO' : 'JURÍDICA') : null}
-                        {fieldsDate.includes(props.translations[index]._id) ? new Date(data[props.translations[index]._id]).toLocaleDateString('pt-BR') : null}
-                        {props.translations[index]._id !== 'role' && props.translations[index]._id !== 'typeCustomer' && !fieldsDate.includes(props.translations[index]._id) ? data[props.translations[index]._id] : null}
-                      </div>
-                    </div> : null
+                    data[props.translations[index]._id] !== '' && data[props.translations[index]._id] !== null && data[props.translations[index]._id] !== undefined ?
+                      <div className="row" key={props.translations[index]._id} style={{ fontSize: '14px', listStyleType: 'none' }}>
+                        <div className="col-6 text-end mx-0 my-1 px-1 " id={`label-${props.translations[index]._id}`}>
+                          <strong>{props.translations[index].label}: </strong>
+                        </div>
+                        <div className="col-6 text-start mx-0 my-1 px-1" id={`value-${props.translations[index]._id}`}>
+                          {props.translations[index]._id === 'role' ?
+                            (data[props.translations[index]._id] == 'owner' ? 'PROPRIETÁRIO' : 'VENDEDOR') : null}
+                          {props.translations[index]._id === 'typeCustomer' ?
+                            (data[props.translations[index]._id] == 'natural' ? 'FÍSICO' : 'JURÍDICA') : null}
+                          {fieldsDate.includes(props.translations[index]._id) ? new Date(data[props.translations[index]._id]).toLocaleDateString('pt-BR') : null}
+                          {props.translations[index]._id !== 'role' && props.translations[index]._id !== 'typeCustomer' && !fieldsDate.includes(props.translations[index]._id) ? data[props.translations[index]._id] : null}
+                        </div>
+                      </div> : null
 
                   )
                 }
@@ -71,3 +79,6 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
     </>
   )
 }
+
+// 'Valor em produtos: R$ 61,98',
+// 'Valor em produtos: R$ 61,98'

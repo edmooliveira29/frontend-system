@@ -11,6 +11,7 @@ describe('Create Customer', () => {
   })
 
   it('Create physical customer ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -44,6 +45,7 @@ describe('Create Customer', () => {
   })
 
   it('Create jurical customer ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('customer-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -65,6 +67,7 @@ describe('Create Customer', () => {
   })
 
   it('Read customer ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('customer-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -80,6 +83,7 @@ describe('Create Customer', () => {
   })
 
   it('Update customer ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('customer-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -100,6 +104,7 @@ describe('Create Customer', () => {
   })
 
   it('Delete customer ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('customer-tests')
     cy.get('#input-password').type('1234*Abcd')

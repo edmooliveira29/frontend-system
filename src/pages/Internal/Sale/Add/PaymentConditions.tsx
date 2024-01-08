@@ -24,6 +24,7 @@ export const PaymentConditions: React.FC<{ state: any, setState: any, calculateT
         </div>
         <div className="col-md-3 col-sm-3 d-flex align-items-center justify-content-center">
           <SwitchInput
+            id={'typeOfDiscount'}
             labelTitle='Tipo de Desconto:&nbsp;&nbsp;'
             label1='R$'
             label2='%'

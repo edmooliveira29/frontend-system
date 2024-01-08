@@ -11,6 +11,7 @@ describe('Create Account without Google', () => {
 
   it('enter website and create account', () => {
 
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -30,6 +31,7 @@ describe('Create Account without Google', () => {
   })
 
   it('enter website, create account and return error ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -42,6 +44,7 @@ describe('Create Account without Google', () => {
   })
 
   it('enter and edit account', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -60,6 +63,7 @@ describe('Create Account without Google', () => {
   })
 
   it('enter and assert expiration date in this day', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -74,6 +78,7 @@ describe('Create Account without Google', () => {
 
 
   it('enter and assert expiration date in 7 days', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')

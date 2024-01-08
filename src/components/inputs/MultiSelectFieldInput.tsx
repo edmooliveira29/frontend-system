@@ -35,8 +35,8 @@ export const MultiSelectFieldInput = (props: { options: any, label: string, requ
           
           sx={{ top: '0px', backgroundColor: '#FEFEFE', borderRadius: '5px', '.MuiSelect-select': { padding: '7px 11px' }, '.MuiButtonBase-root':{color:'#F101010'} }}
         >
-          {props.options.map((option: any) => (
-            <MenuItem key={option} value={option}>
+          {props.options.map((option: any, index: number) => (
+            <MenuItem key={option} value={option} id={`option-${index}`}>
               <Checkbox checked={props.value.indexOf(option) > -1} color='success'/>
               <ListItemText primary={option} />
             </MenuItem>

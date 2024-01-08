@@ -1,6 +1,6 @@
 
 import * as React from 'react'
-export const TextAreaInput: React.FC<{ onChange?: any }> = ({ onChange }) => {
+export const TextAreaInput: React.FC<{ onChange?: any, id: string }> = ({ onChange, id }) => {
   const maxLength = 1500
   const [inputValue, setInputValue] = React.useState('')
 
@@ -15,14 +15,14 @@ export const TextAreaInput: React.FC<{ onChange?: any }> = ({ onChange }) => {
   const remainingChars = maxLength - inputValue.length
 
   return (
-    <div>
+    <div id={`input-${id}`}>
       <textarea
         className="char-count form-control"
         placeholder={`Digite até ${maxLength} caracteres aqui dentro.`}
         maxLength={maxLength}
         value={inputValue}
         onChange={handleInputChange}
-        style={{maxHeight:'150px'}}
+        style={{ maxHeight: '150px' }}
       />
       <p className="text-muted text-end" style={{ fontSize: '12px' }}>{remainingChars} caracteres restantes</p>
     </div>

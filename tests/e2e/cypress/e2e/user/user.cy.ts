@@ -11,6 +11,7 @@ describe('Create User', () => {
   })
 
   it('Create owner user ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -43,6 +44,7 @@ describe('Create User', () => {
   })
 
   it('Read owner user ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
@@ -56,6 +58,7 @@ describe('Create User', () => {
   })
 
   it('Update owner user ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
@@ -77,6 +80,7 @@ describe('Create User', () => {
   })
 
   it('Delete owner user ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')

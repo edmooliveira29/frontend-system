@@ -11,6 +11,7 @@ describe('Create Product', () => {
   })
 
   it('Create product ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -62,6 +63,7 @@ describe('Create Product', () => {
   })
 
   it('Read product ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -82,6 +84,7 @@ describe('Create Product', () => {
   })
 
   it('Update product ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -101,6 +104,7 @@ describe('Create Product', () => {
   })
 
   it('Delete product ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')

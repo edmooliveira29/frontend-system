@@ -53,7 +53,7 @@ export const ContactUs = () => {
                         </div>
                       </div>
                       <div className='col-md-12'>
-                        <div className='form-group'><TextAreaInput /></div>
+                        <div className='form-group'><TextAreaInput id='message'/></div>
                       </div>
                       <div className='col-md-12 m-2'>
                         <div className='form-group'>

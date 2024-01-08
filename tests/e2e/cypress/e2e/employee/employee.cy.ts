@@ -11,6 +11,7 @@ describe('Create Employee', () => {
   })
 
   it('Create employee ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -49,6 +50,7 @@ describe('Create Employee', () => {
   })
 
   it('Read employee ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -64,6 +66,7 @@ describe('Create Employee', () => {
   })
 
   it('Update employee ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')
@@ -84,6 +87,7 @@ describe('Create Employee', () => {
   })
 
   it('Delete employee ', () => {
+    cy.wait(3000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('employee-tests')
     cy.get('#input-password').type('1234*Abcd')

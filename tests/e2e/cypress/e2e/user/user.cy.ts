@@ -19,6 +19,7 @@ describe('Create User', () => {
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
@@ -39,7 +40,9 @@ describe('Create User', () => {
     cy.get('#text-logout').should('have.text', 'Saindo...')
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#welcome-message').should('have.text', 'Seja bem vindo(a) Owner User!')
   })
 
@@ -48,9 +51,12 @@ describe('Create User', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
+    cy.wait(3000)
     cy.get('#details-1').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'Owner User')
@@ -62,7 +68,9 @@ describe('Create User', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
     cy.get('#edit-1').click()
@@ -73,6 +81,7 @@ describe('Create User', () => {
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-save').should('have.text', 'Editado com sucesso!')
     cy.get('#confirm-text-ok').click()
+    cy.wait(3000)
     cy.get('#details-1').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'Owner User Updated')
@@ -84,7 +93,9 @@ describe('Create User', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
     cy.get('#delete-1').click()

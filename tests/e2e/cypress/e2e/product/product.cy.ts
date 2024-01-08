@@ -19,6 +19,7 @@ describe('Create Product', () => {
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
     cy.get('#link-categories').click()
     cy.get('#button-commom-add-category').click()
@@ -67,10 +68,13 @@ describe('Create Product', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-products').click()
     for (let i = 0; i < 3; i++) {
-      cy.get('#details-' + i).click()
+      cy.wait(3000)
+    cy.get('#details-' + i).click()
       cy.get('#label-name').should('have.text', 'NOME: ')
       cy.get('#value-name').should('have.text', 'Product ' + (i + 1))
       cy.get('#label-description').should('have.text', 'DESCRIÇÃO: ')
@@ -88,7 +92,9 @@ describe('Create Product', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-products').click()
     cy.get('#edit-2').click()
     cy.get('#input-name').clear().type('Product Updated')
@@ -97,6 +103,7 @@ describe('Create Product', () => {
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-save').should('have.text', 'Editado com sucesso!')
     cy.get('#confirm-text-ok').click()
+    cy.wait(3000)
     cy.get('#details-2').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'Product Updated')
@@ -108,7 +115,9 @@ describe('Create Product', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-products').click()
     for (let i = 0; i < 2; i++) {
       cy.get('#delete-0').click()

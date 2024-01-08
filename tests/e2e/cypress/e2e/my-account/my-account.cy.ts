@@ -19,6 +19,7 @@ describe('Create Account without Google', () => {
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
     cy.get('#img-user').click()
     cy.get('#logout-system').click()
@@ -39,6 +40,7 @@ describe('Create Account without Google', () => {
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
     cy.get('#error-response').should('have.text', 'Erro do servidor: Já existe uma empresa com este e-mail.')
   })
@@ -48,7 +50,9 @@ describe('Create Account without Google', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#img-user').click()
     cy.get('#my-account-dropdown').click()
     cy.get('#input-cnpj').type('06135538000190')
@@ -67,7 +71,9 @@ describe('Create Account without Google', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#expire-session').should('have.text', `Sua sessão expira no dia ${new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })} às 23:59:00`)
     cy.get('#img-user').click()
     cy.get('#logout-system').click()
@@ -83,7 +89,9 @@ describe('Create Account without Google', () => {
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.get('#checkbox-input-remember').click()
+    cy.wait(3000)
     cy.get('#button-login').click()
+
 
     const nowDate = new Date()
 

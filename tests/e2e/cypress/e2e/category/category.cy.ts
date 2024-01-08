@@ -19,6 +19,7 @@ describe('Create Category', () => {
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-commom-register-singin').click()
     cy.get('#link-categories').click()
     cy.get('#button-commom-add-category').click()
@@ -47,10 +48,13 @@ describe('Create Category', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-categories').click()
     for (let i = 0; i < 5; i++) {
-      cy.get('#details-' + i).click()
+      cy.wait(3000)
+    cy.get('#details-' + i).click()
       if (i % 2 == 0) {
         cy.get('#label-type').should('have.text', 'TIPO: ')
         cy.get('#value-type').should('have.text', 'SERVIÇO')
@@ -74,7 +78,9 @@ describe('Create Category', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-categories').click()
     cy.get('#edit-2').click()
     cy.get('#input-name').clear().type('Category Updated')
@@ -83,6 +89,7 @@ describe('Create Category', () => {
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-save').should('have.text', 'Editado com sucesso!')
     cy.get('#confirm-text-ok').click()
+    cy.wait(3000)
     cy.get('#details-2').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'Category Updated')
@@ -94,7 +101,9 @@ describe('Create Category', () => {
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
+    cy.wait(3000)
     cy.get('#button-login').click()
+
     cy.get('#link-categories').click()
     for(let i = 0; i < 3; i++){
       cy.get('#delete-' + i).click()

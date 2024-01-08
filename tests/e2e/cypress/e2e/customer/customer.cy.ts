@@ -122,6 +122,7 @@ describe('Create Customer', () => {
 
     cy.get('#link-customers').click()
     cy.get('#delete-0').click()
+    cy.wait(3000)
     cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

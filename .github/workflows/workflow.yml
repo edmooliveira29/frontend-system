@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install packages in frontend
         run: |
+          echo "REACT_APP_BASE_URL_DEVELOPMENT=http://localhost:5000/v1" > .env
           npm install --legacy-peer-deps
 
       - name: Setup mongo to backend
@@ -40,7 +41,9 @@ jobs:
           echo "==================="
           npm run start-test & sleep 20
           curl -I http://localhost:3000
+          curl -I http://localhost:5000
           cd ..
+          cat .env
           npm run tests-e2e
 
   deploy:

@@ -42,7 +42,7 @@ jobs:
       - name: Running tests
         run: |
           pwd
-          npm start & sleep 20
+          npm start & sleep 120
           cd backend-system
           echo "==================="
           npm run start-test  & sleep 20

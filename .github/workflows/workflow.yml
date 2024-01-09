@@ -31,19 +31,21 @@ jobs:
           cd backend-system
           echo "${{ secrets.ENV_BACKEND }}" > ./.env
           echo "${{ secrets.ENV_BACKEND }}" >> .env
-          ls
-
-      - name: Running tests
-        run: |
           npm install --legacy-peer-deps
-          pwd
-          npm start & sleep 100
-          cd backend-system
-          echo "==================="
-          npm run start-test & sleep 20
-          curl -I http://localhost:3000
-          cd ..
-          npm run tests-e2e
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm start & sleep 100 & cd backend-system & echo "===================" & npm run start-test & sleep 20 & curl -I http://localhost:3000 & cd ..
+          browser: chrome
+      # - name: Running tests
+      #   run: |
+      #     npm start & sleep 100
+      #     cd backend-system
+      #     echo "==================="
+      #     npm run start-test & sleep 20
+      #     curl -I http://localhost:3000
+      #     cd ..
+      #     npm run tests-e2e
 
   deploy:
     runs-on: ubuntu-latest

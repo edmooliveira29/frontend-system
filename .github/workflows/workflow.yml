@@ -35,7 +35,8 @@ jobs:
           git clone git@github.com:edmooliveira29/backend-system.git
           cd backend-system
           echo "${{ secrets.ENV_BACKEND }}" > ./.env
-          cat .env
+          echo "${{ secrets.ENV_BACKEND }}" >> .env
+          ls
           npm install --legacy-peer-deps
           npm run start-test & sleep 15
 

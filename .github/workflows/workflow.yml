@@ -13,12 +13,12 @@ jobs:
         run: |
           npm install --legacy-peer-deps
 
-      - name: Setup mongo in backend
+      - name: Setup mongo to backend
         uses: DigiPie/mongo-action@v2.0.1
         with:
           image_version: latest
           port: 27017
-      - name: Running tests
+      - name: Running backend
         run: |
           sudo apt-get update
           sudo apt-get install -y wget gnupg
@@ -32,32 +32,16 @@ jobs:
           echo "${{ secrets.ENV_BACKEND }}" > ./.env
           echo "${{ secrets.ENV_BACKEND }}" >> .env
           npm install --legacy-peer-deps
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: |
-            npm start
-            sleep 100
-            cd backend-system
-            echo "==================="
-            npm run start-test
-            sleep 20
-            curl -I http://localhost:3000
-            cd ..
-          command: |
-            npm run tests-e2e
-          browser: chrome
-          config: headed
 
-      # - name: Running tests
-      #   run: |
-      #     npm start & sleep 100
-      #     cd backend-system
-      #     echo "==================="
-      #     npm run start-test & sleep 20
-      #     curl -I http://localhost:3000
-      #     cd ..
-      #     npm run tests-e2e
+      - name: Running tests
+        run: |
+          npm start & sleep 100
+          cd backend-system
+          echo "==================="
+          npm run start-test & sleep 20
+          curl -I http://localhost:3000
+          cd ..
+          npm run tests-e2e
 
   deploy:
     runs-on: ubuntu-latest

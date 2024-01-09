@@ -10,15 +10,16 @@ jobs:
       - name: Setup frontend
         uses: actions/checkout@v2
       - name: Setup node
-      - run: |
+        run: |
           npm install --legacy-peer-deps
           npm start & sleep 15
 
-      - name: Install mongodb
+      - name: Create mongo container
         uses: DigiPie/mongo-action@v2.0.1
         with:
           image_version: latest
           port: 27017
+      - name: Install mongodb
         run: |
           sudo apt-get update
           sudo apt-get install -y wget gnupg

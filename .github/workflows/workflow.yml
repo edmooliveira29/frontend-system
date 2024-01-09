@@ -42,10 +42,11 @@ jobs:
       - name: Running tests
         run: |
           pwd
-          npm start & sleep 10
+          npm start & sleep 20
           cd backend-system
-          npm run start-test  & sleep 10
+          npm run start-test  & sleep 20
           cd ..
+          echo "==================="
           npm run tests-e2e
 
   deploy:

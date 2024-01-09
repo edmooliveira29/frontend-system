@@ -12,7 +12,6 @@ jobs:
       - name: Install packages in frontend
         run: |
           npm install --legacy-peer-deps
-          npm start & sleep 15
 
       - name: Create mongo container
         uses: DigiPie/mongo-action@v2.0.1
@@ -38,11 +37,15 @@ jobs:
           echo "${{ secrets.ENV_BACKEND }}" >> .env
           ls
           npm install --legacy-peer-deps
-          npm run start-test & sleep 15
+          
 
       - name: Running tests
         run: |
           pwd
+          npm start & sleep 10
+          cd backend-system
+          npm run start-test  & sleep 10
+          cd ..
           npm run tests-e2e
 
   deploy:

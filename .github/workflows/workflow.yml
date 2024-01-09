@@ -9,9 +9,10 @@ jobs:
     steps:
       - name: Setup frontend
         uses: actions/checkout@v2
-      - name: Setup node
+      - name: Install packages in frontend
         run: |
           npm install --legacy-peer-deps
+          npm install -g typescript
           npm start & sleep 15
 
       - name: Create mongo container

@@ -98,6 +98,7 @@ describe('Create Customer', () => {
     cy.get('#button-login').click()
 
     cy.get('#link-customers').click()
+    cy.wait(3000)
     cy.get('#edit-0').click()
     cy.get('#input-name').clear().type('Customer Updated')
     cy.get('#input-email').clear().type('customer-updated@gmail.com')

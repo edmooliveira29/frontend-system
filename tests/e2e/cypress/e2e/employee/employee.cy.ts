@@ -78,6 +78,7 @@ describe('Create Employee', () => {
     cy.get('#button-login').click()
 
     cy.get('#link-employees').click()
+    cy.wait(3000)
     cy.get('#edit-0').click()
     cy.get('#input-name').clear().type('Employee Updated')
     cy.get('#input-email').clear().type('employee-updated@gmail.com')

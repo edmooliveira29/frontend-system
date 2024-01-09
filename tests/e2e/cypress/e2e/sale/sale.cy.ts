@@ -121,6 +121,7 @@ describe('Create Sale', () => {
     cy.wait(3000)
     cy.get('#button-login').click()
     cy.get('#link-sales').click()
+    cy.wait(3000)
     cy.get('#edit-0').click()
     cy.get('#input-productId-1').click()
     cy.get('#option-0').click()

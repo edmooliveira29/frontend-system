@@ -39,6 +39,10 @@ jobs:
           npm install --legacy-peer-deps
           
 
+      - name: configure cypress
+        uses: cypress-io/github-action@v6
+        with:
+          browser: firefox
       - name: Running tests
         run: |
           pwd

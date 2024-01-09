@@ -38,17 +38,17 @@ jobs:
           ls
           npm install --legacy-peer-deps
           
-      - name: Start services - backend and frontend
-        run: |
-          pwd
-          npm start & sleep 120
-          cd backend-system
-          echo "==================="
-          npm run start-test  & sleep 20
-          
       - name: Running tests
         uses: cypress-io/github-action@v6
         with:
+          start: |
+            pwd
+            npm start & sleep 120
+            cd backend-system
+            echo "==================="
+            npm run start-test  & sleep 20
+            curl -I http://localhost:3000
+          build: npm run tests-e2e
           browser: chrome
 
   deploy:

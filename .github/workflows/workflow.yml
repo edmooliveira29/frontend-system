@@ -42,6 +42,7 @@ jobs:
           echo "==================="
           npm run start-test & sleep 20
           curl -I http://localhost:3000
+          cd ..
           npm run tests-e2e
 
   deploy:

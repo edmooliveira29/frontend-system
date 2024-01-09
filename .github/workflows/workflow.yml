@@ -1,4 +1,4 @@
-name: Node.js deploy
+name: Deploy to Netlify
 on:
   push:
     branches: ["main"]
@@ -11,8 +11,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Install packages in frontend
         run: |
-          npm install --legacy-peer-deps
           npm install -g typescript
+          echo "===================================="
+          npm install --legacy-peer-deps
           npm start & sleep 15
 
       - name: Create mongo container
@@ -43,10 +44,6 @@ jobs:
       - name: Running tests
         run: |
           pwd
-          ls
-          cd ..
-          pdw
-          ls
           npm run tests-e2e
 
   deploy:

@@ -1,4 +1,4 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode'
+import { JwtPayload, jwtDecode } from 'jwt-decode'
 import { AlertGeneral } from '../components'
 
 const sessionTokenExpiry = (sessionToken: string) => {

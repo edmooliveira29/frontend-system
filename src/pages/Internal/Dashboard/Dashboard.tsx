@@ -6,7 +6,7 @@ import './styles.sass'
 import { Link } from 'react-router-dom'
 import { ReportService } from '../../../services/Report'
 import { AlertGeneral } from '../../../components'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 export const Dashboard = () => {
   const report = new ReportService()
   const [userLogged, setUserLogged] = useState<any>({})

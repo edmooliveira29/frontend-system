@@ -3,7 +3,6 @@
 describe('Create Category', () => {
   before(() => {
     cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
-    console.log('banco apagado')
   })
 
   beforeEach(() => {
@@ -14,7 +13,6 @@ describe('Create Category', () => {
   it('Create category ', () => {
     cy.wait(3000)
     cy.get('#link-login').click()
-    console.log('encontrado')
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
     cy.get('#input-email').type('category-tests@gmail.com')
@@ -22,8 +20,6 @@ describe('Create Category', () => {
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
     cy.get('#button-commom-register-singin').click()
-    console.log('registrado com sucesso')
-
     cy.wait(3000)
     cy.get('#link-categories').click()
     cy.get('#button-commom-add-category').click()
@@ -110,7 +106,9 @@ describe('Create Category', () => {
 
     cy.get('#link-categories').click()
     for(let i = 0; i < 3; i++){
+      cy.wait(2000)
       cy.get('#delete-' + i).click()
+      cy.wait(2000)
       cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
       cy.get('#confirm-text-yes').click()
       cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

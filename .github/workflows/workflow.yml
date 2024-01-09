@@ -37,6 +37,8 @@ jobs:
         with:
           command: npm start & sleep 100 & cd backend-system & echo "===================" & npm run start-test & sleep 20 & curl -I http://localhost:3000 & cd ..
           browser: chrome
+          config: headed
+
       # - name: Running tests
       #   run: |
       #     npm start & sleep 100

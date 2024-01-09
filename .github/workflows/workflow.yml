@@ -35,7 +35,15 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          command: npm start & sleep 100 & cd backend-system & echo "===================" & npm run start-test & sleep 20 & curl -I http://localhost:3000 & cd ..
+          command: |
+            npm start
+            sleep 100
+            cd backend-system
+            echo "==================="
+            npm run start-test
+            sleep 20
+            curl -I http://localhost:3000
+            cd ..
           browser: chrome
           config: headed
 

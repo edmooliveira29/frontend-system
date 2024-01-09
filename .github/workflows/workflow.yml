@@ -35,7 +35,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          command: |
+          start: |
             npm start
             sleep 100
             cd backend-system
@@ -44,6 +44,8 @@ jobs:
             sleep 20
             curl -I http://localhost:3000
             cd ..
+          command: |
+            npm run tests-e2e
           browser: chrome
           config: headed
 

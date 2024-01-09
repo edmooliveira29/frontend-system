@@ -22,6 +22,7 @@ describe('Create Category', () => {
     cy.get('#button-commom-register-singin').click()
     cy.wait(3000)
     cy.get('#link-categories').click()
+    cy.wait(3000)
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 5; i++) {
       cy.get('#input-type').click()
@@ -54,7 +55,7 @@ describe('Create Category', () => {
     cy.get('#link-categories').click()
     for (let i = 0; i < 5; i++) {
       cy.wait(3000)
-    cy.get('#details-' + i).click()
+      cy.get('#details-' + i).click()
       if (i % 2 == 0) {
         cy.get('#label-type').should('have.text', 'TIPO: ')
         cy.get('#value-type').should('have.text', 'SERVIÇO')
@@ -80,9 +81,10 @@ describe('Create Category', () => {
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(3000)
     cy.get('#button-login').click()
-
     cy.get('#link-categories').click()
+    cy.wait(3000)
     cy.get('#edit-2').click()
+    cy.wait(3000)
     cy.get('#input-name').clear().type('Category Updated')
     cy.get('#button-success-save-edit-category').click()
     cy.get('#confirm-text-edit').should('have.text', 'Deseja editar as informações?')
@@ -105,7 +107,7 @@ describe('Create Category', () => {
     cy.get('#button-login').click()
 
     cy.get('#link-categories').click()
-    for(let i = 0; i < 3; i++){
+    for (let i = 0; i < 3; i++) {
       cy.wait(2000)
       cy.get('#delete-' + i).click()
       cy.wait(2000)

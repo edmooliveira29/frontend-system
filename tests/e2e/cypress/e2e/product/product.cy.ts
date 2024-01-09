@@ -22,6 +22,7 @@ describe('Create Product', () => {
     cy.get('#button-commom-register-singin').click()
     cy.wait(3000)
     cy.get('#link-categories').click()
+    cy.wait(3000)
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 2; i++) {
       cy.get('#input-type').click()
@@ -44,6 +45,7 @@ describe('Create Product', () => {
 
     cy.get('#icon-bar-menu').click()
     cy.get('#link-products').click()
+    cy.wait(3000)
     cy.get('#button-commom-add-product').click()
     for (let i = 1; i <= 3; i++) {
       cy.get('#input-name').type('Product ' + i)
@@ -74,7 +76,7 @@ describe('Create Product', () => {
     cy.get('#link-products').click()
     for (let i = 0; i < 3; i++) {
       cy.wait(3000)
-    cy.get('#details-' + i).click()
+      cy.get('#details-' + i).click()
       cy.get('#label-name').should('have.text', 'NOME: ')
       cy.get('#value-name').should('have.text', 'Product ' + (i + 1))
       cy.get('#label-description').should('have.text', 'DESCRIÇÃO: ')
@@ -94,9 +96,10 @@ describe('Create Product', () => {
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(3000)
     cy.get('#button-login').click()
-
     cy.get('#link-products').click()
+    cy.wait(3000)
     cy.get('#edit-2').click()
+    cy.wait(3000)
     cy.get('#input-name').clear().type('Product Updated')
     cy.get('#button-success-save-edit-product').click()
     cy.get('#confirm-text-edit').should('have.text', 'Deseja editar as informações?')
@@ -121,8 +124,8 @@ describe('Create Product', () => {
     cy.get('#link-products').click()
     for (let i = 0; i < 2; i++) {
       cy.wait(3000)
-    cy.get('#delete-0').click()
-    cy.wait(3000)
+      cy.get('#delete-0').click()
+      cy.wait(3000)
       cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
       cy.get('#confirm-text-yes').click()
       cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

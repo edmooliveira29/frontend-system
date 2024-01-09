@@ -74,7 +74,9 @@ describe('Create User', () => {
 
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
+    cy.wait(3000)
     cy.get('#edit-1').click()
+    cy.wait(3000)
     cy.get('#input-name').clear().type('Owner User Updated')
     cy.get('#input-email').clear().type('owner-user-updated@gmail.com')
     cy.get('#button-success-save-edit-user').click()
@@ -100,7 +102,9 @@ describe('Create User', () => {
 
     cy.get('#img-user').click()
     cy.get('#user-register-dropdown').click()
+    cy.wait(3000)
     cy.get('#delete-1').click()
+    cy.wait(3000)
     cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

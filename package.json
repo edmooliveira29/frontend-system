@@ -8,7 +8,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --fix ",
     "prepare": "husky install",
-    "tests-e2e": "unset ELECTRON_RUN_AS_NODE && npx cypress run",
+    "tests-e2e": "unset ELECTRON_RUN_AS_NODE && npx cypress run --headed --record --key 444a0b80-7bbd-4f3e-9dae-2c95d220c85d --browser chrome --env baseUrl=http://localhost:3000",
     "cypress:open": "cypress open",
     "dependency-violations": "npx depcruise src",
     "update-packages": "npx npm-check-updates --color --interactive &&  npm cache clean --force && rm -Rf node_modules/ && npm install && npx npm-check"

@@ -39,19 +39,18 @@ jobs:
           npm install --legacy-peer-deps
           
 
-      - name: configure cypress
-        uses: cypress-io/github-action@v6
-        with:
-          browser: firefox
-      - name: Running tests
+      - name: Start services - backend and frontend
         run: |
           pwd
           npm start & sleep 120
           cd backend-system
           echo "==================="
           npm run start-test  & sleep 20
-          cd ..
-          npm run tests-e2e
+          
+      - name: Running tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: firefox
 
   deploy:
     runs-on: ubuntu-latest

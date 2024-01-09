@@ -80,6 +80,7 @@ describe('Create Customer', () => {
     cy.get('#link-customers').click()
     cy.wait(3000)
     cy.get('#details-1').click()
+    cy.wait(3000)
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'SUPERMERCADOS BH LTDA')
     cy.get('#label-cnpj').should('have.text', 'CNPJ: ')

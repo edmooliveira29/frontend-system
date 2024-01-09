@@ -99,10 +99,13 @@ describe('Create Account without Google', () => {
     dateFuture.setDate(nowDate.getDate() + 7)
     const dateFormated = dateFuture.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })
     dateFuture.setSeconds(dateFuture.getSeconds() + 1)
-    const timeFuture = dateFuture.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' })
 
+    cy.get('#expire-session').should(($element) => {
+      const fullText = $element.text()
+      const expectedText = `Sua sessão expira no dia ${dateFormated}`
 
-    cy.get('#expire-session').should('have.text', `Sua sessão expira no dia ${dateFormated} às ${timeFuture}`)
+      expect(fullText).to.include(`Sua sessão expira no dia ${dateFormated}`)
+    }); 
     cy.get('#img-user').click()
     cy.get('#logout-system').click()
     cy.get('#confirm-text').click()

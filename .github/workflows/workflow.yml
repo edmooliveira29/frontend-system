@@ -28,9 +28,7 @@ jobs:
           echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
           sudo apt-get update
           sudo apt-get install -y mongodb-mongosh
-          sudo service start mongod
-          sudo service mongod restart
-          sudo service status mongod
+
 
       - name: Running backend
         run: |
@@ -38,6 +36,7 @@ jobs:
           git clone git@github.com:edmooliveira29/backend-system.git
           cd backend-system
           echo "${{ secrets.ENV_BACKEND }}" > ./.env
+          cat .env
           npm install --legacy-peer-deps
           npm run start-test & sleep 15
 

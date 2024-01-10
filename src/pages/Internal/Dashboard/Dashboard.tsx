@@ -31,7 +31,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const bestSellingProductsChart = async () => {
-      let myChart: any, data: any
+      let myChart: any, data: any, dom: any
 
       try {
         data = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
@@ -41,8 +41,8 @@ export const Dashboard = () => {
         return
       }
       setData(data)
-      const dom = document.getElementById('best-selling-products-chart')
       setTimeout(() => {
+        dom = document.getElementById('best-selling-products-chart')
         myChart = echarts.init(dom)
 
         const option: echarts.EChartsOption = {
@@ -94,9 +94,9 @@ export const Dashboard = () => {
     }
 
     const salesIntheLast6Months = (data: any) => {
-      const dom = document.getElementById('last-6-months-sales')
-      let myChart: any, option: any
+      let myChart: any, option: any, dom: any
       setTimeout(() => {
+        dom = document.getElementById('last-6-months-sales')
         myChart = echarts.init(dom)
         myChart.setOption({})
 

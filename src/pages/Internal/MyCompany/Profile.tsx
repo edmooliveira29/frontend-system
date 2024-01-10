@@ -114,7 +114,7 @@ export const Profile = () => {
       <BussinesData setState={setState} state={state} title='DADOS EMPRESARIAL' />
       <AddressData setUser={setState} state={state} cities={[]} />
       <div className="m-2 d-flex justify-content-end" >
-        <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-profile' loading={loading} />
+        <ComponentButtonSuccess text='Salvar' sizeWidth='200px' onClick={handleSave} id='save-edit-profile' loading={loading} />
       </div>
     </div>
   </div>

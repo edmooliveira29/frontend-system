@@ -5,9 +5,8 @@ import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
 import { Link } from 'react-router-dom'
 import { ReportService } from '../../../services/Report'
-import { AlertGeneral, alertLoading } from '../../../components'
+import { AlertGeneral } from '../../../components'
 import { jwtDecode } from 'jwt-decode'
-import { FaSpinner } from 'react-icons/fa'
 export const Dashboard = () => {
   const report = new ReportService()
   const [userLogged, setUserLogged] = useState<any>({})

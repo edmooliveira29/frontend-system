@@ -13,7 +13,7 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: false,
     fixturesFolder: false,
-    defaultCommandTimeout: 60000
+    defaultCommandTimeout: 60000,
   },
   component: {
     devServer: {

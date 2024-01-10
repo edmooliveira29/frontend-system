@@ -29,6 +29,8 @@ describe('Create Account without Google', () => {
     cy.get('#confirm-text').click()
     cy.get('#text-logout').should('be.visible')
     cy.get('#text-logout').should('have.text', 'Saindo...')
+    cy.wait(2000)
+
   })
 
   it('enter website, create account and return error ', () => {
@@ -66,6 +68,8 @@ describe('Create Account without Google', () => {
     cy.get('#confirm-text').click()
     cy.get('#text-logout').should('be.visible')
     cy.get('#text-logout').should('have.text', 'Saindo...')
+    cy.wait(2000)
+
   })
 
   it('enter and assert expiration date in this day', () => {
@@ -82,6 +86,8 @@ describe('Create Account without Google', () => {
     cy.get('#confirm-text').click()
     cy.get('#text-logout').should('be.visible')
     cy.get('#text-logout').should('have.text', 'Saindo...')
+    cy.wait(2000)
+
   })
 
 
@@ -113,5 +119,7 @@ describe('Create Account without Google', () => {
     cy.get('#confirm-text').click()
     cy.get('#text-logout').should('be.visible')
     cy.get('#text-logout').should('have.text', 'Saindo...')
+    cy.wait(2000)
+
   })
 })

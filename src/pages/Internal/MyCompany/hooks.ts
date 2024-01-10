@@ -24,7 +24,7 @@ export const onChangeZipCode = async (value: string, props: any, setCitySelected
       })
     }
 
-    const cities = await citiesStates(data.uf)
+    const cities = await citiesStates(data.uf) || []
     if (cities.length > 0) {
       setCitySelected(data.localidade)
       setCities(cities)

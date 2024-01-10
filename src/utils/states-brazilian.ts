@@ -29,17 +29,21 @@ export const statesBrazilian = [
   { value: 'SP', label: 'São Paulo' },
   { value: 'SE', label: 'Sergipe' },
   { value: 'TO', label: 'Tocantins' },
-];
+]
 
-export const citiesStates = async(state: string) => {
+export const citiesStates = async (state: string) => {
   alertLoading('open', 'Carregando lista de cidades ...')
-  const response = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`);
-  const formattedCities = response.data.map((city: { nome: string }) => ({
+  const pause = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds))
+
+  await pause(1000)
+  let formattedCities: any[] = []
+  const response = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`)
+  formattedCities = response.data.map((city: { nome: string }) => ({
     value: city.nome,
     label: city.nome
-  }));
+  }))
   alertLoading('close')
 
 
-  return formattedCities;
+  return formattedCities
 }

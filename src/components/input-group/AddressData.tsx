@@ -10,7 +10,7 @@ export const AddressData: React.FC<{ state: any, setUser: any, cities: any }> = 
   const [flagGetCities, setFlagGetCities] = useState(true)
   const getCities = async (ufState: string) => {
     if (ufState && flagGetCities) {
-      const auxCities = props.cities ? await citiesStates(ufState) : cities
+      const auxCities = props.cities ? await citiesStates(ufState) : cities || []
       setCities(auxCities)
       setCitySelected(auxCities.some((option: { value: string }) => option.value === props.state.city) ? props.state.city : '')
     }

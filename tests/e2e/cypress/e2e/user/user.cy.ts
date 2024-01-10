@@ -38,6 +38,7 @@ describe('Create User', () => {
     cy.get('#confirm-text').click()
     cy.get('#text-logout').should('be.visible')
     cy.get('#text-logout').should('have.text', 'Saindo...')
+    cy.wait(2000)
     cy.get('#input-username').type('owner-user')
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(1000)

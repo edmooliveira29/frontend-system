@@ -31,7 +31,8 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const bestSellingProductsChart = async () => {
-      let data
+      let myChart: any, data: any
+
       try {
         data = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
         data = data.data
@@ -41,48 +42,52 @@ export const Dashboard = () => {
       }
       setData(data)
       const dom = document.getElementById('best-selling-products-chart')
-      const myChart = echarts.init(dom)
-      const option: echarts.EChartsOption = {
-        tooltip: {
-          trigger: 'item'
-        },
-        legend: {
-          orient: 'vertical',
-          right: '2%',
-          bottom: '10%',
-          itemWidth: 10
-        }, toolbox: {
-          feature: {
-            restore: { show: true },
-            saveAsImage: { show: true }
-          }
-        },
-        series: [
-          {
-            name: 'Produto',
-            type: 'pie',
-            radius: '60%',
-            data: data.products,
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 50,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.9)'
+      setTimeout(() => {
+        myChart = echarts.init(dom)
+
+        const option: echarts.EChartsOption = {
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            orient: 'vertical',
+            right: '2%',
+            bottom: '10%',
+            itemWidth: 10
+          }, toolbox: {
+            feature: {
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          series: [
+            {
+              name: 'Produto',
+              type: 'pie',
+              radius: '60%',
+              data: data.products,
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 50,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.9)'
+                }
               }
             }
-          }
-        ]
-      }
+          ]
+        }
 
-      myChart.setOption(option)
-      if (window.innerWidth < 768) {
-        myChart.setOption({ ...option, legend: { orient: 'horizontal', bottom: '0%' } })
+        myChart.setOption(option)
 
-        myChart.resize({ width: 300, height: 300 })
-      } else {
-        myChart.resize()
-      }
-      salesIntheLast6Months(data)
+        if (window.innerWidth < 768) {
+          myChart.setOption({ ...option, legend: { orient: 'horizontal', bottom: '0%' } })
+
+          myChart.resize({ width: 300, height: 300 })
+        } else {
+          myChart.resize()
+        }
+        salesIntheLast6Months(data)
+      }, 1000)
 
       window.addEventListener('resize', () => myChart.resize(), { passive: true })
       window.removeEventListener('resize', () => myChart.resize())
@@ -90,84 +95,88 @@ export const Dashboard = () => {
 
     const salesIntheLast6Months = (data: any) => {
       const dom = document.getElementById('last-6-months-sales')
-      const myChart = echarts.init(dom)
-      const colors = ['#5470C6', '#91CC75', '#EE6666']
-      const option = {
-        color: colors,
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross'
-          }
-        },
+      let myChart: any, option: any
+      setTimeout(() => {
+        myChart = echarts.init(dom)
+        myChart.setOption({})
 
-        toolbox: {
-          feature: {
-            restore: { show: true },
-            saveAsImage: { show: true }
-          }
-        },
-        legend: {
-          data: ['Vendas', 'Média']
-        },
-        xAxis: [
-          {
-            type: 'category',
-            axisTick: {
-              alignWithLabel: true
-            },
-            data: data.salesIntheLast6Months.monthsName
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            name: 'Média das vendas',
-            position: 'right',
-            alignTicks: true,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: colors[0]
-              }
-            },
-            axisLabel: {
-              formatter: '{value}'
+        const colors = ['#5470C6', '#91CC75', '#EE6666']
+        option = {
+          color: colors,
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross'
             }
           },
-          {
-            type: 'value',
-            name: '',
-            position: 'right',
-            alignTicks: true,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: colors[0]
+
+          toolbox: {
+            feature: {
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          legend: {
+            data: ['Vendas', 'Média']
+          },
+          xAxis: [
+            {
+              type: 'category',
+              axisTick: {
+                alignWithLabel: true
+              },
+              data: data.salesIntheLast6Months.monthsName
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value',
+              name: 'Média das vendas',
+              position: 'right',
+              alignTicks: true,
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: colors[0]
+                }
+              },
+              axisLabel: {
+                formatter: '{value}'
               }
             },
-            axisLabel: {
-              formatter: '{value}'
+            {
+              type: 'value',
+              name: '',
+              position: 'right',
+              alignTicks: true,
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: colors[0]
+                }
+              },
+              axisLabel: {
+                formatter: '{value}'
+              }
             }
-          }
-        ],
-        series: [
-          {
-            name: 'Média',
-            type: 'line',
-            yAxisIndex: 1,
-            data: data.salesIntheLast6Months.average
-          }
-        ]
-      }
-      myChart.setOption(option)
-
-      if (window.innerWidth < 768) {
-        myChart.setOption({ ...option, legend: { orient: 'horizontal', bottom: '0%' } })
-        myChart.resize({ width: 300, height: 300 })
-      } else {
-        myChart.resize()
-      }
+          ],
+          series: [
+            {
+              name: 'Média',
+              type: 'line',
+              yAxisIndex: 1,
+              data: data.salesIntheLast6Months.average
+            }
+          ]
+        }
+        myChart.setOption(option)
+        if (window.innerWidth < 768) {
+          myChart.setOption({ ...option, legend: { orient: 'horizontal', bottom: '0%' } })
+          myChart.resize({ width: 300, height: 300 })
+        } else {
+          myChart.resize()
+        }
+      }, 1000)
 
       window.addEventListener('resize', () => myChart.resize(), { passive: true })
       window.removeEventListener('resize', () => myChart.resize())

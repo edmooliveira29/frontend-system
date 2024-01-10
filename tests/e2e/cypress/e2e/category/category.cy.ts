@@ -25,6 +25,7 @@ describe('Create Category', () => {
     cy.wait(3000)
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 5; i++) {
+      cy.wait(2000)
       cy.get('#input-type').click()
       if (i % 2 == 0) {
         cy.get('#option-0').click()
@@ -105,7 +106,6 @@ describe('Create Category', () => {
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(3000)
     cy.get('#button-login').click()
-
     cy.get('#link-categories').click()
     for (let i = 0; i < 3; i++) {
       cy.wait(2000)

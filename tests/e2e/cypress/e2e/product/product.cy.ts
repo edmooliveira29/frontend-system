@@ -25,6 +25,7 @@ describe('Create Product', () => {
     cy.wait(3000)
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 2; i++) {
+      cy.wait(2000)
       cy.get('#input-type').click()
       if (i % 2 == 0) {
         cy.get('#option-0').click()
@@ -48,6 +49,7 @@ describe('Create Product', () => {
     cy.wait(3000)
     cy.get('#button-commom-add-product').click()
     for (let i = 1; i <= 3; i++) {
+      cy.wait(2000)
       cy.get('#input-name').type('Product ' + i)
       cy.get('#input-description').type('Description of Product ' + i)
       cy.get('#input-category').click()
@@ -77,6 +79,7 @@ describe('Create Product', () => {
     for (let i = 0; i < 3; i++) {
       cy.wait(3000)
       cy.get('#details-' + i).click()
+      cy.wait(2000)
       cy.get('#label-name').should('have.text', 'NOME: ')
       cy.get('#value-name').should('have.text', 'Product ' + (i + 1))
       cy.get('#label-description').should('have.text', 'DESCRIÇÃO: ')

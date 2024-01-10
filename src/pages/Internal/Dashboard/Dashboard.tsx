@@ -186,8 +186,11 @@ export const Dashboard = () => {
     }
     expireSession()
     setLoadingData(true)
+
     if (currentPath == '/dashboard') {
-      getDataToDashboard()
+      setTimeout(() => {
+        getDataToDashboard()
+      }, 2000)
     }
     setLoadingData(false)
 

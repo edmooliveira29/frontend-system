@@ -43,6 +43,7 @@ export const Dashboard = () => {
       }
       setData(data)
       const dom = document.getElementById('best-selling-products-chart')
+      if (!dom) return
       const myChart = init(dom)
 
       const option: echarts.EChartsOption = {
@@ -90,11 +91,13 @@ export const Dashboard = () => {
 
       window.addEventListener('resize', () => myChart.resize(), { passive: true })
       window.removeEventListener('resize', () => myChart.resize())
+
     }
 
     const salesIntheLast6Months = (data: any) => {
 
       const dom = document.getElementById('last-6-months-sales')
+      if (!dom) return
       const myChart = init(dom)
       myChart.setOption({})
 
@@ -185,13 +188,10 @@ export const Dashboard = () => {
       setExpireSession((new Date(endSession.exp * 1000).toLocaleString('pt-BR')).split(','))
     }
     expireSession()
-    
+
     if (currentPath == '/dashboard') {
-      setTimeout(() => {
-        setLoadingData(true)
-        getDataToDashboard()
-        setLoadingData(false)
-      }, 2000)
+      getDataToDashboard()
+      setLoadingData(false)
     }
 
   }, [])

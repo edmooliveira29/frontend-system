@@ -11,7 +11,7 @@ describe('Create Account without Google', () => {
 
   it('enter website and create account', () => {
 
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -20,7 +20,7 @@ describe('Create Account without Google', () => {
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
     cy.get('#button-commom-register-singin').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#img-user').click()
     cy.get('#logout-system').click()
     cy.get('#cancel-text').click()
@@ -32,7 +32,7 @@ describe('Create Account without Google', () => {
   })
 
   it('enter website, create account and return error ', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -41,22 +41,22 @@ describe('Create Account without Google', () => {
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
     cy.get('#button-commom-register-singin').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#error-response').should('have.text', 'Erro do servidor: Já existe uma empresa com este e-mail.')
   })
 
   it('enter and edit account', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
 
     cy.get('#img-user').click()
     cy.get('#my-account-dropdown').click()
     cy.get('#input-cnpj').type('06135538000190')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-success-save-edit-profile').click()
     cy.get('#message-alert').should('have.text', 'Empresa editada com sucesso')
     cy.get('#confirm-text-ok').click()
@@ -68,11 +68,11 @@ describe('Create Account without Google', () => {
   })
 
   it('enter and assert expiration date in this day', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
 
     cy.get('#expire-session').should('have.text', `Sua sessão expira no dia ${new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })} às 23:59:00`)
@@ -85,12 +85,12 @@ describe('Create Account without Google', () => {
 
 
   it('enter and assert expiration date in 7 days', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('company-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.get('#checkbox-input-remember').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
 
 

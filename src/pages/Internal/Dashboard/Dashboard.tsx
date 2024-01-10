@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useState } from 'react'
-import * as echarts from 'echarts'
+import { init } from 'echarts'
 import { FcConferenceCall, FcMoneyTransfer, FcBullish } from 'react-icons/fc'
 import './styles.sass'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ReportService } from '../../../services/Report'
 import { AlertGeneral } from '../../../components'
 import { jwtDecode } from 'jwt-decode'
@@ -28,10 +28,11 @@ export const Dashboard = () => {
       quantityOfCustomers: 0,
       totalOfSales: '0.00',
     })
-
+  const location = useLocation()
+  const currentPath = location.pathname
 
   useEffect(() => {
-    const bestSellingProductsChart = async () => {
+    const getDataToDashboard = async () => {
       let data
       try {
         data = await report.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
@@ -42,7 +43,7 @@ export const Dashboard = () => {
       }
       setData(data)
       const dom = document.getElementById('best-selling-products-chart')
-      const myChart = echarts.init(dom)
+      const myChart = init(dom)
 
       const option: echarts.EChartsOption = {
         tooltip: {
@@ -94,7 +95,7 @@ export const Dashboard = () => {
     const salesIntheLast6Months = (data: any) => {
 
       const dom = document.getElementById('last-6-months-sales')
-      const myChart = echarts.init(dom)
+      const myChart = init(dom)
       myChart.setOption({})
 
       const colors = ['#5470C6', '#91CC75', '#EE6666']
@@ -184,11 +185,11 @@ export const Dashboard = () => {
       setExpireSession((new Date(endSession.exp * 1000).toLocaleString('pt-BR')).split(','))
     }
     expireSession()
-    setTimeout(() => {
-      setLoadingData(true)
-      bestSellingProductsChart()
-      setLoadingData(false)
-    }, 2000)
+    setLoadingData(true)
+    if (currentPath == '/dashboard') {
+      getDataToDashboard()
+    }
+    setLoadingData(false)
 
   }, [])
 
@@ -214,7 +215,7 @@ export const Dashboard = () => {
         </div>
         {loadingData ?
           <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-            <div className="spinner-border" role="status" style={{height: '100px', width: '100px'}}>
+            <div className="spinner-border" role="status" style={{ height: '100px', width: '100px' }}>
               <span className="visually-hidden" >Loading...</span>
             </div>
           </div> :

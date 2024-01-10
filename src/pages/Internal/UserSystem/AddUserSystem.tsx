@@ -10,7 +10,6 @@ import { ActionsTypes } from '../../../redux/actions/reducers'
 
 export const AddUserSystem = () => {
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
-  console.log(objectToEdit)
   const hasObjectToEdit = objectToEdit !== undefined
   const [state, setState] = useState(
     hasObjectToEdit ? { ...objectToEdit, password: objectToEdit.password ? objectToEdit.password : '' } : {

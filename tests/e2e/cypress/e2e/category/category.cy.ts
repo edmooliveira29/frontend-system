@@ -11,7 +11,7 @@ describe('Create Category', () => {
   })
 
   it('Create category ', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
@@ -20,12 +20,12 @@ describe('Create Category', () => {
     cy.get('#input-password-singin').type('1234*Abcd')
     cy.get('#input-passwordConfirmation').type('1234*Abcd')
     cy.get('#button-commom-register-singin').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-categories').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-commom-add-category').click()
     for (let i = 1; i <= 5; i++) {
-      cy.wait(2000)
+      cy.wait(1000)
       cy.get('#input-type').click()
       if (i % 2 == 0) {
         cy.get('#option-0').click()
@@ -46,16 +46,16 @@ describe('Create Category', () => {
   })
 
   it('Read category ', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
 
     cy.get('#link-categories').click()
     for (let i = 0; i < 5; i++) {
-      cy.wait(3000)
+      cy.wait(1000)
       cy.get('#details-' + i).click()
       if (i % 2 == 0) {
         cy.get('#label-type').should('have.text', 'TIPO: ')
@@ -76,23 +76,23 @@ describe('Create Category', () => {
   })
 
   it('Update category ', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
     cy.get('#link-categories').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#edit-2').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#input-name').clear().type('Category Updated')
     cy.get('#button-success-save-edit-category').click()
     cy.get('#confirm-text-edit').should('have.text', 'Deseja editar as informações?')
     cy.get('#confirm-text-yes').click()
     cy.get('#confirm-text-save').should('have.text', 'Editado com sucesso!')
     cy.get('#confirm-text-ok').click()
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#details-2').click()
     cy.get('#label-name').should('have.text', 'NOME: ')
     cy.get('#value-name').should('have.text', 'Category Updated')
@@ -100,17 +100,17 @@ describe('Create Category', () => {
   })
 
   it('Delete category ', () => {
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#link-login').click()
     cy.get('#input-username').type('category-tests')
     cy.get('#input-password').type('1234*Abcd')
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('#button-login').click()
     cy.get('#link-categories').click()
     for (let i = 0; i < 3; i++) {
-      cy.wait(2000)
+      cy.wait(1000)
       cy.get('#delete-' + i).click()
-      cy.wait(2000)
+      cy.wait(1000)
       cy.get('#confirm-text-delete').should('have.text', 'Você tem certeza que quer apagar esta informação?')
       cy.get('#confirm-text-yes').click()
       cy.get('#confirm-text-delete').should('have.text', 'Informação deletada com sucesso!')

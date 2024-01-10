@@ -7,8 +7,6 @@ export const ModalDetails: React.FC<{ data: any, title: string, onClose: () => v
   const [openModal, setOpenModal] = React.useState(true)
   const fieldsNotToShow = ['password', 'createdAt', 'editAt', 'updatedAt', '_id', 'profilePicture', 'sessionToken', 'createWithGoogle', 'lastChangedPassword']
   const keys = Object.keys(data).filter(key => !fieldsNotToShow.includes(key))
-  console.log(data)
-  console.log(props.translations)
   return (
     <>
       <Modal

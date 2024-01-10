@@ -185,14 +185,14 @@ export const Dashboard = () => {
       setExpireSession((new Date(endSession.exp * 1000).toLocaleString('pt-BR')).split(','))
     }
     expireSession()
-    setLoadingData(true)
-
+    
     if (currentPath == '/dashboard') {
       setTimeout(() => {
+        setLoadingData(true)
         getDataToDashboard()
+        setLoadingData(false)
       }, 2000)
     }
-    setLoadingData(false)
 
   }, [])
 

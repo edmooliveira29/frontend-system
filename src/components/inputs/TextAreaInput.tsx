@@ -8,7 +8,7 @@ export const TextAreaInput: React.FC<{ onChange?: any, id: string }> = ({ onChan
     const newValue = event.target.value
     if (newValue.length <= maxLength) {
       setInputValue(newValue)
-      onChange(event) // Chama a função onChange passada como prop
+      onChange(event)
     }
   }
 

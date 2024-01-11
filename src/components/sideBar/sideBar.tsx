@@ -45,10 +45,6 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
   const company = JSON.parse(localStorage.getItem('company') as any)
   const { currentUser } = useSelector((reducers: any) => reducers.userReducer)
   userLogged = { ...userLogged, ...currentUser, profilePicture: company?.profilePicture, companyName: company?.name }
-  // const [showClientesSubmenu, setShowClientesSubmenu] = useState(false)
-  // const toggleClientesSubmenu = () => {
-  //   setShowClientesSubmenu(!showClientesSubmenu)
-  // }
 
   const handleLogOut = () => {
     localStorage.clear()

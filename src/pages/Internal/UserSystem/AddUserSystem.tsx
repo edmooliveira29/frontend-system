@@ -97,7 +97,7 @@ export const AddUserSystem = () => {
             required={true}
             value={state.password}
             typeInput="password"
-            onChange={(value: string) => { console.log(state); setState({ ...state, password: value }) }}
+            onChange={(value: string) => { setState({ ...state, password: value }) }}
           />
           {state.password.length > 0 && <div dangerouslySetInnerHTML={{ __html: validationPassword(state.password) }} />}
         </div>}

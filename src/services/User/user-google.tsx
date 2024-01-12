@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import { ActionsTypes } from '../../redux/actions/reducers'
 import { useDispatch } from 'react-redux'
-import { CompanyService } from '../Company'
+import { CompanyService } from '../Company/company-http'
 
 export const LoginGoogle = (props: { setErrorResponse: any }) => {
   const { setErrorResponse } = props
@@ -26,8 +26,8 @@ export const LoginGoogle = (props: { setErrorResponse: any }) => {
           loginWithGoogle: true
         })
         if (userLogged) {
-          const companyService = new CompanyService()
-          const company = await companyService.get(userLogged.data.createdByTheCompanyId)
+          const companyservice = new CompanyService()
+          const company = await companyservice.get(userLogged.data.createdByTheCompanyId)
           localStorage.setItem('company', JSON.stringify(company.data))
           localStorage.setItem('userLogged', JSON.stringify(userLogged.data))
           dispatch({ type: ActionsTypes.USER_LOGGED, payload: userLogged.data })

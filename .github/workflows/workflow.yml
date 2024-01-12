@@ -63,6 +63,8 @@ jobs:
       - name: Install packages in frontend
         run: |
           npm install --legacy-peer-deps
+          echo "REACT_APP_BASE_URL_PRODUCTION=${{ secrets.REACT_APP_BASE_URL_PRODUCTION }}" >> .env
+          echo "REACT_APP_CLIENT_ID_GOOGLE=${{ secrets.REACT_APP_CLIENT_ID_GOOGLE }}" >> .env
           npm run build 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0

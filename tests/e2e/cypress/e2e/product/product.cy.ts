@@ -1,19 +1,30 @@
 /// <reference types="cypress" />
 
 describe('Create Product', () => {
+  for (let i = 0; i < 2; i++) {
+    
   before(() => {
     cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
   })
 
   beforeEach(() => {
-    cy.viewport(1366, 768)
     cy.visit('http://localhost:3000/')
   })
 
-  it('Create product ', () => {
+  it('Create product '+ (i == 0 ? ' - desktop' : ' - mobile'), () => {
     cy.wait(1000)
-    cy.get('#link-login').click()
-    cy.get('#button-commom-register').click()
+    if (i == 0) {
+      cy.viewport(1920, 1080)
+      cy.get('#link-login').click()
+
+    } else {
+      cy.viewport(412, 915)
+      cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
+      cy.get('#navbar-toggler').click()
+      cy.get('#link-login').click()
+      cy.get('#navbar-toggler').click()
+    }    
+     cy.get('#button-commom-register').click()
     cy.get('#input-name').type('Company Of Tests')
     cy.get('#input-email').type('product-tests@gmail.com')
     cy.get('#input-username').type('product-tests')
@@ -67,10 +78,18 @@ describe('Create Product', () => {
     }
   })
 
-  it('Read product ', () => {
+  it('Read product '+ (i == 0 ? ' - desktop' : ' - mobile'), () => {
     cy.wait(1000)
-    cy.get('#link-login').click()
-    cy.get('#input-username').type('product-tests')
+    if (i == 0) {
+      cy.viewport(1920, 1080)
+      cy.get('#link-login').click()
+    } else {
+      cy.viewport(412, 915)
+      cy.get('#navbar-toggler').click()
+      cy.get('#link-login').click()
+      cy.get('#navbar-toggler').click()
+    }
+        cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(1000)
     cy.get('#button-login').click()
@@ -92,9 +111,17 @@ describe('Create Product', () => {
 
   })
 
-  it('Update product ', () => {
+  it('Update product '+ (i == 0 ? ' - desktop' : ' - mobile'), () => {
     cy.wait(1000)
-    cy.get('#link-login').click()
+    if (i == 0) {
+      cy.viewport(1920, 1080)
+      cy.get('#link-login').click()
+    } else {
+      cy.viewport(412, 915)
+      cy.get('#navbar-toggler').click()
+      cy.get('#link-login').click()
+      cy.get('#navbar-toggler').click()
+    }
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(1000)
@@ -116,9 +143,17 @@ describe('Create Product', () => {
     cy.get('#close-modal-details').click()
   })
 
-  it('Delete product ', () => {
+  it('Delete product '+ (i == 0 ? ' - desktop' : ' - mobile'), () => {
     cy.wait(1000)
-    cy.get('#link-login').click()
+    if (i == 0) {
+      cy.viewport(1920, 1080)
+      cy.get('#link-login').click()
+    } else {
+      cy.viewport(412, 915)
+      cy.get('#navbar-toggler').click()
+      cy.get('#link-login').click()
+      cy.get('#navbar-toggler').click()
+    }
     cy.get('#input-username').type('product-tests')
     cy.get('#input-password').type('1234*Abcd')
     cy.wait(1000)
@@ -135,5 +170,6 @@ describe('Create Product', () => {
       cy.get('#confirm-text-ok').click()
     }
   })
+}
 
 })

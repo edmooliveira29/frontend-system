@@ -62,7 +62,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
               </Link>
             </div>
             <div className='col-3 p-3' onClick={props.showSiderbar} style={{ cursor: 'pointer' }}>
-              <FaTimes />
+              <FaTimes id='close-sideBar' />
             </div>
 
           </div>

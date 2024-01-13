@@ -27,7 +27,7 @@ export const NavBar = () => {
           <Link to='/' >
             <img src={icon} width="60" height="60" className="rounded-circle" alt='Logo' />
           </Link>
-          <button className='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
+          <button id='navbar-toggler' className='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon'></span>
           </button>
           <div className='navbar-collapse collapse' id='navbarColor01'>

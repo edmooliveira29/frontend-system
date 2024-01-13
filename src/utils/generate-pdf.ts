@@ -12,11 +12,16 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
   for (const item of data) {
     const row: any[] = []
     for (const field of fields) {
-      if (Object.prototype.hasOwnProperty.call(item,field)) {
+      const [father, children] = field.split('.')
+      if (field.includes('hiringDate') || field.includes('date')) {
+        row.push(new Date(item[field]).toLocaleDateString('pt-BR'))
+      } else if (field.includes('.')) {
+        row.push(item[father][children])
+      } else if (Object.prototype.hasOwnProperty.call(item, field)) {
+
         row.push(item[field])
       }
     }
-  
     bodyTable.push(row)
   }
   const tableData: ContentTable = {
@@ -35,14 +40,14 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
       vLineColor: '#222222',
       fillColor: function (rowIndex) {
         if (rowIndex === 0) {
-          return '#CCCCCC';
+          return '#CCCCCC'
         } else {
-          return (rowIndex % 2 === 0) ? '#EEEEEE' : null;
+          return (rowIndex % 2 === 0) ? '#EEEEEE' : null
         }
       }
     }
   }
-  
+
 
   const currentDate = new Date()
   const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()} às ${currentDate.getHours()}:${currentDate.getMinutes()}`
@@ -88,6 +93,8 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
     },
     pageMargins: [20, 30, 20, 30],
   }
+  console.log(pdfDefinition)
+
   pdfMake.createPdf(pdfDefinition).download(`Lista de ${tableName}.pdf`)
   alertLoading('close')
 }

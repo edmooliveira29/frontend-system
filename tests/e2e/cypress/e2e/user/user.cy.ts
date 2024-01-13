@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Create User', () => {
-  for (let i = 1; i < 2; i++) {
+  for (let i = 0; i < 2; i++) {
 
     before(() => {
       cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')

@@ -20,6 +20,7 @@ export const Profile = () => {
     const fetchData = async () => {
       alertLoading('open', 'Estamos buscando algumas informações...')
       const companyResponse = await company.get(JSON.parse(localStorage.getItem('company') as any)._id as string)
+      console.log(companyResponse)
       setState(
         {
           _id: companyResponse.data._id || '',

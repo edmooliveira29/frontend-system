@@ -13,6 +13,7 @@ export default defineConfig({
     fixturesFolder: false,
     defaultCommandTimeout: 60000,
   },
+  downloadsFolder: 'cypress/downloads',
   component: {
     devServer: {
       framework: "create-react-app",

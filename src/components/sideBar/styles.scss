@@ -6,6 +6,8 @@ a {
 
 #user-dropdown {
     width: 270px;
+    transform: translate3d(-80px, 0px, 0px);
+
 }
 
 #icon-arrow {
@@ -104,8 +106,7 @@ a {
     }
 
     #user-dropdown {
-        width: 60px;
-        transform: translate3d(12px, 60px, 0px);
+        transform: translate3d(220px, 0px, 0px);
     }
     #name-user-log {
         display: none

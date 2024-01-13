@@ -12,18 +12,18 @@ export const ListSale = () => {
   const navigate = useNavigate()
   useEffect(() => {
     const getAllSales = async () => {
-      const saleResponse  = new SaleService()
+      const saleResponse = new SaleService()
       const sales = await saleResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(sales.data)
     }
     getAllSales()
-  },[])
-  
+  }, [])
+
   const columnHeaders = [
     { _id: 'saleNumber', label: 'NÚMERO', sortable: true, viewInTable: true },
-    { _id: 'dateOfSale', label: 'DATA', sortable: true ,viewInTable: true},
-    { _id: 'customer.name', label: 'CLIENTE', sortable: true ,viewInTable: true},
-    { _id: 'resumeOfSale.totalOfSale', label: 'VALOR', sortable: true ,viewInTable: true},
+    { _id: 'dateOfSale', label: 'DATA', sortable: true, viewInTable: true },
+    { _id: 'customer.name', label: 'CLIENTE', sortable: true, viewInTable: true },
+    { _id: 'resumeOfSale.totalOfSale', label: 'VALOR', sortable: true, viewInTable: true },
   ]
   const deleteItem = async (id: string) => {
     const saleResponse = new SaleService()
@@ -48,7 +48,7 @@ export const ListSale = () => {
           </div>
           <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
-              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'PREÇO', 'STATUS'], 'vendas',['number', 'date', 'customer', 'price', 'status'])} style={{ cursor: 'pointer' }} /></i>
+              <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'VALOR'], 'vendas', ['number', 'date', 'customer', 'price'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
           </div>
         </div>

@@ -2,8 +2,7 @@ name: Deploy to Netlify
 on:
   push:
     branches: ["main"]
-    tags:
-      - '*'
+
 jobs:
   # run-lint:
   #   runs-on: ubuntu-latest
@@ -84,11 +83,12 @@ jobs:
   #       timeout-minutes: 1
 
   create_release:
-    name: Create name of version
+    name: Create Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Determine version
         id: version
         run: |
@@ -127,9 +127,14 @@ jobs:
           echo "::set-output name=path::${path}"
           echo "::set-output name=major::${major}"
           echo "::set-output name=minor::${minor}"
-          
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push tag
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git tag -a "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}" -m "Version ${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}"
+          git push origin "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}"
+
       - name: Create Release
         run: |
           apt install gh

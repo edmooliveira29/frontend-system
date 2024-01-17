@@ -2,7 +2,8 @@ name: Deploy to Netlify
 on:
   push:
     branches: ["main"]
-
+    tags:
+      - '*'
 jobs:
   # run-lint:
   #   runs-on: ubuntu-latest

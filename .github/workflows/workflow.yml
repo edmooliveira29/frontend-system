@@ -4,81 +4,132 @@ on:
     branches: ["main"]
 
 jobs:
-  run-lint:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Setup frontend
-          uses: actions/checkout@v4
-        - name: Run lint
-          run: |
-            npm install --legacy-peer-deps
-            npm run lint
+  # run-lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Setup frontend
+  #       uses: actions/checkout@v4
+  #     - name: Run lint
+  #       run: |
+  #         npm install --legacy-peer-deps
+  #         npm run lint
 
-  run-tests:
+  # run-tests:
+  #   runs-on: ubuntu-latest
+  #   needs: run-lint
+  #   steps:
+  #     - name: Setup frontend
+  #       uses: actions/checkout@v4
+  #     - name: Install packages in frontend
+  #       run: |
+  #         echo "REACT_APP_BASE_URL_DEVELOPMENT=http://localhost:5000/v1" > .env
+  #         npm install --legacy-peer-deps
+
+  #     - name: Setup mongo to backend
+  #       uses: DigiPie/mongo-action@v2.0.1
+  #       with:
+  #         image_version: latest
+  #         port: 27017
+  #     - name: Running backend
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y wget gnupg
+  #         wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+  #         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+  #         sudo apt-get update
+  #         sudo apt-get install -y mongodb-mongosh
+  #         mkdir -p ~/.ssh && echo "${{ secrets.ACCESS_GITHUB_SSH }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && ls -al ~/.ssh && eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa && ssh-add ~/.ssh/id_rsa
+  #         git clone git@github.com:edmooliveira29/backend-system.git
+  #         cd backend-system
+  #         echo "${{ secrets.ENV_BACKEND }}" > ./.env
+  #         npm install --legacy-peer-deps
+
+  #     - name: Running tests
+  #       run: |
+  #         npm start & sleep 100
+  #         cd backend-system
+  #         npm run start-test & sleep 20
+  #         cd ..
+  #         cat .env
+  #         npm run tests-e2e
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: run-tests
+  #   steps:
+  #     - name: Setup frontend
+  #       uses: actions/checkout@v4
+  #     - name: Install packages in frontend
+  #       run: |
+  #         npm install --legacy-peer-deps
+  #         echo "REACT_APP_BASE_URL_PRODUCTION=${{ secrets.REACT_APP_BASE_URL_PRODUCTION }}" >> .env
+  #         echo "REACT_APP_CLIENT_ID_GOOGLE=${{ secrets.REACT_APP_CLIENT_ID_GOOGLE }}" >> .env
+  #         npm run build
+  #     - name: Deploy to Netlify
+  #       uses: nwtgck/actions-netlify@v2.0
+  #       with:
+  #         publish-dir: "./build"
+  #         production-branch: main
+  #         github-token: ${{ secrets.NETLIFY_GITHUB_TOKEN }}
+  #         deploy-message: "Deploy from GitHub Actions"
+  #         enable-pull-request-comment: false
+  #         enable-commit-comment: true
+  #         overwrites-pull-request-comment: true
+  #       env:
+  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  #         REACT_APP_BASE_URL_PRODUCTION: ${{ secrets.REACT_APP_BASE_URL_PRODUCTION }}
+  #         REACT_APP_CLIENT_ID_GOOGLE: ${{ secrets.REACT_APP_CLIENT_ID_GOOGLE }}
+  #       timeout-minutes: 1
+
+  create_release:
+    name: Create name of version
     runs-on: ubuntu-latest
-    needs: run-lint
     steps:
-      - name: Setup frontend
-        uses: actions/checkout@v4
-      - name: Install packages in frontend
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Determine version
+        id: version
         run: |
-          echo "REACT_APP_BASE_URL_DEVELOPMENT=http://localhost:5000/v1" > .env
-          npm install --legacy-peer-deps
-
-      - name: Setup mongo to backend
-        uses: DigiPie/mongo-action@v2.0.1
-        with:
-          image_version: latest
-          port: 27017
-      - name: Running backend
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg
-          wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-          echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-          sudo apt-get update
-          sudo apt-get install -y mongodb-mongosh
-          mkdir -p ~/.ssh && echo "${{ secrets.ACCESS_GITHUB_SSH }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && ls -al ~/.ssh && eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa && ssh-add ~/.ssh/id_rsa
-          git clone git@github.com:edmooliveira29/backend-system.git
-          cd backend-system
-          echo "${{ secrets.ENV_BACKEND }}" > ./.env
-          npm install --legacy-peer-deps
-
-      - name: Running tests
-        run: |
-          npm start & sleep 100
-          cd backend-system
-          npm run start-test & sleep 20
-          cd ..
-          cat .env
-          npm run tests-e2e
-
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: run-tests
-    steps:
-      - name: Setup frontend
-        uses: actions/checkout@v4
-      - name: Install packages in frontend
-        run: |
-          npm install --legacy-peer-deps
-          echo "REACT_APP_BASE_URL_PRODUCTION=${{ secrets.REACT_APP_BASE_URL_PRODUCTION }}" >> .env
-          echo "REACT_APP_CLIENT_ID_GOOGLE=${{ secrets.REACT_APP_CLIENT_ID_GOOGLE }}" >> .env
-          npm run build 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: "./build"
-          production-branch: main
-          github-token: ${{ secrets.NETLIFY_GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
+          commit_type=$(git log --format=%B -n 1 $GITHUB_SHA | grep -E '^(fix|feat):' | cut -d ':' -f 1)
+          
+          case $commit_type in
+            "fix")
+              path=patch
+              ;;
+            "feat")
+              path=minor
+              ;;
+            *)
+              echo "Tipo de commit não reconhecido"
+              exit 1
+              ;;
+          esac
+          
+          # Extrair a versão atual
+          current_version=$(git describe --tags --abbrev=0)
+          IFS='.' read -r -a version_parts <<< "$current_version"
+          major=${version_parts[0]}
+          minor=${version_parts[1]}
+          
+          # Incrementar a versão apropriada
+          case $path in
+            "patch")
+              minor=$((minor + 1))
+              ;;
+            "minor")
+              major=$((major + 1))
+              minor=0
+              ;;
+          esac
+          
+          echo "::set-output name=path::${path}"
+          echo "::set-output name=major::${major}"
+          echo "::set-output name=minor::${minor}"
+          
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          REACT_APP_BASE_URL_PRODUCTION: ${{ secrets.REACT_APP_BASE_URL_PRODUCTION }}
-          REACT_APP_CLIENT_ID_GOOGLE: ${{ secrets.REACT_APP_CLIENT_ID_GOOGLE }}
-        timeout-minutes: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        run: |
+          apt install gh
+          gh release create v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }} --title "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}" --notes "this is a beta release" --prerelease

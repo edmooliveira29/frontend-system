@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
-LAST_COMMITS=$(git log "$LAST_TAG"..HEAD --pretty=format:"%s")
+LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
 
 MAJOR=0
 MINOR=0

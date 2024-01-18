@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
 LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
 echo "Last tag: $LAST_TAG"
-VERSION_NUMBER="${$LAST_TAG#v}"
+VERSION_NUMBER="${LAST_TAG#v}"
 echo "Version number: $VERSION_NUMBER"
 IFS='.'
 read -r part1 part2 part3 <<< "$VERSION_NUMBER"

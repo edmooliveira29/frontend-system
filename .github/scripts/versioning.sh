@@ -27,12 +27,16 @@ while IFS= read -r line; do
       RELEASE_NOTES+="- $line"$'\n'
       ;;
     path:*)
-      MINOR=0
+      if [ "$line" != "$LAST_PATH" ]; then
+        MINOR=0
+      fi
       PATH_COUNT=$((PATH_COUNT + 1))
       RELEASE_NOTES+="- $line"$'\n'
       ;;
   esac
 done <<< "$LAST_COMMITS"
+
+LAST_PATH=$(git log -1 --pretty=format:"%s" --grep="path:")
 
 VERSION="v$PATH_COUNT.$MAJOR.$MINOR"
 mkdir -p .git

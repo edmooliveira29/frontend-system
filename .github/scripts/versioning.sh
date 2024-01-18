@@ -11,26 +11,39 @@ PATH_COUNT=1
 RELEASE_NOTES=""
 
 STOP_LOOP=false
-while IFS= read -r line && [ "$STOP_LOOP" = false ]; do
+STOP_LOOP_AUX=true
+while IFS= read -r line; do
   case $line in
     fix:*)
-      MINOR=$((MINOR + 1))
-      RELEASE_NOTES+="- $line"$'\n'
       STOP_LOOP=true
+      if [ "$STOP_LOOP" = true && "STOP_LOOP_AUX" = true ]; then
+        RELEASE_NOTES+="Fixes"$'\n'
+        MINOR=$((MINOR + 1))
+        STOP_LOOP_AUX=false
+      fi
+      RELEASE_NOTES+="- ${line:5}"$'\n'
       ;;
     feat:*)
-      MINOR=0
-      MAJOR=$((MAJOR + 1))
-      RELEASE_NOTES+="- $line"$'\n'
       STOP_LOOP=true
+      if [ "$STOP_LOOP" = true && "STOP_LOOP_AUX" = true ]; then
+        MINOR=0
+        RELEASE_NOTES+="Features"$'\n'
+        MAJOR=$((MAJOR + 1))
+        STOP_LOOP_AUX=false
+
+      fi
+      RELEASE_NOTES+="-${line:5}"$'\n'
       ;;
     path:*)
-      if [ "$line" != "$LAST_PATH" ]; then
-        MINOR=0
-      fi
-      PATH_COUNT=$((PATH_COUNT + 1))
-      RELEASE_NOTES+="- $line"$'\n'
       STOP_LOOP=true
+      if [ "$STOP_LOOP" = true && "STOP_LOOP_AUX" = true ]; then
+        MINOR=0
+        MAJOR=0
+        RELEASE_NOTES+="New version"$'\n'
+        PATH_COUNT=$((PATH_COUNT + 1))
+        STOP_LOOP_AUX=false
+      fi
+      RELEASE_NOTES+="- ${line:5}"$'\n'
       ;;
   esac
 done <<< "$LAST_COMMITS"

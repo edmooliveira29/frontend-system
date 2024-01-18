@@ -83,59 +83,19 @@ jobs:
   #       timeout-minutes: 1
 
   create_release:
-    name: Create Release
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Determine version
-        id: version
-        run: |
-          commit_type=$(git log --format=%B -n 1 $GITHUB_SHA | grep -E '^(fix|feat):' | cut -d ':' -f 1)
-          
-          case $commit_type in
-            "fix")
-              path=patch
-              ;;
-            "feat")
-              path=minor
-              ;;
-            *)
-              echo "Tipo de commit não reconhecido"
-              exit 1
-              ;;
-          esac
-          
-          # Extrair a versão atual
-          current_version=$(git describe --tags --abbrev=0)
-          IFS='.' read -r -a version_parts <<< "$current_version"
-          major=${version_parts[0]}
-          minor=${version_parts[1]}
-          
-          # Incrementar a versão apropriada
-          case $path in
-            "patch")
-              minor=$((minor + 1))
-              ;;
-            "minor")
-              major=$((major + 1))
-              minor=0
-              ;;
-          esac
-          
-          echo "::set-output name=path::${path}"
-          echo "::set-output name=major::${major}"
-          echo "::set-output name=minor::${minor}"
+    - name: Set up Git
+      run: |
+        git config user.name "${{ secrets.GITHUB_ACTOR }}"
+        git config user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
 
-      - name: Create and push tag
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git tag -a "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}" -m "Version ${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}"
-          git push origin "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}"
-
-      - name: Create Release
-        run: |
-          apt install gh
-          gh release create v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }} --title "v${{ steps.version.outputs.path }}.${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}" --notes "this is a beta release" --prerelease
+    - name: Execute Versioning Script
+      run: |
+        ./versioning.sh
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

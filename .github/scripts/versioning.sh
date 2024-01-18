@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
 LAST_COMMITS=$(git log "$LAST_TAG"..HEAD --pretty=format:"%s")
 

@@ -3,10 +3,7 @@
 cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
 LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
-
-MAJOR=0
-MINOR=0
-PATH_COUNT=1
+IFS='.' read -r PATH_COUNT MAJOR MINOR <<< $(echo "$LAST_TAG" | sed 's/v//g' | tr '.' ' ')
 
 RELEASE_NOTES=""
 

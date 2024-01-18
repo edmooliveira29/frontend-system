@@ -27,7 +27,7 @@ while IFS= read -r line; do
   esac
 done <<< "$LAST_COMMITS"
 
-VERSION="v1.$MAJOR.$MINOR.$PATH_COUNT"
+VERSION="v$PATH_COUNT.$MAJOR.$MINOR"
 
 git tag -a "$VERSION" -m "Versão $VERSION"
 git push origin "$VERSION"

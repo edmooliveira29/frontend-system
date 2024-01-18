@@ -10,16 +10,19 @@ PATH_COUNT=1
 
 RELEASE_NOTES=""
 
-while IFS= read -r line; do
+STOP_LOOP=false
+while IFS= read -r line && [ "$STOP_LOOP" = false ]; do
   case $line in
     fix:*)
       MINOR=$((MINOR + 1))
       RELEASE_NOTES+="- $line"$'\n'
+      STOP_LOOP=true
       ;;
     feat:*)
       MINOR=0
       MAJOR=$((MAJOR + 1))
       RELEASE_NOTES+="- $line"$'\n'
+      STOP_LOOP=true
       ;;
     path:*)
       if [ "$line" != "$LAST_PATH" ]; then
@@ -27,6 +30,7 @@ while IFS= read -r line; do
       fi
       PATH_COUNT=$((PATH_COUNT + 1))
       RELEASE_NOTES+="- $line"$'\n'
+      STOP_LOOP=true
       ;;
   esac
 done <<< "$LAST_COMMITS"

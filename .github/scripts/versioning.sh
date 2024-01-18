@@ -10,11 +10,6 @@ PATH_COUNT=1
 
 RELEASE_NOTES=""
 
-if git rev-parse "$LAST_TAG" >/dev/null 2>&1; then
-  echo "Tag $LAST_TAG already exists. Skipping release creation."
-  exit 0
-fi
-
 while IFS= read -r line; do
   case $line in
     fix:*)

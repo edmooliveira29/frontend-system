@@ -4,10 +4,10 @@ cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
 LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
 echo "Last tag: $LAST_TAG"
-IFS='.' read -r VERSION PART1 PART2 PART3 <<< $(echo "$LAST_TAG" | sed 's/v//')
-PATH_COUNT=$PART1
-MAJOR=$PART2
-MINOR=$PART3
+IFS='.' read -r VERSION PART1 PART2 PART3 <<< $(echo "$LAST_TAG" | tr -cd '[:digit:].')
+PATH_COUNT=${PART1:-0}
+MAJOR=${PART2:-0}
+MINOR=${PART3:-0}
 
 RELEASE_NOTES=""
 

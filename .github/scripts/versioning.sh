@@ -25,7 +25,7 @@ while IFS= read -r line; do
     fix:*)
       STOP_LOOP=true
       if [ "$STOP_LOOP" = true ] && [ "$STOP_LOOP_AUX" = true ]; then
-        RELEASE_NOTES+="Fixes"$'\n'
+        RELEASE_NOTES+="**Fixes**"$'\n'
         MINOR=$((MINOR + 1))
         STOP_LOOP_AUX=false
       fi
@@ -35,7 +35,7 @@ while IFS= read -r line; do
       STOP_LOOP=true
       if [ "$STOP_LOOP" = true ] && [ "$STOP_LOOP_AUX" = true ]; then
         MINOR=0
-        RELEASE_NOTES+="Features"$'\n'
+        RELEASE_NOTES+="**Features**"$'\n'
         MAJOR=$((MAJOR + 1))
         STOP_LOOP_AUX=false
       fi
@@ -46,7 +46,7 @@ while IFS= read -r line; do
       if [ "$STOP_LOOP" = true ] && [ "$STOP_LOOP_AUX" = true ]; then
         MINOR=0
         MAJOR=0
-        RELEASE_NOTES+="New version"$'\n'
+        RELEASE_NOTES+="**New version**"$'\n'
         PATH_COUNT=$((PATH_COUNT + 1))
         STOP_LOOP_AUX=false
       fi

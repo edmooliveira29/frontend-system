@@ -14,15 +14,15 @@ while IFS= read -r line; do
   case $line in
     fix:*)
       MINOR=$((MINOR + 1))
-      RELEASE_NOTES+="\n- $line"
+      RELEASE_NOTES+="- $line"$'\n'
       ;;
     feat:*)
       MAJOR=$((MAJOR + 1))
-      RELEASE_NOTES+="\n- $line"
+      RELEASE_NOTES+="- $line"$'\n'
       ;;
     path:*)
       PATH_COUNT=$((PATH_COUNT + 1))
-      RELEASE_NOTES+="\n- $line"
+      RELEASE_NOTES+="- $line"$'\n'
       ;;
   esac
 done <<< "$LAST_COMMITS"

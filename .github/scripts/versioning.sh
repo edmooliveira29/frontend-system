@@ -33,4 +33,4 @@ git config credential.helper "store --file=.git/credentials"
 echo "https://github.com:${GH_TOKEN}@github.com" > .git/credentials
 git tag -af "$VERSION" -m "Versão $VERSION"
 git push origin "$VERSION" --force --tags -o ci.skip
-gh release create "$VERSION" --title "$VERSION" --notes "$RELEASE_NOTES" --prerelease
+gh release create "$VERSION" --title "$VERSION" --notes "$RELEASE_NOTES"

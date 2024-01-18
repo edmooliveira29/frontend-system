@@ -28,7 +28,7 @@ while IFS= read -r line; do
 done <<< "$LAST_COMMITS"
 
 VERSION="v$PATH_COUNT.$MAJOR.$MINOR"
-
+mkdir -p .git
 git config credential.helper "store --file=.git/credentials"
 echo "https://github.com:${GH_TOKEN}@github.com" > .git/credentials
 git tag -a "$VERSION" -m "Versão $VERSION"

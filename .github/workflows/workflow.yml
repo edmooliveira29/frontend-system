@@ -96,6 +96,6 @@ jobs:
 
     - name: Execute Versioning Script
       run: |
-        ./versioning.sh
+        ./.github/scripts/versioning.sh
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

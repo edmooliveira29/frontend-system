@@ -17,10 +17,12 @@ while IFS= read -r line; do
       RELEASE_NOTES+="- $line"$'\n'
       ;;
     feat:*)
+      MINOR=0
       MAJOR=$((MAJOR + 1))
       RELEASE_NOTES+="- $line"$'\n'
       ;;
     path:*)
+      MINOR=0
       PATH_COUNT=$((PATH_COUNT + 1))
       RELEASE_NOTES+="- $line"$'\n'
       ;;

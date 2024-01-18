@@ -101,3 +101,5 @@ jobs:
       run: |
         chmod +x ./.github/scripts/versioning.sh
         ./.github/scripts/versioning.sh
+      env:
+        GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}

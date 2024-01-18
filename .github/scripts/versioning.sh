@@ -6,7 +6,7 @@ LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
 
 MAJOR=0
 MINOR=0
-PATH_COUNT=0
+PATH_COUNT=1
 
 RELEASE_NOTES=""
 

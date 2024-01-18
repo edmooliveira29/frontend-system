@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 LAST_TAG=$(git describe --tags --abbrev=0)
 LAST_COMMITS=$(git log --tags "$LAST_TAG"..HEAD --pretty=format:"%s")
 
-IFS='.' read -r PATH_COUNT MAJOR MINOR <<< $(echo "$LAST_TAG" | tr -cd '[:digit:]')
+IFS='.' read -r _ PATH_COUNT MAJOR MINOR _ <<< $(echo "$LAST_TAG" | sed 's/v//')
 
 RELEASE_NOTES=""
 

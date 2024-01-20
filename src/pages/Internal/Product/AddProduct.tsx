@@ -65,7 +65,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
       if (response) {
         dispatch({ type: ActionsTypes.OBJECT_EDIT, payload: undefined })
         if (!props.addedOutSideMainScreen) {
-          navigate('/produtos')
+          navigate('/produtos-servicos')
         } else {
           const productsResponse = await new ProductService().getAll(JSON.parse(localStorage.getItem('company') as any)._id)
           props.setProductsDB(productsResponse.data)
@@ -80,7 +80,7 @@ export const AddProducts: React.FC<{ state?: any, addedOutSideMainScreen: boolea
 
   return (<>
     <div className="row border border-secondary rounded" id="content-container">
-      <h4 id="titles-product-add">ADICIONAR PRODUTO</h4>
+      <h4 id="titles-product-add">ADICIONAR PRODUTO/SERVIÇO</h4>
       <div className="row">
         <div className="col-md-6 col-sm-12">
           <TextFieldInput

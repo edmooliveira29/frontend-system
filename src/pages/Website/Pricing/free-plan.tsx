@@ -15,7 +15,7 @@ export const FreePlan = () => {
             <ul className="list-group list-group-flush">
               <li className="list-group-item">1 usuário</li>
               <li className="list-group-item">Cadastro de clientes*</li>
-              <li className="list-group-item">Cadastro de produtos*</li>
+              <li className="list-group-item">Cadastro de produtos/serviços*</li>
               <li className="list-group-item">Gestão de estoques*</li>
               <li className="list-group-item">Suporte por email</li>
             </ul>

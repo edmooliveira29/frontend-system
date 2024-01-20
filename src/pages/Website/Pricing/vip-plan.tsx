@@ -16,7 +16,7 @@ export const VipPlan = () => {
             <ul className="list-group list-group-flush">
               <li className="list-group-item">Usuário ilimitado</li>
               <li className="list-group-item">Cadastro de clientes</li>
-              <li className="list-group-item">Cadastro de produtos</li>
+              <li className="list-group-item">Cadastro de produtos/serviços</li>
               <li className="list-group-item">Gestão de estoques</li>
               <li className="list-group-item">Impressão de etiqueta</li>
               <li className="list-group-item">Emissão de Boletos</li>

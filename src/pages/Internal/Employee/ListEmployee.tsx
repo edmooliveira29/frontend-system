@@ -10,10 +10,10 @@ import { EmployeeService } from '../../../services/Employee'
 export const ListEmployee: React.FC = () => {
   const [data, setData] = useState<any[]>([])
   const navigate = useNavigate()
-
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
   useEffect(() => {
     const getAllCategories = async () => {
-      const employeeResponse  = new EmployeeService()
+      const employeeResponse = new EmployeeService()
       const categories = await employeeResponse.getAll(JSON.parse(localStorage.getItem('company') as any)._id)
       setData(categories.data)
     }
@@ -41,12 +41,12 @@ export const ListEmployee: React.FC = () => {
     { _id: 'houseNumber', label: 'Numero', sortable: true, viewInTable: false },
     { _id: 'complement', label: 'Complemento', sortable: true, viewInTable: false },
     { _id: 'neighborhood', label: 'Bairro', sortable: true, viewInTable: false },
-    { _id: 'office', label: 'Cargo', sortable: true, viewInTable: true},
+    { _id: 'office', label: 'Cargo', sortable: true, viewInTable: true },
     { _id: 'department', label: 'Departamento', sortable: true, viewInTable: false },
     { _id: 'hiringDate', label: 'Data de contratação', sortable: true, viewInTable: true },
     { _id: 'wage', label: 'Salário', sortable: true, viewInTable: true },
   ]
-  
+
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -62,11 +62,11 @@ export const ListEmployee: React.FC = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
+          {userLogged.role !== 'salesman' && <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'CARGO', 'EMAIL', 'DATA DE CONTRATACÃO', 'SALÁRIO'], 'colaboradores', ['name', 'office', 'email', 'hiringDate', 'wage'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
-          </div>
+          </div>}
         </div>
       </div>
       <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={infoData} title='colaboradores' translations={infoData} />

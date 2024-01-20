@@ -3,12 +3,14 @@ import { TextFieldInput } from '../../../components'
 
 export const PasswordData = (props: { state: any, setUser: any }) => {
   const { state, setUser } = props
+  console.log(state.lastChangedPassword !== null)
+  console.log(!state.createWithGoogle)
   return (<>
     <h4 id="title-personal-data">SENHA DO SISTEMA</h4>
     <div className="row">
-      <span>O usuário logado no momento é <strong className="text-primary">{`"${state.username}"`}</strong> {state.createWithGoogle ?'foi criado com o Google. Portanto não é permitido alterar a senha':'.'}</span>
+      <span>O usuário logado no momento é <strong className="text-primary">{`"${state.username}"`}</strong> {state.createWithGoogle ? 'foi criado com o Google. Portanto não é permitido alterar a senha' : '.'}</span>
       <div className="col-md-4 col-sm-12">
-        {state.lastChangedPassword !== null || !state.createWithGoogle ? <TextFieldInput
+        <TextFieldInput
           id={'password'}
           label="Senha atual"
           placeholder='Digite aqui o atual senha'
@@ -17,7 +19,7 @@ export const PasswordData = (props: { state: any, setUser: any }) => {
           value={state.password}
           typeInput="password"
           onChange={(value: string) => { setUser({ ...state, password: value }) }}
-        /> : null}
+        />
       </div>
       <div className="col-md-4 col-sm-12">
         <TextFieldInput

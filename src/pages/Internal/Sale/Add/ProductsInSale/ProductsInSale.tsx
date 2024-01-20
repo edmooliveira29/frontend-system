@@ -10,7 +10,7 @@ export const ProductsInSale: React.FC<{ hasObjectToEdit: boolean, state: any, se
   props.state.products.map((_: any, index: number) => numberOfProductsInSale.push({ _id: index }))
   const [productRows, setProductRows] = useState(numberOfProductsInSale)
   return <>
-    <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS</h6>
+    <h6 className="col-sm-12 m-2" id="products-sale-title">PRODUTOS/SERVIÇOS</h6>
     {productRows.map((row, id: number) => (
       <div key={`list-${id}`} className="row px-3 m-0">
         <div className="col-md-1 ">
@@ -46,7 +46,7 @@ export const ProductsInSale: React.FC<{ hasObjectToEdit: boolean, state: any, se
         <div className="col-md-2">
           <TextFieldInput
             label="Quantidade"
-            placeholder="Quantidade de produtos"
+            placeholder="Quantidade de produtos/serviços"
             required={true}
             value={props.state.products[id]?.[`quantity-${id}`] || ''}
             typeInput="number"

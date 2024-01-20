@@ -9,9 +9,10 @@ import { AlertGeneral } from '../../../components'
 import { jwtDecode } from 'jwt-decode'
 export const Dashboard = () => {
   const report = new ReportService()
-  const [userLogged, setUserLogged] = useState<any>({})
+  const [userLogged, setUserLogged] = useState<any>(JSON.parse(localStorage.getItem('userLogged') as any))
   const [loadingData, setLoadingData] = useState(true)
   const [expireSession, setExpireSession] = useState<any>(['', ''])
+
   const [data, setData] = useState<
     {
       products: any[],
@@ -182,7 +183,6 @@ export const Dashboard = () => {
       window.removeEventListener('resize', () => myChart.resize())
     }
     const expireSession = () => {
-      const userLogged: any = JSON.parse(localStorage.getItem('userLogged') as any)
       setUserLogged(userLogged)
       const endSession = jwtDecode(userLogged.sessionToken) as any
       setExpireSession((new Date(endSession.exp * 1000).toLocaleString('pt-BR')).split(','))
@@ -195,7 +195,6 @@ export const Dashboard = () => {
     }
 
   }, [])
-
 
   return (
     <>
@@ -221,78 +220,78 @@ export const Dashboard = () => {
             <div className="spinner-border" role="status" style={{ height: '100px', width: '100px' }}>
               <span className="visually-hidden" >Loading...</span>
             </div>
-          </div> :
-          <div>
-            <div className='row'>
-              <div className="col-md-4 col-sm-12 my-2">
-                <div className="card border bg-light rounded shadow-sm" id='cards'>
+          </div> : ''}
+        {userLogged.role !== 'salesman' && <div>
+          <div className='row'>
+            <div className="col-md-4 col-sm-12 my-2">
+              <div className="card border bg-light rounded shadow-sm" id='cards'>
+                <Link to='/vendas'>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-6" >
+                        <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> {data.quantityOfSales} &nbsp;&nbsp;&nbsp;&nbsp;</strong><h5>{data.quantityOfSales > 1 ? 'vendas' : 'venda'} realizadas</h5></span>
+                      </div>
+                      <div className="col-6 py-2 d-flex justify-content-center align-items-center">
+                        <FcMoneyTransfer size={50} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+            <div className="col-md-4 col-sm-12 my-2">
+              <div className="card border bg-light rounded shadow-sm" id='cards' >
+                <Link to='/clientes'>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-6" >
+                        <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> {data.quantityOfCustomers} &nbsp;&nbsp;&nbsp;&nbsp;</strong><h5>{data.quantityOfCustomers > 1 ? 'clientes cadastrados' : 'cliente cadastrado'} </h5></span>
+                      </div>
+                      <div className="col-6 py-2 d-flex justify-content-center align-items-center">
+                        <FcConferenceCall size={50} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+            <div className="col-md-4 col-sm-12 my-2">
+              <div className="card border bg-light rounded shadow-sm" id='cards' >
+                <div className="card-body">
                   <Link to='/vendas'>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-6" >
-                          <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> {data.quantityOfSales} &nbsp;&nbsp;&nbsp;&nbsp;</strong><h5>{data.quantityOfSales > 1 ? 'vendas' : 'venda'} realizadas</h5></span>
-                        </div>
-                        <div className="col-6 py-2 d-flex justify-content-center align-items-center">
-                          <FcMoneyTransfer size={50} />
-                        </div>
+                    <div className="row">
+                      <div className="col-6">
+                        <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> R$ {data.totalOfSales} </strong><h5>de lucro</h5></span>
+                      </div>
+                      <div className="col-6 py-2 d-flex justify-content-center align-items-center">
+                        <FcBullish size={50} />
                       </div>
                     </div>
                   </Link>
                 </div>
-              </div>
-              <div className="col-md-4 col-sm-12 my-2">
-                <div className="card border bg-light rounded shadow-sm" id='cards' >
-                  <Link to='/clientes'>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-6" >
-                          <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> {data.quantityOfCustomers} &nbsp;&nbsp;&nbsp;&nbsp;</strong><h5>{data.quantityOfCustomers > 1 ? 'clientes cadastrados' : 'cliente cadastrado'} </h5></span>
-                        </div>
-                        <div className="col-6 py-2 d-flex justify-content-center align-items-center">
-                          <FcConferenceCall size={50} />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 col-sm-12 my-2">
-                <div className="card border bg-light rounded shadow-sm" id='cards' >
-                  <div className="card-body">
-                    <Link to='/vendas'>
-                      <div className="row">
-                        <div className="col-6">
-                          <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> R$ {data.totalOfSales} </strong><h5>de lucro</h5></span>
-                        </div>
-                        <div className="col-6 py-2 d-flex justify-content-center align-items-center">
-                          <FcBullish size={50} />
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
 
+              </div>
+            </div>
+          </div>
+          <div className='row'>
+            <div className="col-md-6 col-sm-12 my-2">
+              <div className="card border bg-light rounded shadow-sm" id='cards-profit'>
+                <div className="card-body">
+                  <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> Produtos mais vendidos</strong> </span>
+                  <div id="best-selling-products-chart" />
                 </div>
               </div>
             </div>
-            <div className='row'>
-              <div className="col-md-6 col-sm-12 my-2">
-                <div className="card border bg-light rounded shadow-sm" id='cards-profit'>
-                  <div className="card-body">
-                    <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> Produtos mais vendidos</strong> </span>
-                    <div id="best-selling-products-chart" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-sm-12 my-2">
-                <div className="card border bg-light rounded shadow-sm" id='cards-profit'>
-                  <div className="card-body">
-                    <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> Vendas em relação aos últimos 6 meses</strong> &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <div id="last-6-months-sales" />
-                  </div>
+            <div className="col-md-6 col-sm-12 my-2">
+              <div className="card border bg-light rounded shadow-sm" id='cards-profit'>
+                <div className="card-body">
+                  <span style={{ fontSize: '30px', color: 'CaptionText' }}><strong> Vendas em relação aos últimos 6 meses</strong> &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <div id="last-6-months-sales" />
                 </div>
               </div>
             </div>
-          </div>}
+          </div>
+        </div>}
       </div >
     </>
   )

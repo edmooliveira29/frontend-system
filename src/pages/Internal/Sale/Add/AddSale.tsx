@@ -78,7 +78,7 @@ export const AddSale = (props: { state: any }) => {
     const translations = {
       dateOfSale: 'Data da Venda',
       customer: 'Cliente',
-      products: 'Produtos',
+      products: 'Produtos/Serviços',
       formOfPayment: 'Forma de Pagamento',
     }
     if (!validateFields({ dateOfSale, customer, products, formOfPayment }, translations)) {

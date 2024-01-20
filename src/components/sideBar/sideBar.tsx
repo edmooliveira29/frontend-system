@@ -90,7 +90,7 @@ export const SideBar = (props: { showMenu: boolean, showSiderbar: any, closeSide
                 </ul>
               )}
             </li><hr /> */}
-            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos' id='link-products'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos </Link><hr />
+            <Link className='link-item-menu' onClick={props.showSiderbar} to='/produtos-servicos' id='link-products'> <BsInboxesFill size={30} style={{ margin: '0 10px' }} />Produtos/Serviços</Link><hr />
             <Link className='link-item-menu' onClick={props.showSiderbar} to='/vendas' id='link-sales'> <MdPointOfSale size={30} style={{ margin: '0 10px' }} />Venda </Link><hr />
           </ul>
           <hr />

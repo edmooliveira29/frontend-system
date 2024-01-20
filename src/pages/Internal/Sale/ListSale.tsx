@@ -10,6 +10,7 @@ import { SaleService } from '../../../services/Sale'
 export const ListSale = () => {
   const [data, setData] = useState<any[]>([])
   const navigate = useNavigate()
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
   useEffect(() => {
     const getAllSales = async () => {
       const saleResponse = new SaleService()
@@ -46,11 +47,11 @@ export const ListSale = () => {
               </Link>
             </Tooltip>
           </div>
-          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
+          {userLogged.role !== 'salesman' && <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NÚMERO', 'DATA', 'CLIENTE', 'VALOR'], 'vendas', ['saleNumber', 'dateOfSale', 'customer.name', 'resumeOfSale.totalOfSale'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
-          </div>
+          </div>}
         </div>
       </div>
       <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='vendas' translations={columnHeaders} />

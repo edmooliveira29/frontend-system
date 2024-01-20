@@ -10,7 +10,7 @@ import { CategoryService } from '../../../services/Category'
 export const ListCategory = () => {
   const [data, setData] = useState<any[]>([])
   const navigate = useNavigate()
-
+  const userLogged = JSON.parse(localStorage.getItem('userLogged') as any)
   useEffect(() => {
     const getAllCategories = async () => {
       const categoryResponse = new CategoryService()
@@ -64,11 +64,11 @@ export const ListCategory = () => {
             </Tooltip>
 
           </div>
-          <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
+          {userLogged.role !== 'salesman' && <div className="col-3 d-flex align-items-center" style={{ right: '15px' }}>
             <Tooltip title='Clique aqui para gerar PDF' placement='bottom' arrow>
               <i><BsFileEarmarkPdf size={30} color={'black'} onClick={() => generatePDF(data, ['NOME', 'TIPO', 'DESCRIÇÃO'], 'categoria', ['name', 'type', 'description'])} style={{ cursor: 'pointer' }} /></i>
             </Tooltip>
-          </div>
+          </div>}
         </div>
       </div>
       <TableComponent navigate={navigate} deleteItem={deleteItem} data={data} head={columnHeaders} title='categorias' translations={columnHeaders} />

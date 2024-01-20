@@ -74,8 +74,8 @@ export const router = (
       <Route path="/colaboradores" element={<Internal Page={ListEmployee} />} />
       <Route path="/colaboradores/adicionar" element={<Internal Page={AddEmployee} />} />
       <Route path="/clientes/adicionar" element={<Internal Page={AddCustomer} />} />
-      <Route path="/produtos" element={<Internal Page={ListProduct} />} />
-      <Route path="/produtos/adicionar" element={<Internal Page={AddProducts} />} />
+      <Route path="/produtos-servicos" element={<Internal Page={ListProduct} />} />
+      <Route path="/produtos-servicos/adicionar" element={<Internal Page={AddProducts} />} />
       <Route path="/minha-conta" element={<Internal Page={MyAccount} />} />
       <Route path="/usuarios" element={<Internal Page={ListUserSystem} />} />
       <Route path="/usuarios/adicionar" element={<Internal Page={AddUserSystem} />} />

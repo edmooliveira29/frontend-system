@@ -12,7 +12,7 @@ export const FooterSale: React.FC<{ state: any, calculateTotalAmount: any, handl
     <div className="mt-auto m-0">
       <div id="div-footer-sale" className="row d-flex flex-wrap justify-content-between align-items-center p-3 border">
         <div className="col-md-3 d-flex align-items-center h5 p-1" style={{ color: 'blue' }} id='footer-total-amount'>
-          <strong>Valor em produtos:&nbsp;</strong>
+          <strong>Valor em produtos/serviços:&nbsp;</strong>
           R$ {props.calculateTotalAmount()}
         </div>
         <div className="col-md-3 d-flex align-items-center h5 p-1" style={{ color: 'red' }} id='footer-discount'>

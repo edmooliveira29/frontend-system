@@ -6,7 +6,6 @@ describe('Category', () => {
       cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
     })
 
-    console.log(i)
     beforeEach(() => {
       cy.visit('http://localhost:3000/')
     })

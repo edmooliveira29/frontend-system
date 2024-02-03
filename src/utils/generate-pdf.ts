@@ -93,7 +93,6 @@ export const generatePDF = (data: any[], header: any[], tableName: string, field
     },
     pageMargins: [20, 30, 20, 30],
   }
-  console.log(pdfDefinition)
 
   pdfMake.createPdf(pdfDefinition).download(`Lista de ${tableName}.pdf`)
   alertLoading('close')

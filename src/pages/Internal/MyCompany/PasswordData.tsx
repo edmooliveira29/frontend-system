@@ -3,8 +3,7 @@ import { TextFieldInput } from '../../../components'
 
 export const PasswordData = (props: { state: any, setUser: any }) => {
   const { state, setUser } = props
-  console.log(state.lastChangedPassword !== null)
-  console.log(!state.createWithGoogle)
+
   return (<>
     <h4 id="title-personal-data">SENHA DO SISTEMA</h4>
     <div className="row">

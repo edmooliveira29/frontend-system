@@ -31,7 +31,7 @@ export const ProductsInSale: React.FC<{ hasObjectToEdit: boolean, state: any, se
                 id={`productId-${id}`}
                 required={true}
                 label='Produto'
-                value={props.state.products[id]?.[`productId-${id}`] || ''}
+                value={typeof props.state.products[id][`productId-${id}`] === 'string' ? props.state.products[id][`productId-${id}`] : props.state.products[id][`productId-${id}`].name}
                 options={props.products}
                 placeholder='Selecione um produto'
                 onChange={(event: any) => updateProduct(props.state, props.setState, props.calculateTotalAmount, id, `productId-${id}`, event.target.value, props.productsDB, false)}

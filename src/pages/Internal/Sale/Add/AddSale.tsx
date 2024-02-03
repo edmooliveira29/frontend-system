@@ -24,6 +24,7 @@ export const AddSale = (props: { state: any }) => {
   const [loading, setLoading] = useState(false)
   const { objectToEdit } = useSelector((reducers: any) => reducers.objectReducer)
   const hasObjectToEdit = objectToEdit !== undefined
+  let nameCustomer: string
   let newObjectToEdit: any = {
     products: []
   }
@@ -85,11 +86,14 @@ export const AddSale = (props: { state: any }) => {
       return false
     }
     let response
-    state.customer = customersDB.find((customer: any) => (customer.name).toUpperCase() === (state.customer).toUpperCase())
+    nameCustomer = typeof state.customer === 'string' ? state.customer : state.customer.name
+    state.customer = customersDB.find((customer: any) => (customer.name).toUpperCase() === (nameCustomer).toUpperCase())
 
     for (const index in state.products) {
-      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((state.products[index][`productId-${index}`]).toUpperCase()))
+      const nameCustomer = typeof state.products[index][`productId-${index}`] === 'string' ? state.products[index][`productId-${index}`] : state.products[index][`productId-${index}`].name
+      state.products[index][`productId-${index}`] = productsDB.find((product: any) => (product.name).toUpperCase() === ((nameCustomer).toUpperCase()))
     }
+
     state.resumeOfSale = resumeOfSale
     if (hasObjectToEdit) {
       response = await AlertConfirmationSaveEdit('edit', handleEditSale, { setLoading, SaleService, state })
@@ -131,7 +135,7 @@ export const AddSale = (props: { state: any }) => {
 
     return String(totalAmount.toFixed(2)).replace('.', ',')
   }
-
+  console.log(hasObjectToEdit)
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">
@@ -153,7 +157,7 @@ export const AddSale = (props: { state: any }) => {
                 id={'customer'}
                 required={true}
                 label='Cliente'
-                value={state.customer}
+                value={typeof state.customer === 'string' ? state.customer : state.customer.name}
                 options={customers}
                 placeholder='Selecione um cliente'
                 onChange={(event: any) => { setState({ ...state, customer: event.target.value }) }}

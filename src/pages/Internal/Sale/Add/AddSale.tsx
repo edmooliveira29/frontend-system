@@ -135,7 +135,6 @@ export const AddSale = (props: { state: any }) => {
 
     return String(totalAmount.toFixed(2)).replace('.', ',')
   }
-  console.log(hasObjectToEdit)
   return (<>
     <div className="row border border-secondary rounded" id="div-list-customer">
       <div className="col-sm-12 col-md-9 p-0 border-secondary">

@@ -1,11 +1,38 @@
+/* eslint-disable max-lines */
 import React from 'react'
 import { TextFieldInput, TextAreaInput } from '../../components/inputs'
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined'
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import { ComponentButtonCommon, NavBar, Footer } from '../../components'
+import { ComponentButtonCommon, NavBar, Footer, AlertGeneral } from '../../components'
+import { send, init } from '@emailjs/browser'
 export const ContactUs = () => {
   const [state, setState] = React.useState({ name: '', email: '', subject: '', message: '' })
+  const [loading, setLoading] = React.useState(false)
+  const handleSubmitEmail = async () => {
+    try {
+      setLoading(true)
+      console.log(state)
+      init({ publicKey: process.env.REACT_APP_PUBLIC_KEY_EMAILJS, })
+      send("service_0x5b5jo", "template_ju6oke5", {
+        from_name: state.name,
+        message: state.message,
+        subject: state.subject,
+        from_email: state.email
+      })
+
+      AlertGeneral({
+        message: 'Mensagem enviada com sucesso. Em breve retornaremos', type: 'success',
+        title: 'Sucesso'
+      })
+      
+      setState({ name: '', email: '', subject: '', message: '' })
+      setLoading(false)
+    } catch (error: any) {
+      AlertGeneral({ message: error, type: 'error', title: 'Erro' })
+      setLoading(false)
+    }
+  }
   return (<>
     <NavBar />
     <div className='container'>
@@ -16,52 +43,51 @@ export const ContactUs = () => {
               <div className='col-md-7'>
                 <div className='contact-wrap w-100 p-md-5 p-4'>
                   <h3 className='mb-4'>Contate-nos</h3>
-                  <form method='POST' id='contactForm' name='contactForm' className='contactForm'>
-                    <div className='row'>
-                      <div className='col-md-6'>
-                        <div className='form-group'>
-                          <TextFieldInput
-                            id={'name'}
-                            required={true} label='Nome' typeInput='text'
-                            value={state.name}
-                            onChange={(value: string) => {
-                              return setState({ ...state, name: value })
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='col-md-6'>
-                        <div className='form-group'>
-                          <TextFieldInput
-                            id={`email`}
-                            required={true} label='E-mail' typeInput='text'
-                            value={state.email}
-                            onChange={(value: string) => {
-                              setState({ ...state, email: value })
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='col-md-12'>
-                        <div className='form-group'>
-                          <TextFieldInput
-                            id='subject'
-                            required={true} label='Assunto' typeInput='text'
-                            value={state.subject}
-                            onChange={(value: string) => { setState({ ...state, subject: value }) }}
-                          />
-                        </div>
-                      </div>
-                      <div className='col-md-12'>
-                        <div className='form-group'><TextAreaInput id='message'/></div>
-                      </div>
-                      <div className='col-md-12 m-2'>
-                        <div className='form-group'>
-                          <ComponentButtonCommon text='Enviar' sizeWidth='100%' id='contact' />
-                        </div>
+                  <div className='row'>
+                    <div className='col-md-6'>
+                      <div className='form-group'>
+                        <TextFieldInput
+                          id={'name'}
+                          required={true} label='Nome' typeInput='text'
+                          value={state.name}
+                          onChange={(value: string) => {
+                            return setState({ ...state, name: value })
+                          }}
+                        />
                       </div>
                     </div>
-                  </form>
+                    <div className='col-md-6'>
+                      <div className='form-group'>
+                        <TextFieldInput
+                          id={`email`}
+                          required={true} label='E-mail' typeInput='text'
+                          value={state.email}
+                          onChange={(value: string) => {
+                            setState({ ...state, email: value })
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-md-12'>
+                      <div className='form-group'>
+                        <TextFieldInput
+                          id='subject'
+                          required={true} label='Assunto' typeInput='text'
+                          value={state.subject}
+                          onChange={(value: string) => { setState({ ...state, subject: value }) }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-md-12'>
+                      <div className='form-group'>
+                        <TextAreaInput state={state} id='message' onChange={(event: any) => { setState({ ...state, message: event.target.value }) }} /></div>
+                    </div>
+                    <div className='col-md-12 m-2'>
+                      <div className='form-group'>
+                        <ComponentButtonCommon loading={loading} text='Enviar' onClick={handleSubmitEmail} sizeWidth='100%' id='contact' />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className='col-md-5 d-flex align-items-stretch p-5'>

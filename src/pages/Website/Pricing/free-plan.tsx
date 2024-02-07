@@ -13,11 +13,10 @@ export const FreePlan = () => {
           </div>
           <div className="card-body">
             <ul className="list-group list-group-flush">
-              <li className="list-group-item">1 usuário</li>
               <li className="list-group-item">Cadastro de clientes*</li>
               <li className="list-group-item">Cadastro de produtos/serviços*</li>
               <li className="list-group-item">Gestão de estoques*</li>
-              <li className="list-group-item">Suporte por email</li>
+              <li className="list-group-item">Emi</li>
             </ul>
           </div>
           <Link to='/registrar'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
-import { Home, PricePage, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
+import { Home, FeaturesPage, AboutPage, ContactUs } from '../pages/Website'
 import {
   Dashboard, ListSale, MyAccount, Login, Singin, ListProduct,
   AddProducts, AddSale, ListCustomer, AddCustomer, AddUserSystem, ListUserSystem, AddCategory, ListCategory, AddEmployee, ListEmployee
@@ -63,8 +63,8 @@ export const router = (
       <Route path="/" element={<Website Page={Home} />} />
       <Route path="/entrar" element={<Website Page={Login} />} />
       <Route path="/registrar" element={<Singin />} />
-      <Route path="/preco" element={<PricePage />} />
-      <Route path="/caracteristica" element={<Website Page={FeaturesPage} />} />
+      {/* <Route path="/preco" element={<PricePage />} /> */}
+      <Route path="/caracteristicas" element={<Website Page={FeaturesPage} />} />
       <Route path="/sobre" element={<AboutPage />} />
       <Route path="/contato" element={<ContactUs />} />
       <Route path="/dashboard" element={<Internal Page={Dashboard} />} />

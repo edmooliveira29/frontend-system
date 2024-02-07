@@ -35,12 +35,12 @@ export const NavBar = () => {
               <Link to='/' className='link-navbar'>
                 Início
               </Link>
-              <Link to='/caracteristica' className='link-navbar'>
+              <Link to='/caracteristicas' className='link-navbar'>
                 Caracteristica
               </Link>
-              <Link to='/preco' className='link-navbar'>
+              {/* <Link to='/preco' className='link-navbar'>
                 Preço
-              </Link>
+              </Link> */}
               <Link to='/sobre' className='link-navbar'>
                 Sobre
               </Link>

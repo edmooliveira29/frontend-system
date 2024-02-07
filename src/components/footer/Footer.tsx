@@ -14,8 +14,8 @@ export const Footer = () => {
               <div className='col-12'>
                 <ul className='nav text-center'>
                   <Link to='/' className='link-icon-website'>Início</Link>
-                  <Link to='/caracteristica' className='link-icon-website'>Característica</Link>
-                  <Link to='/preco' className='link-icon-website'>Preço</Link>
+                  <Link to='/caracteristicas' className='link-icon-website'>Característica</Link>
+                  {/* <Link to='/preco' className='link-icon-website'>Preço</Link> */}
                   <Link to='/sobre' className='link-icon-website'>Sobre</Link>
                   <Link to='/contato' className='link-icon-website'>Contato</Link>
                 </ul>
@@ -23,7 +23,7 @@ export const Footer = () => {
             </div>
 
             <div className='link-icon-website d-flex flex-column flex-sm-row justify-content-between py-4 border-top'>
-              <p>© 2023 Empresa. Todos os direitos reservados</p>
+              <p>© {new Date().getFullYear()} Sistema Gerenciador. Todos os direitos reservados</p>
               <ul className='list-unstyled d-flex'>
                 <a className='link-icon-social-media' href='http://www.instagram.com'><Instagram /></a>
                 <a className='link-icon-social-media' href='https://www.facebook.com'><Facebook /></a>

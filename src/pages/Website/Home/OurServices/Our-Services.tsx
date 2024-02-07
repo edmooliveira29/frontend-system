@@ -16,65 +16,65 @@ export const OurServices = () => (
     <div className='row g-4'>
       <div className='col-lg-4 col-md-6' >
         <div className='position-relative rounded-5 bg-light rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <AppShortcutOutlinedIcon fontSize='large' sx={{alignContent: 'center'}} />
               </div>
-              <h5 className='mb-3 text-center'>Marketing Digital</h5>
-              <p className='mb-0 text-center'>Alcance seu público-alvo de forma eficiente e mensurável. Marketing digital para potencializar seus resultados</p>						</div>
+              <h5 className='mb-3 text-center'>Acesse pelo smartphone</h5>
+              <p className='mb-0 text-center'>O sistema é adaptavel a todos os tamanhos de tela como tablets, desktops e smartphones.</p>						</div>
           </Link>
         </div>
       </div>
       <div className='col-lg-4 col-md-6' style={{visibility: 'visible', animationDelay: '0.3s', animationName: 'fadeInUp'}}>
         <div className='position-relative rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <LanguageOutlinedIcon fontSize='large' sx={{alignContent: 'center'}} />
               </div>
-              <h5 className='mb-3 text-center'>Internet Marketing</h5>
-              <p className='mb-0 text-center'>Maximize sua presença online e aumente sua visibilidade na web. Internet marketing para destacar sua marca.</p>
+              <h5 className='mb-3 text-center'>100% online</h5>
+              <p className='mb-0 text-center'>Seu negócio fica disponível 24 horas por dia, 7 dias por semana.</p>
             </div>
           </Link>
         </div>
       </div>
       <div className='col-lg-4 col-md-6 ' style={{visibility: 'visible', animationDelay: '0.5s', animationName: 'fadeInUp'}}>
         <div className='position-relative rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <ComputerOutlinedIcon fontSize='large' />
               </div>
-              <h5 className='mb-3 text-center'>Conteúdo de Marketing</h5>
-              <p className='mb-0 text-center'>Atraia e fidelize seu público com conteúdo estratégico e de qualidade para fortalecer sua marca e gerar resultados.</p>
+              <h5 className='mb-3 text-center'>Gestão de Vendas </h5>
+              <p className='mb-0 text-center'>Gere vendas facilmente com o sistema.</p>
             </div>
           </Link>
         </div>
       </div>
       <div className='col-lg-4 col-md-6 '>
         <div className='position-relative rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <InterestsOutlinedIcon fontSize='large' />							</div>
-              <h5 className='mb-3 text-center'>Mídia Social</h5>
-              <p className='mb-0 text-center'>Construa relacionamentos autênticos com sua audiência nas mídias sociais. Mídia social para engajamento e fidelização.</p>
+              <h5 className='mb-3 text-center'>Gestão de produtos e serviços</h5>
+              <p className='mb-0 text-center'>Gestão personalizada de produtos e serviços</p>
             </div>
           </Link>
         </div>
       </div>
       <div className='col-lg-4 col-md-6'>
         <div className='position-relative rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
 
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <WebOutlinedIcon fontSize='large' sx={{alignContent: 'center'}} />
               </div>
 
-              <h5 className='mb-3 text-center text-center'>Construção de website</h5>
-              <p className='mb-0 text-center'>Crie um site único que reflita a identidade e valores da sua marca. Construção de site personalizado para se destacar na web</p>
+              <h5 className='mb-3 text-center text-center'>Emissão de pdfs</h5>
+              <p className='mb-0 text-center'>Emita pdfs com as informações do seu negócio.</p>
             </div>
           </Link>
 
@@ -82,14 +82,14 @@ export const OurServices = () => (
       </div>
       <div className='col-lg-4 col-md-6 ' style={{visibility: 'visible', animationDelay: '0.5s', animationName: 'fadeInUp'}}>
         <div className='position-relative rounded-5 bg-light' id='div-card-services'>
-          <Link to='/sobre' style={{textDecoration: 'none', color: '#000000'}}>
+          <Link to='/caracteristicas' style={{textDecoration: 'none', color: '#000000'}}>
 
             <div className='service-text rounded p-5'>
               <div className='text-center' style={{margin: '20px'}}>
                 <SettingsOutlinedIcon fontSize='large' sx={{alignItems: 'center'}} />
               </div>
-              <h5 className='mb-3 text-center'>Construção de ERP</h5>
-              <p className='mb-0 text-center'>Otimize a gestão do seu negócio com um sistema integrado e adaptado às suas necessidades.</p>
+              <h5 className='mb-3 text-center'>Gestão de colaboradores</h5>
+              <p className='mb-0 text-center'>Tenha em mãos facilmente os dados de seus colaboradores.</p>
             </div>
           </Link>
         </div>

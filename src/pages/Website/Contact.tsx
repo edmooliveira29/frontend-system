@@ -80,7 +80,7 @@ export const ContactUs = () => {
                     </div>
                     <div className='col-md-12'>
                       <div className='form-group'>
-                        <TextAreaInput state={state} id='message' onChange={(event: any) => { setState({ ...state, message: event.target.value }) }} /></div>
+                        <TextAreaInput value={state.message} id='message' onChange={(event: any) => { setState({ ...state, message: event.target.value }) }} /></div>
                     </div>
                     <div className='col-md-12 m-2'>
                       <div className='form-group'>

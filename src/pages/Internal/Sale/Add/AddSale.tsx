@@ -188,7 +188,7 @@ export const AddSale = (props: { state: any }) => {
       <PaymentConditions state={state} setState={setState} calculateTotalAmount={calculateTotalAmount} />
       <div className='row py-2 m-0'>
         <label id={`label - input`}>Observações sobre a venda</label>
-        <TextAreaInput id='informationAboutTheSale' onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
+        <TextAreaInput value={state.informationAboutTheSale} id='informationAboutTheSale' onChange={(event: any) => { setState({ ...state, informationAboutTheSale: event.target.value }) }} />
       </div>
       <FooterSale state={state} calculateTotalAmount={calculateTotalAmount} handleSave={() => handleSave(resumeOfSale)} loading={loading} />
     </div >

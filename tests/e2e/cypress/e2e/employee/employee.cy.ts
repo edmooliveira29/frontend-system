@@ -22,6 +22,7 @@ describe('Employee', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       } 
       cy.get('#button-commom-register').click()
       cy.get('#input-name').type('Company Of Tests')
@@ -71,6 +72,7 @@ describe('Employee', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       } 
       cy.get('#input-username').type('employee-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -98,6 +100,7 @@ describe('Employee', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       } cy.get('#input-username').type('employee-tests')
       cy.get('#input-password').type('1234*Abcd')
       cy.wait(1000)
@@ -131,6 +134,7 @@ describe('Employee', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       } cy.get('#input-username').type('employee-tests')
       cy.get('#input-password').type('1234*Abcd')
       cy.wait(1000)

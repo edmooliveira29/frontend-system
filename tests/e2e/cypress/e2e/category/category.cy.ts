@@ -21,6 +21,7 @@ describe('Category', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#button-commom-register').click()
       cy.get('#input-name').type('Company Of Tests')
@@ -64,6 +65,7 @@ describe('Category', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('category-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -102,6 +104,7 @@ describe('Category', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('category-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -134,6 +137,7 @@ describe('Category', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('category-tests')
       cy.get('#input-password').type('1234*Abcd')

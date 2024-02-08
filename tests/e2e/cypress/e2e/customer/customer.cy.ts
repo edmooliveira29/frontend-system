@@ -24,6 +24,7 @@ describe('Customer', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
 
       cy.get('#button-commom-register').click()
@@ -68,7 +69,8 @@ describe('Customer', () => {
         cy.viewport(412, 915)
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
-        cy.get('#navbar-toggler').click()      }
+        cy.get('#navbar-toggler').click()
+        cy.wait(2000)      }
       cy.get('#input-username').type('customer-tests')
       cy.get('#input-password').type('1234*Abcd')
       cy.wait(1000)
@@ -94,6 +96,7 @@ describe('Customer', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('customer-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -128,6 +131,7 @@ describe('Customer', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('customer-tests')
       cy.get('#input-password').type('1234*Abcd')

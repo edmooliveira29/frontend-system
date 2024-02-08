@@ -23,6 +23,7 @@ describe('Create Sale', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#button-commom-register').click()
       cy.get('#input-name').type('Company Of Tests')
@@ -119,6 +120,7 @@ describe('Create Sale', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('sale-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -142,6 +144,7 @@ describe('Create Sale', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('sale-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -173,6 +176,7 @@ describe('Create Sale', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('sale-tests')
       cy.get('#input-password').type('1234*Abcd')

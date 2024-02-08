@@ -23,6 +23,7 @@ describe('Create User', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#button-commom-register').click()
       cy.get('#input-name').type('Company Of Tests')
@@ -69,6 +70,7 @@ describe('Create User', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('owner-user')
       cy.get('#input-password').type('1234*Abcd')
@@ -96,6 +98,7 @@ describe('Create User', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('owner-user')
       cy.get('#input-password').type('1234*Abcd')
@@ -133,6 +136,7 @@ describe('Create User', () => {
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('owner-user')
       cy.get('#input-password').type('1234*Abcd')

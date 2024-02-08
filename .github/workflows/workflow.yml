@@ -44,9 +44,11 @@ jobs:
           echo "${{ secrets.ENV_BACKEND }}" > ./.env
           npm install --legacy-peer-deps
 
+      - name: Set timezone
+        run: sudo timedatectl set-timezone America/Sao_Paulo
+        
       - name: Running tests
         run: |
-          cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
           npm start & sleep 100
           cd backend-system
           npm run start-test & sleep 20

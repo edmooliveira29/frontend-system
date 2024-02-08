@@ -9,15 +9,7 @@ export default defineConfig({
     supportFile: 'tests/e2e/cypress/support/e2e.ts',
     specPattern: 'tests/e2e/cypress/e2e/**/*.cy.ts',
     video: false,
-    screenshotOnRunFailure: false,
-    fixturesFolder: false,
+    screenshotOnRunFailure: true,
     defaultCommandTimeout: 60000,
-  },
-  downloadsFolder: 'cypress/downloads',
-  component: {
-    devServer: {
-      framework: "create-react-app",
-      bundler: "webpack",
-    },
-  },
+  }
 })

@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 # Frontend Repository Installation
+=======
+<<<<<<< HEAD
+# Getting Started with Create React App
+=======
+# Frontend Repository Installation
+
+### **Pre-requisites**
+>>>>>>> e54ffd7 (config: updated README.md)
+>>>>>>> 80e3a83 (config: updated README.md)
 
 ### **Pre-requisites**
 

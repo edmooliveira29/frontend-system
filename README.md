@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# Frontend Repository Installation
+Esse é o código do mobile do sistema Cachaça Gestor. Aqui você encontrará todas as intruções para executar o código, os testes e fazer deploy. As configurações abaixo são válidas para o sistema operacional baseado nas distribuições `Ubuntu` como o `Ubuntu Unity` `Linux Mint`. Caso você utilize um outro SO, alguns comandos podem sofre alterações.
+ 
+### **Pre-requisites**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- A linux-based operating system, such as Ubuntu.
+- Git installed on your machine.
+- A GitHub account with 2FA enabled.
 
-## Available Scripts
+### **1. Install NVM and Node.Js**
 
-In the project directory, you can run:
+To install NVM, open the terminal and run the following command:
 
-### `npm start`
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Execute the following command:
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install a version of Node.js using NVM, run the following command:
 
-### `npm run build`
+```sh
+nvm install v18.16.0
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To set the default Node.js version to be used, run the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+nvm alias default v18.16.0
+```
 
-### `npm run eject`
+### **2. Install React-Native**
+ Running this code to install React:
+		`npx i -g react`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### **3. Setting Up 2FA Access to GitHub**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+GitHub offers various forms of authentication, and we recommend using a personal access token (PAT) that can be created on the security settings page of your GitHub account.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To create a PAT, follow the steps below:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Go to the security settings page of your GitHub account (https://github.com/settings/security).
 
-## Learn More
+2. Click "Personal access tokens".
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Click "Generate new token".
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Enter a description for the token (e.g. "Repository access to GitHub").
+
+5. Select the permissions the token should have (e.g. read and write access to private repositories).
+
+6. Click "Generate token".
+
+7. Copy the generated token to a safe location. You will only see the token once, so be sure to copy it immediately.
+
+### **Cloning the Repository**
+
+To clone the repository, open the terminal and run the following command:
+
+```sh
+git clone https://{YOUR ACCESS KEY}@github.com/edmooliveira29/frontend-system.git
+```
+
+### **4. Installing Dependencies**
+
+To install the project dependencies, run the following command in the project root directory:
+
+```sh
+npm install
+```
+
+### **5. Running the Repository**
+
+To run the repository, run the following command in the project root directory:
+
+```sh
+npm start
+```
+
+### **6. Running the Tests**
+
+To run the tests, run the following command in the project root directory:
+
+```sh
+npm run tests-e2e
+```
+
+### **Author**
+Edmo de Oliveira Leite (edmooliveira29@gmail.com)
+ 

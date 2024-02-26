@@ -1,6 +1,5 @@
 # Frontend Repository Installation
-Esse é o código do mobile do sistema Cachaça Gestor. Aqui você encontrará todas as intruções para executar o código, os testes e fazer deploy. As configurações abaixo são válidas para o sistema operacional baseado nas distribuições `Ubuntu` como o `Ubuntu Unity` `Linux Mint`. Caso você utilize um outro SO, alguns comandos podem sofre alterações.
- 
+
 ### **Pre-requisites**
 
 - A linux-based operating system, such as Ubuntu.

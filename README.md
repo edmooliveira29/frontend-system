@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# Frontend Repository Installation
-=======
-<<<<<<< HEAD
-# Getting Started with Create React App
-=======
 # Frontend Repository Installation
 
 ### **Pre-requisites**

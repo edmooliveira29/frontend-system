@@ -10,6 +10,6 @@ export default defineConfig({
     specPattern: 'tests/e2e/cypress/e2e/**/*.cy.ts',
     video: false,
     screenshotOnRunFailure: true,
-    defaultCommandTimeout: 120000,
+    defaultCommandTimeout: 10000,
   }
 })

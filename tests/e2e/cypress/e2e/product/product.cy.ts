@@ -86,7 +86,9 @@ describe('Create Product', () => {
       } else {
         cy.viewport(412, 915)
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
         cy.get('#link-login').click()
+        cy.wait(2000)
         cy.get('#navbar-toggler').click()
       }
       cy.get('#input-username').type('product-tests')
@@ -119,8 +121,11 @@ describe('Create Product', () => {
       } else {
         cy.viewport(412, 915)
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
         cy.get('#link-login').click()
+        cy.wait(2000)
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('product-tests')
       cy.get('#input-password').type('1234*Abcd')
@@ -151,8 +156,11 @@ describe('Create Product', () => {
       } else {
         cy.viewport(412, 915)
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
         cy.get('#link-login').click()
+        cy.wait(2000)
         cy.get('#navbar-toggler').click()
+        cy.wait(2000)
       }
       cy.get('#input-username').type('product-tests')
       cy.get('#input-password').type('1234*Abcd')

@@ -20,6 +20,7 @@ describe('Customer', () => {
 
       } else {
         cy.viewport(412, 915)
+        cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.wait(2000)
@@ -67,6 +68,7 @@ describe('Customer', () => {
         cy.get('#link-login').click()
       } else {
         cy.viewport(412, 915)
+        cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.wait(2000)
@@ -94,6 +96,7 @@ describe('Customer', () => {
         cy.get('#link-login').click()
       } else {
         cy.viewport(412, 915)
+        cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.wait(2000)
@@ -130,6 +133,7 @@ describe('Customer', () => {
         cy.get('#link-login').click()
       } else {
         cy.viewport(412, 915)
+        cy.exec('mongosh mongodb://localhost:27017 --eval "db.getSiblingDB(\'system-database\').dropDatabase()"')
         cy.get('#navbar-toggler').click()
         cy.get('#link-login').click()
         cy.wait(2000)
